@@ -696,3 +696,4 @@ ValueError: Service float is not registered
 2025-05-22 12:39:11,366 - MessageRouter - INFO - Message queued: msg_20250522_123911_366113
 2025-05-22 12:39:11,366 - AdvancedTradingEngine - INFO - Trading engine stopped successfully
 2025-05-22 12:39:11,366 - Shutdown - INFO - Graceful shutdown completed
+2025-05-22 12:39:15,786 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
