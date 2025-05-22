@@ -24,3 +24,675 @@
 2025-05-22 08:58:50,557 - ConfigValidator - INFO - Initial capital: $10,000.00
 2025-05-22 08:58:56,173 - HealthCheck - ERROR - Health check failed: 
 2025-05-22 08:58:56,174 - Main - ERROR - Startup health checks failed
+2025-05-22 09:04:40,853 - Main - INFO - Logging system initialized
+2025-05-22 09:04:40,853 - Main - INFO - Starting Advanced Personal Trading Platform...
+2025-05-22 09:04:40,864 - ConfigValidator - INFO - Environment configuration validated successfully
+2025-05-22 09:04:40,864 - ConfigValidator - INFO - Trading symbols: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT, BNBUSDT, XRPUSDT, LTCUSDT
+2025-05-22 09:04:40,864 - ConfigValidator - INFO - Enabled strategies: scalping, day_trading
+2025-05-22 09:04:40,864 - ConfigValidator - INFO - Initial capital: $10,000.00
+2025-05-22 09:04:42,262 - HealthCheck - INFO - Internet connectivity check passed
+2025-05-22 09:04:43,772 - HealthCheck - INFO - Gemini API connectivity check passed
+2025-05-22 09:04:43,772 - HealthCheck - INFO - All startup health checks passed
+2025-05-22 09:04:43,776 - Main - INFO - Setting up Dependency Injection container...
+2025-05-22 09:04:43,776 - DIContainer - INFO - Registered instance for DIContainer
+2025-05-22 09:04:43,776 - DIContainer - INFO - DIContainer initialized
+2025-05-22 09:04:43,777 - Main - INFO - Initializing Advanced Trading Engine...
+2025-05-22 09:04:43,777 - AdvancedTradingEngine - INFO - AdvancedTradingEngine initialized
+2025-05-22 09:04:43,777 - SignalHandler - INFO - Signal handlers configured
+2025-05-22 09:04:43,777 - Main - INFO - Initializing trading engine components...
+2025-05-22 09:04:43,777 - AdvancedTradingEngine - INFO - Initializing trading engine components...
+2025-05-22 09:04:43,777 - DIContainer - INFO - Registered instance for TradingEngineConfig
+2025-05-22 09:04:43,777 - DIContainer - INFO - Registered ExchangeWebSocketManager -> ExchangeWebSocketManager as singleton with 0 dependencies
+2025-05-22 09:04:43,777 - DIContainer - INFO - Registered RealTimeDataProcessor -> RealTimeDataProcessor as singleton with 0 dependencies
+2025-05-22 09:04:43,777 - DIContainer - INFO - Registered GeminiAnalyzer -> GeminiAnalyzer as singleton with 1 dependencies
+2025-05-22 09:04:43,779 - AdvancedTradingEngine - ERROR - Error initializing trading engine: name 'AdvancedRiskManager' is not defined
+2025-05-22 09:04:43,779 - Main - ERROR - ❌ Critical error in main application: name 'AdvancedRiskManager' is not defined
+2025-05-22 09:04:43,779 - Main - ERROR - Exception details:
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\main_advanced.py", line 274, in main
+    await trading_engine.initialize()
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\application\services\advanced_trading_engine.py", line 131, in initialize
+    await self._register_services()
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\application\services\advanced_trading_engine.py", line 157, in _register_services
+    self.container.register_singleton(AdvancedRiskManager)
+                                      ^^^^^^^^^^^^^^^^^^^
+NameError: name 'AdvancedRiskManager' is not defined
+2025-05-22 12:05:58,308 - Main - INFO - Logging system initialized
+2025-05-22 12:05:58,308 - Main - INFO - Starting Advanced Personal Trading Platform...
+2025-05-22 12:05:58,314 - ConfigValidator - INFO - Environment configuration validated successfully
+2025-05-22 12:05:58,314 - ConfigValidator - INFO - Trading symbols: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT, BNBUSDT, XRPUSDT, LTCUSDT
+2025-05-22 12:05:58,314 - ConfigValidator - INFO - Enabled strategies: scalping, day_trading
+2025-05-22 12:05:58,314 - ConfigValidator - INFO - Initial capital: $10,000.00
+2025-05-22 12:06:04,171 - HealthCheck - ERROR - Health check failed: 
+2025-05-22 12:06:04,172 - Main - ERROR - Startup health checks failed
+2025-05-22 12:11:22,773 - Main - INFO - Logging system initialized
+2025-05-22 12:11:22,773 - Main - INFO - Starting Advanced Personal Trading Platform...
+2025-05-22 12:11:22,780 - ConfigValidator - INFO - Environment configuration validated successfully
+2025-05-22 12:11:22,780 - ConfigValidator - INFO - Trading symbols: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT, BNBUSDT, XRPUSDT, LTCUSDT
+2025-05-22 12:11:22,780 - ConfigValidator - INFO - Enabled strategies: scalping, day_trading
+2025-05-22 12:11:22,780 - ConfigValidator - INFO - Initial capital: $10,000.00
+2025-05-22 12:11:26,850 - HealthCheck - INFO - Internet connectivity check passed
+2025-05-22 12:11:28,341 - HealthCheck - INFO - Gemini API connectivity check passed
+2025-05-22 12:11:28,341 - HealthCheck - INFO - All startup health checks passed
+2025-05-22 12:11:28,344 - Main - INFO - Setting up Dependency Injection container...
+2025-05-22 12:11:28,344 - DIContainer - INFO - Registered instance for DIContainer
+2025-05-22 12:11:28,344 - DIContainer - INFO - DIContainer initialized
+2025-05-22 12:11:28,344 - Main - INFO - Initializing Advanced Trading Engine...
+2025-05-22 12:11:28,344 - AdvancedTradingEngine - INFO - AdvancedTradingEngine initialized
+2025-05-22 12:11:28,344 - SignalHandler - INFO - Signal handlers configured
+2025-05-22 12:11:28,344 - Main - INFO - Initializing trading engine components...
+2025-05-22 12:11:28,344 - AdvancedTradingEngine - INFO - Initializing trading engine components...
+2025-05-22 12:11:28,344 - DIContainer - INFO - Registered instance for TradingEngineConfig
+2025-05-22 12:11:28,344 - DIContainer - INFO - Registered ExchangeWebSocketManager -> ExchangeWebSocketManager as singleton with 0 dependencies
+2025-05-22 12:11:28,344 - DIContainer - INFO - Registered RealTimeDataProcessor -> RealTimeDataProcessor as singleton with 0 dependencies
+2025-05-22 12:11:28,344 - DIContainer - INFO - Registered GeminiAnalyzer -> GeminiAnalyzer as singleton with 1 dependencies
+2025-05-22 12:11:28,344 - DIContainer - INFO - Registered AdvancedRiskManager -> AdvancedRiskManager as singleton with 2 dependencies
+2025-05-22 12:11:28,344 - DIContainer - INFO - Registered SystemMonitor -> SystemMonitor as singleton with 0 dependencies
+2025-05-22 12:11:28,345 - DIContainer - INFO - Registered NotificationService -> NotificationService as singleton with 0 dependencies
+2025-05-22 12:11:28,345 - DIContainer - INFO - Registered ScalpingStrategy -> ScalpingStrategy as transient with 0 dependencies
+2025-05-22 12:11:28,345 - DIContainer - INFO - Registered DayTradingStrategy -> DayTradingStrategy as transient with 0 dependencies
+2025-05-22 12:11:28,345 - AdvancedTradingEngine - INFO - Services registered in DI container
+2025-05-22 12:11:28,345 - RealTimeDataProcessor - INFO - RealTimeDataProcessor initialized
+2025-05-22 12:11:28,345 - RealTimeDataProcessor - INFO - Starting real-time data processor
+2025-05-22 12:11:28,345 - AdvancedTradingEngine - ERROR - Error initializing trading engine: Service str is not registered
+2025-05-22 12:11:28,345 - Main - ERROR - ❌ Critical error in main application: Service str is not registered
+2025-05-22 12:11:28,348 - Main - ERROR - Exception details:
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\main_advanced.py", line 274, in main
+    await trading_engine.initialize()
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\application\services\advanced_trading_engine.py", line 137, in initialize
+    await self._initialize_components()
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\application\services\advanced_trading_engine.py", line 180, in _initialize_components
+    self.ai_analyzer = self.container.resolve(GeminiAnalyzer)
+                       ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\infrastructure\container\di_container.py", line 143, in resolve
+    instance = self._create_instance(descriptor)
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\infrastructure\container\di_container.py", line 193, in _create_instance
+    dependency = self.resolve(dep_type)
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\infrastructure\container\di_container.py", line 120, in resolve
+    raise ValueError(f"Service {service_type.__name__} is not registered")
+ValueError: Service str is not registered
+2025-05-22 12:11:54,592 - Main - INFO - Logging system initialized
+2025-05-22 12:11:54,592 - Main - INFO - Starting Advanced Personal Trading Platform...
+2025-05-22 12:11:54,599 - ConfigValidator - INFO - Environment configuration validated successfully
+2025-05-22 12:11:54,599 - ConfigValidator - INFO - Trading symbols: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT, BNBUSDT, XRPUSDT, LTCUSDT
+2025-05-22 12:11:54,599 - ConfigValidator - INFO - Enabled strategies: scalping, day_trading
+2025-05-22 12:11:54,599 - ConfigValidator - INFO - Initial capital: $10,000.00
+2025-05-22 12:11:55,690 - HealthCheck - INFO - Internet connectivity check passed
+2025-05-22 12:11:57,102 - HealthCheck - INFO - Gemini API connectivity check passed
+2025-05-22 12:11:57,103 - HealthCheck - INFO - All startup health checks passed
+2025-05-22 12:11:57,105 - Main - INFO - Setting up Dependency Injection container...
+2025-05-22 12:11:57,106 - DIContainer - INFO - Registered instance for DIContainer
+2025-05-22 12:11:57,106 - DIContainer - INFO - DIContainer initialized
+2025-05-22 12:11:57,106 - Main - INFO - Initializing Advanced Trading Engine...
+2025-05-22 12:11:57,106 - AdvancedTradingEngine - INFO - AdvancedTradingEngine initialized
+2025-05-22 12:11:57,106 - SignalHandler - INFO - Signal handlers configured
+2025-05-22 12:11:57,106 - Main - INFO - Initializing trading engine components...
+2025-05-22 12:11:57,106 - AdvancedTradingEngine - INFO - Initializing trading engine components...
+2025-05-22 12:11:57,106 - DIContainer - INFO - Registered instance for TradingEngineConfig
+2025-05-22 12:11:57,106 - DIContainer - INFO - Registered ExchangeWebSocketManager -> ExchangeWebSocketManager as singleton with 0 dependencies
+2025-05-22 12:11:57,106 - DIContainer - INFO - Registered RealTimeDataProcessor -> RealTimeDataProcessor as singleton with 0 dependencies
+2025-05-22 12:11:57,106 - DIContainer - INFO - Registered GeminiAnalyzer -> GeminiAnalyzer as singleton with 0 dependencies
+2025-05-22 12:11:57,106 - DIContainer - INFO - Registered AdvancedRiskManager -> AdvancedRiskManager as singleton with 2 dependencies
+2025-05-22 12:11:57,106 - DIContainer - INFO - Registered SystemMonitor -> SystemMonitor as singleton with 0 dependencies
+2025-05-22 12:11:57,106 - DIContainer - INFO - Registered NotificationService -> NotificationService as singleton with 0 dependencies
+2025-05-22 12:11:57,106 - DIContainer - INFO - Registered ScalpingStrategy -> ScalpingStrategy as transient with 0 dependencies
+2025-05-22 12:11:57,106 - DIContainer - INFO - Registered DayTradingStrategy -> DayTradingStrategy as transient with 0 dependencies
+2025-05-22 12:11:57,106 - AdvancedTradingEngine - INFO - Services registered in DI container
+2025-05-22 12:11:57,106 - RealTimeDataProcessor - INFO - RealTimeDataProcessor initialized
+2025-05-22 12:11:57,106 - RealTimeDataProcessor - INFO - Starting real-time data processor
+2025-05-22 12:11:59,379 - GeminiAnalyzer - INFO - Gemini AI analyzer initialized successfully
+2025-05-22 12:11:59,379 - AdvancedTradingEngine - ERROR - Error initializing trading engine: Service float is not registered
+2025-05-22 12:11:59,379 - Main - ERROR - Critical error in main application: Service float is not registered
+2025-05-22 12:11:59,379 - Main - ERROR - Exception details:
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\main_advanced.py", line 274, in main
+    await trading_engine.initialize()
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\application\services\advanced_trading_engine.py", line 137, in initialize
+    await self._initialize_components()
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\application\services\advanced_trading_engine.py", line 183, in _initialize_components
+    self.risk_manager = self.container.resolve(AdvancedRiskManager)
+                        ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\infrastructure\container\di_container.py", line 143, in resolve
+    instance = self._create_instance(descriptor)
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\infrastructure\container\di_container.py", line 193, in _create_instance
+    dependency = self.resolve(dep_type)
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\infrastructure\container\di_container.py", line 120, in resolve
+    raise ValueError(f"Service {service_type.__name__} is not registered")
+ValueError: Service float is not registered
+2025-05-22 12:12:10,377 - Main - INFO - Logging system initialized
+2025-05-22 12:12:10,378 - Main - INFO - Starting Advanced Personal Trading Platform...
+2025-05-22 12:12:10,384 - ConfigValidator - INFO - Environment configuration validated successfully
+2025-05-22 12:12:10,384 - ConfigValidator - INFO - Trading symbols: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT, BNBUSDT, XRPUSDT, LTCUSDT
+2025-05-22 12:12:10,384 - ConfigValidator - INFO - Enabled strategies: scalping, day_trading
+2025-05-22 12:12:10,384 - ConfigValidator - INFO - Initial capital: $10,000.00
+2025-05-22 12:12:12,306 - HealthCheck - INFO - Internet connectivity check passed
+2025-05-22 12:12:13,871 - HealthCheck - INFO - Gemini API connectivity check passed
+2025-05-22 12:12:13,872 - HealthCheck - INFO - All startup health checks passed
+2025-05-22 12:12:13,874 - Main - INFO - Setting up Dependency Injection container...
+2025-05-22 12:12:13,874 - DIContainer - INFO - Registered instance for DIContainer
+2025-05-22 12:12:13,874 - DIContainer - INFO - DIContainer initialized
+2025-05-22 12:12:13,874 - Main - INFO - Initializing Advanced Trading Engine...
+2025-05-22 12:12:13,874 - AdvancedTradingEngine - INFO - AdvancedTradingEngine initialized
+2025-05-22 12:12:13,875 - SignalHandler - INFO - Signal handlers configured
+2025-05-22 12:12:13,875 - Main - INFO - Initializing trading engine components...
+2025-05-22 12:12:13,875 - AdvancedTradingEngine - INFO - Initializing trading engine components...
+2025-05-22 12:12:13,875 - DIContainer - INFO - Registered instance for TradingEngineConfig
+2025-05-22 12:12:13,875 - DIContainer - INFO - Registered ExchangeWebSocketManager -> ExchangeWebSocketManager as singleton with 0 dependencies
+2025-05-22 12:12:13,875 - DIContainer - INFO - Registered RealTimeDataProcessor -> RealTimeDataProcessor as singleton with 0 dependencies
+2025-05-22 12:12:13,875 - DIContainer - INFO - Registered GeminiAnalyzer -> GeminiAnalyzer as singleton with 0 dependencies
+2025-05-22 12:12:13,875 - DIContainer - INFO - Registered AdvancedRiskManager -> AdvancedRiskManager as singleton with 0 dependencies
+2025-05-22 12:12:13,875 - DIContainer - INFO - Registered SystemMonitor -> SystemMonitor as singleton with 0 dependencies
+2025-05-22 12:12:13,875 - DIContainer - INFO - Registered NotificationService -> NotificationService as singleton with 0 dependencies
+2025-05-22 12:12:13,875 - DIContainer - INFO - Registered ScalpingStrategy -> ScalpingStrategy as transient with 0 dependencies
+2025-05-22 12:12:13,875 - DIContainer - INFO - Registered DayTradingStrategy -> DayTradingStrategy as transient with 0 dependencies
+2025-05-22 12:12:13,875 - AdvancedTradingEngine - INFO - Services registered in DI container
+2025-05-22 12:12:13,875 - RealTimeDataProcessor - INFO - RealTimeDataProcessor initialized
+2025-05-22 12:12:13,875 - RealTimeDataProcessor - INFO - Starting real-time data processor
+2025-05-22 12:12:15,204 - GeminiAnalyzer - INFO - Gemini AI analyzer initialized successfully
+2025-05-22 12:12:15,204 - AdvancedRiskManager - INFO - AdvancedRiskManager initialized
+2025-05-22 12:12:15,204 - HealthChecker - INFO - Registered health check for system (interval: 60s)
+2025-05-22 12:12:15,205 - SystemMonitor - INFO - SystemMonitor initialized
+2025-05-22 12:12:15,205 - SystemMonitor - INFO - Starting system monitoring
+2025-05-22 12:12:15,205 - MessageRouter - INFO - Registered message channel: console
+2025-05-22 12:12:15,205 - MessageRouter - INFO - Added routing rule for critical -> ['console', 'telegram', 'email']
+2025-05-22 12:12:15,205 - MessageRouter - INFO - Added routing rule for trade_signal -> ['telegram', 'console']
+2025-05-22 12:12:15,205 - MessageRouter - INFO - Added routing rule for profit_loss -> ['telegram', 'email', 'console']
+2025-05-22 12:12:15,205 - MessageRouter - INFO - Added routing rule for system_status -> ['console', 'telegram']
+2025-05-22 12:12:15,205 - MessageRouter - INFO - Registered message channel: telegram
+2025-05-22 12:12:15,205 - NotificationService - INFO - Telegram channel configured
+2025-05-22 12:12:15,205 - MessageRouter - INFO - Starting message router
+2025-05-22 12:12:15,205 - MessageRouter - INFO - Channel console: ✓
+2025-05-22 12:12:16,905 - MessageRouter - INFO - Channel telegram: ✓
+2025-05-22 12:12:16,907 - NotificationService - INFO - Notification service started
+2025-05-22 12:12:16,907 - ScalpingStrategy - INFO - ScalpingStrategy initialized
+2025-05-22 12:12:16,907 - AdvancedTradingEngine - INFO - Initialized strategy: scalping
+2025-05-22 12:12:16,907 - DayTradingStrategy - INFO - DayTradingStrategy initialized
+2025-05-22 12:12:16,907 - AdvancedTradingEngine - INFO - Initialized strategy: day_trading
+2025-05-22 12:12:16,907 - AdvancedTradingEngine - INFO - All components initialized successfully
+2025-05-22 12:12:16,907 - RealTimeDataProcessor - INFO - New subscriber for BTCUSDT, total: 1
+2025-05-22 12:12:16,907 - ExchangeWebSocketManager - INFO - Subscribed to ticker: BTCUSDT
+2025-05-22 12:12:16,907 - ExchangeWebSocketManager - INFO - Subscribed to order book: BTCUSDT
+2025-05-22 12:12:16,908 - RealTimeDataProcessor - INFO - New subscriber for ETHUSDT, total: 1
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to ticker: ETHUSDT
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to order book: ETHUSDT
+2025-05-22 12:12:16,908 - RealTimeDataProcessor - INFO - New subscriber for ADAUSDT, total: 1
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to ticker: ADAUSDT
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to order book: ADAUSDT
+2025-05-22 12:12:16,908 - RealTimeDataProcessor - INFO - New subscriber for DOTUSDT, total: 1
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to ticker: DOTUSDT
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to order book: DOTUSDT
+2025-05-22 12:12:16,908 - RealTimeDataProcessor - INFO - New subscriber for LINKUSDT, total: 1
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to ticker: LINKUSDT
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to order book: LINKUSDT
+2025-05-22 12:12:16,908 - RealTimeDataProcessor - INFO - New subscriber for BNBUSDT, total: 1
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to ticker: BNBUSDT
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to order book: BNBUSDT
+2025-05-22 12:12:16,908 - RealTimeDataProcessor - INFO - New subscriber for XRPUSDT, total: 1
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to ticker: XRPUSDT
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to order book: XRPUSDT
+2025-05-22 12:12:16,908 - RealTimeDataProcessor - INFO - New subscriber for LTCUSDT, total: 1
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to ticker: LTCUSDT
+2025-05-22 12:12:16,908 - ExchangeWebSocketManager - INFO - Subscribed to order book: LTCUSDT
+2025-05-22 12:12:16,908 - AdvancedTradingEngine - INFO - Subscribed to market data for 8 symbols
+2025-05-22 12:12:16,908 - HealthChecker - INFO - Registered health check for trading_engine (interval: 30s)
+2025-05-22 12:12:16,908 - AdvancedTradingEngine - INFO - Trading engine initialization completed successfully
+2025-05-22 12:12:16,908 - Main - INFO - Starting trading engine...
+2025-05-22 12:12:16,908 - AdvancedTradingEngine - INFO - Starting Advanced Trading Engine...
+2025-05-22 12:12:16,909 - ExchangeWebSocketManager - INFO - Connecting to exchanges...
+2025-05-22 12:12:17,915 - ExchangeWebSocketManager - INFO - Connected to exchanges
+2025-05-22 12:12:17,915 - MessageRouter - INFO - Message queued: msg_20250522_121217_915597
+2025-05-22 12:12:17,915 - AdvancedTradingEngine - INFO - Trading engine started successfully
+2025-05-22 12:12:17,915 - Main - INFO - Trading engine started successfully!
+2025-05-22 12:12:17,915 - Main - INFO - Press Ctrl+C to stop the application gracefully
+2025-05-22 12:12:18,590 - MessageChannel.Telegram - ERROR - Telegram send failed: {"ok":false,"error_code":400,"description":"Bad Request: can't parse entities: Can't find end of the entity starting at byte offset 102"}
+2025-05-22 12:12:21,342 - MessageChannel.Telegram - ERROR - Telegram send failed: {"ok":false,"error_code":400,"description":"Bad Request: can't parse entities: Can't find end of the entity starting at byte offset 102"}
+2025-05-22 12:12:25,988 - MessageChannel.Telegram - ERROR - Telegram send failed: {"ok":false,"error_code":400,"description":"Bad Request: can't parse entities: Can't find end of the entity starting at byte offset 102"}
+2025-05-22 12:12:25,989 - MessageRouter - WARNING - Failed to send message msg_20250522_121217_915597 via telegram
+2025-05-22 12:13:00,729 - Main - INFO - Logging system initialized
+2025-05-22 12:13:00,730 - Main - INFO - Starting Advanced Personal Trading Platform...
+2025-05-22 12:13:00,737 - ConfigValidator - INFO - Environment configuration validated successfully
+2025-05-22 12:13:00,737 - ConfigValidator - INFO - Trading symbols: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT, BNBUSDT, XRPUSDT, LTCUSDT
+2025-05-22 12:13:00,737 - ConfigValidator - INFO - Enabled strategies: scalping, day_trading
+2025-05-22 12:13:00,737 - ConfigValidator - INFO - Initial capital: $10,000.00
+2025-05-22 12:13:05,097 - HealthCheck - INFO - Internet connectivity check passed
+2025-05-22 12:13:06,441 - HealthCheck - INFO - Gemini API connectivity check passed
+2025-05-22 12:13:06,441 - HealthCheck - INFO - All startup health checks passed
+2025-05-22 12:13:06,444 - Main - INFO - Setting up Dependency Injection container...
+2025-05-22 12:13:06,444 - DIContainer - INFO - Registered instance for DIContainer
+2025-05-22 12:13:06,444 - DIContainer - INFO - DIContainer initialized
+2025-05-22 12:13:06,444 - Main - INFO - Initializing Advanced Trading Engine...
+2025-05-22 12:13:06,444 - AdvancedTradingEngine - INFO - AdvancedTradingEngine initialized
+2025-05-22 12:13:06,444 - SignalHandler - INFO - Signal handlers configured
+2025-05-22 12:13:06,444 - Main - INFO - Initializing trading engine components...
+2025-05-22 12:13:06,444 - AdvancedTradingEngine - INFO - Initializing trading engine components...
+2025-05-22 12:13:06,444 - DIContainer - INFO - Registered instance for TradingEngineConfig
+2025-05-22 12:13:06,444 - DIContainer - INFO - Registered ExchangeWebSocketManager -> ExchangeWebSocketManager as singleton with 0 dependencies
+2025-05-22 12:13:06,444 - DIContainer - INFO - Registered RealTimeDataProcessor -> RealTimeDataProcessor as singleton with 0 dependencies
+2025-05-22 12:13:06,444 - DIContainer - INFO - Registered GeminiAnalyzer -> GeminiAnalyzer as singleton with 0 dependencies
+2025-05-22 12:13:06,444 - DIContainer - INFO - Registered AdvancedRiskManager -> AdvancedRiskManager as singleton with 0 dependencies
+2025-05-22 12:13:06,444 - DIContainer - INFO - Registered SystemMonitor -> SystemMonitor as singleton with 0 dependencies
+2025-05-22 12:13:06,444 - DIContainer - INFO - Registered NotificationService -> NotificationService as singleton with 0 dependencies
+2025-05-22 12:13:06,444 - DIContainer - INFO - Registered ScalpingStrategy -> ScalpingStrategy as transient with 0 dependencies
+2025-05-22 12:13:06,444 - DIContainer - INFO - Registered DayTradingStrategy -> DayTradingStrategy as transient with 0 dependencies
+2025-05-22 12:13:06,444 - AdvancedTradingEngine - INFO - Services registered in DI container
+2025-05-22 12:13:06,444 - RealTimeDataProcessor - INFO - RealTimeDataProcessor initialized
+2025-05-22 12:13:06,445 - RealTimeDataProcessor - INFO - Starting real-time data processor
+2025-05-22 12:13:08,586 - GeminiAnalyzer - INFO - Gemini AI analyzer initialized successfully
+2025-05-22 12:13:08,586 - AdvancedRiskManager - INFO - AdvancedRiskManager initialized
+2025-05-22 12:13:08,586 - HealthChecker - INFO - Registered health check for system (interval: 60s)
+2025-05-22 12:13:08,586 - SystemMonitor - INFO - SystemMonitor initialized
+2025-05-22 12:13:08,586 - SystemMonitor - INFO - Starting system monitoring
+2025-05-22 12:13:08,586 - MessageRouter - INFO - Registered message channel: console
+2025-05-22 12:13:08,587 - MessageRouter - INFO - Added routing rule for critical -> ['console', 'telegram', 'email']
+2025-05-22 12:13:08,587 - MessageRouter - INFO - Added routing rule for trade_signal -> ['telegram', 'console']
+2025-05-22 12:13:08,587 - MessageRouter - INFO - Added routing rule for profit_loss -> ['telegram', 'email', 'console']
+2025-05-22 12:13:08,587 - MessageRouter - INFO - Added routing rule for system_status -> ['console', 'telegram']
+2025-05-22 12:13:08,587 - MessageRouter - INFO - Registered message channel: telegram
+2025-05-22 12:13:08,587 - NotificationService - INFO - Telegram channel configured
+2025-05-22 12:13:08,587 - MessageRouter - INFO - Starting message router
+2025-05-22 12:13:08,587 - MessageRouter - INFO - Channel console: OK
+2025-05-22 12:13:10,249 - MessageRouter - INFO - Channel telegram: OK
+2025-05-22 12:13:10,250 - NotificationService - INFO - Notification service started
+2025-05-22 12:13:10,250 - ScalpingStrategy - INFO - ScalpingStrategy initialized
+2025-05-22 12:13:10,250 - AdvancedTradingEngine - INFO - Initialized strategy: scalping
+2025-05-22 12:13:10,250 - DayTradingStrategy - INFO - DayTradingStrategy initialized
+2025-05-22 12:13:10,250 - AdvancedTradingEngine - INFO - Initialized strategy: day_trading
+2025-05-22 12:13:10,250 - AdvancedTradingEngine - INFO - All components initialized successfully
+2025-05-22 12:13:10,250 - RealTimeDataProcessor - INFO - New subscriber for BTCUSDT, total: 1
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to ticker: BTCUSDT
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to order book: BTCUSDT
+2025-05-22 12:13:10,250 - RealTimeDataProcessor - INFO - New subscriber for ETHUSDT, total: 1
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to ticker: ETHUSDT
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to order book: ETHUSDT
+2025-05-22 12:13:10,250 - RealTimeDataProcessor - INFO - New subscriber for ADAUSDT, total: 1
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to ticker: ADAUSDT
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to order book: ADAUSDT
+2025-05-22 12:13:10,250 - RealTimeDataProcessor - INFO - New subscriber for DOTUSDT, total: 1
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to ticker: DOTUSDT
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to order book: DOTUSDT
+2025-05-22 12:13:10,250 - RealTimeDataProcessor - INFO - New subscriber for LINKUSDT, total: 1
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to ticker: LINKUSDT
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to order book: LINKUSDT
+2025-05-22 12:13:10,250 - RealTimeDataProcessor - INFO - New subscriber for BNBUSDT, total: 1
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to ticker: BNBUSDT
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to order book: BNBUSDT
+2025-05-22 12:13:10,250 - RealTimeDataProcessor - INFO - New subscriber for XRPUSDT, total: 1
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to ticker: XRPUSDT
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to order book: XRPUSDT
+2025-05-22 12:13:10,250 - RealTimeDataProcessor - INFO - New subscriber for LTCUSDT, total: 1
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to ticker: LTCUSDT
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Subscribed to order book: LTCUSDT
+2025-05-22 12:13:10,250 - AdvancedTradingEngine - INFO - Subscribed to market data for 8 symbols
+2025-05-22 12:13:10,250 - HealthChecker - INFO - Registered health check for trading_engine (interval: 30s)
+2025-05-22 12:13:10,250 - AdvancedTradingEngine - INFO - Trading engine initialization completed successfully
+2025-05-22 12:13:10,250 - Main - INFO - Starting trading engine...
+2025-05-22 12:13:10,250 - AdvancedTradingEngine - INFO - Starting Advanced Trading Engine...
+2025-05-22 12:13:10,250 - ExchangeWebSocketManager - INFO - Connecting to exchanges...
+2025-05-22 12:13:11,261 - ExchangeWebSocketManager - INFO - Connected to exchanges
+2025-05-22 12:13:11,262 - MessageRouter - INFO - Message queued: msg_20250522_121311_262010
+2025-05-22 12:13:11,262 - AdvancedTradingEngine - INFO - Trading engine started successfully
+2025-05-22 12:13:11,262 - Main - INFO - Trading engine started successfully!
+2025-05-22 12:13:11,262 - Main - INFO - Press Ctrl+C to stop the application gracefully
+2025-05-22 12:13:11,916 - MessageChannel.Telegram - ERROR - Telegram send failed: {"ok":false,"error_code":400,"description":"Bad Request: can't parse entities: Can't find end of the entity starting at byte offset 100"}
+2025-05-22 12:13:14,573 - MessageChannel.Telegram - ERROR - Telegram send failed: {"ok":false,"error_code":400,"description":"Bad Request: can't parse entities: Can't find end of the entity starting at byte offset 100"}
+2025-05-22 12:13:15,221 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:13:19,246 - MessageChannel.Telegram - ERROR - Telegram send failed: {"ok":false,"error_code":400,"description":"Bad Request: can't parse entities: Can't find end of the entity starting at byte offset 100"}
+2025-05-22 12:13:19,247 - MessageRouter - WARNING - Failed to send message msg_20250522_121311_262010 via telegram
+2025-05-22 12:14:08,599 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:14:15,230 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:15:08,606 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:15:15,245 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:15:47,315 - Main - INFO - Logging system initialized
+2025-05-22 12:15:47,315 - Main - INFO - Starting Advanced Personal Trading Platform...
+2025-05-22 12:15:47,321 - ConfigValidator - INFO - Environment configuration validated successfully
+2025-05-22 12:15:47,322 - ConfigValidator - INFO - Trading symbols: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT, BNBUSDT, XRPUSDT, LTCUSDT
+2025-05-22 12:15:47,322 - ConfigValidator - INFO - Enabled strategies: scalping, day_trading
+2025-05-22 12:15:47,322 - ConfigValidator - INFO - Initial capital: $10,000.00
+2025-05-22 12:15:51,314 - HealthCheck - INFO - Internet connectivity check passed
+2025-05-22 12:15:52,701 - HealthCheck - INFO - Gemini API connectivity check passed
+2025-05-22 12:15:52,702 - HealthCheck - INFO - All startup health checks passed
+2025-05-22 12:15:52,707 - Main - INFO - Setting up Dependency Injection container...
+2025-05-22 12:15:52,707 - DIContainer - INFO - Registered instance for DIContainer
+2025-05-22 12:15:52,707 - DIContainer - INFO - DIContainer initialized
+2025-05-22 12:15:52,707 - Main - INFO - Initializing Advanced Trading Engine...
+2025-05-22 12:15:52,707 - AdvancedTradingEngine - INFO - AdvancedTradingEngine initialized
+2025-05-22 12:15:52,707 - SignalHandler - INFO - Signal handlers configured
+2025-05-22 12:15:52,707 - Main - INFO - Initializing trading engine components...
+2025-05-22 12:15:52,707 - AdvancedTradingEngine - INFO - Initializing trading engine components...
+2025-05-22 12:15:52,707 - DIContainer - INFO - Registered instance for TradingEngineConfig
+2025-05-22 12:15:52,707 - DIContainer - INFO - Registered ExchangeWebSocketManager -> ExchangeWebSocketManager as singleton with 0 dependencies
+2025-05-22 12:15:52,708 - DIContainer - INFO - Registered RealTimeDataProcessor -> RealTimeDataProcessor as singleton with 0 dependencies
+2025-05-22 12:15:52,708 - DIContainer - INFO - Registered GeminiAnalyzer -> GeminiAnalyzer as singleton with 0 dependencies
+2025-05-22 12:15:52,708 - DIContainer - INFO - Registered AdvancedRiskManager -> AdvancedRiskManager as singleton with 0 dependencies
+2025-05-22 12:15:52,708 - DIContainer - INFO - Registered SystemMonitor -> SystemMonitor as singleton with 0 dependencies
+2025-05-22 12:15:52,708 - DIContainer - INFO - Registered NotificationService -> NotificationService as singleton with 0 dependencies
+2025-05-22 12:15:52,708 - DIContainer - INFO - Registered ScalpingStrategy -> ScalpingStrategy as transient with 0 dependencies
+2025-05-22 12:15:52,708 - DIContainer - INFO - Registered DayTradingStrategy -> DayTradingStrategy as transient with 0 dependencies
+2025-05-22 12:15:52,708 - AdvancedTradingEngine - INFO - Services registered in DI container
+2025-05-22 12:15:52,708 - RealTimeDataProcessor - INFO - RealTimeDataProcessor initialized
+2025-05-22 12:15:52,708 - RealTimeDataProcessor - INFO - Starting real-time data processor
+2025-05-22 12:15:54,901 - GeminiAnalyzer - INFO - Gemini AI analyzer initialized successfully
+2025-05-22 12:15:54,901 - AdvancedRiskManager - INFO - AdvancedRiskManager initialized
+2025-05-22 12:15:54,902 - HealthChecker - INFO - Registered health check for system (interval: 60s)
+2025-05-22 12:15:54,902 - SystemMonitor - INFO - SystemMonitor initialized
+2025-05-22 12:15:54,902 - SystemMonitor - INFO - Starting system monitoring
+2025-05-22 12:15:54,902 - MessageRouter - INFO - Registered message channel: console
+2025-05-22 12:15:54,902 - MessageRouter - INFO - Added routing rule for critical -> ['console', 'telegram', 'email']
+2025-05-22 12:15:54,903 - MessageRouter - INFO - Added routing rule for trade_signal -> ['telegram', 'console']
+2025-05-22 12:15:54,903 - MessageRouter - INFO - Added routing rule for profit_loss -> ['telegram', 'email', 'console']
+2025-05-22 12:15:54,903 - MessageRouter - INFO - Added routing rule for system_status -> ['console', 'telegram']
+2025-05-22 12:15:54,903 - MessageRouter - INFO - Registered message channel: telegram
+2025-05-22 12:15:54,903 - NotificationService - INFO - Telegram channel configured
+2025-05-22 12:15:54,903 - MessageRouter - INFO - Starting message router
+2025-05-22 12:15:54,903 - MessageRouter - INFO - Channel console: OK
+2025-05-22 12:15:56,576 - MessageRouter - INFO - Channel telegram: OK
+2025-05-22 12:15:56,576 - NotificationService - INFO - Notification service started
+2025-05-22 12:15:56,577 - ScalpingStrategy - INFO - ScalpingStrategy initialized
+2025-05-22 12:15:56,577 - AdvancedTradingEngine - INFO - Initialized strategy: scalping
+2025-05-22 12:15:56,577 - DayTradingStrategy - INFO - DayTradingStrategy initialized
+2025-05-22 12:15:56,577 - AdvancedTradingEngine - INFO - Initialized strategy: day_trading
+2025-05-22 12:15:56,577 - AdvancedTradingEngine - INFO - All components initialized successfully
+2025-05-22 12:15:56,577 - RealTimeDataProcessor - INFO - New subscriber for BTCUSDT, total: 1
+2025-05-22 12:15:56,578 - ExchangeWebSocketManager - INFO - Subscribed to ticker: BTCUSDT
+2025-05-22 12:15:56,578 - ExchangeWebSocketManager - INFO - Subscribed to order book: BTCUSDT
+2025-05-22 12:15:56,578 - RealTimeDataProcessor - INFO - New subscriber for ETHUSDT, total: 1
+2025-05-22 12:15:56,578 - ExchangeWebSocketManager - INFO - Subscribed to ticker: ETHUSDT
+2025-05-22 12:15:56,578 - ExchangeWebSocketManager - INFO - Subscribed to order book: ETHUSDT
+2025-05-22 12:15:56,578 - RealTimeDataProcessor - INFO - New subscriber for ADAUSDT, total: 1
+2025-05-22 12:15:56,578 - ExchangeWebSocketManager - INFO - Subscribed to ticker: ADAUSDT
+2025-05-22 12:15:56,578 - ExchangeWebSocketManager - INFO - Subscribed to order book: ADAUSDT
+2025-05-22 12:15:56,579 - RealTimeDataProcessor - INFO - New subscriber for DOTUSDT, total: 1
+2025-05-22 12:15:56,579 - ExchangeWebSocketManager - INFO - Subscribed to ticker: DOTUSDT
+2025-05-22 12:15:56,579 - ExchangeWebSocketManager - INFO - Subscribed to order book: DOTUSDT
+2025-05-22 12:15:56,579 - RealTimeDataProcessor - INFO - New subscriber for LINKUSDT, total: 1
+2025-05-22 12:15:56,579 - ExchangeWebSocketManager - INFO - Subscribed to ticker: LINKUSDT
+2025-05-22 12:15:56,579 - ExchangeWebSocketManager - INFO - Subscribed to order book: LINKUSDT
+2025-05-22 12:15:56,579 - RealTimeDataProcessor - INFO - New subscriber for BNBUSDT, total: 1
+2025-05-22 12:15:56,579 - ExchangeWebSocketManager - INFO - Subscribed to ticker: BNBUSDT
+2025-05-22 12:15:56,579 - ExchangeWebSocketManager - INFO - Subscribed to order book: BNBUSDT
+2025-05-22 12:15:56,579 - RealTimeDataProcessor - INFO - New subscriber for XRPUSDT, total: 1
+2025-05-22 12:15:56,579 - ExchangeWebSocketManager - INFO - Subscribed to ticker: XRPUSDT
+2025-05-22 12:15:56,579 - ExchangeWebSocketManager - INFO - Subscribed to order book: XRPUSDT
+2025-05-22 12:15:56,579 - RealTimeDataProcessor - INFO - New subscriber for LTCUSDT, total: 1
+2025-05-22 12:15:56,579 - ExchangeWebSocketManager - INFO - Subscribed to ticker: LTCUSDT
+2025-05-22 12:15:56,580 - ExchangeWebSocketManager - INFO - Subscribed to order book: LTCUSDT
+2025-05-22 12:15:56,580 - AdvancedTradingEngine - INFO - Subscribed to market data for 8 symbols
+2025-05-22 12:15:56,580 - HealthChecker - INFO - Registered health check for trading_engine (interval: 30s)
+2025-05-22 12:15:56,580 - AdvancedTradingEngine - INFO - Trading engine initialization completed successfully
+2025-05-22 12:15:56,580 - Main - INFO - Starting trading engine...
+2025-05-22 12:15:56,580 - AdvancedTradingEngine - INFO - Starting Advanced Trading Engine...
+2025-05-22 12:15:56,580 - ExchangeWebSocketManager - INFO - Connecting to exchanges...
+2025-05-22 12:15:57,589 - ExchangeWebSocketManager - INFO - Connected to exchanges
+2025-05-22 12:15:57,589 - MessageRouter - INFO - Message queued: msg_20250522_121557_589864
+2025-05-22 12:15:57,590 - AdvancedTradingEngine - INFO - Trading engine started successfully
+2025-05-22 12:15:57,590 - Main - INFO - Trading engine started successfully!
+2025-05-22 12:15:57,590 - Main - INFO - Press Ctrl+C to stop the application gracefully
+2025-05-22 12:15:58,356 - MessageChannel.Telegram - ERROR - Telegram send failed: {"ok":false,"error_code":400,"description":"Bad Request: can't parse entities: Can't find end of the entity starting at byte offset 100"}
+2025-05-22 12:16:01,043 - MessageChannel.Telegram - ERROR - Telegram send failed: {"ok":false,"error_code":400,"description":"Bad Request: can't parse entities: Can't find end of the entity starting at byte offset 100"}
+2025-05-22 12:16:05,705 - MessageChannel.Telegram - ERROR - Telegram send failed: {"ok":false,"error_code":400,"description":"Bad Request: can't parse entities: Can't find end of the entity starting at byte offset 100"}
+2025-05-22 12:16:05,707 - MessageRouter - WARNING - Failed to send message msg_20250522_121557_589864 via telegram
+2025-05-22 12:16:08,609 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:16:15,259 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:16:54,911 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:17:08,611 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:17:15,261 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:17:54,927 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:18:08,612 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:18:15,262 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:18:54,928 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:19:08,613 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:19:15,263 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:19:52,048 - SignalHandler - INFO - Received signal 2, initiating graceful shutdown...
+2025-05-22 12:19:52,049 - Shutdown - INFO - Initiating graceful shutdown...
+2025-05-22 12:19:52,049 - AdvancedTradingEngine - INFO - Stopping trading engine...
+2025-05-22 12:19:52,049 - ExchangeWebSocketManager - INFO - Disconnecting from exchanges...
+2025-05-22 12:19:52,050 - RealTimeDataProcessor - INFO - Stopping real-time data processor
+2025-05-22 12:19:52,050 - SystemMonitor - INFO - Stopping system monitoring
+2025-05-22 12:19:52,050 - MessageRouter - INFO - Stopping message router
+2025-05-22 12:19:52,051 - NotificationService - INFO - Notification service stopped
+2025-05-22 12:19:52,051 - MessageRouter - INFO - Message queued: msg_20250522_121952_051135
+2025-05-22 12:19:52,051 - AdvancedTradingEngine - INFO - Trading engine stopped successfully
+2025-05-22 12:19:52,051 - Shutdown - INFO - Graceful shutdown completed
+2025-05-22 12:20:08,614 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:20:15,264 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:21:08,622 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:21:15,265 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:22:08,636 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:22:15,278 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:23:08,638 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:23:15,283 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:24:08,648 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:24:15,295 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:25:08,653 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:25:15,302 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:26:08,659 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:26:15,315 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:27:08,670 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:27:15,709 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:28:09,050 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:28:15,718 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:29:09,057 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:29:15,721 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:30:09,058 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:30:15,723 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:30:57,778 - Main - INFO - Logging system initialized
+2025-05-22 12:30:57,778 - Main - INFO - Starting Advanced Personal Trading Platform...
+2025-05-22 12:30:57,785 - ConfigValidator - INFO - Environment configuration validated successfully
+2025-05-22 12:30:57,785 - ConfigValidator - INFO - Trading symbols: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT, BNBUSDT, XRPUSDT, LTCUSDT
+2025-05-22 12:30:57,785 - ConfigValidator - INFO - Enabled strategies: scalping, day_trading
+2025-05-22 12:30:57,785 - ConfigValidator - INFO - Initial capital: $10,000.00
+2025-05-22 12:31:02,085 - HealthCheck - INFO - Internet connectivity check passed
+2025-05-22 12:31:03,576 - HealthCheck - INFO - Gemini API connectivity check passed
+2025-05-22 12:31:03,576 - HealthCheck - INFO - All startup health checks passed
+2025-05-22 12:31:03,580 - Main - INFO - Setting up Dependency Injection container...
+2025-05-22 12:31:03,580 - DIContainer - INFO - Registered instance for DIContainer
+2025-05-22 12:31:03,580 - DIContainer - INFO - DIContainer initialized
+2025-05-22 12:31:03,580 - Main - INFO - Initializing Advanced Trading Engine...
+2025-05-22 12:31:03,580 - AdvancedTradingEngine - INFO - AdvancedTradingEngine initialized
+2025-05-22 12:31:03,580 - SignalHandler - INFO - Signal handlers configured
+2025-05-22 12:31:03,580 - Main - INFO - Initializing trading engine components...
+2025-05-22 12:31:03,580 - AdvancedTradingEngine - INFO - Initializing trading engine components...
+2025-05-22 12:31:03,580 - DIContainer - INFO - Registered instance for TradingEngineConfig
+2025-05-22 12:31:03,580 - DIContainer - INFO - Registered ExchangeWebSocketManager -> ExchangeWebSocketManager as singleton with 0 dependencies
+2025-05-22 12:31:03,580 - DIContainer - INFO - Registered RealTimeDataProcessor -> RealTimeDataProcessor as singleton with 0 dependencies
+2025-05-22 12:31:03,580 - DIContainer - INFO - Registered GeminiAnalyzer -> GeminiAnalyzer as singleton with 0 dependencies
+2025-05-22 12:31:03,580 - DIContainer - INFO - Registered AdvancedRiskManager -> AdvancedRiskManager as singleton with 0 dependencies
+2025-05-22 12:31:03,580 - DIContainer - INFO - Registered SystemMonitor -> SystemMonitor as singleton with 0 dependencies
+2025-05-22 12:31:03,580 - DIContainer - INFO - Registered NotificationService -> NotificationService as singleton with 0 dependencies
+2025-05-22 12:31:03,580 - DIContainer - INFO - Registered ScalpingStrategy -> ScalpingStrategy as transient with 0 dependencies
+2025-05-22 12:31:03,580 - DIContainer - INFO - Registered DayTradingStrategy -> DayTradingStrategy as transient with 0 dependencies
+2025-05-22 12:31:03,580 - AdvancedTradingEngine - INFO - Services registered in DI container
+2025-05-22 12:31:03,581 - RealTimeDataProcessor - INFO - RealTimeDataProcessor initialized
+2025-05-22 12:31:03,581 - RealTimeDataProcessor - INFO - Starting real-time data processor
+2025-05-22 12:31:05,977 - GeminiAnalyzer - INFO - Gemini AI analyzer initialized successfully
+2025-05-22 12:31:05,977 - AdvancedRiskManager - INFO - AdvancedRiskManager initialized
+2025-05-22 12:31:05,977 - HealthChecker - INFO - Registered health check for system (interval: 60s)
+2025-05-22 12:31:05,977 - SystemMonitor - INFO - SystemMonitor initialized
+2025-05-22 12:31:05,977 - SystemMonitor - INFO - Starting system monitoring
+2025-05-22 12:31:05,977 - MessageRouter - INFO - Registered message channel: console
+2025-05-22 12:31:05,977 - MessageRouter - INFO - Added routing rule for critical -> ['console', 'telegram', 'email']
+2025-05-22 12:31:05,977 - MessageRouter - INFO - Added routing rule for trade_signal -> ['telegram', 'console']
+2025-05-22 12:31:05,977 - MessageRouter - INFO - Added routing rule for profit_loss -> ['telegram', 'email', 'console']
+2025-05-22 12:31:05,977 - MessageRouter - INFO - Added routing rule for system_status -> ['console', 'telegram']
+2025-05-22 12:31:06,116 - MessageRouter - INFO - Registered message channel: telegram
+2025-05-22 12:31:06,116 - NotificationService - INFO - Telegram channel configured
+2025-05-22 12:31:06,116 - TelegramUpgrade - INFO - Telegram channel upgraded successfully
+2025-05-22 12:31:06,116 - MessageRouter - INFO - Starting message router
+2025-05-22 12:31:06,116 - MessageRouter - INFO - Channel console: OK
+2025-05-22 12:31:08,304 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7975449458:AAHnjgmlbHW-vdjQtMq_RKLSUSOCCXoS4U4/getMe "HTTP/1.1 200 OK"
+2025-05-22 12:31:08,307 - MessageChannel.TelegramAdvanced - INFO - Connected to Telegram bot: Agente_IME_BOT
+2025-05-22 12:31:08,307 - MessageRouter - INFO - Channel telegram: OK
+2025-05-22 12:31:08,307 - NotificationService - INFO - Notification service started
+2025-05-22 12:31:08,307 - ScalpingStrategy - INFO - ScalpingStrategy initialized
+2025-05-22 12:31:08,307 - AdvancedTradingEngine - INFO - Initialized strategy: scalping
+2025-05-22 12:31:08,307 - DayTradingStrategy - INFO - DayTradingStrategy initialized
+2025-05-22 12:31:08,307 - AdvancedTradingEngine - INFO - Initialized strategy: day_trading
+2025-05-22 12:31:08,307 - AdvancedTradingEngine - INFO - All components initialized successfully
+2025-05-22 12:31:08,307 - RealTimeDataProcessor - INFO - New subscriber for BTCUSDT, total: 1
+2025-05-22 12:31:08,307 - ExchangeWebSocketManager - INFO - Subscribed to ticker: BTCUSDT
+2025-05-22 12:31:08,307 - ExchangeWebSocketManager - INFO - Subscribed to order book: BTCUSDT
+2025-05-22 12:31:08,307 - RealTimeDataProcessor - INFO - New subscriber for ETHUSDT, total: 1
+2025-05-22 12:31:08,307 - ExchangeWebSocketManager - INFO - Subscribed to ticker: ETHUSDT
+2025-05-22 12:31:08,307 - ExchangeWebSocketManager - INFO - Subscribed to order book: ETHUSDT
+2025-05-22 12:31:08,307 - RealTimeDataProcessor - INFO - New subscriber for ADAUSDT, total: 1
+2025-05-22 12:31:08,307 - ExchangeWebSocketManager - INFO - Subscribed to ticker: ADAUSDT
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Subscribed to order book: ADAUSDT
+2025-05-22 12:31:08,308 - RealTimeDataProcessor - INFO - New subscriber for DOTUSDT, total: 1
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Subscribed to ticker: DOTUSDT
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Subscribed to order book: DOTUSDT
+2025-05-22 12:31:08,308 - RealTimeDataProcessor - INFO - New subscriber for LINKUSDT, total: 1
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Subscribed to ticker: LINKUSDT
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Subscribed to order book: LINKUSDT
+2025-05-22 12:31:08,308 - RealTimeDataProcessor - INFO - New subscriber for BNBUSDT, total: 1
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Subscribed to ticker: BNBUSDT
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Subscribed to order book: BNBUSDT
+2025-05-22 12:31:08,308 - RealTimeDataProcessor - INFO - New subscriber for XRPUSDT, total: 1
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Subscribed to ticker: XRPUSDT
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Subscribed to order book: XRPUSDT
+2025-05-22 12:31:08,308 - RealTimeDataProcessor - INFO - New subscriber for LTCUSDT, total: 1
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Subscribed to ticker: LTCUSDT
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Subscribed to order book: LTCUSDT
+2025-05-22 12:31:08,308 - AdvancedTradingEngine - INFO - Subscribed to market data for 8 symbols
+2025-05-22 12:31:08,308 - HealthChecker - INFO - Registered health check for trading_engine (interval: 30s)
+2025-05-22 12:31:08,308 - AdvancedTradingEngine - INFO - Trading engine initialization completed successfully
+2025-05-22 12:31:08,308 - Main - INFO - Starting trading engine...
+2025-05-22 12:31:08,308 - AdvancedTradingEngine - INFO - Starting Advanced Trading Engine...
+2025-05-22 12:31:08,308 - ExchangeWebSocketManager - INFO - Connecting to exchanges...
+2025-05-22 12:31:09,072 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:31:09,323 - ExchangeWebSocketManager - INFO - Connected to exchanges
+2025-05-22 12:31:09,324 - MessageRouter - INFO - Message queued: msg_20250522_123109_324116
+2025-05-22 12:31:09,324 - AdvancedTradingEngine - INFO - Trading engine started successfully
+2025-05-22 12:31:09,324 - Main - INFO - Trading engine started successfully!
+2025-05-22 12:31:09,324 - Main - INFO - Press Ctrl+C to stop the application gracefully
+2025-05-22 12:31:09,691 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7975449458:AAHnjgmlbHW-vdjQtMq_RKLSUSOCCXoS4U4/sendMessage "HTTP/1.1 200 OK"
+2025-05-22 12:31:09,692 - MessageChannel.TelegramAdvanced - INFO - Telegram message sent successfully: msg_20250522_123109_324116
+2025-05-22 12:31:15,733 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:32:06,648 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:32:09,076 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:32:15,738 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:33:06,652 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:33:09,092 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:33:15,747 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:34:06,661 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:34:09,106 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:34:15,762 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:34:31,832 - Main - INFO - Logging system initialized
+2025-05-22 12:34:31,833 - Main - INFO - Starting Advanced Personal Trading Platform...
+2025-05-22 12:34:31,839 - ConfigValidator - INFO - Environment configuration validated successfully
+2025-05-22 12:34:31,839 - ConfigValidator - INFO - Trading symbols: BTCUSDT, ETHUSDT, ADAUSDT, DOTUSDT, LINKUSDT, BNBUSDT, XRPUSDT, LTCUSDT
+2025-05-22 12:34:31,839 - ConfigValidator - INFO - Enabled strategies: scalping, day_trading
+2025-05-22 12:34:31,839 - ConfigValidator - INFO - Initial capital: $10,000.00
+2025-05-22 12:34:35,934 - HealthCheck - INFO - Internet connectivity check passed
+2025-05-22 12:34:38,140 - HealthCheck - INFO - Gemini API connectivity check passed
+2025-05-22 12:34:38,140 - HealthCheck - INFO - All startup health checks passed
+2025-05-22 12:34:38,145 - Main - INFO - Setting up Dependency Injection container...
+2025-05-22 12:34:38,146 - DIContainer - INFO - Registered instance for DIContainer
+2025-05-22 12:34:38,146 - DIContainer - INFO - DIContainer initialized
+2025-05-22 12:34:38,146 - Main - INFO - Initializing Advanced Trading Engine...
+2025-05-22 12:34:38,146 - AdvancedTradingEngine - INFO - AdvancedTradingEngine initialized
+2025-05-22 12:34:38,146 - SignalHandler - INFO - Signal handlers configured
+2025-05-22 12:34:38,147 - Main - INFO - Initializing trading engine components...
+2025-05-22 12:34:38,147 - AdvancedTradingEngine - INFO - Initializing trading engine components...
+2025-05-22 12:34:38,147 - DIContainer - INFO - Registered instance for TradingEngineConfig
+2025-05-22 12:34:38,148 - DIContainer - INFO - Registered ExchangeWebSocketManager -> ExchangeWebSocketManager as singleton with 0 dependencies
+2025-05-22 12:34:38,148 - DIContainer - INFO - Registered RealTimeDataProcessor -> RealTimeDataProcessor as singleton with 0 dependencies
+2025-05-22 12:34:38,148 - DIContainer - INFO - Registered GeminiAnalyzer -> GeminiAnalyzer as singleton with 0 dependencies
+2025-05-22 12:34:38,148 - DIContainer - INFO - Registered AdvancedRiskManager -> AdvancedRiskManager as singleton with 0 dependencies
+2025-05-22 12:34:38,148 - DIContainer - INFO - Registered SystemMonitor -> SystemMonitor as singleton with 0 dependencies
+2025-05-22 12:34:38,148 - DIContainer - INFO - Registered NotificationService -> NotificationService as singleton with 0 dependencies
+2025-05-22 12:34:38,149 - DIContainer - INFO - Registered ScalpingStrategy -> ScalpingStrategy as transient with 0 dependencies
+2025-05-22 12:34:38,149 - DIContainer - INFO - Registered DayTradingStrategy -> DayTradingStrategy as transient with 0 dependencies
+2025-05-22 12:34:38,149 - AdvancedTradingEngine - INFO - Services registered in DI container
+2025-05-22 12:34:38,149 - RealTimeDataProcessor - INFO - RealTimeDataProcessor initialized
+2025-05-22 12:34:38,150 - RealTimeDataProcessor - INFO - Starting real-time data processor
+2025-05-22 12:34:39,561 - GeminiAnalyzer - INFO - Gemini AI analyzer initialized successfully
+2025-05-22 12:34:39,562 - AdvancedRiskManager - INFO - AdvancedRiskManager initialized
+2025-05-22 12:34:39,562 - HealthChecker - INFO - Registered health check for system (interval: 60s)
+2025-05-22 12:34:39,562 - SystemMonitor - INFO - SystemMonitor initialized
+2025-05-22 12:34:39,562 - SystemMonitor - INFO - Starting system monitoring
+2025-05-22 12:34:39,563 - MessageRouter - INFO - Registered message channel: console
+2025-05-22 12:34:39,563 - MessageRouter - INFO - Added routing rule for critical -> ['console', 'telegram', 'email']
+2025-05-22 12:34:39,564 - MessageRouter - INFO - Added routing rule for trade_signal -> ['telegram', 'console']
+2025-05-22 12:34:39,564 - MessageRouter - INFO - Added routing rule for profit_loss -> ['telegram', 'email', 'console']
+2025-05-22 12:34:39,565 - MessageRouter - INFO - Added routing rule for system_status -> ['console', 'telegram']
+2025-05-22 12:34:39,694 - MessageRouter - INFO - Registered message channel: telegram
+2025-05-22 12:34:39,695 - NotificationService - INFO - Telegram channel configured
+2025-05-22 12:34:39,695 - TelegramUpgrade - INFO - Telegram channel upgraded successfully
+2025-05-22 12:34:39,695 - MessageRouter - INFO - Starting message router
+2025-05-22 12:34:39,695 - MessageRouter - INFO - Channel console: OK
+2025-05-22 12:34:41,798 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7975449458:AAHnjgmlbHW-vdjQtMq_RKLSUSOCCXoS4U4/getMe "HTTP/1.1 200 OK"
+2025-05-22 12:34:41,800 - MessageChannel.TelegramAdvanced - INFO - Connected to Telegram bot: Agente_IME_BOT
+2025-05-22 12:34:41,800 - MessageRouter - INFO - Channel telegram: OK
+2025-05-22 12:34:41,800 - NotificationService - INFO - Notification service started
+2025-05-22 12:34:41,800 - ScalpingStrategy - INFO - ScalpingStrategy initialized
+2025-05-22 12:34:41,801 - AdvancedTradingEngine - INFO - Initialized strategy: scalping
+2025-05-22 12:34:41,801 - DayTradingStrategy - INFO - DayTradingStrategy initialized
+2025-05-22 12:34:41,801 - AdvancedTradingEngine - INFO - Initialized strategy: day_trading
+2025-05-22 12:34:41,801 - AdvancedTradingEngine - INFO - All components initialized successfully
+2025-05-22 12:34:41,802 - RealTimeDataProcessor - INFO - New subscriber for BTCUSDT, total: 1
+2025-05-22 12:34:41,802 - ExchangeWebSocketManager - INFO - Subscribed to ticker: BTCUSDT
+2025-05-22 12:34:41,802 - ExchangeWebSocketManager - INFO - Subscribed to order book: BTCUSDT
+2025-05-22 12:34:41,802 - RealTimeDataProcessor - INFO - New subscriber for ETHUSDT, total: 1
+2025-05-22 12:34:41,802 - ExchangeWebSocketManager - INFO - Subscribed to ticker: ETHUSDT
+2025-05-22 12:34:41,802 - ExchangeWebSocketManager - INFO - Subscribed to order book: ETHUSDT
+2025-05-22 12:34:41,802 - RealTimeDataProcessor - INFO - New subscriber for ADAUSDT, total: 1
+2025-05-22 12:34:41,803 - ExchangeWebSocketManager - INFO - Subscribed to ticker: ADAUSDT
+2025-05-22 12:34:41,803 - ExchangeWebSocketManager - INFO - Subscribed to order book: ADAUSDT
+2025-05-22 12:34:41,803 - RealTimeDataProcessor - INFO - New subscriber for DOTUSDT, total: 1
+2025-05-22 12:34:41,803 - ExchangeWebSocketManager - INFO - Subscribed to ticker: DOTUSDT
+2025-05-22 12:34:41,803 - ExchangeWebSocketManager - INFO - Subscribed to order book: DOTUSDT
+2025-05-22 12:34:41,803 - RealTimeDataProcessor - INFO - New subscriber for LINKUSDT, total: 1
+2025-05-22 12:34:41,803 - ExchangeWebSocketManager - INFO - Subscribed to ticker: LINKUSDT
+2025-05-22 12:34:41,803 - ExchangeWebSocketManager - INFO - Subscribed to order book: LINKUSDT
+2025-05-22 12:34:41,803 - RealTimeDataProcessor - INFO - New subscriber for BNBUSDT, total: 1
+2025-05-22 12:34:41,803 - ExchangeWebSocketManager - INFO - Subscribed to ticker: BNBUSDT
+2025-05-22 12:34:41,803 - ExchangeWebSocketManager - INFO - Subscribed to order book: BNBUSDT
+2025-05-22 12:34:41,803 - RealTimeDataProcessor - INFO - New subscriber for XRPUSDT, total: 1
+2025-05-22 12:34:41,803 - ExchangeWebSocketManager - INFO - Subscribed to ticker: XRPUSDT
+2025-05-22 12:34:41,803 - ExchangeWebSocketManager - INFO - Subscribed to order book: XRPUSDT
+2025-05-22 12:34:41,804 - RealTimeDataProcessor - INFO - New subscriber for LTCUSDT, total: 1
+2025-05-22 12:34:41,804 - ExchangeWebSocketManager - INFO - Subscribed to ticker: LTCUSDT
+2025-05-22 12:34:41,804 - ExchangeWebSocketManager - INFO - Subscribed to order book: LTCUSDT
+2025-05-22 12:34:41,804 - AdvancedTradingEngine - INFO - Subscribed to market data for 8 symbols
+2025-05-22 12:34:41,804 - HealthChecker - INFO - Registered health check for trading_engine (interval: 30s)
+2025-05-22 12:34:41,804 - AdvancedTradingEngine - INFO - Trading engine initialization completed successfully
+2025-05-22 12:34:41,804 - Main - INFO - Starting trading engine...
+2025-05-22 12:34:41,804 - AdvancedTradingEngine - INFO - Starting Advanced Trading Engine...
+2025-05-22 12:34:41,804 - ExchangeWebSocketManager - INFO - Connecting to exchanges...
+2025-05-22 12:34:42,811 - ExchangeWebSocketManager - INFO - Connected to exchanges
+2025-05-22 12:34:42,812 - MessageRouter - INFO - Message queued: msg_20250522_123442_812254
+2025-05-22 12:34:42,812 - AdvancedTradingEngine - INFO - Trading engine started successfully
+2025-05-22 12:34:42,812 - Main - INFO - Trading engine started successfully!
+2025-05-22 12:34:42,813 - Main - INFO - Press Ctrl+C to stop the application gracefully
+2025-05-22 12:34:43,150 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot7975449458:AAHnjgmlbHW-vdjQtMq_RKLSUSOCCXoS4U4/sendMessage "HTTP/1.1 200 OK"
+2025-05-22 12:34:43,151 - MessageChannel.TelegramAdvanced - INFO - Telegram message sent successfully: msg_20250522_123442_812254
+2025-05-22 12:35:06,664 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:35:09,113 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:35:15,764 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:35:40,131 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:36:06,680 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:36:09,114 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:36:15,779 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:36:40,132 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:37:06,682 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:37:09,116 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:37:15,782 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:37:40,133 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:38:06,684 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:38:09,117 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:38:15,783 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:38:40,134 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:39:06,685 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:39:09,132 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 12:39:11,364 - SignalHandler - INFO - Received signal 2, initiating graceful shutdown...
+2025-05-22 12:39:11,365 - Shutdown - INFO - Initiating graceful shutdown...
+2025-05-22 12:39:11,365 - AdvancedTradingEngine - INFO - Stopping trading engine...
+2025-05-22 12:39:11,365 - ExchangeWebSocketManager - INFO - Disconnecting from exchanges...
+2025-05-22 12:39:11,365 - RealTimeDataProcessor - INFO - Stopping real-time data processor
+2025-05-22 12:39:11,365 - SystemMonitor - INFO - Stopping system monitoring
+2025-05-22 12:39:11,365 - MessageRouter - INFO - Stopping message router
+2025-05-22 12:39:11,366 - NotificationService - INFO - Notification service stopped
+2025-05-22 12:39:11,366 - MessageRouter - INFO - Message queued: msg_20250522_123911_366113
+2025-05-22 12:39:11,366 - AdvancedTradingEngine - INFO - Trading engine stopped successfully
+2025-05-22 12:39:11,366 - Shutdown - INFO - Graceful shutdown completed

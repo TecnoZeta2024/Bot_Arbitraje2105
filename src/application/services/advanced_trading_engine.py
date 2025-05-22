@@ -13,6 +13,9 @@ from dataclasses import dataclass, asdict
 from domain.entities.market_data import MarketData
 from domain.trading_signals.trading_signal import TradingSignal
 from domain.strategies.base_strategy import BaseStrategy
+from domain.strategies.scalping_strategy import ScalpingStrategy
+from domain.strategies.day_trading_strategy import DayTradingStrategy
+from domain.risk_management.advanced_risk_manager import AdvancedRiskManager
 from infrastructure.websockets.exchange_websocket_manager import ExchangeWebSocketManager
 from infrastructure.ai_analysis.gemini_analyzer import GeminiAnalyzer
 from infrastructure.real_time_data.stream_processor import RealTimeDataProcessor
@@ -189,7 +192,17 @@ class AdvancedTradingEngine:
         # Configurar notificaciones si están habilitadas
         if self.config.enable_notifications:
             if self.config.telegram_bot_token and self.config.telegram_chat_id:
+                # Usar canal de Telegram mejorado
+                from infrastructure.messaging.advanced_telegram import upgrade_telegram_channel
+                
                 self.notification_service.configure_telegram(
+                    self.config.telegram_bot_token,
+                    self.config.telegram_chat_id
+                )
+                
+                # Actualizar a canal avanzado
+                self.advanced_telegram = upgrade_telegram_channel(
+                    self.notification_service,
                     self.config.telegram_bot_token,
                     self.config.telegram_chat_id
                 )
@@ -235,7 +248,7 @@ class AdvancedTradingEngine:
         """Configura health checks y monitoreo."""
         # Health check del motor de trading
         def trading_engine_health_check():
-            from ..infrastructure.monitoring.system_monitor import HealthCheck, HealthStatus
+            from infrastructure.monitoring.system_monitor import HealthCheck, HealthStatus
             
             if not self.is_running:
                 return HealthCheck(
@@ -403,13 +416,28 @@ class AdvancedTradingEngine:
             if success:
                 self.performance_metrics['signals_executed'] += 1
                 
-                # Notificar señal
-                await self.notification_service.notify_trade_signal(
-                    signal.symbol,
-                    signal.action.value,
-                    signal.price,
-                    signal.ai_analysis.confidence if signal.ai_analysis else 0.0
-                )
+                # Notificar señal usando canal avanzado si está disponible
+                if hasattr(self, 'advanced_telegram') and self.advanced_telegram:
+                    await self.advanced_telegram.send_trading_notification(
+                        "Nueva Señal de Trading",
+                        signal.symbol,
+                        signal.action.value,
+                        signal.price,
+                        signal.ai_analysis.confidence if signal.ai_analysis else 0.0,
+                        {
+                            "Estrategia": strategy_name,
+                            "Risk Level": signal.risk_level.value,
+                            "Expected Profit": f"{signal.expected_profit:.2f}%"
+                        }
+                    )
+                else:
+                    # Fallback al método original
+                    await self.notification_service.notify_trade_signal(
+                        signal.symbol,
+                        signal.action.value,
+                        signal.price,
+                        signal.ai_analysis.confidence if signal.ai_analysis else 0.0
+                    )
         
         except Exception as e:
             self.logger.error(f"Error processing trading signal: {e}")
@@ -488,13 +516,22 @@ class AdvancedTradingEngine:
         # Remover de posiciones activas
         del self.current_positions[position['id']]
         
-        # Notificar P&L
-        await self.notification_service.notify_profit_loss(
-            position['symbol'],
-            pnl,
-            pnl_pct,
-            position['size']
-        )
+        # Notificar P&L usando canal avanzado si está disponible
+        if hasattr(self, 'advanced_telegram') and self.advanced_telegram:
+            await self.advanced_telegram.send_pnl_notification(
+                position['symbol'],
+                pnl,
+                pnl_pct,
+                position['size']
+            )
+        else:
+            # Fallback al método original
+            await self.notification_service.notify_profit_loss(
+                position['symbol'],
+                pnl,
+                pnl_pct,
+                position['size']
+            )
         
         self.logger.info(
             f"Closed position {position['id']} - "

@@ -36,19 +36,24 @@ def setup_logging():
     # Configuración de logging
     log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     
+    # Console handler con encoding UTF-8
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setLevel(logging.INFO)
+    console_handler.setFormatter(logging.Formatter(log_format))
+    
+    # File handler con encoding UTF-8
+    file_handler = logging.FileHandler(
+        logs_dir / f"trading_{datetime.now().strftime('%Y%m%d')}.log",
+        encoding='utf-8'
+    )
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(logging.Formatter(log_format))
+    
     # Logger principal
     logging.basicConfig(
         level=logging.INFO,
         format=log_format,
-        handlers=[
-            # Console handler
-            logging.StreamHandler(sys.stdout),
-            # File handler
-            logging.FileHandler(
-                logs_dir / f"trading_{datetime.now().strftime('%Y%m%d')}.log",
-                encoding='utf-8'
-            )
-        ]
+        handlers=[console_handler, file_handler]
     )
     
     # Configurar loggers específicos
@@ -297,7 +302,7 @@ async def main():
         return 0
         
     except Exception as e:
-        logger.error(f"❌ Critical error in main application: {e}")
+        logger.error(f"Critical error in main application: {e}")
         logger.exception("Exception details:")
         return 1
 

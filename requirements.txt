@@ -66,6 +66,7 @@ aioredis>=2.0.0
 # ========================================
 # Telegram
 python-telegram-bot>=20.4
+telegram>=0.0.1
 
 # Email
 aiosmtplib>=2.0.0

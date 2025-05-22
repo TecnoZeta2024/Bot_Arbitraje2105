@@ -7,12 +7,10 @@ import asyncio
 import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from decimal import Decimal
 from typing import Dict, List, Any, Optional
 from enum import Enum
 
-from ...domain.trading_signals.trading_signal import TradingSignal, RiskLevel, SignalAction
-from ...domain.entities.market_data import MarketData
+from domain.trading_signals.trading_signal import TradingSignal, RiskLevel, SignalAction
 
 
 class RiskEventType(Enum):
@@ -30,33 +28,33 @@ class RiskEventType(Enum):
 class RiskParameters:
     """Risk management configuration"""
     # Capital limits
-    max_daily_loss: Decimal = Decimal('0.02')          # 2% max daily loss
-    max_position_size: Decimal = Decimal('0.05')       # 5% max per position
-    max_total_exposure: Decimal = Decimal('0.8')       # 80% max total exposure
-    max_correlation_exposure: Decimal = Decimal('0.15') # 15% max in correlated assets
+    max_daily_loss: float = 0.02          # 2% max daily loss
+    max_position_size: float = 0.05       # 5% max per position
+    max_total_exposure: float = 0.8       # 80% max total exposure
+    max_correlation_exposure: float = 0.15 # 15% max in correlated assets
     
     # Risk multipliers
-    stop_loss_multiplier: Decimal = Decimal('1.5')     # ATR multiplier for stop loss
-    profit_target_multiplier: Decimal = Decimal('2.0') # Risk/Reward ratio
+    stop_loss_multiplier: float = 1.5     # ATR multiplier for stop loss
+    profit_target_multiplier: float = 2.0 # Risk/Reward ratio
     
     # Position limits
     max_concurrent_positions: int = 10
     max_positions_per_symbol: int = 1
     
     # Volatility and market conditions
-    max_volatility_threshold: Decimal = Decimal('0.05') # 5% max volatility
-    min_liquidity_score: Decimal = Decimal('1000')      # Minimum liquidity
-    max_spread_percentage: Decimal = Decimal('0.1')     # 0.1% max spread
+    max_volatility_threshold: float = 0.05 # 5% max volatility
+    min_liquidity_score: float = 1000      # Minimum liquidity
+    max_spread_percentage: float = 0.1     # 0.1% max spread
     
     # Time-based limits
-    max_hold_time_hours: int = 24                       # Maximum hold time
-    cooldown_period_minutes: int = 15                   # Cooldown between trades
+    max_hold_time_hours: int = 24          # Maximum hold time
+    cooldown_period_minutes: int = 15      # Cooldown between trades
     
     # Drawdown protection
-    max_drawdown_percentage: Decimal = Decimal('0.15')  # 15% max drawdown
+    max_drawdown_percentage: float = 0.15  # 15% max drawdown
     
     # AI validation
-    min_ai_confidence: Decimal = Decimal('0.6')         # 60% minimum AI confidence
+    min_ai_confidence: float = 0.6         # 60% minimum AI confidence
     require_ai_validation: bool = True
 
 
@@ -65,17 +63,17 @@ class PositionInfo:
     """Information about an open position"""
     symbol: str
     strategy: str
-    entry_price: Decimal
-    quantity: Decimal
+    entry_price: float
+    quantity: float
     entry_time: datetime
-    stop_loss: Decimal
-    take_profit: Decimal
-    unrealized_pnl: Decimal = Decimal('0')
-    max_unrealized_pnl: Decimal = Decimal('0')
-    min_unrealized_pnl: Decimal = Decimal('0')
+    stop_loss: float
+    take_profit: float
+    unrealized_pnl: float = 0.0
+    max_unrealized_pnl: float = 0.0
+    min_unrealized_pnl: float = 0.0
     
     @property
-    def position_value(self) -> Decimal:
+    def position_value(self) -> float:
         """Calculate current position value"""
         return abs(self.quantity) * self.entry_price
     
@@ -85,11 +83,11 @@ class PositionInfo:
         return datetime.now() - self.entry_time
     
     @property
-    def unrealized_pnl_percentage(self) -> Decimal:
+    def unrealized_pnl_percentage(self) -> float:
         """Calculate unrealized P&L as percentage"""
         if self.position_value > 0:
             return self.unrealized_pnl / self.position_value
-        return Decimal('0')
+        return 0.0
 
 
 @dataclass
@@ -116,7 +114,10 @@ class AdvancedRiskManager:
     - AI-powered risk assessment
     """
     
-    def __init__(self, initial_capital: Decimal, risk_params: Optional[RiskParameters] = None):
+    def __init__(self):
+        """Initialize with default values"""
+        initial_capital = 10000.0  # Default initial capital
+        risk_params = None
         self.initial_capital = initial_capital
         self.current_capital = initial_capital
         self.available_capital = initial_capital
@@ -124,13 +125,13 @@ class AdvancedRiskManager:
         
         # Position tracking
         self.open_positions: Dict[str, PositionInfo] = {}
-        self.daily_pnl = Decimal('0')
-        self.total_pnl = Decimal('0')
+        self.daily_pnl = 0.0
+        self.total_pnl = 0.0
         self.daily_trades = 0
         
         # Risk tracking
-        self.max_drawdown_hit = Decimal('0')
-        self.current_drawdown = Decimal('0')
+        self.max_drawdown_hit = 0.0
+        self.current_drawdown = 0.0
         self.risk_events: List[RiskEvent] = []
         self.last_trade_time: Dict[str, datetime] = {}
         
@@ -138,83 +139,98 @@ class AdvancedRiskManager:
         self.correlation_matrix: Dict[str, Dict[str, float]] = {}
         
         # Monitoring
-        self.logger = logging.getLogger("risk.manager")
+        self.logger = logging.getLogger("AdvancedRiskManager")
         self.monitoring_active = False
         
-    async def evaluate_signal_risk(self, signal: TradingSignal, market_data: MarketData) -> Dict[str, Any]:
+        self.logger.info("AdvancedRiskManager initialized")
+    
+    async def validate_signal(self, signal: TradingSignal) -> bool:
         """
-        Comprehensive risk evaluation for a trading signal
+        Comprehensive risk validation for a trading signal
         
+        Args:
+            signal: Trading signal to validate
+            
         Returns:
-            Dictionary with risk assessment and position sizing recommendations
+            True if signal passes risk validation, False otherwise
         """
-        risk_assessment = {
-            'approved': False,
-            'risk_score': 1.0,  # 0.0 = no risk, 1.0 = maximum risk
-            'position_size': Decimal('0'),
-            'stop_loss': None,
-            'take_profit': None,
-            'max_hold_time': None,
-            'risk_factors': [],
-            'warnings': []
-        }
-        
         try:
             # 1. Check daily loss limit
             if not self._check_daily_loss_limit():
-                risk_assessment['risk_factors'].append("Daily loss limit exceeded")
-                return risk_assessment
+                self.logger.warning(f"Signal rejected: Daily loss limit exceeded")
+                return False
             
             # 2. Check position limits
             position_check = self._check_position_limits(signal.symbol)
             if not position_check['allowed']:
-                risk_assessment['risk_factors'].extend(position_check['reasons'])
-                return risk_assessment
+                self.logger.warning(f"Signal rejected: {position_check['reasons']}")
+                return False
             
-            # 3. Check market conditions
-            market_risk = self._assess_market_conditions(signal, market_data)
-            risk_assessment['risk_score'] += market_risk['risk_score']
-            risk_assessment['warnings'].extend(market_risk['warnings'])
+            # 3. Check confidence thresholds
+            if signal.confidence < self.risk_params.min_ai_confidence:
+                self.logger.warning(f"Signal rejected: Low confidence {signal.confidence:.2f}")
+                return False
             
-            # 4. Check correlation risk
-            correlation_risk = await self._assess_correlation_risk(signal.symbol)
-            risk_assessment['risk_score'] += correlation_risk['risk_score']
-            
-            # 5. Calculate optimal position size
-            position_size = self._calculate_optimal_position_size(signal, risk_assessment['risk_score'])
-            risk_assessment['position_size'] = position_size
-            
-            # 6. Calculate stop loss and take profit
-            stop_loss, take_profit = self._calculate_stop_loss_take_profit(signal, market_data)
-            risk_assessment['stop_loss'] = stop_loss
-            risk_assessment['take_profit'] = take_profit
-            
-            # 7. Calculate maximum hold time
-            max_hold_time = self._calculate_max_hold_time(signal)
-            risk_assessment['max_hold_time'] = max_hold_time
-            
-            # 8. Check cooldown period
+            # 4. Check cooldown period
             if not self._check_cooldown_period(signal.symbol):
-                risk_assessment['warnings'].append("Recent trade on this symbol")
-                risk_assessment['risk_score'] += 0.1
+                self.logger.warning(f"Signal rejected: Cooldown period not met for {signal.symbol}")
+                return False
             
-            # 9. Final approval decision
-            risk_assessment['approved'] = (
-                risk_assessment['risk_score'] < 0.8 and  # Risk score threshold
-                position_size > 0 and
-                len(risk_assessment['risk_factors']) == 0
-            )
+            # 5. Check correlation risk
+            correlation_risk = await self._assess_correlation_risk(signal.symbol)
+            if correlation_risk['risk_score'] > 0.7:
+                self.logger.warning(f"Signal rejected: High correlation risk")
+                return False
             
-            if risk_assessment['approved']:
-                self.logger.info(f"Risk assessment APPROVED for {signal.symbol}: risk_score={risk_assessment['risk_score']:.2f}")
-            else:
-                self.logger.warning(f"Risk assessment REJECTED for {signal.symbol}: {risk_assessment['risk_factors']}")
+            self.logger.info(f"Signal validated for {signal.symbol}")
+            return True
             
         except Exception as e:
-            self.logger.error(f"Risk evaluation failed for {signal.symbol}: {e}")
-            risk_assessment['risk_factors'].append(f"Risk evaluation error: {e}")
+            self.logger.error(f"Risk validation failed for {signal.symbol}: {e}")
+            return False
+    
+    async def calculate_position_size(self, signal: TradingSignal, available_capital: float) -> float:
+        """
+        Calculate optimal position size based on risk assessment
         
-        return risk_assessment
+        Args:
+            signal: Trading signal
+            available_capital: Available capital for trading
+            
+        Returns:
+            Position size in base currency
+        """
+        try:
+            # Base position size from signal confidence
+            base_size_pct = self.risk_params.max_position_size * signal.confidence
+            
+            # Adjust for risk level
+            risk_multiplier = {
+                RiskLevel.VERY_LOW: 1.2,
+                RiskLevel.LOW: 1.0,
+                RiskLevel.MEDIUM: 0.8,
+                RiskLevel.HIGH: 0.5,
+                RiskLevel.CRITICAL: 0.2
+            }.get(signal.risk_level, 0.8)
+            
+            adjusted_size_pct = base_size_pct * risk_multiplier
+            
+            # Calculate position size
+            position_size = available_capital * adjusted_size_pct
+            
+            # Ensure we don't exceed maximum position size
+            max_position_value = self.current_capital * self.risk_params.max_position_size
+            position_size = min(position_size, max_position_value)
+            
+            # Ensure we have enough available capital
+            position_size = min(position_size, self.available_capital * 0.9)  # Leave 10% buffer
+            
+            self.logger.info(f"Calculated position size for {signal.symbol}: ${position_size:.2f}")
+            return max(0, position_size)
+            
+        except Exception as e:
+            self.logger.error(f"Error calculating position size for {signal.symbol}: {e}")
+            return 0.0
     
     def _check_daily_loss_limit(self) -> bool:
         """Check if daily loss limit has been exceeded"""
@@ -245,36 +261,6 @@ class AdvancedRiskManager:
         
         return result
     
-    def _assess_market_conditions(self, signal: TradingSignal, market_data: MarketData) -> Dict[str, Any]:
-        """Assess market conditions for risk"""
-        risk_score = 0.0
-        warnings = []
-        
-        # Volatility check
-        if market_data.volatility and market_data.volatility > self.risk_params.max_volatility_threshold:
-            risk_score += 0.3
-            warnings.append(f"High volatility: {market_data.volatility:.2%}")
-        
-        # Liquidity check
-        if market_data.order_book:
-            if market_data.order_book.liquidity_score < self.risk_params.min_liquidity_score:
-                risk_score += 0.2
-                warnings.append("Low liquidity")
-            
-            # Spread check
-            if market_data.order_book.spread_percentage and market_data.order_book.spread_percentage > self.risk_params.max_spread_percentage:
-                risk_score += 0.1
-                warnings.append(f"Wide spread: {market_data.order_book.spread_percentage:.2%}")
-        
-        # AI confidence check
-        if signal.ai_analysis:
-            ai_confidence = signal.ai_analysis.get('ai_confidence', 0)
-            if ai_confidence < float(self.risk_params.min_ai_confidence):
-                risk_score += 0.2
-                warnings.append(f"Low AI confidence: {ai_confidence:.1%}")
-        
-        return {'risk_score': risk_score, 'warnings': warnings}
-    
     async def _assess_correlation_risk(self, symbol: str) -> Dict[str, Any]:
         """Assess correlation risk with existing positions"""
         risk_score = 0.0
@@ -291,68 +277,20 @@ class AdvancedRiskManager:
         
         if similar_positions > 0:
             correlation_exposure = similar_positions / len(self.open_positions)
-            if correlation_exposure > float(self.risk_params.max_correlation_exposure):
-                risk_score += 0.3
+            if correlation_exposure > self.risk_params.max_correlation_exposure:
+                risk_score += 0.5
         
         return {'risk_score': risk_score}
     
     def _are_symbols_correlated(self, symbol1: str, symbol2: str) -> bool:
         """Check if two symbols are correlated (simplified implementation)"""
         # Simplified correlation check - same base currency or similar assets
-        base1 = symbol1[:3] if len(symbol1) >= 6 else symbol1
-        base2 = symbol2[:3] if len(symbol2) >= 6 else symbol2
+        if len(symbol1) >= 6 and len(symbol2) >= 6:
+            base1 = symbol1[:3]
+            base2 = symbol2[:3]
+            return base1 == base2
         
-        return base1 == base2
-    
-    def _calculate_optimal_position_size(self, signal: TradingSignal, risk_score: float) -> Decimal:
-        """Calculate optimal position size based on risk assessment"""
-        
-        # Base position size from signal confidence
-        base_size = self.risk_params.max_position_size * Decimal(str(signal.confidence))
-        
-        # Adjust for risk score
-        risk_adjustment = Decimal(str(max(0.1, 1.0 - risk_score)))
-        adjusted_size = base_size * risk_adjustment
-        
-        # Ensure we don't exceed available capital
-        max_size_by_capital = self.available_capital / self.current_capital * self.risk_params.max_position_size
-        
-        # Final position size
-        position_size = min(adjusted_size, max_size_by_capital, self.risk_params.max_position_size)
-        
-        return max(Decimal('0'), position_size)
-    
-    def _calculate_stop_loss_take_profit(self, signal: TradingSignal, market_data: MarketData) -> tuple:
-        """Calculate dynamic stop loss and take profit levels"""
-        
-        entry_price = signal.entry_price or float(market_data.current_price)
-        
-        # Calculate ATR-based stop loss
-        volatility = market_data.volatility or Decimal('0.01')  # Default 1% volatility
-        atr_based_stop = volatility * self.risk_params.stop_loss_multiplier
-        
-        if signal.action == SignalAction.BUY:
-            stop_loss = entry_price * (1 - float(atr_based_stop))
-            take_profit = entry_price * (1 + float(atr_based_stop) * float(self.risk_params.profit_target_multiplier))
-        else:  # SELL
-            stop_loss = entry_price * (1 + float(atr_based_stop))
-            take_profit = entry_price * (1 - float(atr_based_stop) * float(self.risk_params.profit_target_multiplier))
-        
-        return stop_loss, take_profit
-    
-    def _calculate_max_hold_time(self, signal: TradingSignal) -> timedelta:
-        """Calculate maximum hold time for position"""
-        
-        # Base hold time from risk parameters
-        base_hold_time = timedelta(hours=self.risk_params.max_hold_time_hours)
-        
-        # Adjust based on strategy type
-        if signal.strategy_name.value == "scalping":
-            return timedelta(minutes=5)
-        elif signal.strategy_name.value == "day_trading":
-            return timedelta(hours=8)
-        else:
-            return base_hold_time
+        return symbol1 == symbol2
     
     def _check_cooldown_period(self, symbol: str) -> bool:
         """Check if cooldown period has passed since last trade"""
@@ -362,7 +300,7 @@ class AdvancedRiskManager:
         cooldown_period = timedelta(minutes=self.risk_params.cooldown_period_minutes)
         return datetime.now() - self.last_trade_time[symbol] >= cooldown_period
     
-    async def monitor_positions(self, current_prices: Dict[str, Decimal]):
+    async def monitor_positions(self, current_prices: Dict[str, float]) -> List[tuple]:
         """Monitor open positions for risk management"""
         
         positions_to_close = []
@@ -400,7 +338,7 @@ class AdvancedRiskManager:
         # Return positions that should be closed
         return positions_to_close
     
-    def _update_position_pnl(self, position: PositionInfo, current_price: Decimal):
+    def _update_position_pnl(self, position: PositionInfo, current_price: float):
         """Update position's unrealized P&L"""
         if position.quantity > 0:  # Long position
             position.unrealized_pnl = (current_price - position.entry_price) * position.quantity
@@ -411,14 +349,14 @@ class AdvancedRiskManager:
         position.max_unrealized_pnl = max(position.max_unrealized_pnl, position.unrealized_pnl)
         position.min_unrealized_pnl = min(position.min_unrealized_pnl, position.unrealized_pnl)
     
-    def _should_stop_loss(self, position: PositionInfo, current_price: Decimal) -> bool:
+    def _should_stop_loss(self, position: PositionInfo, current_price: float) -> bool:
         """Check if position should be closed due to stop loss"""
         if position.quantity > 0:  # Long position
             return current_price <= position.stop_loss
         else:  # Short position
             return current_price >= position.stop_loss
     
-    def _should_take_profit(self, position: PositionInfo, current_price: Decimal) -> bool:
+    def _should_take_profit(self, position: PositionInfo, current_price: float) -> bool:
         """Check if position should be closed for take profit"""
         if position.quantity > 0:  # Long position
             return current_price >= position.take_profit
@@ -430,12 +368,12 @@ class AdvancedRiskManager:
         max_hold_time = timedelta(hours=self.risk_params.max_hold_time_hours)
         return position.hold_time >= max_hold_time
     
-    def _update_trailing_stop(self, position: PositionInfo, current_price: Decimal):
+    def _update_trailing_stop(self, position: PositionInfo, current_price: float):
         """Update trailing stop loss if position is profitable"""
         
         # Only update if position is profitable
         if position.unrealized_pnl > 0:
-            trail_percentage = Decimal('0.5')  # 50% of maximum profit protection
+            trail_percentage = 0.5  # 50% of maximum profit protection
             
             if position.quantity > 0:  # Long position
                 # Calculate new stop loss to protect 50% of maximum unrealized profit
@@ -447,7 +385,7 @@ class AdvancedRiskManager:
                 new_stop_loss = position.entry_price - (profit_protection / abs(position.quantity))
                 position.stop_loss = min(position.stop_loss, new_stop_loss)
     
-    def add_position(self, signal: TradingSignal, quantity: Decimal, entry_price: Decimal):
+    def add_position(self, signal: TradingSignal, quantity: float, entry_price: float):
         """Add new position to tracking"""
         position_id = f"{signal.symbol}_{signal.strategy_name.value}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         
@@ -457,8 +395,8 @@ class AdvancedRiskManager:
             entry_price=entry_price,
             quantity=quantity,
             entry_time=datetime.now(),
-            stop_loss=signal.stop_loss or entry_price * Decimal('0.99'),  # Default 1% stop loss
-            take_profit=signal.take_profit or entry_price * Decimal('1.02')  # Default 2% take profit
+            stop_loss=signal.stop_loss or entry_price * 0.99,  # Default 1% stop loss
+            take_profit=signal.take_profit or entry_price * 1.02  # Default 2% take profit
         )
         
         self.open_positions[position_id] = position
@@ -469,9 +407,9 @@ class AdvancedRiskManager:
         position_value = abs(quantity) * entry_price
         self.available_capital -= position_value
         
-        self.logger.info(f"Position added: {position_id}, value: {position_value}")
+        self.logger.info(f"Position added: {position_id}, value: ${position_value:.2f}")
     
-    def close_position(self, position_id: str, exit_price: Decimal, reason: str = "MANUAL"):
+    def close_position(self, position_id: str, exit_price: float, reason: str = "MANUAL"):
         """Close position and update capital"""
         
         if position_id not in self.open_positions:
@@ -496,7 +434,7 @@ class AdvancedRiskManager:
         # Remove position
         del self.open_positions[position_id]
         
-        self.logger.info(f"Position closed: {position_id}, P&L: {realized_pnl:.2f}, reason: {reason}")
+        self.logger.info(f"Position closed: {position_id}, P&L: ${realized_pnl:.2f}, reason: {reason}")
         
         # Log risk event if stop loss
         if reason == "STOP_LOSS":
@@ -505,7 +443,7 @@ class AdvancedRiskManager:
                 position.symbol,
                 f"Stop loss triggered for {position.symbol}",
                 "MEDIUM",
-                f"Position closed with loss: {realized_pnl:.2f}"
+                f"Position closed with loss: ${realized_pnl:.2f}"
             )
     
     def _log_risk_event(self, event_type: RiskEventType, symbol: Optional[str], description: str, severity: str, action: str):
@@ -531,15 +469,15 @@ class AdvancedRiskManager:
         unrealized_pnl = sum(pos.unrealized_pnl for pos in self.open_positions.values())
         
         return {
-            'current_capital': float(self.current_capital),
-            'available_capital': float(self.available_capital),
-            'daily_pnl': float(self.daily_pnl),
-            'total_pnl': float(self.total_pnl),
+            'current_capital': self.current_capital,
+            'available_capital': self.available_capital,
+            'daily_pnl': self.daily_pnl,
+            'total_pnl': self.total_pnl,
             'open_positions': len(self.open_positions),
-            'total_exposure': float(total_exposure),
-            'exposure_percentage': float(exposure_percentage),
-            'unrealized_pnl': float(unrealized_pnl),
+            'total_exposure': total_exposure,
+            'exposure_percentage': exposure_percentage,
+            'unrealized_pnl': unrealized_pnl,
             'daily_trades': self.daily_trades,
             'risk_events_today': len([e for e in self.risk_events if e.timestamp.date() == datetime.now().date()]),
-            'max_drawdown': float(self.max_drawdown_hit)
+            'max_drawdown': self.max_drawdown_hit
         }

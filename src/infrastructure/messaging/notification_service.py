@@ -81,7 +81,7 @@ class MessageChannel(ABC):
 
 
 class TelegramChannel(MessageChannel):
-    """Canal de Telegram."""
+    """Canal de Telegram mejorado."""
     
     def __init__(self, bot_token: str, chat_id: str):
         super().__init__("Telegram")
@@ -117,10 +117,42 @@ class TelegramChannel(MessageChannel):
                     else:
                         error_text = await response.text()
                         self.logger.error(f"Telegram send failed: {error_text}")
-                        return False
+                        
+                        # Intentar enviar sin formato Markdown en caso de error
+                        return await self._send_plain_text(formatted_message)
         
         except Exception as e:
             self.logger.error(f"Error sending Telegram message: {e}")
+            # Fallback: intentar enviar como texto plano
+            try:
+                return await self._send_plain_text(self._format_plain_message(message))
+            except:
+                return False
+    
+    async def _send_plain_text(self, text: str) -> bool:
+        """Envía mensaje como texto plano sin formato."""
+        try:
+            async with aiohttp.ClientSession() as session:
+                payload = {
+                    "chat_id": self.chat_id,
+                    "text": text,
+                    "disable_web_page_preview": True
+                }
+                
+                async with session.post(
+                    f"{self.api_url}/sendMessage",
+                    json=payload
+                ) as response:
+                    
+                    if response.status == 200:
+                        self.logger.info("Telegram message sent as plain text")
+                        return True
+                    else:
+                        error_text = await response.text()
+                        self.logger.error(f"Telegram plain text send failed: {error_text}")
+                        return False
+        except Exception as e:
+            self.logger.error(f"Error sending plain text to Telegram: {e}")
             return False
     
     async def test_connection(self) -> bool:
@@ -132,12 +164,22 @@ class TelegramChannel(MessageChannel):
         except Exception:
             return False
     
+    def _escape_markdown(self, text: str) -> str:
+        """Escapa caracteres especiales de Markdown."""
+        # Caracteres que necesitan escape en Telegram Markdown
+        special_chars = ['_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!']
+        
+        for char in special_chars:
+            text = text.replace(char, f'\\{char}')
+        
+        return text
+    
     def _format_telegram_message(self, message: Message) -> str:
-        """Formatea mensaje para Telegram."""
+        """Formatea mensaje para Telegram con Markdown seguro."""
         # Emojis según el tipo
         emoji_map = {
-            MessageType.INFO: "ℹ️",
-            MessageType.WARNING: "⚠️",
+            MessageType.INFO: "ℹ",
+            MessageType.WARNING: "⚠",
             MessageType.ERROR: "❌",
             MessageType.CRITICAL: "🚨",
             MessageType.TRADE_SIGNAL: "📈",
@@ -147,15 +189,48 @@ class TelegramChannel(MessageChannel):
         
         emoji = emoji_map.get(message.type, "📄")
         
-        formatted = f"{emoji} *{message.title}*\n\n"
-        formatted += f"{message.content}\n\n"
+        # Escapar texto para Markdown
+        safe_title = self._escape_markdown(str(message.title))
+        safe_content = self._escape_markdown(str(message.content))
+        
+        formatted = f"{emoji} *{safe_title}*\n\n"
+        formatted += f"{safe_content}\n\n"
         formatted += f"🕐 {message.timestamp.strftime('%Y-%m-%d %H:%M:%S')}"
         
         # Agregar tags si existen
         if message.tags:
             formatted += "\n\n*Tags:*"
             for key, value in message.tags.items():
-                formatted += f"\n• {key}: `{value}`"
+                safe_key = self._escape_markdown(str(key))
+                safe_value = self._escape_markdown(str(value))
+                formatted += f"\n• {safe_key}: `{safe_value}`"
+        
+        return formatted
+    
+    def _format_plain_message(self, message: Message) -> str:
+        """Formatea mensaje como texto plano sin Markdown."""
+        # Emojis según el tipo
+        emoji_map = {
+            MessageType.INFO: "INFO",
+            MessageType.WARNING: "WARNING",
+            MessageType.ERROR: "ERROR",
+            MessageType.CRITICAL: "CRITICAL",
+            MessageType.TRADE_SIGNAL: "TRADE_SIGNAL",
+            MessageType.PROFIT_LOSS: "PROFIT_LOSS",
+            MessageType.SYSTEM_STATUS: "SYSTEM_STATUS"
+        }
+        
+        type_label = emoji_map.get(message.type, "MESSAGE")
+        
+        formatted = f"[{type_label}] {message.title}\n\n"
+        formatted += f"{message.content}\n\n"
+        formatted += f"Time: {message.timestamp.strftime('%Y-%m-%d %H:%M:%S')}"
+        
+        # Agregar tags si existen
+        if message.tags:
+            formatted += "\n\nTags:"
+            for key, value in message.tags.items():
+                formatted += f"\n- {key}: {value}"
         
         return formatted
 
@@ -361,7 +436,7 @@ class MessageRouter:
         for name, channel in self.channels.items():
             try:
                 is_connected = await channel.test_connection()
-                status = "✓" if is_connected else "✗"
+                status = "OK" if is_connected else "FAIL"
                 self.logger.info(f"Channel {name}: {status}")
                 
                 if not is_connected:

@@ -47,19 +47,24 @@ class GeminiAnalyzer:
     - Trading signals validation
     """
     
-    def __init__(self, api_key: str = None):
-        """Initialize Gemini analyzer with API key"""
+    def __init__(self):
+        """Initialize Gemini analyzer with API key from environment"""
         try:
+            import os
+            api_key = os.getenv('GEMINI_API_KEY')
+            
             if api_key:
                 genai.configure(api_key=api_key)
+            
             self.model = genai.GenerativeModel('gemini-1.5-flash')
-            self.logger = logging.getLogger("ai.gemini_analyzer")
+            self.logger = logging.getLogger("GeminiAnalyzer")
             self.analysis_cache = {}
             self.cache_duration = timedelta(minutes=2)  # Cache analysis for 2 minutes
             
             # Test connection if API key provided
             if api_key:
                 self._test_connection()
+            
             self.logger.info("Gemini AI analyzer initialized successfully")
             
         except Exception as e:
