@@ -1,0 +1,28 @@
+2025-05-15 16:50:01,650 - opportunity_service - INFO - OpportunityDetectionService.find_and_store_opportunities called.
+2025-05-15 20:01:45,957 - opportunity_service - INFO - OpportunityDetectionService.find_and_store_opportunities called.
+2025-05-15 20:01:46,289 - opportunity_service - INFO - find_opportunities returned 370 opportunities.
+2025-05-15 20:01:46,290 - opportunity_service - INFO - Stored 10 opportunities in session state.
+2025-05-15 20:18:07,454 - opportunity_service - INFO - OpportunityDetectionService.find_and_store_opportunities called.
+2025-05-15 20:18:07,495 - opportunity_service - INFO - find_opportunities returned 2 opportunities.
+2025-05-15 20:18:07,496 - opportunity_service - INFO - Stored 2 opportunities in session state.
+2025-05-15 20:22:59,029 - opportunity_service - INFO - OpportunityDetectionService.find_and_store_opportunities called.
+2025-05-15 20:22:59,064 - opportunity_service - INFO - find_opportunities returned 2 opportunities.
+2025-05-15 20:22:59,065 - opportunity_service - INFO - Stored 2 opportunities in session state.
+2025-05-15 20:27:04,406 - opportunity_service - INFO - OpportunityDetectionService.find_and_store_opportunities called.
+2025-05-15 20:27:04,445 - opportunity_service - INFO - find_opportunities returned 2 opportunities.
+2025-05-15 20:27:04,445 - opportunity_service - INFO - Stored 2 opportunities in session state.
+2025-05-15 20:35:39,877 - opportunity_service - INFO - OpportunityDetectionService.find_and_store_opportunities called.
+2025-05-15 20:35:39,914 - opportunity_service - INFO - find_opportunities returned 2 opportunities.
+2025-05-15 20:35:39,915 - opportunity_service - INFO - Stored 2 opportunities in session state.
+2025-05-15 21:09:46,420 - opportunity_service - INFO - OpportunityDetectionService.find_and_store_opportunities called.
+2025-05-15 21:09:46,463 - opportunity_service - INFO - find_opportunities returned 3 opportunities.
+2025-05-15 21:09:46,463 - opportunity_service - INFO - Stored 3 opportunities in session state.
+2025-05-15 21:16:46,639 - opportunity_service - INFO - OpportunityDetectionService.find_and_store_opportunities called.
+2025-05-15 21:16:46,685 - opportunity_service - INFO - find_opportunities returned 3 opportunities.
+2025-05-15 21:16:46,686 - opportunity_service - INFO - Stored 3 opportunities in session state.
+2025-05-16 00:02:27,568 - opportunity_service - INFO - OpportunityDetectionService.find_and_store_opportunities called.
+2025-05-16 00:02:27,630 - opportunity_service - INFO - find_opportunities returned 2 opportunities.
+2025-05-16 00:02:27,631 - opportunity_service - INFO - Stored 2 opportunities in session state.
+2025-05-16 00:19:10,643 - opportunity_service - INFO - OpportunityDetectionService.find_and_store_opportunities called.
+2025-05-16 00:19:10,685 - opportunity_service - INFO - find_opportunities returned 0 opportunities.
+2025-05-16 00:19:10,686 - opportunity_service - INFO - No opportunities found, session state['opportunities'] set to empty list.

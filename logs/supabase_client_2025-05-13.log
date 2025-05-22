@@ -1,0 +1,136 @@
+<<<<<<< HEAD
+2025-05-13 11:40:18,360 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 11:40:25,462 - supabase_client - ERROR - Error al insertar oportunidad: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\src\apis\supabase_client.py", line 122, in insertar_oportunidad
+    response = self.supabase.table("oportunidades_detectadas").insert(oportunidad_data).execute()
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\.venv\Lib\site-packages\postgrest\_sync\request_builder.py", line 78, in execute
+    raise APIError(r.json())
+postgrest.exceptions.APIError: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+2025-05-13 11:40:25,708 - supabase_client - ERROR - Error al insertar oportunidad: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\src\apis\supabase_client.py", line 122, in insertar_oportunidad
+    response = self.supabase.table("oportunidades_detectadas").insert(oportunidad_data).execute()
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\.venv\Lib\site-packages\postgrest\_sync\request_builder.py", line 78, in execute
+    raise APIError(r.json())
+postgrest.exceptions.APIError: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+2025-05-13 11:40:25,948 - supabase_client - ERROR - Error al insertar oportunidad: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\src\apis\supabase_client.py", line 122, in insertar_oportunidad
+    response = self.supabase.table("oportunidades_detectadas").insert(oportunidad_data).execute()
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\.venv\Lib\site-packages\postgrest\_sync\request_builder.py", line 78, in execute
+    raise APIError(r.json())
+postgrest.exceptions.APIError: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+2025-05-13 11:40:26,185 - supabase_client - ERROR - Error al insertar oportunidad: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\src\apis\supabase_client.py", line 122, in insertar_oportunidad
+    response = self.supabase.table("oportunidades_detectadas").insert(oportunidad_data).execute()
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\.venv\Lib\site-packages\postgrest\_sync\request_builder.py", line 78, in execute
+    raise APIError(r.json())
+postgrest.exceptions.APIError: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+2025-05-13 11:40:26,769 - supabase_client - ERROR - Error al insertar oportunidad: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\src\apis\supabase_client.py", line 122, in insertar_oportunidad
+    response = self.supabase.table("oportunidades_detectadas").insert(oportunidad_data).execute()
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\.venv\Lib\site-packages\postgrest\_sync\request_builder.py", line 78, in execute
+    raise APIError(r.json())
+postgrest.exceptions.APIError: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+2025-05-13 11:41:06,386 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 11:50:34,567 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 11:51:00,900 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 12:10:48,356 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 12:11:59,940 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 12:12:02,682 - supabase_client - INFO - Oportunidad insertada: USDT → BTC → STRK → USDT
+2025-05-13 12:12:03,278 - supabase_client - INFO - Oportunidad insertada: USDT → BTC → THE → USDT
+2025-05-13 12:12:03,779 - supabase_client - INFO - Oportunidad insertada: USDT → BTC → FIO → USDT
+2025-05-13 12:12:04,288 - supabase_client - INFO - Oportunidad insertada: USDT → BTC → IOTX → USDT
+2025-05-13 12:12:04,797 - supabase_client - INFO - Oportunidad insertada: USDT → BTC → ONE → USDT
+2025-05-13 12:21:29,649 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 12:21:32,311 - supabase_client - INFO - Oportunidad insertada: USDT → BTC → STRK → USDT
+2025-05-13 12:21:32,869 - supabase_client - INFO - Oportunidad insertada: USDT → BTC → THE → USDT
+2025-05-13 12:21:33,367 - supabase_client - INFO - Oportunidad insertada: USDT → BTC → FIO → USDT
+2025-05-13 12:21:33,853 - supabase_client - INFO - Oportunidad insertada: USDT → BTC → IOTX → USDT
+2025-05-13 12:21:34,368 - supabase_client - INFO - Oportunidad insertada: USDT → BTC → ONE → USDT
+=======
+2025-05-13 00:35:38,587 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 00:35:48,254 - supabase_client - ERROR - Error al insertar oportunidad: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\src\apis\supabase_client.py", line 159, in insertar_oportunidad
+    response = self.supabase.table("oportunidades_detectadas").insert(oportunidad_data).execute()
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\site-packages\postgrest\_sync\request_builder.py", line 78, in execute
+    raise APIError(r.json())
+postgrest.exceptions.APIError: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+2025-05-13 00:35:48,842 - supabase_client - ERROR - Error al insertar oportunidad: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\src\apis\supabase_client.py", line 159, in insertar_oportunidad
+    response = self.supabase.table("oportunidades_detectadas").insert(oportunidad_data).execute()
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\site-packages\postgrest\_sync\request_builder.py", line 78, in execute
+    raise APIError(r.json())
+postgrest.exceptions.APIError: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+2025-05-13 00:35:49,073 - supabase_client - ERROR - Error al insertar oportunidad: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\src\apis\supabase_client.py", line 159, in insertar_oportunidad
+    response = self.supabase.table("oportunidades_detectadas").insert(oportunidad_data).execute()
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\site-packages\postgrest\_sync\request_builder.py", line 78, in execute
+    raise APIError(r.json())
+postgrest.exceptions.APIError: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+2025-05-13 00:35:49,305 - supabase_client - ERROR - Error al insertar oportunidad: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\src\apis\supabase_client.py", line 159, in insertar_oportunidad
+    response = self.supabase.table("oportunidades_detectadas").insert(oportunidad_data).execute()
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\site-packages\postgrest\_sync\request_builder.py", line 78, in execute
+    raise APIError(r.json())
+postgrest.exceptions.APIError: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+2025-05-13 00:35:49,554 - supabase_client - ERROR - Error al insertar oportunidad: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2 - CLINE\src\apis\supabase_client.py", line 159, in insertar_oportunidad
+    response = self.supabase.table("oportunidades_detectadas").insert(oportunidad_data).execute()
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\site-packages\postgrest\_sync\request_builder.py", line 78, in execute
+    raise APIError(r.json())
+postgrest.exceptions.APIError: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'oportunidades_detectadas' in the schema cache"}
+2025-05-13 00:36:32,389 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 00:50:17,761 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 00:59:14,895 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 00:59:41,921 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 01:01:25,688 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 01:01:52,064 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 01:02:17,632 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 01:50:04,346 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 01:55:50,831 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:03:06,422 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:04:38,861 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:08:57,089 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:10:16,742 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:14:08,538 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:17:52,924 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:19:40,358 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:24:50,153 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:34:17,089 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:35:31,707 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:42:15,411 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 02:42:47,501 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+>>>>>>> CLAUDE
+2025-05-13 16:10:34,477 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:10:34,663 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:12:01,371 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:12:01,559 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:16:20,632 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:16:20,821 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:20:10,971 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:20:11,165 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:23:48,357 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:23:48,547 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:24:05,497 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:32:14,607 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:53:47,343 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:53:47,533 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:54:43,945 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:54:44,129 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:57:11,329 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 16:57:11,511 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 18:41:03,361 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 18:41:03,549 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 19:14:53,413 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 19:14:53,606 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 19:37:10,050 - supabase_client - INFO - Cliente Supabase inicializado correctamente
+2025-05-13 19:37:10,235 - supabase_client - INFO - Cliente Supabase inicializado correctamente

@@ -1,0 +1,106 @@
+2025-05-13 11:40:17,925 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 11:40:17,925 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 11:41:05,965 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 11:41:05,965 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 11:50:34,156 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 11:50:34,156 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 11:51:00,501 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 11:51:00,502 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 12:10:47,949 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 12:10:47,949 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 12:11:59,526 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 12:11:59,526 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 12:21:29,222 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 12:21:29,223 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:10:34,165 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:10:34,166 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:10:34,166 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:10:38,487 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:10:38,489 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:11:44,505 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:11:44,506 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:11:44,506 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:12:03,743 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:12:03,744 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:12:05,818 - binance_client - INFO - Obtenidos 1424 símbolos de trading en Binance
+2025-05-13 16:12:05,832 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:12:05,832 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:12:05,832 - binance_client - ERROR - Se requiere API key y secret para una solicitud firmada
+2025-05-13 16:12:05,832 - binance_client - ERROR - Credenciales de API inválidas o acceso denegado
+2025-05-13 16:16:16,918 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:16:16,919 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:16:16,919 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:16:22,917 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:16:23,876 - binance_client - INFO - Obtenidos 1424 símbolos de trading en Binance
+2025-05-13 16:16:23,890 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:16:23,890 - binance_client - ERROR - Se requiere API key y secret para una solicitud firmada
+2025-05-13 16:16:23,891 - binance_client - ERROR - Credenciales de API inválidas o acceso denegado
+2025-05-13 16:20:10,708 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:20:10,708 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:20:10,708 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:20:25,381 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:20:25,383 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:20:25,384 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:20:25,385 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:23:47,493 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:23:47,493 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:23:47,494 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:24:03,082 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:24:04,423 - binance_client - INFO - Obtenidos 1424 símbolos de trading en Binance
+2025-05-13 16:24:04,434 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:24:05,299 - binance_client - INFO - Obtenidos 1424 símbolos de trading en Binance
+2025-05-13 16:24:06,745 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:24:07,328 - binance_client - ERROR - Error en solicitud a Binance account: 401 - {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2025-05-13 16:24:07,330 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:24:07,330 - binance_client - ERROR - Cliente no inicializado para trading
+2025-05-13 16:32:14,086 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:32:14,086 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:32:16,946 - binance_client - INFO - Obtenidos 1424 símbolos de trading en Binance
+2025-05-13 16:53:43,160 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:53:43,160 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:53:43,160 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:54:04,171 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:54:05,211 - binance_client - ERROR - Error en solicitud a Binance account: 401 - {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2025-05-13 16:54:05,213 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:54:05,213 - binance_client - ERROR - Cliente no inicializado para trading
+2025-05-13 16:54:38,459 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:54:38,459 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:54:38,459 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:54:59,818 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:55:00,270 - binance_client - ERROR - Error en solicitud a Binance account: 401 - {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2025-05-13 16:55:00,272 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:55:00,272 - binance_client - ERROR - Cliente no inicializado para trading
+2025-05-13 16:57:10,071 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:57:10,071 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:57:10,071 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:57:27,362 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 16:57:28,070 - binance_client - ERROR - Error en solicitud a Binance account: 401 - {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2025-05-13 16:57:28,073 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 16:57:28,074 - binance_client - ERROR - Cliente no inicializado para trading
+2025-05-13 18:41:01,824 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 18:41:01,825 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 18:41:01,825 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 18:41:27,765 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 18:41:28,297 - binance_client - ERROR - Error en solicitud a Binance account: 401 - {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2025-05-13 18:41:28,300 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 18:41:28,300 - binance_client - ERROR - Cliente no inicializado para trading
+2025-05-13 19:14:52,186 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 19:14:52,186 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 19:14:52,186 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 19:15:09,841 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 19:15:10,372 - binance_client - ERROR - Error en solicitud a Binance account: 401 - {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2025-05-13 19:15:10,375 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 19:15:10,375 - binance_client - ERROR - Cliente no inicializado para trading
+2025-05-13 19:37:08,788 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 19:37:08,788 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 19:37:08,789 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 19:37:29,173 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 19:37:29,862 - binance_client - ERROR - Error en solicitud a Binance account: 401 - {"code":-2015,"msg":"Invalid API-key, IP, or permissions for action."}
+2025-05-13 19:37:29,864 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 19:37:29,865 - binance_client - ERROR - Cliente no inicializado para trading
+2025-05-13 23:32:09,274 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 23:32:09,275 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 23:32:10,281 - binance_client - INFO - Obtenidos 1424 símbolos de trading en Binance
+2025-05-13 23:55:01,841 - binance_client - INFO - Cliente Binance inicializado para datos
+2025-05-13 23:55:01,841 - binance_client - INFO - Cliente Binance inicializado para trading (testnet: True)
+2025-05-13 23:55:02,761 - binance_client - INFO - Obtenidos 1424 símbolos de trading en Binance

@@ -1,0 +1,11 @@
+2025-05-14 21:28:41,580 - api - INFO - Iniciando servidor API en localhost:8000...
+2025-05-14 22:45:08,736 - api - ERROR - Error al registrar solicitud en Supabase: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'arbitraje_operaciones' in the schema cache"}
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2_CLINE\src\core\api_server.py", line 187, in ejecutar_solicitud
+    supabase_client.insertar_operacion(operacion_data)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2_CLINE\src\apis\supabase_client.py", line 265, in insertar_operacion
+    response = self.client.table("arbitraje_operaciones").insert(operacion_data).execute()
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2_CLINE\.venv\Lib\site-packages\postgrest\_sync\request_builder.py", line 70, in execute
+    raise APIError(r.json())
+postgrest.exceptions.APIError: {'code': 'PGRST204', 'details': None, 'hint': None, 'message': "Could not find the 'capital_inicial' column of 'arbitraje_operaciones' in the schema cache"}
