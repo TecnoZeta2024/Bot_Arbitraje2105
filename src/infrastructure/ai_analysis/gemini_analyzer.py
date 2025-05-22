@@ -12,8 +12,8 @@ from decimal import Decimal
 import google.generativeai as genai
 from dataclasses import dataclass
 
-from ...domain.trading_signals.trading_signal import TradingSignal, StrategyType
-from ...domain.entities.market_data import MarketData
+from domain.trading_signals.trading_signal import TradingSignal, StrategyType
+from domain.entities.market_data import MarketData
 
 
 @dataclass
@@ -35,7 +35,7 @@ class AIAnalysisResult:
     raw_response: Dict[str, Any]
 
 
-class GeminiMarketAnalyzer:
+class GeminiAnalyzer:
     """
     Advanced market analyzer using Google Gemini AI
     
@@ -47,22 +47,24 @@ class GeminiMarketAnalyzer:
     - Trading signals validation
     """
     
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str = None):
         """Initialize Gemini analyzer with API key"""
         try:
-            genai.configure(api_key=api_key)
-            self.model = genai.GenerativeModel('gemini-pro')
+            if api_key:
+                genai.configure(api_key=api_key)
+            self.model = genai.GenerativeModel('gemini-1.5-flash')
             self.logger = logging.getLogger("ai.gemini_analyzer")
             self.analysis_cache = {}
             self.cache_duration = timedelta(minutes=2)  # Cache analysis for 2 minutes
             
-            # Test connection
-            self._test_connection()
+            # Test connection if API key provided
+            if api_key:
+                self._test_connection()
             self.logger.info("Gemini AI analyzer initialized successfully")
             
         except Exception as e:
             self.logger.error(f"Failed to initialize Gemini AI: {e}")
-            raise
+            # Don't raise, allow to continue without AI
     
     def _test_connection(self):
         """Test Gemini API connection"""
@@ -113,7 +115,7 @@ class GeminiMarketAnalyzer:
             # Return default analysis in case of failure
             return self._create_fallback_analysis(symbol, market_data)
     
-    async def detect_price_patterns(self, symbol: str, price_history: List[Decimal]) -> Dict[str, Any]:
+    async def detect_price_patterns(self, symbol: str, price_history: List[float]) -> Dict[str, Any]:
         """
         Detect complex price patterns using AI
         
@@ -129,8 +131,8 @@ class GeminiMarketAnalyzer:
             return self.analysis_cache[cache_key]
         
         try:
-            # Convert Decimal to float for AI processing
-            prices = [float(price) for price in price_history[-50:]]  # Last 50 data points
+            # Convert to float for AI processing
+            prices = price_history[-50:] if len(price_history) > 50 else price_history
             
             prompt = self._create_pattern_detection_prompt(symbol, prices)
             response = await self._generate_ai_response(prompt)
@@ -170,41 +172,15 @@ class GeminiMarketAnalyzer:
             self.logger.error(f"Risk assessment failed for {signal.symbol}: {e}")
             return self._create_fallback_risk_assessment()
     
-    async def validate_arbitrage_opportunity(self, opportunity: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Validate arbitrage opportunity using AI to detect potential traps
-        
-        Args:
-            opportunity: Arbitrage opportunity data
-            
-        Returns:
-            Validation result with confidence score
-        """
-        try:
-            prompt = self._create_arbitrage_validation_prompt(opportunity)
-            response = await self._generate_ai_response(prompt)
-            
-            validation_result = self._parse_arbitrage_response(response)
-            
-            return validation_result
-            
-        except Exception as e:
-            self.logger.error(f"Arbitrage validation failed: {e}")
-            return {"is_valid": False, "confidence": 0.0, "risk_factors": ["AI_ANALYSIS_FAILED"]}
-    
     def _prepare_market_data_for_ai(self, symbol: str, market_data: MarketData) -> Dict[str, Any]:
         """Prepare market data in format suitable for AI analysis"""
         return {
             "symbol": symbol,
-            "current_price": float(market_data.current_price),
-            "price_24h_ago": float(market_data.price_24h_ago) if market_data.price_24h_ago else None,
-            "volume_24h": float(market_data.volume_24h) if market_data.volume_24h else None,
+            "current_price": float(market_data.price),
+            "volume_24h": float(market_data.volume) if market_data.volume else None,
             "price_change_24h": float(market_data.price_change_24h) if market_data.price_change_24h else None,
-            "volatility": float(market_data.volatility) if market_data.volatility else None,
-            "trend_strength": float(market_data.trend_strength) if market_data.trend_strength else None,
-            "technical_indicators": market_data.technical_indicators or {},
-            "liquidity_score": float(market_data.order_book.liquidity_score) if market_data.order_book else None,
-            "spread_percentage": float(market_data.order_book.spread_percentage) if market_data.order_book else None,
+            "high_24h": float(market_data.high_24h) if market_data.high_24h else None,
+            "low_24h": float(market_data.low_24h) if market_data.low_24h else None,
             "timestamp": market_data.timestamp.isoformat()
         }
     
@@ -215,33 +191,26 @@ class GeminiMarketAnalyzer:
         
         Current Market Data:
         - Price: ${data['current_price']:.6f}
-        - 24h Change: {data['price_change_24h']:.2f}% if available
-        - Volume 24h: {data['volume_24h']} if available
-        - Volatility: {data['volatility']} if available
-        - Technical Indicators: {json.dumps(data['technical_indicators'], indent=2)}
-        - Liquidity Score: {data['liquidity_score']} if available
-        - Spread: {data['spread_percentage']}% if available
+        - 24h Change: {data.get('price_change_24h', 'N/A')}%
+        - Volume 24h: {data.get('volume_24h', 'N/A')}
+        - High 24h: ${data.get('high_24h', 'N/A')}
+        - Low 24h: ${data.get('low_24h', 'N/A')}
         
         Please provide analysis in the following JSON format only (no additional text):
         {{
-            "sentiment_score": 0-100,
-            "confidence_level": 0.0-1.0,
-            "price_prediction_short": predicted_price_next_15_minutes,
-            "risk_assessment": "LOW|MEDIUM|HIGH",
-            "recommended_action": "BUY|SELL|HOLD",
-            "reasoning": "explanation_of_analysis",
-            "market_regime": "trending|ranging|volatile",
-            "momentum_strength": 0.0-1.0,
-            "support_level": nearest_support_price,
-            "resistance_level": nearest_resistance_price
+            "sentiment_score": 50,
+            "confidence_level": 0.7,
+            "price_prediction_short": {data['current_price']},
+            "risk_assessment": "MEDIUM",
+            "recommended_action": "HOLD",
+            "reasoning": "Market analysis based on current data",
+            "market_regime": "ranging",
+            "momentum_strength": 0.5,
+            "support_level": {data['current_price'] * 0.98},
+            "resistance_level": {data['current_price'] * 1.02}
         }}
         
-        Consider:
-        1. Current price momentum and volume
-        2. Technical indicator signals
-        3. Market volatility and liquidity
-        4. Risk factors and market conditions
-        5. Short-term price movement probability
+        Consider current market conditions and provide conservative analysis.
         """
     
     def _create_pattern_detection_prompt(self, symbol: str, prices: List[float]) -> str:
@@ -249,25 +218,19 @@ class GeminiMarketAnalyzer:
         return f"""
         Analyze the following price sequence for {symbol} to detect technical patterns:
         
-        Price History (last 50 points): {prices}
+        Price History: {prices[-10:]}  # Last 10 prices for brevity
         
-        Identify patterns and provide analysis in JSON format only:
+        Provide analysis in JSON format only:
         {{
-            "patterns_detected": ["pattern1", "pattern2"],
-            "support_levels": [price1, price2],
-            "resistance_levels": [price1, price2],
-            "breakout_probability": 0.0-1.0,
-            "trend_strength": 0.0-1.0,
-            "pattern_reliability": 0.0-1.0,
-            "next_move_direction": "UP|DOWN|SIDEWAYS",
-            "pattern_completion_probability": 0.0-1.0
+            "patterns_detected": ["consolidation"],
+            "support_levels": [{min(prices)}],
+            "resistance_levels": [{max(prices)}],
+            "breakout_probability": 0.5,
+            "trend_strength": 0.5,
+            "pattern_reliability": 0.6,
+            "next_move_direction": "SIDEWAYS",
+            "pattern_completion_probability": 0.5
         }}
-        
-        Look for:
-        - Head and shoulders, triangles, flags, pennants
-        - Support and resistance levels
-        - Trend lines and channels
-        - Breakout/breakdown patterns
         """
     
     def _create_risk_assessment_prompt(self, signal: TradingSignal, market_context: Dict[str, Any]) -> str:
@@ -276,49 +239,25 @@ class GeminiMarketAnalyzer:
         Evaluate the risk of this trading signal:
         
         Trading Signal:
-        - Strategy: {signal.strategy_name.value}
         - Symbol: {signal.symbol}
         - Action: {signal.action.value}
-        - Expected Profit: {signal.expected_profit:.4f}
         - Confidence: {signal.confidence:.2f}
-        - Timeframe: {signal.timeframe}
-        
-        Market Context:
-        {json.dumps(market_context, indent=2)}
         
         Provide risk analysis in JSON format only:
         {{
-            "risk_score": 0.0-1.0,
-            "risk_factors": ["factor1", "factor2"],
-            "mitigation_strategies": ["strategy1", "strategy2"],
-            "max_position_size": 0.0-1.0,
-            "recommended_stop_loss": percentage,
-            "hold_time_recommendation": "minutes",
-            "market_timing_score": 0.0-1.0
-        }}
-        """
-    
-    def _create_arbitrage_validation_prompt(self, opportunity: Dict[str, Any]) -> str:
-        """Create prompt for arbitrage validation"""
-        return f"""
-        Validate this arbitrage opportunity:
-        
-        {json.dumps(opportunity, indent=2)}
-        
-        Check for potential issues and provide validation in JSON format only:
-        {{
-            "is_valid": true/false,
-            "confidence": 0.0-1.0,
-            "risk_factors": ["factor1", "factor2"],
-            "execution_probability": 0.0-1.0,
-            "recommended_position_size": 0.0-1.0,
-            "urgency_level": "LOW|MEDIUM|HIGH"
+            "risk_score": 0.5,
+            "risk_factors": ["market_volatility"],
+            "mitigation_strategies": ["conservative_position_sizing"],
+            "max_position_size": 0.05,
+            "recommended_stop_loss": 0.01,
+            "hold_time_recommendation": "30",
+            "market_timing_score": 0.6
         }}
         """
     
     async def _generate_ai_response(self, prompt: str) -> str:
         """Generate AI response with retry logic"""
-        max_retries = 3
+        max_retries = 2
         retry_delay = 1
         
         for attempt in range(max_retries):
@@ -382,15 +321,6 @@ class GeminiMarketAnalyzer:
         except Exception as e:
             self.logger.error(f"Failed to parse risk response: {e}")
             return self._create_fallback_risk_assessment()
-    
-    def _parse_arbitrage_response(self, response: str) -> Dict[str, Any]:
-        """Parse arbitrage validation response"""
-        try:
-            json_str = self._extract_json_from_response(response)
-            return json.loads(json_str)
-        except Exception as e:
-            self.logger.error(f"Failed to parse arbitrage response: {e}")
-            return {"is_valid": False, "confidence": 0.0, "risk_factors": ["PARSE_ERROR"]}
     
     def _extract_json_from_response(self, response: str) -> str:
         """Extract JSON from AI response that might contain extra text"""

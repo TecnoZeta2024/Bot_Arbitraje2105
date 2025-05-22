@@ -11,7 +11,7 @@ import logging
 from collections import defaultdict, deque
 import statistics
 
-from ..domain.entities.market_data import MarketData
+from domain.entities.market_data import MarketData
 
 
 @dataclass

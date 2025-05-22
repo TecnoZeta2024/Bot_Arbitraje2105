@@ -1,11 +1,10 @@
 """
-AI Analysis Module
-Intelligent market analysis using Google Gemini AI
+AI Analysis Infrastructure
 """
 
-from .gemini_analyzer import GeminiMarketAnalyzer, AIAnalysisResult
+from .gemini_analyzer import GeminiAnalyzer, AIAnalysisResult
 
 __all__ = [
-    'GeminiMarketAnalyzer',
-    'AIAnalysisResult'
+    "GeminiAnalyzer",
+    "AIAnalysisResult"
 ]

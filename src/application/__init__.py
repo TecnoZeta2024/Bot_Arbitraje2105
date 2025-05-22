@@ -2,9 +2,7 @@
 Application Layer - Use Cases & Services
 """
 
-from .services import *
-
+# Avoid circular imports
 __all__ = [
-    # Application Services
-    "TradingEngine",
+    # Components available when imported individually
 ]

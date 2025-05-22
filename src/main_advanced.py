@@ -83,31 +83,31 @@ def setup_logging():
 def print_banner():
     """Muestra el banner de inicio."""
     banner = """
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                                                                              ║
-║              🚀 ADVANCED PERSONAL TRADING PLATFORM 2.0 🚀                  ║
-║                            Bot_Arbitraje2105                                ║
-║                                                                              ║
-║  ✨ Features:                                                               ║
-║     • Multi-Strategy Trading (Scalping, Day Trading, Arbitrage)             ║
-║     • AI-Powered Analysis (Google Gemini Integration)                       ║
-║     • Real-time WebSocket Data Streams                                      ║
-║     • Institutional-Grade Risk Management                                   ║
-║     • Advanced Monitoring & Alerting                                        ║
-║     • Clean Architecture with Dependency Injection                          ║
-║                                                                              ║
-║  📊 Performance Goals:                                                       ║
-║     • Scalping: 50-200 trades/day, 0.01-0.1% per trade                     ║
-║     • Day Trading: 5-20 trades/day, 0.5-2% per trade                       ║
-║     • Win Rate: >65% | Max Drawdown: <10% | Sharpe Ratio: >1.5             ║
-║                                                                              ║
-║  🛡️  Risk Management:                                                        ║
-║     • Dynamic Stop-Loss based on ATR volatility                             ║
-║     • Position Sizing with AI confidence weighting                          ║
-║     • Multi-layer risk validation                                           ║
-║     • Real-time portfolio monitoring                                        ║
-║                                                                              ║
-╚══════════════════════════════════════════════════════════════════════════════╝
+================================================================================
+                                                                              
+              ** ADVANCED PERSONAL TRADING PLATFORM 2.0 **                  
+                            Bot_Arbitraje2105                                
+                                                                              
+  Features:                                                               
+     * Multi-Strategy Trading (Scalping, Day Trading, Arbitrage)             
+     * AI-Powered Analysis (Google Gemini Integration)                       
+     * Real-time WebSocket Data Streams                                      
+     * Institutional-Grade Risk Management                                   
+     * Advanced Monitoring & Alerting                                        
+     * Clean Architecture with Dependency Injection                          
+                                                                              
+  Performance Goals:                                                       
+     * Scalping: 50-200 trades/day, 0.01-0.1% per trade                     
+     * Day Trading: 5-20 trades/day, 0.5-2% per trade                       
+     * Win Rate: >65% | Max Drawdown: <10% | Sharpe Ratio: >1.5             
+                                                                              
+  Risk Management:                                                        
+     * Dynamic Stop-Loss based on ATR volatility                             
+     * Position Sizing with AI confidence weighting                          
+     * Multi-layer risk validation                                           
+     * Real-time portfolio monitoring                                        
+                                                                              
+================================================================================
     """
     print(banner)
 
@@ -117,6 +117,10 @@ def validate_environment_config() -> bool:
     logger = logging.getLogger("ConfigValidator")
     
     try:
+        # Cargar variables de entorno desde .env
+        from dotenv import load_dotenv
+        load_dotenv()
+        
         config = TradingEngineConfig.from_env()
         
         # Validaciones críticas
@@ -203,25 +207,27 @@ async def health_check_startup():
                 if response.status != 200:
                     raise Exception("Internet connectivity check failed")
         
-        logger.info("✓ Internet connectivity check passed")
+        logger.info("Internet connectivity check passed")
         
         # Verificar API de Gemini
+        from dotenv import load_dotenv
+        load_dotenv()
         config = TradingEngineConfig.from_env()
         if config.gemini_api_key:
             import google.generativeai as genai
             genai.configure(api_key=config.gemini_api_key)
             
             # Test simple de API
-            model = genai.GenerativeModel('gemini-pro')
+            model = genai.GenerativeModel('gemini-1.5-flash')
             response = model.generate_content("Test connection")
             
-            logger.info("✓ Gemini API connectivity check passed")
+            logger.info("Gemini API connectivity check passed")
         
         logger.info("All startup health checks passed")
         return True
         
     except Exception as e:
-        logger.error(f"✗ Health check failed: {e}")
+        logger.error(f"Health check failed: {e}")
         return False
 
 
@@ -235,7 +241,7 @@ async def main():
     print_banner()
     
     try:
-        logger.info("🚀 Starting Advanced Personal Trading Platform...")
+        logger.info("Starting Advanced Personal Trading Platform...")
         
         # Validar configuración
         if not validate_environment_config():
@@ -248,6 +254,8 @@ async def main():
             return 1
         
         # Crear configuración
+        from dotenv import load_dotenv
+        load_dotenv()
         config = TradingEngineConfig.from_env()
         
         # Configurar contenedor de DI
@@ -268,8 +276,8 @@ async def main():
         logger.info("Starting trading engine...")
         await trading_engine.start()
         
-        logger.info("🎉 Trading engine started successfully!")
-        logger.info("💡 Press Ctrl+C to stop the application gracefully")
+        logger.info("Trading engine started successfully!")
+        logger.info("Press Ctrl+C to stop the application gracefully")
         
         # Mantener la aplicación corriendo
         try:
@@ -281,7 +289,7 @@ async def main():
         # Cierre graceful
         await graceful_shutdown(trading_engine)
         
-        logger.info("✅ Application terminated successfully")
+        logger.info("Application terminated successfully")
         return 0
         
     except KeyboardInterrupt:
@@ -299,14 +307,14 @@ def run():
     
     # Verificar versión de Python
     if sys.version_info < (3, 9):
-        print("❌ Error: Python 3.9 or higher is required")
+        print("Error: Python 3.9 or higher is required")
         print(f"Current version: {sys.version}")
         sys.exit(1)
     
     # Verificar que estamos en el directorio correcto
     current_dir = Path(__file__).parent
     if not (current_dir / "domain").exists():
-        print("❌ Error: Please run from the src/ directory")
+        print("Error: Please run from the src/ directory")
         print("Usage: cd src && python main.py")
         sys.exit(1)
     
@@ -316,11 +324,11 @@ def run():
         sys.exit(exit_code)
         
     except KeyboardInterrupt:
-        print("\n👋 Goodbye!")
+        print("\nGoodbye!")
         sys.exit(0)
         
     except Exception as e:
-        print(f"❌ Fatal error: {e}")
+        print(f"Fatal error: {e}")
         sys.exit(1)
 
 

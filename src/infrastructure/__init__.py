@@ -2,18 +2,7 @@
 Infrastructure Layer - External Dependencies & Adapters
 """
 
-from .websockets import *
-from .ai_analysis import *
-from .real_time_data import *
-
+# Import specific components to avoid circular imports
 __all__ = [
-    # WebSocket Infrastructure
-    "ExchangeWebSocketManager",
-    "BinanceWebSocket",
-    
-    # AI Analysis
-    "GeminiAnalyzer",
-    
-    # Real-time Data Processing
-    "RealTimeDataProcessor",
+    # Components available when imported individually
 ]

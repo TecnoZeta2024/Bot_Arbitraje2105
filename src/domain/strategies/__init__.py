@@ -1,14 +1,10 @@
 """
-Trading Strategies Module
-Collection of algorithmic trading strategies
+Domain Strategies
 """
 
-from .base_strategy import TradingStrategy
-from .scalping_strategy import ScalpingStrategy
-from .day_trading_strategy import DayTradingStrategy
+from .base_strategy import BaseStrategy, TradingStrategy
 
 __all__ = [
-    'TradingStrategy',
-    'ScalpingStrategy', 
-    'DayTradingStrategy'
+    "BaseStrategy",
+    "TradingStrategy"
 ]

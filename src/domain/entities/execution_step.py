@@ -2,10 +2,10 @@
 ExecutionStep Entity - Represents a single trading step in an arbitrage operation.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from decimal import Decimal
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from enum import Enum
 
 from ..value_objects.currency import Currency
@@ -42,29 +42,29 @@ class ExecutionStep:
     Each step represents one trade in the arbitrage sequence.
     """
     
-    # Identity and order
+    # Identity and order (required fields first)
     step_id: str
     step_number: int
     operation_id: str
     
-    # Trading details
+    # Trading details (required)
     trading_pair: str
     order_side: OrderSide
     order_type: OrderType
     
-    # Quantities and prices
+    # Quantities and prices (required)
     requested_quantity: Decimal
+    from_currency: Currency
+    to_currency: Currency
+    
+    # Optional fields with defaults
     executed_quantity: Optional[Decimal] = None
     requested_price: Optional[Price] = None  # For limit orders
     executed_price: Optional[Price] = None
     
-    # Currencies involved
-    from_currency: Currency
-    to_currency: Currency
-    
     # Status and timing
     status: StepStatus = StepStatus.PENDING
-    created_at: datetime = None
+    created_at: Optional[datetime] = None
     started_at: Optional[datetime] = None
     completed_at: Optional[datetime] = None
     
@@ -75,7 +75,7 @@ class ExecutionStep:
     
     # Exchange details
     exchange_order_id: Optional[str] = None
-    exchange_trade_ids: list = None
+    exchange_trade_ids: List[str] = field(default_factory=list)
     
     # Error tracking
     error_message: Optional[str] = None
@@ -86,8 +86,6 @@ class ExecutionStep:
         """Initialize post-creation logic."""
         if self.created_at is None:
             self.created_at = datetime.utcnow()
-        if self.exchange_trade_ids is None:
-            self.exchange_trade_ids = []
         
         self._validate_step()
     
@@ -120,7 +118,7 @@ class ExecutionStep:
         executed_price: Price,
         fee_amount: Optional[Decimal] = None,
         exchange_order_id: Optional[str] = None,
-        trade_ids: Optional[list] = None
+        trade_ids: Optional[List[str]] = None
     ) -> None:
         """Mark step as successfully completed."""
         if self.status != StepStatus.EXECUTING:

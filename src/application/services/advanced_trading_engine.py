@@ -10,18 +10,15 @@ from datetime import datetime, timedelta
 import json
 from dataclasses import dataclass, asdict
 
-from ..domain.entities.market_data import MarketData
-from ..domain.entities.trading_signal import TradingSignal
-from ..domain.strategies.base_strategy import BaseStrategy
-from ..domain.strategies.scalping_strategy import ScalpingStrategy
-from ..domain.strategies.day_trading_strategy import DayTradingStrategy
-from ..domain.risk_management.advanced_risk_manager import AdvancedRiskManager
-from ..infrastructure.websockets.exchange_websocket_manager import ExchangeWebSocketManager
-from ..infrastructure.ai_analysis.gemini_analyzer import GeminiAnalyzer
-from ..infrastructure.real_time_data.stream_processor import RealTimeDataProcessor
-from ..infrastructure.monitoring.system_monitor import SystemMonitor
-from ..infrastructure.messaging.notification_service import NotificationService
-from ..infrastructure.container.di_container import DIContainer, ServiceLocator
+from domain.entities.market_data import MarketData
+from domain.trading_signals.trading_signal import TradingSignal
+from domain.strategies.base_strategy import BaseStrategy
+from infrastructure.websockets.exchange_websocket_manager import ExchangeWebSocketManager
+from infrastructure.ai_analysis.gemini_analyzer import GeminiAnalyzer
+from infrastructure.real_time_data.stream_processor import RealTimeDataProcessor
+from infrastructure.monitoring.system_monitor import SystemMonitor
+from infrastructure.messaging.notification_service import NotificationService
+from infrastructure.container.di_container import DIContainer, ServiceLocator
 import os
 
 
@@ -66,10 +63,10 @@ class TradingEngineConfig:
             initial_capital=float(os.getenv('INITIAL_CAPITAL', '10000')),
             max_positions=int(os.getenv('MAX_POSITIONS', '5')),
             
-            max_daily_loss_pct=float(os.getenv('MAX_DAILY_LOSS_PCT', '2.0')),
-            max_position_size_pct=float(os.getenv('MAX_POSITION_SIZE_PCT', '10.0')),
-            stop_loss_pct=float(os.getenv('STOP_LOSS_PCT', '1.0')),
-            take_profit_pct=float(os.getenv('TAKE_PROFIT_PCT', '2.0')),
+            max_daily_loss_pct=float(os.getenv('MAX_DAILY_LOSS', '0.02')) * 100,
+            max_position_size_pct=float(os.getenv('MAX_POSITION_SIZE', '0.05')) * 100,
+            stop_loss_pct=float(os.getenv('DAY_TRADING_STOP_LOSS', '0.01')) * 100,
+            take_profit_pct=2.0,  # Default value
             
             exchange_name=os.getenv('EXCHANGE_NAME', 'binance'),
             websocket_reconnect_delay=int(os.getenv('WEBSOCKET_RECONNECT_DELAY', '5')),
@@ -79,7 +76,7 @@ class TradingEngineConfig:
             
             telegram_bot_token=os.getenv('TELEGRAM_BOT_TOKEN'),
             telegram_chat_id=os.getenv('TELEGRAM_CHAT_ID'),
-            enable_notifications=os.getenv('ENABLE_NOTIFICATIONS', 'false').lower() == 'true',
+            enable_notifications=os.getenv('ENABLE_NOTIFICATIONS', 'true').lower() == 'true',
             
             monitoring_interval=int(os.getenv('MONITORING_INTERVAL', '60')),
             health_check_interval=int(os.getenv('HEALTH_CHECK_INTERVAL', '30'))
