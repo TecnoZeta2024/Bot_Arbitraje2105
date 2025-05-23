@@ -6,21 +6,22 @@ Servidor unificado de producción con todas las mejoras implementadas
 import asyncio
 import json
 import logging
-import time
-from datetime import datetime
-from typing import Any, Dict, List, Optional, Set
-from enum import Enum
-import traceback
 import os
+import time
+import traceback
+from datetime import datetime
+from enum import Enum
+from logging.handlers import RotatingFileHandler
+from typing import Any, Dict, List, Optional, Set
 
 import uvicorn
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
-from logging.handlers import RotatingFileHandler
 
 # Importar módulos internos
 from binance_websocket import BinanceDataFeeder, is_bearish_signal, is_bullish_signal
+
 
 # ==================== CONFIGURACIÓN DE LOGGING ====================
 def setup_logging():
