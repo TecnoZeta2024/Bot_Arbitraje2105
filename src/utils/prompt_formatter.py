@@ -1,6 +1,7 @@
 import json
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict
+
 from src.utils.logger import get_logger
 
 prompt_logger = get_logger("prompt_formatter")

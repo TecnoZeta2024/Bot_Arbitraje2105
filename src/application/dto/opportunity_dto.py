@@ -2,11 +2,11 @@
 Data Transfer Objects for Opportunity entities.
 """
 
+import uuid
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
-from typing import Optional, List, Dict, Any
-import uuid
+from typing import Any, Dict, List, Optional
 
 from ...domain.entities.opportunity import Opportunity, OpportunityStatus
 from ...domain.value_objects.currency import Currency

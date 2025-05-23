@@ -1,5 +1,7 @@
+from typing import Any, Dict
+
 import google.generativeai as genai
-from typing import Dict, Any
+
 from src.utils.config import settings
 from src.utils.logger import get_logger
 

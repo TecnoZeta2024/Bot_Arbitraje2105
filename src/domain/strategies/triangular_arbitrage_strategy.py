@@ -2,19 +2,19 @@
 Triangular Arbitrage Detection Strategy - Concrete implementation.
 """
 
-import time
 import itertools
-from typing import Dict, Any, List, Optional
+import time
 from decimal import Decimal
+from typing import Any, Dict, List, Optional
 
-from .detection_strategy import BaseDetectionStrategy, DetectionType, DetectionResult
-from ..entities.opportunity import Opportunity
+from ...utils.calculator import calcular_rentabilidad_triangular
+from ...utils.logger import get_logger
 from ..entities.market_data import MarketData
+from ..entities.opportunity import Opportunity
 from ..value_objects.currency import Currency
 from ..value_objects.price import Price
 from ..value_objects.profit_percentage import ProfitPercentage
-from ...utils.calculator import calcular_rentabilidad_triangular
-from ...utils.logger import get_logger
+from .detection_strategy import BaseDetectionStrategy, DetectionResult, DetectionType
 
 
 class TriangularArbitrageStrategy(BaseDetectionStrategy):
@@ -270,7 +270,7 @@ class TriangularArbitrageStrategy(BaseDetectionStrategy):
         """Create Opportunity entity from calculation results."""
         import uuid
         from datetime import datetime, timedelta
-        
+
         # Create currencies
         base_currency = Currency(path[0])
         intermediate_currency = Currency(path[1])

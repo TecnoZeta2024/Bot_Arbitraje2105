@@ -3,9 +3,11 @@ Cliente para interactuar con la base de datos Supabase.
 """
 
 import json
-from typing import Dict, Any, List, Optional, Union
-from supabase import create_client, Client
-from ..utils.config import get_config_value # Import get_config_value
+from typing import Any, Dict, List, Optional, Union
+
+from supabase import Client, create_client
+
+from ..utils.config import get_config_value  # Import get_config_value
 from ..utils.logger import get_logger
 
 # Obtener logger específico

@@ -3,17 +3,17 @@ Dependency Injection Container
 """
 
 from .di_container import (
+    AutowiredMixin,
     DIContainer,
     DIScope,
-    ServiceLocator,
     ServiceDescriptor,
     ServiceLifetime,
-    AutowiredMixin,
+    ServiceLocator,
+    auto_register,
     dependency,
+    scoped,
     singleton,
     transient,
-    scoped,
-    auto_register
 )
 
 __all__ = [

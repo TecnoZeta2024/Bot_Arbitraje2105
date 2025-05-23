@@ -2,21 +2,21 @@
 Fast Execution Strategy - High-speed execution for time-sensitive opportunities.
 """
 
-import time
 import asyncio
-from typing import Dict, Any, Optional, List
+import time
 from datetime import datetime
 from decimal import Decimal
+from typing import Any, Dict, List, Optional
 
-from .execution_strategy import BaseExecutionStrategy, ExecutionResult, ExecutionStatus
-from ..entities.opportunity import Opportunity
+from ...utils.logger import get_logger
 from ..entities.arbitrage_operation import ArbitrageOperation, OperationType
 from ..entities.execution_step import ExecutionStep, OrderSide, OrderType
+from ..entities.opportunity import Opportunity
 from ..services.order_executor import OrderExecutor
 from ..services.position_manager import PositionManager
 from ..services.risk_manager import RiskManager
 from ..value_objects.currency import Currency
-from ...utils.logger import get_logger
+from .execution_strategy import BaseExecutionStrategy, ExecutionResult, ExecutionStatus
 
 
 class FastExecutionStrategy(BaseExecutionStrategy):

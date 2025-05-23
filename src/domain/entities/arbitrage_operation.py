@@ -5,8 +5,8 @@ ArbitrageOperation Entity - Represents the execution of an arbitrage opportunity
 from dataclasses import dataclass, field
 from datetime import datetime
 from decimal import Decimal
-from typing import List, Optional, Dict, Any
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
 from ..value_objects.currency import Currency
 from ..value_objects.price import Price

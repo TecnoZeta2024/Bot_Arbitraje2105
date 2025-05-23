@@ -5,20 +5,26 @@ Main orchestrator that integrates all components: WebSockets, AI, Strategies, Ri
 
 import asyncio
 import logging
-from typing import Dict, List, Any, Optional
 from datetime import datetime, timedelta
 from decimal import Decimal
+from typing import Any, Dict, List, Optional
 
-from ...domain.trading_signals.trading_signal import TradingSignal, StrategyType
 from ...domain.entities.market_data import MarketData
+from ...domain.risk_management.advanced_risk_manager import (
+    AdvancedRiskManager,
+    RiskParameters,
+)
 from ...domain.strategies.base_strategy import TradingStrategy
-from ...domain.strategies.scalping_strategy import ScalpingStrategy
 from ...domain.strategies.day_trading_strategy import DayTradingStrategy
-from ...domain.risk_management.advanced_risk_manager import AdvancedRiskManager, RiskParameters
-from ...infrastructure.websockets.websocket_manager import ExchangeWebSocketManager, ExchangeType
-from ...infrastructure.websockets.binance_websocket import BinanceWebSocketClient
+from ...domain.strategies.scalping_strategy import ScalpingStrategy
+from ...domain.trading_signals.trading_signal import StrategyType, TradingSignal
 from ...infrastructure.ai_analysis.gemini_analyzer import GeminiMarketAnalyzer
 from ...infrastructure.real_time_data.stream_processor import RealTimeDataProcessor
+from ...infrastructure.websockets.binance_websocket import BinanceWebSocketClient
+from ...infrastructure.websockets.websocket_manager import (
+    ExchangeType,
+    ExchangeWebSocketManager,
+)
 
 
 class TradingEngineConfig:

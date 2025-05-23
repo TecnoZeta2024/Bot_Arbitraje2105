@@ -3,13 +3,13 @@ Detection Strategy Interface - Open/Closed Principle implementation.
 """
 
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List, Optional
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
-from ..entities.opportunity import Opportunity
 from ..entities.market_data import MarketData
+from ..entities.opportunity import Opportunity
 
 
 class DetectionType(Enum):

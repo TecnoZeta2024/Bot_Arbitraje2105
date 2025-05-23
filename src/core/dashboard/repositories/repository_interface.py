@@ -5,7 +5,7 @@ para los repositorios que utilizarán los servicios.
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Optional, Dict, Any, Generic, TypeVar
+from typing import Any, Dict, Generic, List, Optional, TypeVar
 
 # Tipo genérico para modelos
 T = TypeVar('T')

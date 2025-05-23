@@ -4,9 +4,10 @@ Sigue el principio SRP al tener una única responsabilidad: gestionar la comunic
 """
 
 import logging
-import requests
-from typing import Dict, Any, Optional, List
 from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+import requests
 
 from src.core.dashboard.services.service_interfaces import NotificationService
 from src.utils.config import settings

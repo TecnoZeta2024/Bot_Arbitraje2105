@@ -1,17 +1,18 @@
-import streamlit as st
-import pandas as pd
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
-from src.core.detectar_oportunidades import (
-    fetch_market_data, 
-    find_opportunities, 
-    send_opportunities_to_webhook,
-    load_specific_cache_file,
-    list_available_cache_files
-)
-from src.utils.config import settings
+import pandas as pd
+import streamlit as st
+
 from src.apis.binance_client import BinanceClient
 from src.apis.mobula_client import MobulaClient
+from src.core.detectar_oportunidades import (
+    fetch_market_data,
+    find_opportunities,
+    list_available_cache_files,
+    load_specific_cache_file,
+    send_opportunities_to_webhook,
+)
+from src.utils.config import settings
 from src.utils.logger import get_logger
 
 logger = get_logger("opportunity_service")

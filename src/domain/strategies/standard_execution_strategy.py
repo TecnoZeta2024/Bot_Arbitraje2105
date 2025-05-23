@@ -3,19 +3,19 @@ Standard Execution Strategy - Conservative execution approach.
 """
 
 import time
-from typing import Dict, Any, Optional
 from datetime import datetime
 from decimal import Decimal
+from typing import Any, Dict, Optional
 
-from .execution_strategy import BaseExecutionStrategy, ExecutionResult, ExecutionStatus
-from ..entities.opportunity import Opportunity
+from ...utils.logger import get_logger
 from ..entities.arbitrage_operation import ArbitrageOperation, OperationType
 from ..entities.execution_step import ExecutionStep, OrderSide, OrderType
+from ..entities.opportunity import Opportunity
 from ..services.order_executor import OrderExecutor
 from ..services.position_manager import PositionManager
 from ..services.risk_manager import RiskManager
 from ..value_objects.currency import Currency
-from ...utils.logger import get_logger
+from .execution_strategy import BaseExecutionStrategy, ExecutionResult, ExecutionStatus
 
 
 class StandardExecutionStrategy(BaseExecutionStrategy):

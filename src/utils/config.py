@@ -1,12 +1,13 @@
-import os
 import json
-from typing import Dict, Any, Optional
+import os
 from pathlib import Path
+from typing import Any, Dict, Optional
+
 import dotenv
 from dotenv import load_dotenv
 from pydantic import Field
 from pydantic_settings import BaseSettings
-from supabase import create_client, Client
+from supabase import Client, create_client
 
 # Cargar variables de entorno desde .env
 env_file = Path(__file__).parents[2] / ".env"
@@ -50,6 +51,7 @@ settings = Settings()
 
 # Configuración de logging (asegurarse de que logger esté definido)
 import logging
+
 logger = logging.getLogger(__name__)
 
 def get_supabase_client() -> Client:

@@ -1,18 +1,21 @@
-import requests
 import itertools
-import time
 import json
 import os
+import time
 from datetime import datetime
-from typing import Dict, Any, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
+
+import requests
 
 from src.apis.binance_client import BinanceClient, binance_data_client
-from src.apis.mobula_client import MobulaClient # Import MobulaClient
+from src.apis.mobula_client import MobulaClient  # Import MobulaClient
+from src.apis.supabase_client import SupabaseClient  # Import SupabaseClient
+from src.core.telegram.telegram_handler import (
+    telegram_handler,  # Import the TelegramHandler instance
+)
 from src.utils.calculator import calcular_rentabilidad_triangular
 from src.utils.config import settings
 from src.utils.logger import get_logger
-from src.core.telegram.telegram_handler import telegram_handler # Import the TelegramHandler instance
-from src.apis.supabase_client import SupabaseClient # Import SupabaseClient
 
 logger = get_logger("deteccion")
 
@@ -247,7 +250,7 @@ def verificar_modulo_deteccion(binance_client: BinanceClient) -> Dict[str, Any]:
         # Comprobar que los componentes para el cálculo de triangulación funcionan
         # Only check imports, not full calculation execution
         from src.utils.calculator import calcular_rentabilidad_triangular
-        
+
         # All checks passed
         return {
             "success": True,

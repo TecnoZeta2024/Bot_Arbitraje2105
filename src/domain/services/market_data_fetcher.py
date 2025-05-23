@@ -2,9 +2,9 @@
 MarketDataFetcher - Single responsibility for fetching market data.
 """
 
-from typing import List, Dict, Optional, Tuple
-from abc import ABC, abstractmethod
 import time
+from abc import ABC, abstractmethod
+from typing import Dict, List, Optional, Tuple
 
 from ...domain.entities.market_data import MarketData
 from ...domain.value_objects.currency import Currency

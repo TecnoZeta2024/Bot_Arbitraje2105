@@ -3,8 +3,8 @@ Inicialización del paquete de modelos.
 """
 
 from src.core.dashboard.models.config_model import *
-from src.core.dashboard.models.token_model import *
 from src.core.dashboard.models.operation_model import *
+from src.core.dashboard.models.token_model import *
 from src.core.dashboard.models.user_model import *
 
 # Exportar todos los modelos

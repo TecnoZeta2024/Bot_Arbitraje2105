@@ -3,14 +3,14 @@ WebSocket Infrastructure Module
 Real-time data streaming from multiple cryptocurrency exchanges
 """
 
-from .websocket_manager import (
-    ExchangeWebSocketManager, 
-    BaseWebSocketClient, 
-    ExchangeType, 
-    StreamType, 
-    ConnectionStatus
-)
 from .binance_websocket import BinanceWebSocketClient
+from .websocket_manager import (
+    BaseWebSocketClient,
+    ConnectionStatus,
+    ExchangeType,
+    ExchangeWebSocketManager,
+    StreamType,
+)
 
 __all__ = [
     'ExchangeWebSocketManager',

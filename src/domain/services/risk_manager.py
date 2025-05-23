@@ -2,13 +2,13 @@
 RiskManager - Single responsibility for risk management and validation.
 """
 
-from typing import Dict, Any, List, Optional
-from decimal import Decimal
 from datetime import datetime, timedelta
+from decimal import Decimal
+from typing import Any, Dict, List, Optional
 
 from ...domain.entities.arbitrage_operation import ArbitrageOperation
-from ...domain.entities.opportunity import Opportunity
 from ...domain.entities.execution_step import ExecutionStep
+from ...domain.entities.opportunity import Opportunity
 from ...utils.logger import get_logger
 
 

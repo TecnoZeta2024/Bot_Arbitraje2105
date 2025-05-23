@@ -2,17 +2,19 @@
 Módulo para visualización del historial de operaciones.
 """
 
-import streamlit as st
+import json
+from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from datetime import datetime, timedelta
-import json
-from typing import Dict, Any, List, Optional
+import streamlit as st
 
 from src.core.dashboard.dependency_injection import get_service_registry
-from src.core.dashboard.services import OperationService, ConfigService
 from src.core.dashboard.models import ArbitrageOperation, OperationStatus
+from src.core.dashboard.services import ConfigService, OperationService
+
 
 def display_historical_operations():
     """

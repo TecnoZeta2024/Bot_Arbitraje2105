@@ -1,7 +1,9 @@
 import os
-from supabase import create_client, Client
-import streamlit as st
 from functools import lru_cache
+
+import streamlit as st
+from supabase import Client, create_client
+
 
 @lru_cache(maxsize=1)
 def get_supabase_client() -> Client:

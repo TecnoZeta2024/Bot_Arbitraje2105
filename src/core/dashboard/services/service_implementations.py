@@ -2,42 +2,40 @@
 Implementaciones concretas de servicios.
 """
 
-import os
 import json
 import logging
+import os
+from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional, Union
+
+import pandas as pd
 import psutil
 import requests
-import pandas as pd
-from datetime import datetime, timedelta
-from typing import List, Optional, Dict, Any, Union
 import streamlit as st
 
+from src.core.dashboard.models import (
+    ArbitrageOperation,
+    SystemConfig,
+    Token,
+    User,
+    UserCredentials,
+)
+from src.core.dashboard.repositories import (
+    ConfigRepository,
+    OperationRepository,
+    SupabaseConfigRepository,
+    SupabaseOperationRepository,
+    SupabaseTokenRepository,
+    TokenRepository,
+)
 from src.core.dashboard.services.service_interfaces import (
     AuthService,
     ConfigService,
-    TokenService,
-    OperationService,
     NotificationService,
-    SystemMonitorService
+    OperationService,
+    SystemMonitorService,
+    TokenService,
 )
-
-from src.core.dashboard.repositories import (
-    TokenRepository,
-    OperationRepository,
-    ConfigRepository,
-    SupabaseTokenRepository,
-    SupabaseOperationRepository,
-    SupabaseConfigRepository
-)
-
-from src.core.dashboard.models import (
-    Token,
-    ArbitrageOperation,
-    SystemConfig,
-    User,
-    UserCredentials
-)
-
 from src.utils.config import settings
 
 # Configurar logging
@@ -58,7 +56,9 @@ class SupabaseAuthService(AuthService):
         """
         try:
             # Obtener cliente de Supabase
-            from src.core.dashboard.repositories.supabase_repositories import get_supabase_client
+            from src.core.dashboard.repositories.supabase_repositories import (
+                get_supabase_client,
+            )
             supabase = get_supabase_client()
             
             # Autenticar usuario
@@ -100,7 +100,9 @@ class SupabaseAuthService(AuthService):
         """
         try:
             # Obtener cliente de Supabase
-            from src.core.dashboard.repositories.supabase_repositories import get_supabase_client
+            from src.core.dashboard.repositories.supabase_repositories import (
+                get_supabase_client,
+            )
             supabase = get_supabase_client()
             
             # Cerrar sesión
@@ -132,7 +134,9 @@ class SupabaseAuthService(AuthService):
                     return User.from_dict(user_data)
             
             # Si no hay usuario en la sesión, intentar obtenerlo de Supabase
-            from src.core.dashboard.repositories.supabase_repositories import get_supabase_client
+            from src.core.dashboard.repositories.supabase_repositories import (
+                get_supabase_client,
+            )
             supabase = get_supabase_client()
             
             response = supabase.auth.get_user()

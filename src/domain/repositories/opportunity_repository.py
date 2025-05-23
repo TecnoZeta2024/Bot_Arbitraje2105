@@ -3,8 +3,8 @@ Opportunity Repository Interface - Defines contract for opportunity persistence.
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Optional, Dict, Any
 from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 from ..entities.opportunity import Opportunity, OpportunityStatus
 

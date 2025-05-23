@@ -2,12 +2,14 @@
 Módulo de autenticación para el dashboard.
 """
 
-import streamlit as st
 from typing import Optional
 
+import streamlit as st
+
 from src.core.dashboard.dependency_injection import get_service_registry
-from src.core.dashboard.services import AuthService
 from src.core.dashboard.models import UserCredentials
+from src.core.dashboard.services import AuthService
+
 
 def login_page():
     """

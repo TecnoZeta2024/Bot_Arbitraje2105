@@ -2,15 +2,16 @@
 OpportunityService - Application service for managing arbitrage opportunities.
 """
 
-from typing import List, Optional, Dict, Any
 from datetime import datetime
+from typing import Any, Dict, List, Optional
+
 from dependency_injector.wiring import Provide, inject
 
-from ..dto.opportunity_dto import OpportunityDTO, CreateOpportunityDTO
 from ...domain.entities.opportunity import Opportunity, OpportunityStatus
 from ...domain.repositories.opportunity_repository import IOpportunityRepository
 from ...infrastructure.container.dependency_injection import Container
 from ...utils.logger import get_logger
+from ..dto.opportunity_dto import CreateOpportunityDTO, OpportunityDTO
 
 
 class OpportunityService:

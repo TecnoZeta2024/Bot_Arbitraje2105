@@ -4,15 +4,18 @@ Implementado siguiendo el patrón de Service Locator/Registry.
 """
 
 import logging
-from typing import Dict, Any, Type, TypeVar, Generic, Optional
+from typing import Any, Dict, Generic, Optional, Type, TypeVar
 
 # Import necessary services
 from src.apis.binance_client import BinanceClient
 from src.apis.mobula_client import MobulaClient
-from src.apis.supabase_client import supabase_client # Import the global instance
+from src.apis.supabase_client import supabase_client  # Import the global instance
+from src.core.dashboard.services.opportunity_detection_service import (
+    OpportunityDetectionService,
+)
 from src.utils.config import settings
-from src.core.dashboard.services.opportunity_detection_service import OpportunityDetectionService
-from .services.ai_report_service import AIReportService # Import the new service
+
+from .services.ai_report_service import AIReportService  # Import the new service
 
 # Configurar logger
 logger = logging.getLogger(__name__)

@@ -3,9 +3,10 @@ Módulo de cálculos para el Bot de Arbitraje Triangular.
 Proporciona funciones para calcular rentabilidad, comisiones, y otras métricas.
 """
 
-from typing import List, Dict, Any, Tuple, Optional
-import numpy as np
 from decimal import Decimal, getcontext
+from typing import Any, Dict, List, Optional, Tuple
+
+import numpy as np
 
 # Configurar precisión para cálculos decimales
 getcontext().prec = 18

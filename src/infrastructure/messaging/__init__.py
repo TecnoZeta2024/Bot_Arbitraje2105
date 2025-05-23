@@ -3,14 +3,14 @@ Messaging Infrastructure (Telegram, Email, etc.)
 """
 
 from .notification_service import (
-    NotificationService,
-    MessageRouter,
-    TelegramChannel,
-    EmailChannel,
     ConsoleChannel,
+    EmailChannel,
     Message,
+    MessagePriority,
+    MessageRouter,
     MessageType,
-    MessagePriority
+    NotificationService,
+    TelegramChannel,
 )
 
 __all__ = [

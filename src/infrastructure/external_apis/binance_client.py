@@ -3,13 +3,15 @@ Cliente para la API de Binance.
 Proporciona funciones para interactuar con Binance para datos y operaciones.
 """
 
-import time
-import hmac
 import hashlib
-import requests
-from typing import Dict, Any, List, Optional, Tuple
+import hmac
+import time
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urlencode
-from ..utils.config import get_config_value, settings 
+
+import requests
+
+from ..utils.config import get_config_value, settings
 from ..utils.logger import get_logger
 
 # Obtener logger específico

@@ -1,14 +1,15 @@
-import os
 import logging
-from typing import Dict, List, Any, Optional
+import os
+from typing import Any, Dict, List, Optional
+
 import streamlit as st
-from supabase import create_client, Client
+from supabase import Client, create_client
 
 from src.utils.mock_data import (
+    generate_mock_config,
     generate_mock_operations,
     generate_mock_performance_metrics,
     generate_mock_realtime_opportunities,
-    generate_mock_config
 )
 
 # Configuración de logging

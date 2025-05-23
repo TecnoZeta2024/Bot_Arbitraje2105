@@ -3,9 +3,11 @@ Modelos de datos para la configuración del sistema.
 Implementa patrones basados en SOLID para mantener la responsabilidad única y extensibilidad.
 """
 
-from typing import Dict, Any, List, Optional
-from pydantic import BaseModel, Field
 from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, Field
+
 
 class WebhookConfig(BaseModel):
     """Configuración de webhooks del sistema"""

@@ -3,10 +3,14 @@ Operation Repository Interface - Defines contract for operation persistence.
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Optional, Dict, Any
 from datetime import datetime
+from typing import Any, Dict, List, Optional
 
-from ..entities.arbitrage_operation import ArbitrageOperation, OperationStatus, OperationType
+from ..entities.arbitrage_operation import (
+    ArbitrageOperation,
+    OperationStatus,
+    OperationType,
+)
 
 
 class IOperationRepository(ABC):

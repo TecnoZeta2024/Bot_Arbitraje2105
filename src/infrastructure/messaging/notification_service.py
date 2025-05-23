@@ -3,14 +3,15 @@ Sistema de Messaging - Telegram, Email, SMS y otras notificaciones
 """
 
 import asyncio
+import json
 import logging
-from typing import Dict, List, Optional, Union
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
-import json
+from typing import Dict, List, Optional, Union
+
 import aiohttp
-from abc import ABC, abstractmethod
 
 
 class MessageType(Enum):
@@ -253,9 +254,9 @@ class EmailChannel(MessageChannel):
             await self._rate_limit_check()
             
             import smtplib
-            from email.mime.text import MIMEText
             from email.mime.multipart import MIMEMultipart
-            
+            from email.mime.text import MIMEText
+
             # Crear mensaje
             msg = MIMEMultipart()
             msg['From'] = self.from_email

@@ -3,17 +3,18 @@ Google Gemini AI Market Analyzer
 Advanced AI-powered market analysis using Google Gemini API
 """
 
+import asyncio
 import json
 import logging
-import asyncio
-from typing import Dict, List, Any, Optional
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from decimal import Decimal
-import google.generativeai as genai
-from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
 
-from domain.trading_signals.trading_signal import TradingSignal, StrategyType
+import google.generativeai as genai
+
 from domain.entities.market_data import MarketData
+from domain.trading_signals.trading_signal import StrategyType, TradingSignal
 
 
 @dataclass

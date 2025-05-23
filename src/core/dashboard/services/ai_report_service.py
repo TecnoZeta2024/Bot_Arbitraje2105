@@ -2,7 +2,8 @@
 Servicio para interactuar con los informes de IA almacenados en Supabase.
 """
 
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
+
 from src.apis.supabase_client import SupabaseClient
 from src.utils.logger import get_logger
 

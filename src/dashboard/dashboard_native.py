@@ -15,14 +15,15 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-import plotly.express as px
-import plotly.graph_objects as go
-import pandas as pd
-import numpy as np
-from datetime import datetime, timedelta
 import json
 import os
 import time
+from datetime import datetime, timedelta
+
+import numpy as np
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
 
 # Importación de utilidades y clientes de datos
 from src.dashboard.supabase_client import (
@@ -30,9 +31,10 @@ from src.dashboard.supabase_client import (
     get_performance_metrics,
     get_realtime_opportunities,
     get_system_config,
-    update_system_config
+    update_system_config,
 )
-from src.utils.config import load_config # Import load_config to get default interval
+from src.utils.config import load_config  # Import load_config to get default interval
+
 
 # Aplicar estilos personalizados
 def apply_custom_styles():

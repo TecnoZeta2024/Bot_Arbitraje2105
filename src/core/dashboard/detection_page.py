@@ -1,18 +1,22 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
 import json
 import time
-from typing import List, Dict, Any
 from datetime import datetime
+from typing import Any, Dict, List
+
+import numpy as np
+import pandas as pd
+import streamlit as st
+
+# Import dependency injection
+from src.core.dashboard.dependency_injection import get_service_registry
+from src.core.dashboard.services.opportunity_detection_service import (
+    OpportunityDetectionService,
+)
 
 # Import necessary functions from detectar_oportunidades.py
 from src.core.detectar_oportunidades import send_opportunities_to_webhook
 from src.utils.config import settings
 
-# Import dependency injection
-from src.core.dashboard.dependency_injection import get_service_registry
-from src.core.dashboard.services.opportunity_detection_service import OpportunityDetectionService
 
 def display_detection_page():
     """
@@ -1072,7 +1076,9 @@ def display_detection_stage(opportunity_service):
                 
                 with col2:
                     # Buscar archivos de caché disponibles
-                    from src.core.detectar_oportunidades import list_available_cache_files
+                    from src.core.detectar_oportunidades import (
+                        list_available_cache_files,
+                    )
                     cache_files = list_available_cache_files()
                     
                     if cache_files:

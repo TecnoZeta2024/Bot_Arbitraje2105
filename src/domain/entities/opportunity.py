@@ -5,8 +5,8 @@ Opportunity Entity - Represents a triangular arbitrage opportunity.
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
-from typing import List, Optional
 from enum import Enum
+from typing import List, Optional
 
 from ..value_objects.currency import Currency
 from ..value_objects.price import Price

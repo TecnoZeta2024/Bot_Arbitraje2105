@@ -3,11 +3,13 @@ Modelos de datos para las operaciones de arbitraje.
 Implementa patrones basados en SOLID para mantener la responsabilidad única y extensibilidad.
 """
 
-from typing import Dict, Any, List, Optional, Union
-from pydantic import BaseModel, Field
-from datetime import datetime
 import json
+from datetime import datetime
 from enum import Enum, auto
+from typing import Any, Dict, List, Optional, Union
+
+from pydantic import BaseModel, Field
+
 
 class OperationStatus(str, Enum):
     """Enum para estados de operación"""

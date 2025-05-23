@@ -2,25 +2,31 @@
 Página de monitoreo en tiempo real.
 """
 
-import streamlit as st
-import pandas as pd
-from datetime import datetime, timedelta
+import subprocess  # Import subprocess
+import sys  # Import sys
 import time
-import plotly.graph_objects as go
-from typing import Dict, Any, List, Optional
-import subprocess # Import subprocess
-import sys # Import sys
+from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional
 
+import pandas as pd
+import plotly.graph_objects as go
+import streamlit as st
+
+from src.apis.binance_client import BinanceClient  # Import BinanceClient
 from src.core.dashboard.dependency_injection import get_service_registry
-from src.core.dashboard.services import OperationService, ConfigService, SystemMonitorService
-from src.apis.binance_client import BinanceClient # Import BinanceClient
-from src.utils.ui_components import (
-    display_metric_card, 
-    create_data_table, 
-    display_status_indicator,
-    create_status_dashboard,
-    create_performance_chart
+from src.core.dashboard.services import (
+    ConfigService,
+    OperationService,
+    SystemMonitorService,
 )
+from src.utils.ui_components import (
+    create_data_table,
+    create_performance_chart,
+    create_status_dashboard,
+    display_metric_card,
+    display_status_indicator,
+)
+
 
 def display_monitoring_page():
     """

@@ -2,9 +2,9 @@
 OpportunityFinder - Single responsibility for finding arbitrage opportunities.
 """
 
-from typing import List, Dict, Tuple, Optional
 import itertools
 from decimal import Decimal
+from typing import Dict, List, Optional, Tuple
 
 from ...domain.entities.opportunity import Opportunity
 from ...domain.value_objects.currency import Currency
@@ -330,7 +330,7 @@ class OpportunityFinder:
         """Create an Opportunity entity from cycle calculation data."""
         import uuid
         from datetime import datetime, timedelta
-        
+
         # Create currencies
         base_currency = Currency(cycle_data["start_currency"])
         intermediate_currency = Currency(cycle_data["intermediate_currency"])

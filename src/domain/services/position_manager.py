@@ -2,9 +2,9 @@
 PositionManager - Single responsibility for managing trading positions.
 """
 
-from typing import Dict, Any, List, Optional
-from decimal import Decimal
 from datetime import datetime
+from decimal import Decimal
+from typing import Any, Dict, List, Optional
 
 from ...domain.entities.arbitrage_operation import ArbitrageOperation
 from ...domain.entities.execution_step import ExecutionStep

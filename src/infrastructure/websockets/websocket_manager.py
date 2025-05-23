@@ -6,12 +6,13 @@ Implements real-time data streaming with connection pooling and automatic reconn
 import asyncio
 import json
 import logging
-import websockets
+import ssl
 from abc import ABC, abstractmethod
-from typing import Dict, List, Any, Callable, Optional
 from datetime import datetime
 from enum import Enum
-import ssl
+from typing import Any, Callable, Dict, List, Optional
+
+import websockets
 
 
 class ExchangeType(Enum):

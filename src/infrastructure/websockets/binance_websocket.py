@@ -3,9 +3,10 @@ Binance WebSocket Client Implementation
 Handles real-time data streaming from Binance API
 """
 
-from typing import Dict, List, Any, Optional
-from decimal import Decimal
 from datetime import datetime
+from decimal import Decimal
+from typing import Any, Dict, List, Optional
+
 from .websocket_manager import BaseWebSocketClient, ExchangeType, StreamType
 
 

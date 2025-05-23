@@ -2,9 +2,10 @@
 Módulo para calcular métricas de rendimiento de tokens.
 """
 
-from typing import Dict, Any, List
+import math  # Import math for square root in volatility calculation
 import time
-import math # Import math for square root in volatility calculation
+from typing import Any, Dict, List
+
 from ..utils.logger import get_logger
 
 # Obtener logger específico

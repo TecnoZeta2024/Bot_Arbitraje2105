@@ -3,9 +3,10 @@ Modelos de datos para el dashboard.
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, Any, List, Optional
 from datetime import datetime
 from enum import Enum
+from typing import Any, Dict, List, Optional
+
 
 class OperationStatus(Enum):
     """Estados posibles de una operación"""

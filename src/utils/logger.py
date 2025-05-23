@@ -3,10 +3,10 @@ Módulo de logging para el Bot de Arbitraje Triangular.
 Proporciona funciones para el registro de eventos y errores.
 """
 
+import io
 import logging
 import os
 import sys
-import io
 from datetime import datetime
 from typing import Optional
 

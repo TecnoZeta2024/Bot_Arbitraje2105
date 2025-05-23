@@ -3,16 +3,16 @@ Simple Arbitrage Detection Strategy - Concrete implementation.
 """
 
 import time
-from typing import Dict, Any, List, Optional
 from decimal import Decimal
+from typing import Any, Dict, List, Optional
 
-from .detection_strategy import BaseDetectionStrategy, DetectionType, DetectionResult
-from ..entities.opportunity import Opportunity
+from ...utils.logger import get_logger
 from ..entities.market_data import MarketData
+from ..entities.opportunity import Opportunity
 from ..value_objects.currency import Currency
 from ..value_objects.price import Price
 from ..value_objects.profit_percentage import ProfitPercentage
-from ...utils.logger import get_logger
+from .detection_strategy import BaseDetectionStrategy, DetectionResult, DetectionType
 
 
 class SimpleArbitrageStrategy(BaseDetectionStrategy):
@@ -192,7 +192,7 @@ class SimpleArbitrageStrategy(BaseDetectionStrategy):
         """Create Opportunity entity for simple arbitrage."""
         import uuid
         from datetime import datetime, timedelta
-        
+
         # Use market data currencies
         base_curr = Currency(base_currency)
         quote_curr1 = md1.quote_currency

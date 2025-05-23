@@ -1,17 +1,20 @@
-import streamlit as st
-import pandas as pd
-import json
 import datetime
-from typing import Dict, Any, List
+import json
+from typing import Any, Dict, List
+
+import pandas as pd
 import plotly.express as px
+import streamlit as st
+
 from src.core.dashboard.supabase_client import (
+    get_arbitrage_operations,
     get_system_config,
-    update_system_config,
     get_token_candidates,
+    update_system_config,
     update_token_candidates,
-    get_arbitrage_operations
 )
 from src.utils.config import settings
+
 
 def display_config_panel():
     """

@@ -7,10 +7,10 @@ import asyncio
 import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
-from typing import Dict, List, Any, Optional
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
-from domain.trading_signals.trading_signal import TradingSignal, RiskLevel, SignalAction
+from domain.trading_signals.trading_signal import RiskLevel, SignalAction, TradingSignal
 
 
 class RiskEventType(Enum):

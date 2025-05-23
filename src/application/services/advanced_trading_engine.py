@@ -4,25 +4,27 @@ Orquestador principal que integra todos los componentes del sistema
 """
 
 import asyncio
-import logging
-from typing import Dict, List, Optional, Any
-from datetime import datetime, timedelta
 import json
-from dataclasses import dataclass, asdict
+import logging
+import os
+from dataclasses import asdict, dataclass
+from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional
 
 from domain.entities.market_data import MarketData
-from domain.trading_signals.trading_signal import TradingSignal
-from domain.strategies.base_strategy import BaseStrategy
-from domain.strategies.scalping_strategy import ScalpingStrategy
-from domain.strategies.day_trading_strategy import DayTradingStrategy
 from domain.risk_management.advanced_risk_manager import AdvancedRiskManager
-from infrastructure.websockets.exchange_websocket_manager import ExchangeWebSocketManager
+from domain.strategies.base_strategy import BaseStrategy
+from domain.strategies.day_trading_strategy import DayTradingStrategy
+from domain.strategies.scalping_strategy import ScalpingStrategy
+from domain.trading_signals.trading_signal import TradingSignal
 from infrastructure.ai_analysis.gemini_analyzer import GeminiAnalyzer
-from infrastructure.real_time_data.stream_processor import RealTimeDataProcessor
-from infrastructure.monitoring.system_monitor import SystemMonitor
-from infrastructure.messaging.notification_service import NotificationService
 from infrastructure.container.di_container import DIContainer, ServiceLocator
-import os
+from infrastructure.messaging.notification_service import NotificationService
+from infrastructure.monitoring.system_monitor import SystemMonitor
+from infrastructure.real_time_data.stream_processor import RealTimeDataProcessor
+from infrastructure.websockets.exchange_websocket_manager import (
+    ExchangeWebSocketManager,
+)
 
 
 @dataclass
@@ -193,7 +195,9 @@ class AdvancedTradingEngine:
         if self.config.enable_notifications:
             if self.config.telegram_bot_token and self.config.telegram_chat_id:
                 # Usar canal de Telegram mejorado
-                from infrastructure.messaging.advanced_telegram import upgrade_telegram_channel
+                from infrastructure.messaging.advanced_telegram import (
+                    upgrade_telegram_channel,
+                )
                 
                 self.notification_service.configure_telegram(
                     self.config.telegram_bot_token,
@@ -248,7 +252,10 @@ class AdvancedTradingEngine:
         """Configura health checks y monitoreo."""
         # Health check del motor de trading
         def trading_engine_health_check():
-            from infrastructure.monitoring.system_monitor import HealthCheck, HealthStatus
+            from infrastructure.monitoring.system_monitor import (
+                HealthCheck,
+                HealthStatus,
+            )
             
             if not self.is_running:
                 return HealthCheck(
@@ -481,7 +488,7 @@ class AdvancedTradingEngine:
     async def _simulate_position_close(self, position: Dict[str, Any]):
         """Simula el cierre de una posición después de un tiempo aleatorio."""
         import random
-        
+
         # Esperar entre 1-30 minutos (simulación)
         wait_time = random.randint(60, 1800)
         await asyncio.sleep(wait_time)

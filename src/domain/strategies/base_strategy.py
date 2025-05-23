@@ -4,9 +4,10 @@ Defines the interface and common functionality for all trading strategies
 """
 
 from abc import ABC, abstractmethod
-from typing import Dict, List, Any
-from domain.trading_signals.trading_signal import TradingSignal
+from typing import Any, Dict, List
+
 from domain.entities.market_data import MarketData
+from domain.trading_signals.trading_signal import TradingSignal
 
 
 class BaseStrategy(ABC):

@@ -7,8 +7,9 @@ import asyncio
 import logging
 import os
 import sys
-from pathlib import Path
 from decimal import Decimal
+from pathlib import Path
+
 from dotenv import load_dotenv
 
 # Add src to path for imports
@@ -17,7 +18,10 @@ sys.path.append(str(Path(__file__).parent))
 # Load environment variables
 load_dotenv()
 
-from application.services.enhanced_trading_engine import EnhancedTradingEngine, EnhancedTradingEngineConfig
+from application.services.enhanced_trading_engine import (
+    EnhancedTradingEngine,
+    EnhancedTradingEngineConfig,
+)
 from domain.trading_signals.trading_signal import StrategyType
 from infrastructure.websockets.websocket_manager import ExchangeType
 

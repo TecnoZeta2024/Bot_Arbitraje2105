@@ -1,24 +1,19 @@
-import ccxt
 import json
-import requests
-import time # Import time for timestamps
-from typing import Dict, Any, List, Optional, Tuple # Add typing imports
-
-from src.apis.binance_client import BinanceClient, binance_trade_client # Import both clients
-from src.apis.supabase_client import SupabaseClient
-from src.utils.config import get_config_value # Import get_config_value
-from src.utils.logger import get_logger
-from src.core.telegram.telegram_handler import telegram_handler # Re-added for use within function
+import time  # Import time for timestamps
+from typing import Any, Dict, List, Optional, Tuple  # Add typing imports
 
 import ccxt
-import json
 import requests
-import time # Import time for timestamps
-from typing import Dict, Any, List, Optional, Tuple # Add typing imports
 
-from src.apis.binance_client import BinanceClient, binance_trade_client # Import both clients
+from src.apis.binance_client import (  # Import both clients
+    BinanceClient,
+    binance_trade_client,
+)
 from src.apis.supabase_client import SupabaseClient
-from src.utils.config import get_config_value # Import get_config_value
+from src.core.telegram.telegram_handler import (
+    telegram_handler,  # Re-added for use within function
+)
+from src.utils.config import get_config_value  # Import get_config_value
 from src.utils.logger import get_logger
 
 """
@@ -39,15 +34,18 @@ def verificar_modulo_ejecucion():
             }
     """
     try:
+        import json
+        import time  # Import time for timestamps
+
+        import ccxt
+        import requests
+
+        from src.apis.binance_client import (
+            binance_trade_client,  # Import the trade client instance
+        )
         from src.apis.binance_client import BinanceClient
         from src.apis.supabase_client import SupabaseClient
-        from src.utils.config import get_config_value # Import get_config_value
-        import ccxt
-        import json
-        import requests
-        import time # Import time for timestamps
-
-        from src.apis.binance_client import binance_trade_client # Import the trade client instance
+        from src.utils.config import get_config_value  # Import get_config_value
         from src.utils.logger import get_logger
 
         logger = get_logger("ejecutar_ciclo") # Use a specific logger for this module

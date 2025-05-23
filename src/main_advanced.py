@@ -13,17 +13,20 @@ Sistema completo de trading con:
 
 import asyncio
 import logging
-import sys
 import signal
-from pathlib import Path
+import sys
 from datetime import datetime
+from pathlib import Path
 from typing import Optional
 
 # Agregar el directorio src al path
 sys.path.insert(0, str(Path(__file__).parent))
 
+from application.services.advanced_trading_engine import (
+    AdvancedTradingEngine,
+    TradingEngineConfig,
+)
 from infrastructure.container.di_container import DIContainer
-from application.services.advanced_trading_engine import AdvancedTradingEngine, TradingEngineConfig
 
 
 def setup_logging():

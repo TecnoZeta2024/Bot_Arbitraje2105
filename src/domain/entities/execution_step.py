@@ -5,8 +5,8 @@ ExecutionStep Entity - Represents a single trading step in an arbitrage operatio
 from dataclasses import dataclass, field
 from datetime import datetime
 from decimal import Decimal
-from typing import Optional, Dict, Any, List
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
 from ..value_objects.currency import Currency
 from ..value_objects.price import Price

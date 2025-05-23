@@ -2,20 +2,24 @@
 Orchestration service for opportunity detection - Refactored with SRP.
 """
 
-import requests
 import time
-from typing import Dict, Any, List, Optional
 from datetime import datetime
+from typing import Any, Dict, List, Optional
 
-from src.infrastructure.external_apis.binance_client import BinanceClient, binance_data_client
-from src.infrastructure.external_apis.mobula_client import MobulaClient
+import requests
+
+from src.core.telegram.telegram_handler import telegram_handler
+from src.domain.services.cache_manager import CacheManager
 from src.domain.services.market_data_fetcher import MarketDataFetcher
 from src.domain.services.opportunity_finder import OpportunityFinder
-from src.domain.services.cache_manager import CacheManager
+from src.infrastructure.external_apis.binance_client import (
+    BinanceClient,
+    binance_data_client,
+)
+from src.infrastructure.external_apis.mobula_client import MobulaClient
+from src.infrastructure.external_apis.supabase_client import SupabaseClient
 from src.utils.config import settings
 from src.utils.logger import get_logger
-from src.core.telegram.telegram_handler import telegram_handler
-from src.infrastructure.external_apis.supabase_client import SupabaseClient
 
 logger = get_logger("deteccion")
 

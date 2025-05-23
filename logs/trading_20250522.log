@@ -1330,3 +1330,763 @@ ValueError: Service float is not registered
 2025-05-22 14:46:15,772 - MessageRouter - INFO - Message queued: msg_20250522_144615_772265
 2025-05-22 14:46:15,772 - AdvancedTradingEngine - INFO - Trading engine stopped successfully
 2025-05-22 14:46:15,772 - Shutdown - INFO - Graceful shutdown completed
+2025-05-22 14:46:19,353 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:47:10,055 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:47:12,836 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:47:19,368 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:48:10,066 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:48:12,851 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:48:19,373 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:49:10,080 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:49:12,856 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:49:19,384 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:50:10,838 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:50:12,870 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:50:19,388 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:51:10,842 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:51:12,877 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:51:19,389 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:52:10,848 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:52:12,890 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:52:19,402 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:53:10,854 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:53:12,898 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:53:19,411 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:54:10,858 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:54:12,908 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:54:19,412 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:55:10,865 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:55:12,910 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:55:19,418 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:56:10,878 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:56:12,915 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:56:19,434 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:57:10,894 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:57:12,921 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:57:19,449 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:58:10,901 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:58:12,927 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:58:19,454 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:59:10,915 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:59:12,930 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 14:59:19,459 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:00:10,924 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:00:12,931 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:00:19,470 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:01:10,937 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:01:12,936 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:01:19,484 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:02:10,944 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:02:12,948 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:02:20,116 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:03:10,950 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:03:13,565 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:03:20,132 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:04:10,962 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:04:13,573 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:04:20,133 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:05:10,967 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:05:13,576 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:05:20,143 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:06:10,974 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:06:13,586 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:06:20,146 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:07:10,988 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:07:13,601 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:07:20,161 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:08:10,995 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:08:13,612 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:08:20,165 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:09:10,996 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:09:13,618 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:09:20,176 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:10:11,005 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:10:13,630 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:10:20,177 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:11:11,019 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:11:13,632 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:11:20,191 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:12:11,025 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:12:13,637 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:12:17,944 - MessageRouter - INFO - Message queued: msg_20250522_151217_944779
+2025-05-22 15:12:17,945 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 15:12:19,950 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 15:12:20,205 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:12:23,953 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 15:12:23,953 - MessageRouter - WARNING - Failed to send message msg_20250522_151217_944779 via console
+2025-05-22 15:12:23,953 - MessageRouter - WARNING - Failed to send message msg_20250522_151217_944779 via telegram
+2025-05-22 15:13:11,041 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:13:11,290 - MessageRouter - INFO - Message queued: msg_20250522_151311_290561
+2025-05-22 15:13:11,290 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 15:13:13,297 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 15:13:13,639 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:13:17,305 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 15:13:17,305 - MessageRouter - WARNING - Failed to send message msg_20250522_151311_290561 via console
+2025-05-22 15:13:17,305 - MessageRouter - WARNING - Failed to send message msg_20250522_151311_290561 via telegram
+2025-05-22 15:13:20,214 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:14:11,044 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:14:13,643 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:14:20,227 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:15:11,056 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:15:13,659 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:15:20,236 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:16:11,067 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:16:13,667 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:16:20,247 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:17:11,068 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:17:13,668 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:17:20,251 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:18:11,080 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:18:13,675 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:18:20,260 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:19:11,096 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:19:13,685 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:19:20,262 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:20:11,111 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:20:13,701 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:20:20,275 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:21:11,669 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:21:13,706 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:21:20,289 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:22:13,532 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:22:15,562 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:22:22,151 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:23:13,541 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:23:15,572 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:23:22,162 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:24:13,555 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:24:15,585 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:24:22,173 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:25:13,557 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:25:15,588 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:25:22,178 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:26:13,574 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:26:15,594 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:26:22,193 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:27:13,581 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:27:15,603 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:27:22,196 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:28:13,588 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:28:15,608 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:28:22,206 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:29:13,602 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:29:15,614 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:29:22,221 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:30:13,605 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:30:15,622 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:30:22,235 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:31:11,200 - MessageRouter - INFO - Message queued: msg_20250522_153111_200709
+2025-05-22 15:31:11,201 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 15:31:13,211 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 15:31:13,618 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:31:15,630 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:31:17,220 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 15:31:17,220 - MessageRouter - WARNING - Failed to send message msg_20250522_153111_200709 via console
+2025-05-22 15:31:17,220 - MessageRouter - WARNING - Failed to send message msg_20250522_153111_200709 via telegram
+2025-05-22 15:31:22,248 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:32:13,629 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:32:15,644 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:32:22,253 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:33:13,632 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:33:15,657 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:33:22,803 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:34:13,647 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:34:16,208 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:34:22,815 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:35:13,654 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:35:16,209 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:35:22,823 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:36:13,661 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:36:16,215 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:36:22,835 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:37:13,677 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:37:16,220 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:37:22,838 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:38:13,692 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:38:16,229 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:38:22,851 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:39:13,694 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:39:16,236 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:39:22,852 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:40:13,701 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:40:16,247 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:40:22,869 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:41:13,713 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:41:16,258 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:41:22,874 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:42:13,724 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:42:16,271 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:42:22,879 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:43:13,734 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:43:16,279 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:43:22,883 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:44:13,742 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:44:16,283 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:44:22,894 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:45:13,755 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:45:16,285 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:45:22,905 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:46:13,756 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:46:16,288 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:46:22,908 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:47:13,758 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:47:16,303 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:47:22,922 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:48:13,766 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:48:16,311 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:48:22,929 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:49:13,770 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:49:16,318 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:49:22,940 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:50:13,774 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:50:16,322 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:50:22,953 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:51:13,776 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:51:16,335 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:51:22,962 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:52:14,391 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:52:16,336 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:52:22,966 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:53:14,403 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:53:16,338 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:53:22,972 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:54:14,417 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:54:16,351 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:54:22,975 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:55:14,420 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:55:16,367 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:55:22,979 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:56:14,428 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:56:16,374 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:56:22,983 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:57:14,444 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:57:16,381 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:57:22,989 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:58:14,456 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:58:16,382 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:58:22,990 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:59:14,466 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:59:16,397 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 15:59:23,001 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:00:14,468 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:00:16,408 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:00:23,010 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:01:14,480 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:01:16,423 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:01:23,017 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:02:14,483 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:02:16,436 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:02:23,020 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:03:14,493 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:03:16,449 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:03:23,025 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:04:14,501 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:04:16,457 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:04:23,647 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:05:14,510 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:05:17,009 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:05:23,662 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:06:14,522 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:06:17,013 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:06:23,672 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:07:14,534 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:07:17,026 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:07:23,677 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:08:14,537 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:08:17,032 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:08:23,691 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:09:14,540 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:09:17,046 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:09:23,697 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:10:14,550 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:10:17,053 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:10:23,713 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:11:14,557 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:11:17,065 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:11:23,724 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:12:14,565 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:12:17,067 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:12:19,805 - MessageRouter - INFO - Message queued: msg_20250522_161219_805130
+2025-05-22 16:12:19,805 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 16:12:21,813 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 16:12:23,734 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:12:25,819 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 16:12:25,819 - MessageRouter - WARNING - Failed to send message msg_20250522_161219_805130 via console
+2025-05-22 16:12:25,819 - MessageRouter - WARNING - Failed to send message msg_20250522_161219_805130 via telegram
+2025-05-22 16:13:13,145 - MessageRouter - INFO - Message queued: msg_20250522_161313_144860
+2025-05-22 16:13:13,145 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 16:13:14,572 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:13:15,150 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 16:13:17,083 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:13:19,151 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 16:13:19,152 - MessageRouter - WARNING - Failed to send message msg_20250522_161313_144860 via console
+2025-05-22 16:13:19,152 - MessageRouter - WARNING - Failed to send message msg_20250522_161313_144860 via telegram
+2025-05-22 16:13:23,743 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:14:14,587 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:14:17,095 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:14:23,750 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:15:14,597 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:15:17,101 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:15:23,753 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:16:14,598 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:16:17,105 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:16:23,758 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:17:14,605 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:17:17,114 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:17:23,772 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:18:14,620 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:18:17,122 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:18:23,779 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:19:14,633 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:19:17,134 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:19:23,788 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:20:14,635 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:20:17,144 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:20:23,791 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:21:14,637 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:21:17,160 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:21:23,801 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:22:14,639 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:22:17,167 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:22:23,816 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:23:15,344 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:23:17,169 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:23:23,819 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:24:15,357 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:24:17,177 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:24:23,826 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:25:15,362 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:25:17,192 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:25:23,839 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:26:15,364 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:26:17,202 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:26:23,844 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:27:15,379 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:27:17,205 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:27:23,848 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:28:15,393 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:28:17,214 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:28:23,851 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:29:15,403 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:29:17,226 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:29:23,855 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:30:15,413 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:30:17,240 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:30:23,858 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:31:11,215 - MessageRouter - INFO - Message queued: msg_20250522_163111_214794
+2025-05-22 16:31:11,215 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 16:31:13,233 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 16:31:15,418 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:31:17,247 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+acter maps to <undefined>
+2025-05-22 16:31:17,247 - MessageRouter - WARNING - Failed to send message msg_20250522_163111_214794 via console
+2025-05-22 16:31:17,247 - MessageRouter - WARNING - Failed to send message msg_20250522_163111_214794 via telegram
+2025-05-22 16:31:23,872 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:32:15,432 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:32:17,251 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:32:23,886 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:33:15,437 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:33:17,257 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:33:23,887 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:34:15,452 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:34:17,272 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:34:23,896 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:35:15,466 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:35:17,288 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:35:24,620 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:36:15,472 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:36:18,048 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:36:24,636 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:37:15,485 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:37:18,055 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:37:24,649 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:38:15,492 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:38:18,064 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:38:24,660 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:39:15,493 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:39:18,065 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:39:24,663 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:40:15,506 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:40:18,079 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:40:24,675 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:41:15,508 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:41:18,091 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:41:24,683 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:42:15,523 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:42:18,096 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:42:24,692 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:43:15,529 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:43:18,101 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:43:24,699 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:44:15,538 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:44:18,112 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:44:24,709 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:45:15,551 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:45:18,120 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:45:24,716 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:46:15,553 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:46:18,126 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:46:24,728 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:47:15,558 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:47:18,132 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:47:24,738 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:48:15,560 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:48:18,148 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:48:24,751 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:49:15,564 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:49:18,153 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:49:24,767 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:50:15,568 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:50:18,164 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:50:24,773 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:51:15,580 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:51:18,169 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:51:24,774 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:52:15,593 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:52:18,181 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:52:24,790 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:53:15,594 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:53:18,189 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:53:24,800 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:54:16,405 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:54:18,198 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:54:24,802 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:55:16,416 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:55:18,204 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:55:24,808 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:56:16,424 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:56:18,205 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:56:24,818 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:57:16,427 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:57:18,215 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:57:24,824 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:58:16,436 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:58:18,215 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:58:24,839 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:59:16,437 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:59:18,225 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 16:59:24,844 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:00:16,438 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:00:18,226 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:00:24,851 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:01:16,440 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:01:18,236 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:01:24,854 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:02:16,446 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:02:18,246 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:02:24,859 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:03:16,454 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:03:18,254 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:03:24,865 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:04:16,455 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:04:18,256 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:04:24,872 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:05:16,464 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:05:18,257 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:05:24,879 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:06:16,469 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:06:18,258 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:06:25,663 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:07:16,473 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:07:19,024 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:07:25,669 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:08:16,484 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:08:19,032 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:08:25,674 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:09:16,488 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:09:19,034 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:09:25,684 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:10:16,497 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:10:19,039 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:10:25,687 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:11:16,511 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:11:19,049 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:11:25,695 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:12:16,516 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:12:19,060 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:12:19,809 - MessageRouter - INFO - Message queued: msg_20250522_171219_809583
+2025-05-22 17:12:19,810 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 17:12:21,815 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 17:12:25,710 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:12:25,824 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 17:12:25,824 - MessageRouter - WARNING - Failed to send message msg_20250522_171219_809583 via console
+2025-05-22 17:12:25,824 - MessageRouter - WARNING - Failed to send message msg_20250522_171219_809583 via telegram
+2025-05-22 17:13:13,153 - MessageRouter - INFO - Message queued: msg_20250522_171313_153399
+2025-05-22 17:13:13,154 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 17:13:15,163 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 17:13:16,526 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:13:19,070 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:13:19,173 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 17:13:19,173 - MessageRouter - WARNING - Failed to send message msg_20250522_171313_153399 via console
+2025-05-22 17:13:19,173 - MessageRouter - WARNING - Failed to send message msg_20250522_171313_153399 via telegram
+2025-05-22 17:13:25,716 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:14:16,535 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:14:19,079 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:14:25,722 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:15:16,538 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:15:19,089 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:15:25,725 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:16:16,544 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:16:19,094 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:16:25,728 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:17:16,556 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:17:19,095 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:17:25,730 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:18:16,560 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:18:19,104 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:18:25,738 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:19:16,569 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:19:19,106 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:19:25,745 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:20:16,575 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:20:19,111 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:20:25,749 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:21:16,582 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:21:19,119 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:21:25,759 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:22:16,584 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:22:19,124 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 17:22:25,769 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:04:30,750 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:04:30,751 - MessageRouter - INFO - Message queued: msg_20250522_190430_750998
+2025-05-22 19:04:30,751 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 19:04:30,931 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:04:30,932 - MessageRouter - INFO - Message queued: msg_20250522_190430_932289
+2025-05-22 19:04:30,932 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 19:04:31,083 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:04:31,084 - MessageRouter - INFO - Message queued: msg_20250522_190431_084176
+2025-05-22 19:04:31,084 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 19:04:32,760 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 19:04:32,934 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 19:04:33,087 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 19:04:36,776 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 19:04:36,776 - MessageRouter - WARNING - Failed to send message msg_20250522_190430_750998 via console
+2025-05-22 19:04:36,776 - MessageRouter - WARNING - Failed to send message msg_20250522_190430_750998 via telegram
+2025-05-22 19:04:36,950 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 19:04:36,951 - MessageRouter - WARNING - Failed to send message msg_20250522_190430_932289 via console
+2025-05-22 19:04:36,951 - MessageRouter - WARNING - Failed to send message msg_20250522_190430_932289 via telegram
+2025-05-22 19:04:37,093 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 19:04:37,094 - MessageRouter - WARNING - Failed to send message msg_20250522_190431_084176 via console
+2025-05-22 19:04:37,094 - MessageRouter - WARNING - Failed to send message msg_20250522_190431_084176 via telegram
+2025-05-22 19:05:30,761 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:05:30,945 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:05:31,086 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:06:30,766 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:06:30,954 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:06:31,093 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:07:30,781 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:07:30,969 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:07:31,095 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:08:30,789 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:08:30,975 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:08:31,100 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:09:30,792 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:09:30,977 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:09:31,103 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:10:30,795 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:10:30,983 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:10:31,106 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:11:30,797 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:11:30,985 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:11:31,109 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:12:30,809 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:12:30,997 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:12:31,122 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:13:30,816 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:13:31,003 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:13:31,127 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:14:30,822 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:14:31,010 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:14:31,139 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:15:30,824 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:15:31,013 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:15:31,153 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:16:30,833 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:16:31,020 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:16:31,159 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:17:30,834 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:17:31,036 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:17:31,174 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:18:30,847 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:18:31,050 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:18:31,189 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:19:30,850 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:19:31,065 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:19:31,204 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:20:30,853 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:20:31,075 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:20:31,215 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:21:30,854 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:21:31,087 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:21:31,225 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:22:30,858 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:22:31,091 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:22:31,231 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:23:30,866 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:23:31,099 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:23:31,238 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:24:30,881 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:24:31,102 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:24:31,242 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:25:30,886 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:25:31,104 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:25:31,244 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:26:30,900 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:26:31,112 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:26:31,253 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:27:30,910 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:27:31,113 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:27:31,265 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:28:30,925 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:28:31,126 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:28:31,266 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:29:30,931 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:29:31,142 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:29:31,281 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:30:30,943 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:30:31,158 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:30:31,283 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:31:30,952 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:31:31,171 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:31:31,295 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:32:30,957 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:32:31,180 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:32:31,306 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:33:30,967 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:33:31,184 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:33:31,319 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:34:30,977 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:34:31,191 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:34:31,321 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:35:31,667 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:35:31,936 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:35:32,043 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:36:31,682 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:36:31,946 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:36:32,056 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:37:31,685 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:37:31,949 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:37:32,060 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:38:31,698 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:38:31,965 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:38:32,073 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:39:31,700 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:39:31,976 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:39:32,080 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:40:31,716 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:40:31,981 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:40:32,089 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:41:31,729 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:41:31,994 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:41:32,104 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:42:31,745 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:42:32,010 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:42:32,121 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:43:31,752 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:43:32,025 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:43:32,128 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:44:31,756 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:44:32,037 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:44:32,132 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:45:31,768 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:45:32,053 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:45:32,147 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:46:31,775 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:46:32,056 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:46:32,150 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:47:31,786 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:47:32,072 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:47:32,165 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:48:31,797 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:48:32,077 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:48:32,171 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:49:31,806 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:49:32,083 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:49:32,176 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:50:31,820 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:50:32,091 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:50:32,185 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:51:31,825 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:51:32,092 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:51:32,201 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:52:31,841 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:52:32,108 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:52:32,216 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:53:31,852 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:53:32,117 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:53:32,226 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:54:31,864 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:54:32,131 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:54:32,238 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:55:31,870 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:55:32,137 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:55:32,246 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:56:31,882 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:56:32,147 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:56:32,256 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:57:31,891 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:57:32,152 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:57:32,264 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:58:31,896 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:58:32,164 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:58:32,272 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:59:31,899 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:59:32,169 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 19:59:32,278 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:00:31,915 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:00:32,180 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:00:32,289 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:01:31,925 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:01:32,186 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:01:32,293 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:02:31,933 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:02:32,199 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:02:32,308 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:03:31,941 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:03:32,207 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:03:32,316 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:04:30,764 - MessageRouter - INFO - Message queued: msg_20250522_200430_763669
+2025-05-22 20:04:30,765 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 20:04:30,937 - MessageRouter - INFO - Message queued: msg_20250522_200430_936814
+2025-05-22 20:04:30,938 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 20:04:31,094 - MessageRouter - INFO - Message queued: msg_20250522_200431_094435
+2025-05-22 20:04:31,095 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 20:04:31,945 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:04:32,216 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:04:32,331 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:04:32,774 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 20:04:32,945 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 20:04:33,102 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 20:04:36,788 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 20:04:36,788 - MessageRouter - WARNING - Failed to send message msg_20250522_200430_763669 via console
+2025-05-22 20:04:36,789 - MessageRouter - WARNING - Failed to send message msg_20250522_200430_763669 via telegram
+2025-05-22 20:04:36,961 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 20:04:36,961 - MessageRouter - WARNING - Failed to send message msg_20250522_200430_936814 via console
+2025-05-22 20:04:36,961 - MessageRouter - WARNING - Failed to send message msg_20250522_200430_936814 via telegram
+2025-05-22 20:04:37,118 - MessageChannel.Console - ERROR - Error sending console message: 'charmap' codec can't encode character '\U0001f4ca' in position 0: character maps to <undefined>
+2025-05-22 20:04:37,118 - MessageRouter - WARNING - Failed to send message msg_20250522_200431_094435 via console
+2025-05-22 20:04:37,118 - MessageRouter - WARNING - Failed to send message msg_20250522_200431_094435 via telegram
+2025-05-22 20:05:31,960 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:05:32,224 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:05:32,339 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:06:32,541 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:06:32,929 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:06:32,960 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:07:32,546 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:07:32,934 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:07:32,965 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:08:32,555 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:08:32,944 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:08:32,976 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:09:32,561 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:09:32,951 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:09:32,982 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:10:32,577 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:10:32,965 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:10:32,995 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:11:32,583 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:11:32,975 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:11:33,006 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:12:32,600 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:12:32,976 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8
+2025-05-22 20:12:33,008 - RealTimeDataProcessor - INFO - Data Processor Metrics - Messages: 0, Avg Processing Time: 0.0000s, Errors: 0, Active Subscriptions: 8

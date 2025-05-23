@@ -3,21 +3,17 @@ Repositorios para acceso a datos del dashboard.
 Implementan el patrón Repository para abstraer el acceso a datos.
 """
 
-import os
-import logging
-from pathlib import Path
-from typing import Dict, Any, List, Optional
-from datetime import datetime, timedelta
 import json
+import logging
+import os
 import re
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 from supabase import create_client
 
-from src.core.dashboard.models import (
-    ArbitrageOperation,
-    SystemConfig,
-    OperationStatus
-)
+from src.core.dashboard.models import ArbitrageOperation, OperationStatus, SystemConfig
 
 # Configurar logger
 logger = logging.getLogger(__name__)

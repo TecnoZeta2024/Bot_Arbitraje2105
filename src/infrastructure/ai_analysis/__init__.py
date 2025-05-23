@@ -2,7 +2,7 @@
 AI Analysis Infrastructure
 """
 
-from .gemini_analyzer import GeminiAnalyzer, AIAnalysisResult
+from .gemini_analyzer import AIAnalysisResult, GeminiAnalyzer
 
 __all__ = [
     "GeminiAnalyzer",

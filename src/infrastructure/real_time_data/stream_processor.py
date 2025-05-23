@@ -4,12 +4,12 @@ Procesamiento eficiente de datos en tiempo real con patrones de suscripción
 """
 
 import asyncio
-from typing import Dict, List, Callable, Any, Optional
+import logging
+import statistics
+from collections import defaultdict, deque
 from dataclasses import dataclass, field
 from datetime import datetime
-import logging
-from collections import defaultdict, deque
-import statistics
+from typing import Any, Callable, Dict, List, Optional
 
 from domain.entities.market_data import MarketData
 

@@ -2,32 +2,40 @@
 Módulo para la inicialización de componentes y servicios del dashboard.
 """
 
-import os
 import logging
+import os
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Any, Dict, Optional
 
 from dotenv import load_dotenv
-from src.core.dashboard.dependency_injection import initialize_service_registry, get_service_registry
-from src.core.dashboard.services import (
-    AuthService,
-    OperationService,
-    ConfigService,
-    SystemMonitorService,
-    NotificationService,
-    TokenService, # Import TokenService interface
-    SupabaseAuthService,
-    DefaultOperationService,
-    DefaultConfigService,
-    DefaultSystemMonitorService,
-    DefaultNotificationService,
-    DefaultTokenService # Import DefaultTokenService implementation
+
+from src.core.dashboard.dependency_injection import (
+    get_service_registry,
+    initialize_service_registry,
 )
 from src.core.dashboard.repositories import (
-    SupabaseOperationRepository,
-    SupabaseConfigRepository,
+    SupabaseTokenRepository,  # Import SupabaseTokenRepository
+)
+from src.core.dashboard.repositories import (
     FileSystemLogRepository,
-    SupabaseTokenRepository # Import SupabaseTokenRepository
+    SupabaseConfigRepository,
+    SupabaseOperationRepository,
+)
+from src.core.dashboard.services import (
+    DefaultTokenService,  # Import DefaultTokenService implementation
+)
+from src.core.dashboard.services import TokenService  # Import TokenService interface
+from src.core.dashboard.services import (
+    AuthService,
+    ConfigService,
+    DefaultConfigService,
+    DefaultNotificationService,
+    DefaultOperationService,
+    DefaultSystemMonitorService,
+    NotificationService,
+    OperationService,
+    SupabaseAuthService,
+    SystemMonitorService,
 )
 from src.utils.config import settings
 

@@ -4,12 +4,11 @@ Sistema avanzado de inyección de dependencias para arquitectura limpia
 """
 
 import asyncio
-import logging
-from typing import Dict, Any, Type, TypeVar, Callable, Optional, Union, List
-from dataclasses import dataclass
 import inspect
+import logging
+from dataclasses import dataclass
 from enum import Enum
-
+from typing import Any, Callable, Dict, List, Optional, Type, TypeVar, Union
 
 T = TypeVar('T')
 

@@ -1,8 +1,10 @@
-import pandas as pd
-import numpy as np
 import datetime
 import random
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
+
+import numpy as np
+import pandas as pd
+
 
 def generate_mock_operations(count: int = 100) -> List[Dict[str, Any]]:
     """

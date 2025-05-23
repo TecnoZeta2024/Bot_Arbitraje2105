@@ -1,7 +1,8 @@
-import streamlit as st
-import sys
 import os
+import sys
 from pathlib import Path
+
+import streamlit as st
 
 # Asegurar que el módulo pueda ser importado correctamente
 current_dir = Path(__file__).parent
@@ -10,12 +11,13 @@ sys.path.append(str(project_root))
 
 # Importar los módulos del dashboard
 from src.core.dashboard.auth import authenticate_user, login_page
-from src.core.dashboard.monitoring import display_monitoring_page
-from src.core.dashboard.historical_ops import display_historical_operations
-from src.core.dashboard.performance import display_performance_charts
 from src.core.dashboard.config_panel import display_config_panel
+from src.core.dashboard.historical_ops import display_historical_operations
+from src.core.dashboard.monitoring import display_monitoring_page
+from src.core.dashboard.performance import display_performance_charts
 from src.utils.config import load_config
 from src.utils.ui_components import setup_page_config
+
 
 def main():
     """

@@ -2,24 +2,22 @@
 Inicialización del paquete de servicios.
 """
 
+from src.core.dashboard.services.service_implementations import (
+    DefaultConfigService,
+    DefaultNotificationService,
+    DefaultOperationService,
+    DefaultSystemMonitorService,
+    DefaultTokenService,
+    SupabaseAuthService,
+)
 from src.core.dashboard.services.service_interfaces import (
     AuthService,
     ConfigService,
-    TokenService,
-    OperationService,
     NotificationService,
-    SystemMonitorService
+    OperationService,
+    SystemMonitorService,
+    TokenService,
 )
-
-from src.core.dashboard.services.service_implementations import (
-    SupabaseAuthService,
-    DefaultConfigService,
-    DefaultTokenService,
-    DefaultOperationService,
-    DefaultNotificationService,
-    DefaultSystemMonitorService
-)
-
 from src.core.dashboard.services.telegram_service import TelegramService
 
 # Exportar todos los servicios

@@ -4,13 +4,15 @@ Obtiene datos de APIs externas y aplica filtros para seleccionar tokens adecuado
 """
 
 import time
-from typing import Dict, Any, List, Optional
-from ..utils.logger import get_logger, filtrado_logger
-from ..utils.config import settings
-from ..apis.mobula_client import mobula_client
-from ..apis.coingecko_client import coingecko_client
+from typing import Any, Dict, List, Optional
+
 from ..apis.binance_client import binance_data_client
+from ..apis.coingecko_client import coingecko_client
+from ..apis.mobula_client import mobula_client
 from ..apis.supabase_client import supabase_client
+from ..utils.config import settings
+from ..utils.logger import filtrado_logger, get_logger
+
 
 def obtener_tokens_candidatos() -> List[Dict[str, Any]]:
     """

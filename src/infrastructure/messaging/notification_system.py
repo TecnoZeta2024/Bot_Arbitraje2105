@@ -4,16 +4,16 @@ Multi-channel notifications with priority-based routing and smart filtering
 """
 
 import asyncio
+import json
 import logging
 import smtplib
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 from decimal import Decimal
-from email.mime.text import MimeText
 from email.mime.multipart import MimeMultipart
-from typing import Dict, List, Any, Optional
+from email.mime.text import MimeText
 from enum import Enum
-import json
+from typing import Any, Dict, List, Optional
 
 try:
     import telegram

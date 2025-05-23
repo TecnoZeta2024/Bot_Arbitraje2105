@@ -5,13 +5,18 @@ Basado en código probado y funcional
 
 import asyncio
 import logging
-from typing import Dict, Any, Optional
 from datetime import datetime
+from typing import Any, Dict, Optional
+
 import aiohttp
 from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.constants import ParseMode
 
-from infrastructure.messaging.notification_service import MessageChannel, Message, MessageType
+from infrastructure.messaging.notification_service import (
+    Message,
+    MessageChannel,
+    MessageType,
+)
 
 
 class AdvancedTelegramChannel(MessageChannel):

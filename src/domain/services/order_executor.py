@@ -2,13 +2,18 @@
 OrderExecutor - Single responsibility for executing trading orders.
 """
 
-from typing import Dict, Any, Optional, List
-from decimal import Decimal
-from datetime import datetime
 import time
+from datetime import datetime
+from decimal import Decimal
+from typing import Any, Dict, List, Optional
 
-from ...domain.entities.execution_step import ExecutionStep, StepStatus, OrderSide, OrderType
 from ...domain.entities.arbitrage_operation import ArbitrageOperation
+from ...domain.entities.execution_step import (
+    ExecutionStep,
+    OrderSide,
+    OrderType,
+    StepStatus,
+)
 from ...domain.value_objects.currency import Currency
 from ...domain.value_objects.price import Price
 from ...infrastructure.external_apis.binance_client import BinanceClient

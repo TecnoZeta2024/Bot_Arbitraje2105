@@ -3,17 +3,27 @@ Manejador de respuestas de Telegram para el Bot de Arbitraje Triangular.
 Procesa mensajes recibidos del bot de Telegram y los reenvía a n8n.
 """
 
-import time
-import logging
 import asyncio
 import json
+import logging
+import time
+from typing import Any, Callable, Dict, List, Optional
+
 import requests
-from typing import Dict, Any, Optional, List, Callable
-from telegram import Update, Bot, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters, ContextTypes
-from ...utils.logger import get_logger
-from ...utils.config import settings
+from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.ext import (
+    Application,
+    CallbackQueryHandler,
+    CommandHandler,
+    ContextTypes,
+    MessageHandler,
+    filters,
+)
+
 from ...apis.supabase_client import SupabaseClient
+from ...utils.config import settings
+from ...utils.logger import get_logger
+
 # from ...core.ejecutar_ciclo import execute_trade_cycle # Removed to break circular dependency
 
 # Obtener logger específico

@@ -6,16 +6,16 @@ Centralizes all dependency configuration and wiring.
 from dependency_injector import containers, providers
 from dependency_injector.wiring import Provide, inject
 
-from ..external_apis.binance_client import BinanceClient
-from ..external_apis.supabase_client import SupabaseClient
-from ..external_apis.mobula_client import MobulaClient
-from ..external_apis.gemini_client import GeminiClient
-from ..database.opportunity_repository_impl import OpportunityRepositoryImpl
-from ..database.operation_repository_impl import OperationRepositoryImpl
-from ..database.market_data_repository_impl import MarketDataRepositoryImpl
-from ..database.trading_pair_repository_impl import TradingPairRepositoryImpl
 from ...utils.config import settings
 from ...utils.logger import get_logger
+from ..database.market_data_repository_impl import MarketDataRepositoryImpl
+from ..database.operation_repository_impl import OperationRepositoryImpl
+from ..database.opportunity_repository_impl import OpportunityRepositoryImpl
+from ..database.trading_pair_repository_impl import TradingPairRepositoryImpl
+from ..external_apis.binance_client import BinanceClient
+from ..external_apis.gemini_client import GeminiClient
+from ..external_apis.mobula_client import MobulaClient
+from ..external_apis.supabase_client import SupabaseClient
 
 
 class Container(containers.DeclarativeContainer):

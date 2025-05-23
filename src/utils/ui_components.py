@@ -5,13 +5,15 @@ Este módulo implementa componentes UI siguiendo el principio SRP (Single Respon
 donde cada componente tiene una única responsabilidad y abstrae detalles de implementación.
 """
 
-import streamlit as st
-import pandas as pd
-import numpy as np
-import plotly.graph_objects as go
-import plotly.express as px
-from typing import Dict, Any, List, Optional, Tuple, Union
 from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional, Tuple, Union
+
+import numpy as np
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+import streamlit as st
+
 
 def display_metric_card(title: str, value: Union[float, int], 
                       delta: Optional[float] = None, 

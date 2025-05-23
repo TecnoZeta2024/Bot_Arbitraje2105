@@ -2,17 +2,17 @@
 Concrete implementation of IOpportunityRepository using Supabase.
 """
 
-from typing import List, Optional, Dict, Any
-from datetime import datetime, timedelta
 import json
+from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional
 
-from ...domain.repositories.opportunity_repository import IOpportunityRepository
 from ...domain.entities.opportunity import Opportunity, OpportunityStatus
+from ...domain.repositories.opportunity_repository import IOpportunityRepository
 from ...domain.value_objects.currency import Currency
 from ...domain.value_objects.price import Price
 from ...domain.value_objects.profit_percentage import ProfitPercentage
-from ..external_apis.supabase_client import SupabaseClient
 from ...utils.logger import get_logger
+from ..external_apis.supabase_client import SupabaseClient
 
 
 class RepositoryError(Exception):

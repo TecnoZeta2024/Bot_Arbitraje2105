@@ -2,17 +2,26 @@
 Concrete implementation of IOperationRepository using Supabase.
 """
 
-from typing import List, Optional, Dict, Any
 from datetime import datetime, timedelta
 from decimal import Decimal
+from typing import Any, Dict, List, Optional
 
+from ...domain.entities.arbitrage_operation import (
+    ArbitrageOperation,
+    OperationStatus,
+    OperationType,
+)
+from ...domain.entities.execution_step import (
+    ExecutionStep,
+    OrderSide,
+    OrderType,
+    StepStatus,
+)
 from ...domain.repositories.operation_repository import IOperationRepository
-from ...domain.entities.arbitrage_operation import ArbitrageOperation, OperationStatus, OperationType
-from ...domain.entities.execution_step import ExecutionStep, StepStatus, OrderSide, OrderType
 from ...domain.value_objects.currency import Currency
 from ...domain.value_objects.price import Price
-from ..external_apis.supabase_client import SupabaseClient
 from ...utils.logger import get_logger
+from ..external_apis.supabase_client import SupabaseClient
 
 
 class OperationRepositoryImpl(IOperationRepository):
@@ -397,4 +406,4 @@ class OperationRepositoryImpl(IOperationRepository):
 
 
 # Import the exceptions at the top of the file
-from .opportunity_repository_impl import RepositoryError, NotFoundError
+from .opportunity_repository_impl import NotFoundError, RepositoryError

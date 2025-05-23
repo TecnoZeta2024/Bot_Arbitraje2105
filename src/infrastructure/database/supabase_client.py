@@ -3,17 +3,18 @@ Supabase Database Integration
 Handles data persistence for trading operations, metrics, and configuration
 """
 
-import os
-import logging
 import asyncio
-from typing import Dict, List, Any, Optional
+import logging
+import os
+from dataclasses import asdict
 from datetime import datetime, timedelta
 from decimal import Decimal
-import asyncpg
-from dataclasses import asdict
+from typing import Any, Dict, List, Optional
 
-from ...domain.trading_signals.trading_signal import TradingSignal
+import asyncpg
+
 from ...domain.risk_management.advanced_risk_manager import PositionInfo, RiskEvent
+from ...domain.trading_signals.trading_signal import TradingSignal
 
 
 class SupabaseClient:

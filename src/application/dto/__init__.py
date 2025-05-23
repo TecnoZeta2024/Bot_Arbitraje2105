@@ -2,8 +2,8 @@
 Data Transfer Objects for the Application Layer.
 """
 
-from .opportunity_dto import OpportunityDTO, CreateOpportunityDTO
-from .operation_dto import OperationDTO, CreateOperationDTO
+from .operation_dto import CreateOperationDTO, OperationDTO
+from .opportunity_dto import CreateOpportunityDTO, OpportunityDTO
 
 __all__ = [
     "OpportunityDTO",

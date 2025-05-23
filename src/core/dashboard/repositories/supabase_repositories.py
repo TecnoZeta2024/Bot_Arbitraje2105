@@ -5,15 +5,20 @@ Implementaciones concretas de repositorios utilizando Supabase.
 import json
 import logging
 from datetime import datetime
-from typing import List, Optional, Dict, Any, TypeVar, Generic, cast
-from supabase import Client, create_client
 from functools import lru_cache
+from typing import Any, Dict, Generic, List, Optional, TypeVar, cast
 
-from src.core.dashboard.repositories.repository_interface import Repository
-from src.core.dashboard.repositories.specific_repositories import TokenRepository, OperationRepository, ConfigRepository
-from src.core.dashboard.models.token_model import Token
-from src.core.dashboard.models.operation_model import ArbitrageOperation
+from supabase import Client, create_client
+
 from src.core.dashboard.models.config_model import SystemConfig
+from src.core.dashboard.models.operation_model import ArbitrageOperation
+from src.core.dashboard.models.token_model import Token
+from src.core.dashboard.repositories.repository_interface import Repository
+from src.core.dashboard.repositories.specific_repositories import (
+    ConfigRepository,
+    OperationRepository,
+    TokenRepository,
+)
 
 # Configurar logging
 logger = logging.getLogger(__name__)

@@ -5,13 +5,14 @@ para los servicios que utilizará el dashboard.
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Optional, Dict, Any, Generic, TypeVar
 from datetime import datetime
+from typing import Any, Dict, Generic, List, Optional, TypeVar
 
-from src.core.dashboard.models.token_model import Token
-from src.core.dashboard.models.operation_model import ArbitrageOperation
 from src.core.dashboard.models.config_model import SystemConfig
+from src.core.dashboard.models.operation_model import ArbitrageOperation
+from src.core.dashboard.models.token_model import Token
 from src.core.dashboard.models.user_model import User, UserCredentials
+
 
 class AuthService(ABC):
     """Interfaz para servicio de autenticación"""

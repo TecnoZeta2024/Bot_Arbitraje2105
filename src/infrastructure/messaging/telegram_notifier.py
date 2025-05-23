@@ -3,16 +3,17 @@ Telegram Notification System
 Sends intelligent trading alerts and status updates via Telegram
 """
 
-import os
-import logging
 import asyncio
-import aiohttp
-from typing import Dict, Any, Optional
+import logging
+import os
 from datetime import datetime
 from decimal import Decimal
+from typing import Any, Dict, Optional
 
-from ...domain.trading_signals.trading_signal import TradingSignal
+import aiohttp
+
 from ...domain.risk_management.advanced_risk_manager import RiskEvent
+from ...domain.trading_signals.trading_signal import TradingSignal
 
 
 class TelegramNotifier:

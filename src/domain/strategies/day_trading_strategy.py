@@ -5,12 +5,18 @@ Multi-timeframe analysis for intraday trades
 
 import asyncio
 import logging
-from typing import Dict, List, Any, Optional
 from datetime import datetime, timedelta
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
-from domain.trading_signals.trading_signal import TradingSignal, SignalAction, RiskLevel, StrategyType
 from domain.entities.market_data import MarketData
+from domain.trading_signals.trading_signal import (
+    RiskLevel,
+    SignalAction,
+    StrategyType,
+    TradingSignal,
+)
+
 from .base_strategy import BaseStrategy
 
 

@@ -3,12 +3,14 @@ Interfaces específicas para repositorios de tokens, operaciones y configuració
 """
 
 from abc import abstractmethod
-from typing import List, Optional, Dict, Any
 from datetime import datetime
-from src.core.dashboard.repositories.repository_interface import Repository
-from src.core.dashboard.models.token_model import Token
-from src.core.dashboard.models.operation_model import ArbitrageOperation
+from typing import Any, Dict, List, Optional
+
 from src.core.dashboard.models.config_model import SystemConfig
+from src.core.dashboard.models.operation_model import ArbitrageOperation
+from src.core.dashboard.models.token_model import Token
+from src.core.dashboard.repositories.repository_interface import Repository
+
 
 class TokenRepository(Repository[Token]):
     """Interfaz para repositorio de tokens"""

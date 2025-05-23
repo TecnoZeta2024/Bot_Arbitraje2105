@@ -2,18 +2,20 @@
 Módulo para análisis y visualización del rendimiento del sistema de arbitraje.
 """
 
-import streamlit as st
-import pandas as pd
+from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional
+
 import numpy as np
+import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from datetime import datetime, timedelta
-from typing import Dict, Any, List, Optional
+import streamlit as st
 
 from src.core.dashboard.dependency_injection import get_service_registry
-from src.core.dashboard.services import OperationService, TokenService
 from src.core.dashboard.models import OperationStatus
-from src.utils.ui_components import display_metric_card, create_performance_chart
+from src.core.dashboard.services import OperationService, TokenService
+from src.utils.ui_components import create_performance_chart, display_metric_card
+
 
 def display_performance_charts():
     """
