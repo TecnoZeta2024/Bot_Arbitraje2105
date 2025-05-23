@@ -14,7 +14,11 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel
 
 # Importar el cliente de Binance
-from src.binance_websocket1 import BinanceDataFeeder, is_bearish_signal, is_bullish_signal
+from src.binance_websocket1 import (
+    BinanceDataFeeder,
+    is_bearish_signal,
+    is_bullish_signal,
+)
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO)

@@ -20,7 +20,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 # Importar módulos internos
-from src.binance_websocket1 import BinanceDataFeeder, is_bearish_signal, is_bullish_signal
+from src.binance_websocket1 import (
+    BinanceDataFeeder,
+    is_bearish_signal,
+    is_bullish_signal,
+)
 
 
 # ==================== CONFIGURACIÓN DE LOGGING ====================
