@@ -5,9 +5,9 @@ Versión funcional para arrancar HOY - Frontend-First Visibility
 
 import asyncio
 import json
+import logging
 import time
 from typing import Any, Dict, List, Optional
-import logging
 
 import uvicorn
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect

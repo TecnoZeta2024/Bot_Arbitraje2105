@@ -5,16 +5,16 @@ Con datos reales de Binance y funcionalidad completa
 
 import asyncio
 import json
+import logging
 import time
 from typing import Any, Dict, List, Optional
-import logging
 
 import uvicorn
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel
 
 # Importar el cliente de Binance
-from binance_websocket import BinanceDataFeeder, is_bullish_signal, is_bearish_signal
+from binance_websocket import BinanceDataFeeder, is_bearish_signal, is_bullish_signal
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO)

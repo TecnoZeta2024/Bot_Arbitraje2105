@@ -16,12 +16,19 @@ import {
   Plus,
   Minus,
   Clock,
-  Zap
+  Zap,
+  Settings2,
+  LineChart
 } from 'lucide-react'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
+
+// Import new AI components
+import AIAnalysis from './AIAnalysis'
+import StrategyManager from './StrategyManager'
 
 // Enhanced Mock Data with State Management
 class TradingSystemState {
@@ -695,40 +702,67 @@ export default function TradingDashboard() {
         </div>
       </div>
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="space-y-6">
-          <TradingControls onStateChange={handleStateChange} />
-          <TradingSignals signals={systemState.signals} />
-        </div>
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <Target className="w-5 h-5 mr-2 text-blue-500" />
-                Active Positions
-                <span className="ml-auto text-sm font-normal text-muted-foreground">
-                  {systemState.portfolio.positions.length}
-                </span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-center py-8">
-                <Target className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-                <p className="text-muted-foreground text-sm">
-                  No active positions. Execute trades to see positions here.
-                </p>
-                <p className="text-xs text-muted-foreground mt-2">
-                  Available Balance: {formatCurrency(systemState.portfolio.availableBalance)}
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-        <div className="space-y-6">
-          <RecentTrades trades={systemState.trades} />
-        </div>
-      </div>
+      {/* Main Content with Tabs */}
+      <Tabs defaultValue="trading" className="space-y-4">
+        <TabsList className="grid grid-cols-3 w-full lg:w-auto">
+          <TabsTrigger value="trading" className="flex items-center gap-2">
+            <Activity className="w-4 h-4" />
+            Trading Overview
+          </TabsTrigger>
+          <TabsTrigger value="ai-analysis" className="flex items-center gap-2">
+            <Brain className="w-4 h-4" />
+            AI Analysis
+          </TabsTrigger>
+          <TabsTrigger value="strategies" className="flex items-center gap-2">
+            <Settings2 className="w-4 h-4" />
+            Strategy Manager
+          </TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="trading" className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="space-y-6">
+              <TradingControls onStateChange={handleStateChange} />
+              <TradingSignals signals={systemState.signals} />
+            </div>
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Target className="w-5 h-5 mr-2 text-blue-500" />
+                    Active Positions
+                    <span className="ml-auto text-sm font-normal text-muted-foreground">
+                      {systemState.portfolio.positions.length}
+                    </span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center py-8">
+                    <Target className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+                    <p className="text-muted-foreground text-sm">
+                      No active positions. Execute trades to see positions here.
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Available Balance: {formatCurrency(systemState.portfolio.availableBalance)}
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            <div className="space-y-6">
+              <RecentTrades trades={systemState.trades} />
+            </div>
+          </div>
+        </TabsContent>
+        
+        <TabsContent value="ai-analysis" className="space-y-6">
+          <AIAnalysis />
+        </TabsContent>
+        
+        <TabsContent value="strategies" className="space-y-6">
+          <StrategyManager />
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }

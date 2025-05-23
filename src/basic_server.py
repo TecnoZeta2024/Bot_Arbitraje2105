@@ -5,10 +5,10 @@ Para Bot_Arbitraje2105 - Garantizado que funciona
 
 import asyncio
 import json
-import time
-import random
-from typing import List
 import logging
+import random
+import time
+from typing import List
 
 import uvicorn
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect

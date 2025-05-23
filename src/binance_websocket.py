@@ -6,9 +6,10 @@ Integración con Bot_Arbitraje2105 - Frontend-First Visibility
 import asyncio
 import json
 import logging
-import websockets
-from typing import Dict, List, Callable, Optional
+from typing import Callable, Dict, List, Optional
+
 import aiohttp
+import websockets
 
 logger = logging.getLogger("BinanceWebSocket")
 
