@@ -2,7 +2,7 @@
 Concrete implementation of IOperationRepository using Supabase.
 """
 
-import math # Added for Sharpe Ratio calculation
+import math  # Added for Sharpe Ratio calculation
 from datetime import datetime, timedelta
 from decimal import Decimal
 from typing import Any, Dict, List, Optional, cast

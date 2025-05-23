@@ -25,8 +25,11 @@ from src.binance_websocket import (
     is_bearish_signal,
     is_bullish_signal,
 )
-from src.infrastructure.monitoring.system_monitor import SystemMonitor, HealthStatus
-from src.domain.risk_management.advanced_risk_manager import AdvancedRiskManager, RiskParameters
+from src.domain.risk_management.advanced_risk_manager import (
+    AdvancedRiskManager,
+    RiskParameters,
+)
+from src.infrastructure.monitoring.system_monitor import HealthStatus, SystemMonitor
 
 
 # ==================== CONFIGURACIÓN DE LOGGING ====================
