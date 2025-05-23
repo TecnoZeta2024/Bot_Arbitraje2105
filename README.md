@@ -52,7 +52,7 @@
 - Alertas por Telegram y Email
 - Health checks automáticos
 - Reportes de P&L
-- Dashboard web (opcional)
+- Dashboard web (Streamlit)
 
 ### 🏗️ **Arquitectura Limpia**
 - Principios SOLID y Clean Architecture
@@ -93,8 +93,12 @@ python test_setup.py
 
 ### 5. Iniciar la Plataforma
 ```bash
+# Iniciar el servidor de producción
 cd src
 python main_advanced.py
+
+# Iniciar el dashboard de Streamlit (en una nueva terminal)
+streamlit run streamlit_dashboash.py
 ```
 
 ## ⚙️ Configuración

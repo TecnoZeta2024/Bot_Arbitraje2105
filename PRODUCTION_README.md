@@ -11,7 +11,7 @@ El sistema Bot Arbitraje 2105 está completamente implementado con todas las car
 - ✅ **BLOQUE 3**: Controles de trading operativos con máquina de estados
 - ✅ **BLOQUE 4**: Paper trading funcional con tracking de P&L
 - ✅ **BLOQUE 5**: IA y estrategias (preparado para integración con Gemini)
-- ✅ **BLOQUE 6**: UI/UX pulido y responsivo
+- ✅ **BLOQUE 6**: Dashboard Streamlit
 
 ### 🏗️ Arquitectura del Sistema
 
@@ -21,12 +21,6 @@ Bot_Arbitraje2105/
 │   ├── production_server.py    # ⭐ Servidor principal de producción
 │   ├── binance_websocket.py    # Cliente WebSocket de Binance
 │   └── apis/                   # Integraciones (Gemini, Supabase)
-├── frontend/
-│   ├── src/
-│   │   ├── components/         # Componentes React
-│   │   ├── hooks/             # WebSocket hooks
-│   │   └── store/             # Estado global (Zustand)
-│   └── package.json
 ├── start_production.bat        # Script de inicio
 └── stop_production.bat         # Script de detención
 ```
@@ -41,8 +35,8 @@ Bot_Arbitraje2105/
 
 2. **El sistema iniciará:**
    - Servidor de producción en http://localhost:8000
-   - Frontend en http://localhost:5173
    - WebSocket en ws://localhost:8000/ws
+   - Dashboard Streamlit en http://localhost:8501
 
 3. **Verificar conexión:**
    - El indicador en la UI mostrará "Connected" en verde
@@ -75,11 +69,6 @@ Bot_Arbitraje2105/
 - Niveles de confianza calculados
 - Integración preparada para Google Gemini
 
-#### 6. **UI/UX Profesional**
-- Dashboard responsivo
-- Actualizaciones en tiempo real sin parpadeos
-- Notificaciones toast para eventos importantes
-
 ### 📊 Monitoreo y Logs
 
 - **Logs del servidor**: `logs/production_server.log`
@@ -100,10 +89,6 @@ Bot_Arbitraje2105/
 # Backend
 cd src
 pip install -r requirements.txt --upgrade
-
-# Frontend
-cd frontend
-npm update
 ```
 
 #### Limpiar logs:
@@ -131,10 +116,6 @@ npm update
 **El servidor no se conecta a Binance:**
 - Verificar conexión a internet
 - El sistema funciona en modo degradado sin problema
-
-**El frontend no se conecta al servidor:**
-- Verificar que el servidor esté corriendo
-- Revisar la consola del navegador
 
 **Performance lento:**
 - Reducir número de símbolos monitoreados
