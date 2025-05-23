@@ -17,7 +17,7 @@ import {
 
 // Import store and hooks
 import { useTradingStore } from '@/store'
-// TEMPORARILY DISABLED - import { useWebSocket, useSymbolSubscription } from '@/hooks/useWebSocket'
+import { useWebSocket, useSymbolSubscription } from '@/hooks/useWebSocket'
 
 // Import UI components
 import { ToastProvider } from '@/components/ui/toast'
@@ -31,8 +31,7 @@ import AnalyticsDashboard from '@/components/analytics/AnalyticsDashboard'
 // Navigation component
 const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const location = useLocation()
-  // Set as connected for demo mode
-  const isConnected = true // useTradingStore((state) => state.isConnected)
+  const isConnected = useTradingStore((state) => state.isConnected)
 
   const navigation = [
     { name: 'Trading Dashboard', href: '/', icon: BarChart3 },
@@ -74,8 +73,17 @@ const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
           {/* Connection status */}
           <div className="px-4 py-3 border-b border-gray-700">
             <div className="flex items-center space-x-2">
-              <Wifi className="w-4 h-4 text-green-400" />
-              <span className="text-sm text-green-400">Demo Mode</span>
+              {isConnected ? (
+                <>
+                  <Wifi className="w-4 h-4 text-green-400" />
+                  <span className="text-sm text-green-400">Connected</span>
+                </>
+              ) : (
+                <>
+                  <WifiOff className="w-4 h-4 text-red-400" />
+                  <span className="text-sm text-red-400">Disconnected</span>
+                </>
+              )}
             </div>
           </div>
 
@@ -119,14 +127,10 @@ const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
 
 // Top bar component
 const TopBar = ({ onMenuClick }: { onMenuClick: () => void }) => {
-  // Mock portfolio data for demo
-  const portfolio = {
-    totalValue: 1000.00,
-    dailyPnL: 23.45
-  }
-  
-  const notifications = [] // Mock empty notifications
-  const unreadCount = 0
+  // Get real portfolio data from store
+  const portfolio = useTradingStore((state) => state.portfolio)
+  const notifications = useTradingStore((state) => state.notifications)
+  const unreadCount = notifications.filter(n => !n.read).length
 
   return (
     <div className="bg-white border-b border-gray-200 px-4 py-3">
@@ -140,7 +144,7 @@ const TopBar = ({ onMenuClick }: { onMenuClick: () => void }) => {
           </button>
           
           <div className="ml-4 lg:ml-0">
-            <h1 className="text-xl font-semibold text-gray-900">Trading Dashboard - Demo</h1>
+            <h1 className="text-xl font-semibold text-gray-900">Trading Dashboard - Production</h1>
           </div>
         </div>
 
@@ -195,9 +199,24 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  // DISABLED WebSocket for demo mode
-  // useWebSocket({ ... })
-  // useSymbolSubscription()
+  // Initialize WebSocket connection
+  useWebSocket({
+    url: 'ws://localhost:8000/ws',
+    reconnectInterval: 3000,
+    maxReconnectAttempts: 10,
+    onConnect: () => {
+      console.log('✅ Connected to production server')
+    },
+    onDisconnect: () => {
+      console.log('❌ Disconnected from server')
+    },
+    onError: (error) => {
+      console.error('WebSocket error:', error)
+    }
+  })
+  
+  // Subscribe to symbol updates
+  useSymbolSubscription()
 
   // Simulate loading
   useEffect(() => {
