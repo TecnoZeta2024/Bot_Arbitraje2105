@@ -119,3 +119,5 @@
 2025-05-23 06:15:01 - BinanceWebSocket - INFO - Binance WebSocket connection closed
 2025-05-23 06:15:01 - ProductionServer - INFO - Server shutdown complete
 2025-05-23 06:15:01 - BinanceWebSocket - ERROR - Error listening to messages: sent 1000 (OK); then received 1008 (policy violation) Too many requests
+2025-05-23 06:15:48 - ProductionServer - INFO - Client 20993b9c-11d2-41f3-8f21-eca4bbab0194 disconnected normally
+2025-05-23 06:15:48 - ProductionServer - INFO - WebSocket disconnected: 20993b9c-11d2-41f3-8f21-eca4bbab0194 | Total: 0

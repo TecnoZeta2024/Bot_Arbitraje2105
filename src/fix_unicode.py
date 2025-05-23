@@ -5,6 +5,7 @@ Removes emojis from production_server.py for Windows compatibility
 
 import re
 
+
 def fix_unicode_in_file():
     """Replace emojis with ASCII characters in production_server.py"""
     
