@@ -17,3 +17,65 @@
 2025-05-23 14:45:46 - ProductionServer - INFO - Shutting down production server...
 2025-05-23 14:45:56 - BinanceWebSocket - INFO - Binance WebSocket connection closed
 2025-05-23 14:45:56 - ProductionServer - INFO - Server shutdown complete
+2025-05-23 16:10:01 - HealthChecker - INFO - Registered health check for system (interval: 60s)
+2025-05-23 16:10:01 - SystemMonitor - INFO - SystemMonitor initialized
+2025-05-23 16:10:01 - AdvancedRiskManager - INFO - AdvancedRiskManager initialized
+2025-05-23 16:10:01 - ProductionServer - INFO - ================================================================================
+2025-05-23 16:10:01 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 16:10:01 - ProductionServer - INFO - ================================================================================
+2025-05-23 16:10:01 - ProductionServer - INFO - [OK] WebSocket logging handler initialized
+2025-05-23 16:10:01 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/30)
+2025-05-23 16:10:03 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 16:10:04 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 16:10:04 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 16:10:04 - BinanceWebSocket - INFO - Started Binance data feed for 2 symbols
+2025-05-23 16:10:04 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 16:10:04 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 16:10:04 - ProductionServer - INFO - ================================================================================
+2025-05-23 16:10:04 - SystemMonitor - INFO - Starting system monitoring
+2025-05-23 16:10:04 - AlertManager - WARNING - Alert created - ERROR: Health Check Failed: system (system)
+2025-05-23 16:10:34 - AlertManager - WARNING - Alert created - ERROR: Health Check Failed: system (system)
+2025-05-23 16:11:04 - AlertManager - WARNING - Alert created - ERROR: Health Check Failed: system (system)
+2025-05-23 16:11:34 - AlertManager - WARNING - Alert created - ERROR: Health Check Failed: system (system)
+2025-05-23 16:11:54 - HealthChecker - INFO - Registered health check for system (interval: 60s)
+2025-05-23 16:11:54 - SystemMonitor - INFO - SystemMonitor initialized
+2025-05-23 16:11:54 - AdvancedRiskManager - INFO - AdvancedRiskManager initialized
+2025-05-23 16:11:54 - ProductionServer - INFO - ================================================================================
+2025-05-23 16:11:54 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 16:11:54 - ProductionServer - INFO - ================================================================================
+2025-05-23 16:11:54 - ProductionServer - INFO - [OK] WebSocket logging handler initialized
+2025-05-23 16:11:54 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/30)
+2025-05-23 16:11:56 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 16:11:57 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 16:11:57 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 16:11:57 - BinanceWebSocket - INFO - Started Binance data feed for 2 symbols
+2025-05-23 16:11:57 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 16:11:57 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 16:11:57 - ProductionServer - INFO - ================================================================================
+2025-05-23 16:11:57 - SystemMonitor - INFO - Starting system monitoring
+2025-05-23 16:11:58 - ProductionServer - INFO - Shutting down production server...
+2025-05-23 16:12:04 - AlertManager - WARNING - Alert created - ERROR: Health Check Failed: system (system)
+2025-05-23 16:12:08 - BinanceWebSocket - INFO - Binance WebSocket connection closed
+2025-05-23 16:12:08 - ProductionServer - INFO - Server shutdown complete
+2025-05-23 16:12:34 - AlertManager - WARNING - Alert created - ERROR: Health Check Failed: system (system)
+2025-05-23 16:13:04 - AlertManager - WARNING - Alert created - ERROR: Health Check Failed: system (system)
+2025-05-23 16:13:34 - AlertManager - WARNING - Alert created - ERROR: Health Check Failed: system (system)
+2025-05-23 16:13:34 - HealthChecker - INFO - Registered health check for system (interval: 60s)
+2025-05-23 16:13:34 - SystemMonitor - INFO - SystemMonitor initialized
+2025-05-23 16:13:34 - AdvancedRiskManager - INFO - AdvancedRiskManager initialized
+2025-05-23 16:13:34 - ProductionServer - INFO - ================================================================================
+2025-05-23 16:13:34 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 16:13:34 - ProductionServer - INFO - ================================================================================
+2025-05-23 16:13:34 - ProductionServer - INFO - [OK] WebSocket logging handler initialized
+2025-05-23 16:13:34 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/30)
+2025-05-23 16:13:36 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 16:13:37 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 16:13:37 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 16:13:37 - BinanceWebSocket - INFO - Started Binance data feed for 2 symbols
+2025-05-23 16:13:37 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 16:13:37 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 16:13:37 - ProductionServer - INFO - ================================================================================
+2025-05-23 16:13:37 - SystemMonitor - INFO - Starting system monitoring
+2025-05-23 16:13:38 - ProductionServer - INFO - Shutting down production server...
+2025-05-23 16:13:46 - BinanceWebSocket - INFO - Binance WebSocket connection closed
+2025-05-23 16:13:46 - ProductionServer - INFO - Server shutdown complete

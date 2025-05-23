@@ -370,5 +370,17 @@ class SupabaseClient:
             self.logger.info("Supabase connection pool closed")
 
 
-# Global instance
-supabase_client = SupabaseClient()
+# Global instance - initialize only when needed to avoid import errors
+supabase_client = None
+
+def get_supabase_client():
+    """Get or create Supabase client instance"""
+    global supabase_client
+    if supabase_client is None:
+        try:
+            supabase_client = SupabaseClient()
+        except ValueError as e:
+            # Return None if configuration is missing
+            logging.getLogger("database.supabase").warning(f"Supabase client not initialized: {e}")
+            return None
+    return supabase_client

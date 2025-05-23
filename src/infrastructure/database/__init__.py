@@ -3,9 +3,9 @@ Database Infrastructure Module
 Supabase integration for data persistence
 """
 
-from .supabase_client import SupabaseClient, supabase_client
+from .supabase_client import SupabaseClient, get_supabase_client
 
 __all__ = [
     'SupabaseClient',
-    'supabase_client'
+    'get_supabase_client'
 ]

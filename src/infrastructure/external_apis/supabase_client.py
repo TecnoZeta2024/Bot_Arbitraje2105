@@ -7,8 +7,8 @@ from typing import Any, Dict, List, Optional, Union
 
 from supabase import Client, create_client
 
-from ..utils.config import get_config_value  # Import get_config_value
-from ..utils.logger import get_logger
+from ...utils.config import get_config_value  # Import get_config_value desde src.utils
+from ...utils.logger import get_logger
 
 # Obtener logger específico
 logger = get_logger("supabase_client")

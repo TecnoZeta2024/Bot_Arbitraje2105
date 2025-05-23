@@ -1,6 +1,13 @@
 # Dashboard Production Configuration
 # Configuración específica para el despliegue en producción del Bot Arbitraje
-# ACTUALIZADO: Configuraciones migradas según documentación oficial de Streamlit
+
+[streamlit]
+# Configuración del servidor Streamlit
+serverPort = 8501
+serverAddress = "0.0.0.0"
+enableCORS = false
+enableXsrfProtection = true
+maxUploadSize = 200
 
 # Configuración del navegador
 [browser]
@@ -13,29 +20,22 @@ serverPort = 8501
 level = "info"
 messageFormat = "%(asctime)s %(message)s"
 
-# Configuración del servidor (MIGRADO desde [streamlit])
+# Configuración de la aplicación
 [server]
-# Configuraciones migradas desde [streamlit]
-port = 8501
-address = "0.0.0.0"
-enableCORS = false
-enableXsrfProtection = false
-maxUploadSize = 200
-
-# Configuraciones existentes
 headless = true
 runOnSave = false
 fileWatcherType = "none"
 enableStaticServing = true
 allowRunOnSave = false
 
-# Configuración global (logLevel removido - ahora en [logger])
+# Configuración de caché
 [global]
 developmentMode = false
+logLevel = "info"
 unitTest = false
 suppressDeprecationWarnings = true
 
-# Configuración de tema (sin cambios)
+# Configuración de tema (opcional)
 [theme]
 primaryColor = "#00ff88"
 backgroundColor = "#0f0f0f"
@@ -43,7 +43,9 @@ secondaryBackgroundColor = "#1e1e1e"
 textColor = "#ffffff"
 font = "sans serif"
 
-# Configuración de cliente (configuraciones obsoletas removidas)
+# Configuración de métricas
 [client]
+caching = true
+displayEnabled = true
 showErrorDetails = true
 toolbarMode = "minimal"
