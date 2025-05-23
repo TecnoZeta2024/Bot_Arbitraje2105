@@ -1,15 +1,18 @@
 """
 Cliente WebSocket de Binance para datos de mercado en tiempo real
 Integración con Bot_Arbitraje2105 - Frontend-First Visibility
+Version mejorada con mejor manejo de reconexión
 """
 
 import asyncio
 import json
 import logging
+import time
 from typing import Callable, Dict, List, Optional
 
 import aiohttp
 import websockets
+from aiohttp import ClientSession
 
 logger = logging.getLogger("BinanceWebSocket")
 
@@ -18,71 +21,129 @@ class BinanceWebSocketClient:
         self.ws_url = "wss://stream.binance.com:9443/ws"
         self.callback = callback_function
         self.subscriptions = []
-        self.websocket = None
+        self.websocket: Optional[websockets.WebSocketClientProtocol] = None
         self.is_running = False
-        
+        self.reconnect_attempts = 0
+        self.max_reconnect_attempts = 30
+        self.reconnect_delay = 5  # Reducir a 5 segundos inicial
+        self._listen_task = None
+        self._reconnect_lock = asyncio.Lock()
+
     async def connect(self):
-        """Conecta al WebSocket de Binance"""
-        try:
-            self.websocket = await websockets.connect(self.ws_url)
-            self.is_running = True
-            logger.info("Connected to Binance WebSocket")
+        """Conecta al WebSocket de Binance con backoff exponencial mejorado"""
+        async with self._reconnect_lock:
+            while self.reconnect_attempts < self.max_reconnect_attempts:
+                try:
+                    logger.info(f"Attempting to connect to Binance WebSocket (Attempt {self.reconnect_attempts + 1}/{self.max_reconnect_attempts})")
+                    
+                    # Configurar timeout y opciones de conexión
+                    self.websocket = await websockets.connect(
+                        self.ws_url,
+                        ping_interval=20,  # Enviar ping cada 20 segundos
+                        ping_timeout=10,   # Timeout de 10 segundos para el pong
+                        close_timeout=10   # Timeout para cerrar conexión
+                    )
+                    
+                    self.is_running = True
+                    self.reconnect_attempts = 0
+                    logger.info("Connected to Binance WebSocket")
+                    
+                    # Re-suscribir a los streams después de reconectar
+                    if self.subscriptions:
+                        await self.send_subscription()
+                    
+                    # Cancelar tarea anterior si existe
+                    if self._listen_task and not self._listen_task.done():
+                        self._listen_task.cancel()
+                    
+                    # Escuchar mensajes en background
+                    self._listen_task = asyncio.create_task(self.listen_messages())
+                    return
+                    
+                except Exception as e:
+                    logger.error(f"Error connecting to Binance WebSocket: {e}")
+                    self.is_running = False
+                    self.reconnect_attempts += 1
+                    
+                    # Backoff exponencial con límite máximo
+                    wait_time = min(self.reconnect_delay * (2 ** (self.reconnect_attempts - 1)), 300)
+                    logger.info(f"Retrying in {wait_time} seconds...")
+                    await asyncio.sleep(wait_time)
             
-            # Escuchar mensajes en background
-            asyncio.create_task(self.listen_messages())
-            
-        except Exception as e:
-            logger.error(f"Error connecting to Binance WebSocket: {e}")
-    
+            logger.error("Max reconnect attempts reached. Could not connect to Binance WebSocket.")
+
     async def listen_messages(self):
-        """Escucha mensajes del WebSocket"""
+        """Escucha mensajes del WebSocket con mejor manejo de errores"""
+        if not self.websocket:
+            logger.error("WebSocket is not connected. Cannot listen for messages.")
+            return
+
         try:
             async for message in self.websocket:
-                data = json.loads(message)
-                if self.callback:
-                    await self.callback(data)
-        except Exception as e:
-            logger.error(f"Error listening to messages: {e}")
+                try:
+                    data = json.loads(message)
+                    if self.callback:
+                        await self.callback(data)
+                except json.JSONDecodeError as e:
+                    logger.error(f"Error decoding JSON message: {e}")
+                except Exception as e:
+                    logger.error(f"Error processing message: {e}")
+                    
+        except websockets.exceptions.ConnectionClosedOK:
+            logger.info("Binance WebSocket connection closed normally.")
+        except websockets.exceptions.ConnectionClosedError as e:
+            logger.warning(f"Binance WebSocket connection closed with error: {e}")
             self.is_running = False
+            await self.connect()  # Intentar reconectar
+        except Exception as e:
+            logger.error(f"Unexpected error in listen_messages: {e}")
+            self.is_running = False
+            await self.connect()  # Intentar reconectar
     
     async def subscribe_ticker(self, symbol: str):
         """Suscribirse a ticker de un símbolo"""
         stream = f"{symbol.lower()}@ticker"
         if stream not in self.subscriptions:
             self.subscriptions.append(stream)
-            await self.send_subscription()
+            if self.websocket and self.is_running:
+                await self.send_subscription()
     
     async def subscribe_kline(self, symbol: str, interval: str = "1m"):
         """Suscribirse a klines/candlesticks"""
         stream = f"{symbol.lower()}@kline_{interval}"
         if stream not in self.subscriptions:
             self.subscriptions.append(stream)
-            await self.send_subscription()
+            if self.websocket and self.is_running:
+                await self.send_subscription()
     
     async def subscribe_orderbook(self, symbol: str, levels: int = 20):
         """Suscribirse a orderbook"""
         stream = f"{symbol.lower()}@depth{levels}"
         if stream not in self.subscriptions:
             self.subscriptions.append(stream)
-            await self.send_subscription()
+            if self.websocket and self.is_running:
+                await self.send_subscription()
     
     async def send_subscription(self):
-        """Envía la suscripción al WebSocket"""
+        """Envía la suscripción al WebSocket con manejo de errores"""
         if self.websocket and self.subscriptions:
-            subscription_message = {
-                "method": "SUBSCRIBE",
-                "params": self.subscriptions,
-                "id": 1
-            }
-            await self.websocket.send(json.dumps(subscription_message))
-            logger.info(f"Subscribed to {len(self.subscriptions)} streams")
+            try:
+                subscription_message = {
+                    "method": "SUBSCRIBE",
+                    "params": self.subscriptions,
+                    "id": 1
+                }
+                await self.websocket.send(json.dumps(subscription_message))
+                logger.info(f"Subscribed to {len(self.subscriptions)} streams")
+            except Exception as e:
+                logger.error(f"Error sending subscription: {e}")
     
     async def get_24hr_ticker_stats(self) -> Dict:
         """Obtiene estadísticas de 24hr via REST API"""
         url = "https://api.binance.com/api/v3/ticker/24hr"
         
         try:
-            async with aiohttp.ClientSession() as session:
+            async with ClientSession() as session:
                 async with session.get(url) as response:
                     if response.status == 200:
                         return await response.json()
@@ -96,6 +157,10 @@ class BinanceWebSocketClient:
     async def close(self):
         """Cierra la conexión WebSocket"""
         self.is_running = False
+        
+        if self._listen_task and not self._listen_task.done():
+            self._listen_task.cancel()
+            
         if self.websocket:
             await self.websocket.close()
             logger.info("Binance WebSocket connection closed")
@@ -106,25 +171,31 @@ class BinanceDataFeeder:
         self.api_manager = api_manager  # ConnectionManager del API server
         self.binance_client = BinanceWebSocketClient(self.handle_binance_data)
         self.symbols = [
-            "BTCUSDT", "ETHUSDT", "ADAUSDT", "DOTUSDT", "LINKUSDT",
-            "BNBUSDT", "XRPUSDT", "LTCUSDT", "SOLUSDT", "AVAXUSDT"
+            "BTCUSDT", "ETHUSDT"  # Empezar con solo 2 símbolos
         ]
+        self._running = False
         
     async def start(self):
         """Inicia el feed de datos de Binance"""
+        self._running = True
         await self.binance_client.connect()
+        
+        # Esperar un poco para asegurar la conexión
+        await asyncio.sleep(1)
         
         # Suscribirse a todos los símbolos
         for symbol in self.symbols:
             await self.binance_client.subscribe_ticker(symbol)
-            await self.binance_client.subscribe_kline(symbol, "1m")
-            await self.binance_client.subscribe_orderbook(symbol, 10)
+            await asyncio.sleep(0.1)  # Pequeño delay entre suscripciones
         
         logger.info(f"Started Binance data feed for {len(self.symbols)} symbols")
     
     async def handle_binance_data(self, data: Dict):
         """Procesa datos de Binance y los envía al frontend"""
         try:
+            if not self._running:
+                return
+                
             if 'e' in data:  # Event type
                 event_type = data['e']
                 
@@ -143,7 +214,9 @@ class BinanceDataFeeder:
                         }
                     }
                     
-                    await self.api_manager.broadcast_json(market_data)
+                    # Usar el método correcto: broadcast
+                    await self.api_manager.broadcast(market_data)
+                    logger.debug(f"Broadcasted market data for {data['s']}")
                 
                 elif event_type == 'kline':
                     # Datos de candlesticks
@@ -163,7 +236,7 @@ class BinanceDataFeeder:
                             }
                         }
                         
-                        await self.api_manager.broadcast_json(candle_data)
+                        await self.api_manager.broadcast(candle_data)
                 
                 elif event_type == 'depthUpdate':
                     # Datos de orderbook
@@ -177,13 +250,14 @@ class BinanceDataFeeder:
                         }
                     }
                     
-                    await self.api_manager.broadcast_json(orderbook_data)
+                    await self.api_manager.broadcast(orderbook_data)
                     
         except Exception as e:
-            logger.error(f"Error processing Binance data: {e}")
+            logger.error(f"Error processing Binance data: {e}", exc_info=True)
     
     async def stop(self):
         """Detiene el feed de datos"""
+        self._running = False
         await self.binance_client.close()
 
 # Función para integrar con el API server existente

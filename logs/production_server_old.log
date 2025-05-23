@@ -1,0 +1,421 @@
+2025-05-22 22:48:13 - ProductionServer - INFO - ================================================================================
+2025-05-22 22:48:13 - ProductionServer - INFO - ================================================================================
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 3 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 4 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 5 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 6 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 7 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 8 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 9 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 10 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 11 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 12 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 13 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 14 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 15 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 16 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 17 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 18 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 19 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 20 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 21 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 22 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 23 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 24 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 25 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 26 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 27 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 28 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 29 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Subscribed to 30 streams
+2025-05-22 22:48:14 - BinanceWebSocket - INFO - Started Binance data feed for 10 symbols
+2025-05-22 22:48:14 - ProductionServer - INFO - ================================================================================
+2025-05-22 22:48:14 - ProductionServer - INFO - Shutting down production server...
+2025-05-22 22:48:24 - BinanceWebSocket - INFO - Binance WebSocket connection closed
+2025-05-22 22:48:24 - ProductionServer - INFO - Server shutdown complete
+2025-05-22 22:48:24 - BinanceWebSocket - ERROR - Error listening to messages: sent 1000 (OK); then received 1008 (policy violation) Too many requests
+2025-05-23 06:13:34 - ProductionServer - INFO - ================================================================================
+2025-05-23 06:13:34 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 06:13:34 - ProductionServer - INFO - ================================================================================
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 3 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 4 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 5 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 6 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 7 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 8 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 9 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 10 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 11 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 12 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 13 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 14 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 15 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 16 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 17 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 18 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 19 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 20 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 21 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 22 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 23 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 24 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 25 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 26 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 27 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 28 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 29 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Subscribed to 30 streams
+2025-05-23 06:13:35 - BinanceWebSocket - INFO - Started Binance data feed for 10 symbols
+2025-05-23 06:13:35 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 06:13:35 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 06:13:35 - ProductionServer - INFO - ================================================================================
+2025-05-23 06:13:42 - BinanceWebSocket - ERROR - Error listening to messages: received 1008 (policy violation) Too many requests; then sent 1008 (policy violation) Too many requests
+2025-05-23 06:14:52 - ProductionServer - INFO - ================================================================================
+2025-05-23 06:14:52 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 06:14:52 - ProductionServer - INFO - ================================================================================
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 3 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 4 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 5 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 6 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 7 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 8 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 9 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 10 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 11 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 12 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 13 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 14 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 15 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 16 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 17 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 18 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 19 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 20 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 21 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 22 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 23 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 24 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 25 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 26 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 27 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 28 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 29 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Subscribed to 30 streams
+2025-05-23 06:14:54 - BinanceWebSocket - INFO - Started Binance data feed for 10 symbols
+2025-05-23 06:14:54 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 06:14:54 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 06:14:54 - ProductionServer - INFO - ================================================================================
+2025-05-23 06:14:54 - ProductionServer - INFO - Shutting down production server...
+2025-05-23 06:14:58 - ProductionServer - INFO - WebSocket connected: 20993b9c-11d2-41f3-8f21-eca4bbab0194 | Total: 1
+2025-05-23 06:15:01 - BinanceWebSocket - INFO - Binance WebSocket connection closed
+2025-05-23 06:15:01 - ProductionServer - INFO - Server shutdown complete
+2025-05-23 06:15:01 - BinanceWebSocket - ERROR - Error listening to messages: sent 1000 (OK); then received 1008 (policy violation) Too many requests
+2025-05-23 06:15:48 - ProductionServer - INFO - Client 20993b9c-11d2-41f3-8f21-eca4bbab0194 disconnected normally
+2025-05-23 06:15:48 - ProductionServer - INFO - WebSocket disconnected: 20993b9c-11d2-41f3-8f21-eca4bbab0194 | Total: 0
+2025-05-23 10:10:27 - ProductionServer - INFO - WebSocket connected: 60c9cb93-a947-448e-81c4-70b1ed089c6a | Total: 1
+2025-05-23 10:11:17 - ProductionServer - INFO - Client 60c9cb93-a947-448e-81c4-70b1ed089c6a disconnected normally
+2025-05-23 10:11:17 - ProductionServer - INFO - WebSocket disconnected: 60c9cb93-a947-448e-81c4-70b1ed089c6a | Total: 0
+2025-05-23 10:13:27 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:13:27 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 10:13:27 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 3 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 4 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 5 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 6 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 7 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 8 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 9 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 10 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 11 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 12 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 13 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 14 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 15 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 16 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 17 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 18 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 19 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 20 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 21 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 22 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 23 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 24 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 25 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 26 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 27 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 28 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 29 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Subscribed to 30 streams
+2025-05-23 10:13:29 - BinanceWebSocket - INFO - Started Binance data feed for 10 symbols
+2025-05-23 10:13:29 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 10:13:29 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 10:13:29 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:13:29 - ProductionServer - INFO - Shutting down production server...
+2025-05-23 10:13:39 - BinanceWebSocket - ERROR - Error listening to messages: sent 1000 (OK); then received 1008 (policy violation) Too many requests
+2025-05-23 10:13:39 - BinanceWebSocket - INFO - Binance WebSocket connection closed
+2025-05-23 10:13:39 - ProductionServer - INFO - Server shutdown complete
+2025-05-23 10:14:26 - ProductionServer - INFO - WebSocket connected: 81397e35-44d4-4ad5-b707-08800e88a786 | Total: 1
+2025-05-23 10:14:26 - ProductionServer - INFO - Client 81397e35-44d4-4ad5-b707-08800e88a786 disconnected normally
+2025-05-23 10:14:26 - ProductionServer - INFO - WebSocket disconnected: 81397e35-44d4-4ad5-b707-08800e88a786 | Total: 0
+2025-05-23 10:14:26 - ProductionServer - INFO - WebSocket connected: 7bfdcc73-dfa9-48eb-bfd6-715fd6f6dab7 | Total: 1
+2025-05-23 10:14:26 - asyncio - ERROR - Exception in callback _ProactorBasePipeTransport._call_connection_lost()
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost()>
+Traceback (most recent call last):
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\asyncio\events.py", line 89, in _run
+    self._context.run(self._callback, *self._args)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+ConnectionResetError: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2025-05-23 10:14:27 - ProductionServer - INFO - Client 7bfdcc73-dfa9-48eb-bfd6-715fd6f6dab7 disconnected normally
+2025-05-23 10:14:27 - ProductionServer - INFO - WebSocket disconnected: 7bfdcc73-dfa9-48eb-bfd6-715fd6f6dab7 | Total: 0
+2025-05-23 10:14:27 - ProductionServer - INFO - WebSocket connected: 2bee11fa-a878-45ca-ab80-087061637138 | Total: 1
+2025-05-23 10:15:17 - ProductionServer - INFO - Client 2bee11fa-a878-45ca-ab80-087061637138 disconnected normally
+2025-05-23 10:15:17 - ProductionServer - INFO - WebSocket disconnected: 2bee11fa-a878-45ca-ab80-087061637138 | Total: 0
+2025-05-23 10:15:49 - ProductionServer - INFO - WebSocket connected: a78940f9-5401-4e04-b8c3-130ae636bfe7 | Total: 1
+2025-05-23 10:16:39 - ProductionServer - INFO - Client a78940f9-5401-4e04-b8c3-130ae636bfe7 disconnected normally
+2025-05-23 10:16:39 - ProductionServer - INFO - WebSocket disconnected: a78940f9-5401-4e04-b8c3-130ae636bfe7 | Total: 0
+2025-05-23 10:19:05 - ProductionServer - INFO - WebSocket connected: 1cd0f0f8-ed4f-409a-add2-c24b11582bd5 | Total: 1
+2025-05-23 10:19:55 - ProductionServer - INFO - Client 1cd0f0f8-ed4f-409a-add2-c24b11582bd5 disconnected normally
+2025-05-23 10:19:55 - ProductionServer - INFO - WebSocket disconnected: 1cd0f0f8-ed4f-409a-add2-c24b11582bd5 | Total: 0
+2025-05-23 10:26:46 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:26:46 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 10:26:46 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 3 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 4 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 5 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 6 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 7 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 8 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 9 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 10 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 11 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 12 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 13 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 14 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 15 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 16 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 17 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 18 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 19 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 20 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 21 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 22 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 23 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 24 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 25 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 26 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 27 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 28 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 29 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Subscribed to 30 streams
+2025-05-23 10:26:47 - BinanceWebSocket - INFO - Started Binance data feed for 10 symbols
+2025-05-23 10:26:47 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 10:26:47 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 10:26:47 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:26:55 - BinanceWebSocket - ERROR - Error listening to messages: received 1008 (policy violation) Too many requests; then sent 1008 (policy violation) Too many requests
+2025-05-23 10:26:59 - ProductionServer - INFO - WebSocket connected: aac301be-347c-478e-a0eb-92557fdf5bb0 | Total: 1
+2025-05-23 10:27:49 - ProductionServer - INFO - Client aac301be-347c-478e-a0eb-92557fdf5bb0 disconnected normally
+2025-05-23 10:27:49 - ProductionServer - INFO - WebSocket disconnected: aac301be-347c-478e-a0eb-92557fdf5bb0 | Total: 0
+2025-05-23 10:27:49 - ProductionServer - WARNING - Failed to send to aac301be-347c-478e-a0eb-92557fdf5bb0: 
+2025-05-23 10:27:49 - ProductionServer - ERROR - Error in system monitoring: dictionary changed size during iteration
+2025-05-23 10:30:13 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:30:13 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 10:30:13 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:30:13 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/10)
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Subscribed to 3 streams
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Subscribed to 4 streams
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Subscribed to 5 streams
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Subscribed to 6 streams
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Subscribed to 7 streams
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Subscribed to 8 streams
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Subscribed to 9 streams
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Subscribed to 10 streams
+2025-05-23 10:30:14 - BinanceWebSocket - INFO - Started Binance data feed for 10 symbols
+2025-05-23 10:30:14 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 10:30:14 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 10:30:14 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:30:22 - BinanceWebSocket - ERROR - Error listening to messages: received 1008 (policy violation) Too many requests; then sent 1008 (policy violation) Too many requests. Attempting to reconnect...
+2025-05-23 10:30:22 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/10)
+2025-05-23 10:30:24 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 10:30:58 - ProductionServer - INFO - WebSocket connected: d23e0c9e-378d-4b40-aa9d-673e2c6e411a | Total: 1
+2025-05-23 10:30:58 - ProductionServer - INFO - Client d23e0c9e-378d-4b40-aa9d-673e2c6e411a disconnected normally
+2025-05-23 10:30:58 - ProductionServer - INFO - WebSocket disconnected: d23e0c9e-378d-4b40-aa9d-673e2c6e411a | Total: 0
+2025-05-23 10:30:58 - ProductionServer - INFO - WebSocket connected: db3a1c8a-dffe-46d8-be72-4881be5e6883 | Total: 1
+2025-05-23 10:31:48 - ProductionServer - INFO - Client db3a1c8a-dffe-46d8-be72-4881be5e6883 disconnected normally
+2025-05-23 10:31:48 - ProductionServer - INFO - WebSocket disconnected: db3a1c8a-dffe-46d8-be72-4881be5e6883 | Total: 0
+2025-05-23 10:34:21 - ProductionServer - INFO - WebSocket connected: 4409e36f-6831-4cc3-8760-894cf4db72ae | Total: 1
+2025-05-23 10:34:21 - ProductionServer - WARNING - Heartbeat failed for 4409e36f-6831-4cc3-8760-894cf4db72ae: 
+2025-05-23 10:34:21 - ProductionServer - INFO - WebSocket disconnected: 4409e36f-6831-4cc3-8760-894cf4db72ae | Total: 0
+2025-05-23 10:34:21 - ProductionServer - ERROR - Error sending message to 4409e36f-6831-4cc3-8760-894cf4db72ae: 
+2025-05-23 10:34:21 - ProductionServer - INFO - WebSocket disconnected: 4409e36f-6831-4cc3-8760-894cf4db72ae | Total: 0
+2025-05-23 10:34:21 - ProductionServer - ERROR - WebSocket error for 4409e36f-6831-4cc3-8760-894cf4db72ae: WebSocket is not connected. Need to call "accept" first.
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\production_server_clean.py", line 561, in websocket_endpoint
+    data = await websocket.receive_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zamor\Bot_Arbitraje_Triangular_v2_CLINE\.venv\Lib\site-packages\starlette\websockets.py", line 117, in receive_text
+    raise RuntimeError('WebSocket is not connected. Need to call "accept" first.')
+RuntimeError: WebSocket is not connected. Need to call "accept" first.
+
+2025-05-23 10:34:21 - ProductionServer - INFO - WebSocket disconnected: 4409e36f-6831-4cc3-8760-894cf4db72ae | Total: 0
+2025-05-23 10:34:21 - ProductionServer - INFO - WebSocket connected: 17336117-ebb5-48d5-8bce-bfd3af36770f | Total: 1
+2025-05-23 10:35:11 - ProductionServer - INFO - Client 17336117-ebb5-48d5-8bce-bfd3af36770f disconnected normally
+2025-05-23 10:35:11 - ProductionServer - INFO - WebSocket disconnected: 17336117-ebb5-48d5-8bce-bfd3af36770f | Total: 0
+2025-05-23 10:35:20 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:35:20 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 10:35:20 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:35:20 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/10)
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Subscribed to 3 streams
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Subscribed to 4 streams
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Subscribed to 5 streams
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Subscribed to 6 streams
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Subscribed to 7 streams
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Subscribed to 8 streams
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Subscribed to 9 streams
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Subscribed to 10 streams
+2025-05-23 10:35:22 - BinanceWebSocket - INFO - Started Binance data feed for 10 symbols
+2025-05-23 10:35:22 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 10:35:22 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 10:35:22 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:35:22 - ProductionServer - INFO - Shutting down production server...
+2025-05-23 10:35:23 - ProductionServer - INFO - WebSocket connected: 3cf64daa-7da6-4296-8eee-d2732687aed6 | Total: 1
+2025-05-23 10:35:31 - BinanceWebSocket - ERROR - Error listening to messages: sent 1000 (OK); then received 1008 (policy violation) Too many requests. Attempting to reconnect...
+2025-05-23 10:35:31 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/10)
+2025-05-23 10:35:31 - BinanceWebSocket - INFO - Binance WebSocket connection closed
+2025-05-23 10:35:31 - ProductionServer - INFO - Server shutdown complete
+2025-05-23 10:40:02 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:40:02 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 10:40:02 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:40:02 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/10)
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Subscribed to 3 streams
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Subscribed to 4 streams
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Subscribed to 5 streams
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Subscribed to 6 streams
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Subscribed to 7 streams
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Subscribed to 8 streams
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Subscribed to 9 streams
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Subscribed to 10 streams
+2025-05-23 10:40:04 - BinanceWebSocket - INFO - Started Binance data feed for 10 symbols
+2025-05-23 10:40:04 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 10:40:04 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 10:40:04 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:40:10 - ProductionServer - INFO - WebSocket connected: 17f2a9f8-9ed8-480c-8523-67a662eaab90 | Total: 1
+2025-05-23 10:40:13 - BinanceWebSocket - ERROR - Error listening to messages: received 1008 (policy violation) Too many requests; then sent 1008 (policy violation) Too many requests. Attempting to reconnect...
+2025-05-23 10:40:13 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/10)
+2025-05-23 10:40:15 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 10:41:00 - ProductionServer - INFO - Client 17f2a9f8-9ed8-480c-8523-67a662eaab90 disconnected normally
+2025-05-23 10:41:00 - ProductionServer - INFO - WebSocket disconnected: 17f2a9f8-9ed8-480c-8523-67a662eaab90 | Total: 0
+2025-05-23 10:44:10 - ProductionServer - INFO - WebSocket connected: 60fc0cc9-7a64-4f60-a4ce-0443f8b39309 | Total: 1
+2025-05-23 10:44:10 - ProductionServer - INFO - Client 60fc0cc9-7a64-4f60-a4ce-0443f8b39309 disconnected normally
+2025-05-23 10:44:10 - ProductionServer - INFO - WebSocket disconnected: 60fc0cc9-7a64-4f60-a4ce-0443f8b39309 | Total: 0
+2025-05-23 10:46:21 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:46:21 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 10:46:21 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:46:21 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/10)
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Subscribed to 3 streams
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Subscribed to 4 streams
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Subscribed to 5 streams
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Subscribed to 6 streams
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Subscribed to 7 streams
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Subscribed to 8 streams
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Subscribed to 9 streams
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Subscribed to 10 streams
+2025-05-23 10:46:22 - BinanceWebSocket - INFO - Started Binance data feed for 10 symbols
+2025-05-23 10:46:22 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 10:46:22 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 10:46:22 - ProductionServer - INFO - ================================================================================
+2025-05-23 10:46:33 - BinanceWebSocket - ERROR - Error listening to messages: received 1008 (policy violation) Too many requests; then sent 1008 (policy violation) Too many requests. Attempting to reconnect...
+2025-05-23 10:46:33 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/10)
+2025-05-23 10:46:34 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 11:06:42 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:06:42 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 11:06:42 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:06:42 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/10)
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Subscribed to 3 streams
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Subscribed to 4 streams
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Subscribed to 5 streams
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Subscribed to 6 streams
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Subscribed to 7 streams
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Subscribed to 8 streams
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Subscribed to 9 streams
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Subscribed to 10 streams
+2025-05-23 11:06:43 - BinanceWebSocket - INFO - Started Binance data feed for 10 symbols
+2025-05-23 11:06:43 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 11:06:43 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 11:06:43 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:06:53 - BinanceWebSocket - ERROR - Error listening to messages: received 1008 (policy violation) Too many requests; then sent 1008 (policy violation) Too many requests. Attempting to reconnect...
+2025-05-23 11:06:53 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/10)
+2025-05-23 11:06:54 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 11:12:42 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:12:42 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 11:12:42 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:12:42 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/20)
+2025-05-23 11:12:44 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 11:12:44 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 11:12:44 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 11:12:44 - BinanceWebSocket - INFO - Started Binance data feed for 2 symbols
+2025-05-23 11:12:44 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 11:12:44 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 11:12:44 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:15:41 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:15:41 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 11:15:41 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:15:41 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/20)
+2025-05-23 11:15:43 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 11:15:43 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 11:15:43 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 11:15:43 - BinanceWebSocket - INFO - Started Binance data feed for 2 symbols
+2025-05-23 11:15:43 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 11:15:43 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 11:15:43 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:38:51 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:38:51 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 11:38:51 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:38:51 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/30)
+2025-05-23 11:38:52 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 11:38:53 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 11:38:53 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 11:38:53 - BinanceWebSocket - INFO - Started Binance data feed for 2 symbols
+2025-05-23 11:38:53 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 11:38:53 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 11:38:53 - ProductionServer - INFO - ================================================================================
+2025-05-23 11:38:53 - ProductionServer - INFO - Shutting down production server...
+2025-05-23 11:39:03 - ProductionServer - INFO - WebSocket connected: 2c3dc10f-94b2-4a98-94d1-7092e33cead3 | Total: 1
+2025-05-23 11:39:03 - BinanceWebSocket - INFO - Binance WebSocket connection closed
+2025-05-23 11:39:03 - ProductionServer - INFO - Server shutdown complete
+2025-05-23 11:39:53 - ProductionServer - INFO - Client 2c3dc10f-94b2-4a98-94d1-7092e33cead3 disconnected normally
+2025-05-23 11:39:53 - ProductionServer - INFO - WebSocket disconnected: 2c3dc10f-94b2-4a98-94d1-7092e33cead3 | Total: 0
+2025-05-23 11:39:53 - ProductionServer - WARNING - Failed to send to 2c3dc10f-94b2-4a98-94d1-7092e33cead3: 
+2025-05-23 11:39:53 - ProductionServer - ERROR - Error in system monitoring: dictionary changed size during iteration

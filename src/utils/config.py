@@ -7,7 +7,7 @@ import dotenv
 from dotenv import load_dotenv
 from pydantic import Field
 from pydantic_settings import BaseSettings
-from supabase import Client, create_client
+from supabase.client import Client, create_client
 
 # Cargar variables de entorno desde .env
 env_file = Path(__file__).parents[2] / ".env"
@@ -37,7 +37,7 @@ class Settings:
         
         # API Server
         self.api_host = os.getenv("API_HOST", "localhost")
-        self.api_port = int(os.getenv("API_PORT", 8000))
+        self.api_port = int(os.getenv("API_PORT", 8001))
         self.api_server_url = os.getenv("API_SERVER_URL", f"http://{self.api_host}:{self.api_port}")
         
         # Parámetros del bot
@@ -54,7 +54,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def get_supabase_client() -> Client:
+def get_supabase_client() -> Optional[Client]:
     """
     Obtiene un cliente de Supabase configurado
     
@@ -62,9 +62,13 @@ def get_supabase_client() -> Client:
         Client: Cliente de Supabase
     """
     try:
-        url = os.environ.get("SUPABASE_URL")
-        key = os.environ.get("SUPABASE_KEY")
+        url = os.environ.get("SUPABASE_URL", "")
+        key = os.environ.get("SUPABASE_KEY", "")
         
+        if not url or not key:
+            logger.warning("SUPABASE_URL o SUPABASE_KEY no están configurados en las variables de entorno.")
+            return None
+
         client = create_client(url, key)
         return client
     except Exception as e:
@@ -191,7 +195,7 @@ def load_config(config_path: Optional[str] = None) -> Dict[str, Any]:
         "SUPABASE_KEY": os.getenv("SUPABASE_KEY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFsbWhsaG1pamZrY3ZtZGJpZHZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY4NDUyMjksImV4cCI6MjA2MjQyMTIyOX0.-Jma387OwDcnOnoiR0g8KJT6QussDmxj4ot363SuKbk"),
         "GEMINI_API_KEY": os.getenv("GEMINI_API_KEY", ""),
         "API_HOST": os.getenv("API_HOST", "localhost"),
-        "API_PORT": int(os.getenv("API_PORT", 8000)),
+        "API_PORT": int(os.getenv("API_PORT", 8001)),
         "CAPITAL_INICIAL": float(os.getenv("CAPITAL_INICIAL", 100.0)),
         "UMBRAL_RENTABILIDAD": float(os.getenv("UMBRAL_RENTABILIDAD", 0.5)),
         "INTERVALO_DETECCION": int(os.getenv("INTERVALO_DETECCION", 300)),

@@ -18,7 +18,7 @@ interface UseWebSocketOptions {
 }
 
 export function useWebSocket({
-  url = 'ws://localhost:8000/ws',
+  url = 'ws://localhost:8001/ws',
   reconnectInterval = 3000,
   maxReconnectAttempts = 10,
   onConnect,
@@ -191,6 +191,16 @@ export function useWebSocket({
           // Handle system metrics
           const metricsData = message.data as any
           console.log('📈 System metrics:', metricsData)
+          break
+        }
+
+        case 'heartbeat': {
+          // Respond to heartbeat immediately
+          wsRef.current?.send(JSON.stringify({
+            type: 'heartbeat_ack',
+            timestamp: Date.now()
+          }))
+          console.log('💓 Heartbeat acknowledged')
           break
         }
         

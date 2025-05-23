@@ -20,7 +20,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 # Importar módulos internos
-from binance_websocket import BinanceDataFeeder, is_bearish_signal, is_bullish_signal
+from src.binance_websocket1 import BinanceDataFeeder, is_bearish_signal, is_bullish_signal
 
 
 # ==================== CONFIGURACIÓN DE LOGGING ====================
@@ -421,7 +421,7 @@ app = FastAPI(
 # CORS Middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://localhost:3003"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -609,10 +609,17 @@ async def handle_websocket_message(client_id: str, message: dict):
     
     elif msg_type == "execute_order":
         try:
+            symbol = message.get("symbol")
+            side = message.get("side")
+            quantity = float(message.get("quantity", 0.001))
+
+            if not isinstance(symbol, str) or not isinstance(side, str):
+                raise ValueError("Symbol and side must be strings.")
+
             trade = await trading_engine.execute_order(
-                symbol=message.get("symbol"),
-                side=message.get("side"),
-                quantity=float(message.get("quantity", 0.001))
+                symbol=symbol,
+                side=side,
+                quantity=quantity
             )
             
             # Broadcast trade ejecutado
@@ -669,7 +676,7 @@ async def startup_event():
     global binance_feeder
     
     logger.info("=" * 80)
-    logger.info("🚀 PRODUCTION SERVER STARTING")
+    logger.info("[LAUNCH] PRODUCTION SERVER STARTING")
     logger.info("=" * 80)
     
     # Inicializar Binance feeder
@@ -681,15 +688,15 @@ async def startup_event():
         
         binance_feeder = ProductionBinanceFeeder(manager)
         await binance_feeder.start()
-        logger.info("✅ Binance data feed initialized")
+        logger.info("[OK] Binance data feed initialized")
     except Exception as e:
-        logger.error(f"❌ Failed to initialize Binance feed: {e}")
-        logger.info("⚠️  Running in degraded mode without live data")
+        logger.error(f"[ERROR] Failed to initialize Binance feed: {e}")
+        logger.info("[WARNING]  Running in degraded mode without live data")
     
     # Tarea de monitoreo del sistema
     asyncio.create_task(system_monitoring())
     
-    logger.info("✅ All systems initialized")
+    logger.info("[OK] All systems initialized")
     logger.info("=" * 80)
 
 @app.on_event("shutdown")
@@ -742,27 +749,27 @@ async def system_monitoring():
 def start_production_server():
     """Inicia el servidor de producción"""
     host = "127.0.0.1"
-    port = 8000
+    port = 8001 # Cambiado a 8001
     
     print("\n" + "="*80)
-    print("🚀 BOT ARBITRAJE PRODUCTION SERVER v3.0")
+    print("[LAUNCH] BOT ARBITRAJE PRODUCTION SERVER v3.0")
     print("="*80)
-    print(f"📡 API Server: http://{host}:{port}")
-    print(f"🌐 WebSocket: ws://{host}:{port}/ws")
+    print(f"[API] API Server: http://{host}:{port}")
+    print(f"[WEB] WebSocket: ws://{host}:{port}/ws")
     print("="*80)
-    print("✨ Features:")
-    print("   • Real-time Binance market data")
-    print("   • WebSocket with automatic heartbeat")
-    print("   • Robust reconnection handling")
-    print("   • Trading state management")
-    print("   • Paper trading simulation")
-    print("   • AI-powered signal generation")
-    print("   • Real-time portfolio tracking")
-    print("   • Comprehensive logging system")
+    print("[INFO] Features:")
+    print("   * Real-time Binance market data")
+    print("   * WebSocket with automatic heartbeat")
+    print("   * Robust reconnection handling")
+    print("   * Trading state management")
+    print("   * Paper trading simulation")
+    print("   * AI-powered signal generation")
+    print("   * Real-time portfolio tracking")
+    print("   * Comprehensive logging system")
     print("="*80)
-    print("📊 Monitoring:")
-    print(f"   • Logs: logs/production_server.log")
-    print(f"   • Health: http://{host}:{port}/api/health")
+    print("[STATS] Monitoring:")
+    print(f"   * Logs: logs/production_server.log")
+    print(f"   * Health: http://{host}:{port}/api/health")
     print("="*80)
     print("Press Ctrl+C to stop the server\n")
     

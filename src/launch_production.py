@@ -10,7 +10,7 @@ from pathlib import Path
 # Add parent directory to Python path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# Now import the production server
+# Now import the clean production server
 from src.production_server import start_production_server
 
 if __name__ == "__main__":

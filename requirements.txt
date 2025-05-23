@@ -1,207 +1,122 @@
-# Advanced Personal Trading Platform - Bot_Arbitraje2105
-# Complete dependencies for production-ready trading system
+# ========================================
+# BOT ARBITRAJE 2105 - OPTIMIZED REQUIREMENTS
+# ========================================
+# Based on FastAPI best practices and version compatibility
+# Python 3.9+ Required
 
 # ========================================
 # CORE FRAMEWORK & ASYNC
 # ========================================
-asyncio>=3.4.3
-websockets>=11.0.2
-aiohttp>=3.8.0
-aiofiles>=23.1.0
+# FastAPI with standard extras includes websockets
+fastapi[standard]>=0.112.0,<0.113.0
+websockets>=12.0,<13.0
+aiohttp>=3.9.0,<4.0.0
+aiofiles>=23.2.1,<24.0.0
 
 # ========================================
 # DATA PROCESSING & ANALYSIS
 # ========================================
-pandas>=2.0.0
-numpy>=1.24.0
-scipy>=1.11.0
+pandas>=2.1.4,<3.0.0
+numpy>=1.24.0,<2.0.0
+scipy>=1.11.0,<2.0.0
 
 # Technical Analysis
-ta-lib>=0.4.25
+ta>=0.11.0
 pandas-ta>=0.3.14b0
 
 # ========================================
 # AI & MACHINE LEARNING
 # ========================================
-google-generativeai>=0.3.0
-scikit-learn>=1.3.0
-tensorflow>=2.13.0  # Optional for advanced AI models
+google-generativeai>=0.3.0,<1.0.0
+scikit-learn>=1.3.0,<2.0.0
 
 # ========================================
 # TRADING & EXCHANGE APIS
 # ========================================
-ccxt>=4.0.0  # Unified exchange API
-python-binance>=1.0.19  # Binance specific client
+ccxt>=4.1.0,<5.0.0
+python-binance>=1.0.19,<2.0.0
 
 # ========================================
 # CONFIGURATION & VALIDATION
 # ========================================
-python-dotenv>=1.0.0
-pydantic>=2.0.0
-typing-extensions>=4.0.0
+python-dotenv>=1.0.0,<2.0.0
+pydantic>=2.5.0,<3.0.0
+typing-extensions>=4.9.0,<5.0.0
 
 # ========================================
 # LOGGING & MONITORING
 # ========================================
-structlog>=23.1.0
-psutil>=5.9.0  # System monitoring
+structlog>=23.2.0,<24.0.0
+psutil>=5.9.0,<6.0.0
 
 # ========================================
-# DATABASE & CACHING
+# DATABASE
 # ========================================
 # PostgreSQL (Production)
-asyncpg>=0.28.0
-sqlalchemy>=2.0.0
-alembic>=1.11.0
+asyncpg>=0.29.0,<1.0.0
+sqlalchemy>=2.0.0,<3.0.0
+alembic>=1.13.0,<2.0.0
 
 # SQLite (Development/Testing)
-aiosqlite>=0.19.0
+aiosqlite>=0.19.0,<1.0.0
 
 # Redis (Caching & Session)
-redis>=4.5.0
-aioredis>=2.0.0
+redis>=5.0.0,<6.0.0
 
 # ========================================
 # MESSAGING & NOTIFICATIONS
 # ========================================
 # Telegram
-python-telegram-bot>=20.4
-telegram>=0.0.1
+python-telegram-bot>=20.7,<21.0
 
 # Email
-aiosmtplib>=2.0.0
-jinja2>=3.1.0  # Email templates
+aiosmtplib>=3.0.0,<4.0.0
+jinja2>=3.1.0,<4.0.0
 
 # ========================================
 # WEB FRAMEWORK (Dashboard)
 # ========================================
-fastapi>=0.100.0
-uvicorn>=0.23.0
-python-multipart>=0.0.6
+uvicorn[standard]>=0.25.0,<1.0.0
+python-multipart>=0.0.6,<1.0.0
 
 # Authentication
-python-jose>=3.3.0
-passlib>=1.7.4
-bcrypt>=4.0.0
+python-jose[cryptography]>=3.3.0,<4.0.0
+passlib[bcrypt]>=1.7.4,<2.0.0
 
 # ========================================
 # VISUALIZATION & CHARTING
 # ========================================
-plotly>=5.15.0
-matplotlib>=3.7.0
-seaborn>=0.12.0
+plotly>=5.18.0,<6.0.0
+matplotlib>=3.8.0,<4.0.0
+seaborn>=0.13.0,<1.0.0
+streamlit>=1.29.0,<2.0.0
 
 # ========================================
 # HTTP CLIENTS & UTILITIES
 # ========================================
-requests>=2.31.0
-httpx>=0.24.0  # Modern async HTTP client
+requests>=2.31.0,<3.0.0
+httpx>=0.25.0,<1.0.0
 
 # ========================================
 # SECURITY & ENCRYPTION
 # ========================================
-cryptography>=41.0.0
-python-jose>=3.3.0
+cryptography>=41.0.0,<42.0.0
 
 # ========================================
-# TESTING FRAMEWORK
+# TESTING FRAMEWORK (Optional for production)
 # ========================================
-pytest>=7.4.0
-pytest-asyncio>=0.21.0
-pytest-mock>=3.11.0
-pytest-cov>=4.1.0
-pytest-xdist>=3.3.0  # Parallel testing
-factory-boy>=3.3.0  # Test data factories
+pytest>=7.4.0,<8.0.0
+pytest-asyncio>=0.21.0,<1.0.0
 
 # ========================================
-# DEVELOPMENT TOOLS
+# PRODUCTION ESSENTIALS
 # ========================================
-# Code formatting & linting
-black>=23.7.0
-pylint>=2.17.0
-flake8>=6.0.0
-isort>=5.12.0
-
-# Type checking
-mypy>=1.5.0
-types-requests>=2.31.0
-types-redis>=4.6.0
-
-# Security
-bandit>=1.7.5
-safety>=2.3.0
+gunicorn>=21.2.0,<22.0.0
 
 # ========================================
-# DEVELOPMENT ENVIRONMENT
+# MINIMUM REQUIREMENTS SUMMARY
 # ========================================
-ipython>=8.14.0
-jupyter>=1.0.0
-notebook>=6.5.0
-
-# Documentation
-sphinx>=7.0.0
-sphinx-rtd-theme>=1.3.0
-
-# ========================================
-# PERFORMANCE & PROFILING
-# ========================================
-memory-profiler>=0.61.0
-line-profiler>=4.1.0
-py-spy>=0.3.14
-
-# ========================================
-# DEPLOYMENT & CONTAINERIZATION
-# ========================================
-gunicorn>=21.0.0
-docker>=6.1.0
-
-# ========================================
-# VERSION COMPATIBILITY
-# ========================================
-# Ensure Python 3.9+ compatibility
-dataclasses;python_version<"3.7"  # Backport for older Python
-
-# ========================================
-# OPTIONAL ADVANCED FEATURES
-# ========================================
-# Machine Learning Pipeline
-mlflow>=2.5.0
-tensorboard>=2.13.0
-
-# Advanced Data Processing
-polars>=0.18.0  # Ultra-fast DataFrame library
-dask>=2023.7.0  # Parallel computing
-
-# Blockchain Integration (for DeFi)
-web3>=6.8.0
-eth-account>=0.9.0
-
-# Real-time Message Queues
-celery>=5.3.0
-kombu>=5.3.0
-
-# Advanced Monitoring
-prometheus-client>=0.17.0
-grafana-api>=1.0.3
-
-# ========================================
-# PRODUCTION REQUIREMENTS
-# ========================================
-# Process management
-supervisor>=4.2.0
-
-# Environment management
-python-decouple>=3.8
-
-# Health checks
-healthcheck>=1.3.3
-
-# Rate limiting
-slowapi>=0.1.9
-
-# ========================================
-# TOTAL PACKAGES: ~80 dependencies
-# Estimated installation size: ~2.5GB
-# Recommended Python version: 3.9+
-# Recommended RAM: 8GB minimum, 16GB recommended
+# Python: 3.9+
+# RAM: 4GB minimum, 8GB recommended
+# Disk: 2GB for dependencies
 # ========================================
