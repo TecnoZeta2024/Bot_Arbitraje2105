@@ -20,11 +20,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 # Importar módulos internos
-from src.binance_websocket1 import (
+from src.binance_websocket import (
     BinanceDataFeeder,
     is_bearish_signal,
     is_bullish_signal,
 )
+from src.infrastructure.monitoring.system_monitor import SystemMonitor, HealthStatus
+from src.domain.risk_management.advanced_risk_manager import AdvancedRiskManager, RiskParameters
 
 
 # ==================== CONFIGURACIÓN DE LOGGING ====================
@@ -64,6 +66,33 @@ def setup_logging():
     return logging.getLogger("ProductionServer")
 
 logger = setup_logging()
+
+# ==================== CUSTOM LOGGING HANDLER ====================
+class WebSocketLoggingHandler(logging.Handler):
+    """Custom logging handler to send logs to WebSocket clients."""
+    def __init__(self, manager: Any): # Use Any to avoid circular dependency with ConnectionManager
+        super().__init__()
+        self.manager = manager
+        self.setFormatter(logging.Formatter(
+            '%(asctime)s - %(levelname)s - %(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S'
+        ))
+
+    def emit(self, record: logging.LogRecord):
+        try:
+            message = self.format(record)
+            log_entry = {
+                "type": "system_alert", # Usar un tipo genérico para alertas del sistema
+                "level": record.levelname,
+                "message": message,
+                "component": record.name,
+                "timestamp": datetime.now().isoformat()
+            }
+            # Enviar solo si hay conexiones activas para evitar errores
+            if self.manager and self.manager.active_connections:
+                asyncio.create_task(self.manager.broadcast(log_entry))
+        except Exception as e:
+            print(f"Error in WebSocketLoggingHandler: {e}")
 
 # ==================== ENUMS Y CONSTANTES ====================
 class TradingState(str, Enum):
@@ -434,6 +463,8 @@ app.add_middleware(
 # Instancias globales
 manager = ConnectionManager()
 trading_engine = TradingEngine()
+system_monitor = SystemMonitor() # Instanciar SystemMonitor
+risk_manager = AdvancedRiskManager() # Instanciar AdvancedRiskManager
 binance_feeder: Optional[BinanceDataFeeder] = None
 
 # ==================== API ENDPOINTS ====================
@@ -683,6 +714,12 @@ async def startup_event():
     logger.info("[LAUNCH] PRODUCTION SERVER STARTING")
     logger.info("=" * 80)
     
+    # Añadir el handler de logging de WebSocket
+    websocket_log_handler = WebSocketLoggingHandler(manager)
+    websocket_log_handler.setLevel(logging.WARNING) # Enviar WARNING y ERROR al dashboard
+    logger.addHandler(websocket_log_handler)
+    logger.info("[OK] WebSocket logging handler initialized")
+
     # Inicializar Binance feeder
     try:
         # Crear feeder personalizado
@@ -723,11 +760,21 @@ async def shutdown_event():
 # ==================== MONITORING TASKS ====================
 async def system_monitoring():
     """Monitoreo continuo del sistema"""
+    # Iniciar el SystemMonitor si no está corriendo
+    if not system_monitor.is_running:
+        await system_monitor.start()
+
     while True:
         try:
             # Actualizar métricas del portfolio
             trading_engine.portfolio.timestamp = time.time()
             
+            # Obtener estado del SystemMonitor
+            system_status_data = system_monitor.get_system_status()
+            
+            # Obtener métricas del AdvancedRiskManager
+            risk_metrics_data = risk_manager.get_risk_metrics()
+
             # Broadcast métricas del sistema
             if len(manager.active_connections) > 0:
                 await manager.broadcast({
@@ -739,7 +786,9 @@ async def system_monitoring():
                         "daily_pnl": trading_engine.portfolio.dailyPnL,
                         "signals_count": len(trading_engine.signals),
                         "trades_count": len(trading_engine.trades),
-                        "timestamp": time.time()
+                        "timestamp": time.time(),
+                        "system_monitor_status": system_status_data, # Añadir datos del SystemMonitor
+                        "risk_metrics": risk_metrics_data # Añadir datos del AdvancedRiskManager
                     }
                 })
             
@@ -753,7 +802,7 @@ async def system_monitoring():
 def start_production_server():
     """Inicia el servidor de producción"""
     host = "127.0.0.1"
-    port = 8001 # Cambiado a 8001
+    port = 8501 # Cambiado a 8501
     
     print("\n" + "="*80)
     print("[LAUNCH] BOT ARBITRAJE PRODUCTION SERVER v3.0")
