@@ -17,7 +17,7 @@ import {
 
 // Import store and hooks
 import { useTradingStore } from '@/store'
-import { useWebSocket, useSymbolSubscription } from '@/hooks/useWebSocket'
+// TEMPORARILY DISABLED - import { useWebSocket, useSymbolSubscription } from '@/hooks/useWebSocket'
 
 // Import UI components
 import { ToastProvider } from '@/components/ui/toast'
@@ -31,7 +31,8 @@ import AnalyticsDashboard from '@/components/analytics/AnalyticsDashboard'
 // Navigation component
 const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const location = useLocation()
-  const isConnected = useTradingStore((state) => state.isConnected)
+  // Set as connected for demo mode
+  const isConnected = true // useTradingStore((state) => state.isConnected)
 
   const navigation = [
     { name: 'Trading Dashboard', href: '/', icon: BarChart3 },
@@ -73,17 +74,8 @@ const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
           {/* Connection status */}
           <div className="px-4 py-3 border-b border-gray-700">
             <div className="flex items-center space-x-2">
-              {isConnected ? (
-                <>
-                  <Wifi className="w-4 h-4 text-green-400" />
-                  <span className="text-sm text-green-400">Connected</span>
-                </>
-              ) : (
-                <>
-                  <WifiOff className="w-4 h-4 text-red-400" />
-                  <span className="text-sm text-red-400">Disconnected</span>
-                </>
-              )}
+              <Wifi className="w-4 h-4 text-green-400" />
+              <span className="text-sm text-green-400">Demo Mode</span>
             </div>
           </div>
 
@@ -114,8 +106,8 @@ const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
             <div className="flex items-center">
               <User className="w-8 h-8 text-gray-400" />
               <div className="ml-3">
-                <p className="text-sm font-medium text-white">Trader</p>
-                <p className="text-xs text-gray-400">Admin</p>
+                <p className="text-sm font-medium text-white">Demo User</p>
+                <p className="text-xs text-gray-400">Trading Platform</p>
               </div>
             </div>
           </div>
@@ -127,9 +119,14 @@ const Sidebar = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) 
 
 // Top bar component
 const TopBar = ({ onMenuClick }: { onMenuClick: () => void }) => {
-  const portfolio = useTradingStore((state) => state.portfolio)
-  const notifications = useTradingStore((state) => state.notifications)
-  const unreadCount = notifications.filter(n => !n.read).length
+  // Mock portfolio data for demo
+  const portfolio = {
+    totalValue: 1000.00,
+    dailyPnL: 23.45
+  }
+  
+  const notifications = [] // Mock empty notifications
+  const unreadCount = 0
 
   return (
     <div className="bg-white border-b border-gray-200 px-4 py-3">
@@ -143,7 +140,7 @@ const TopBar = ({ onMenuClick }: { onMenuClick: () => void }) => {
           </button>
           
           <div className="ml-4 lg:ml-0">
-            <h1 className="text-xl font-semibold text-gray-900">Trading Dashboard</h1>
+            <h1 className="text-xl font-semibold text-gray-900">Trading Dashboard - Demo</h1>
           </div>
         </div>
 
@@ -188,7 +185,7 @@ const LoadingScreen = () => (
   <div className="min-h-screen bg-gray-50 flex items-center justify-center">
     <div className="text-center">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-      <p className="text-gray-600">Initializing Trading System...</p>
+      <p className="text-gray-600">Initializing Trading System Demo...</p>
     </div>
   </div>
 )
@@ -198,27 +195,15 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
-  // Initialize WebSocket connection
-  useWebSocket({
-    onConnect: () => {
-      console.log('WebSocket connected')
-    },
-    onDisconnect: () => {
-      console.log('WebSocket disconnected')
-    },
-    onError: (error) => {
-      console.error('WebSocket error:', error)
-    },
-  })
-
-  // Subscribe to symbol updates
-  useSymbolSubscription()
+  // DISABLED WebSocket for demo mode
+  // useWebSocket({ ... })
+  // useSymbolSubscription()
 
   // Simulate loading
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 2000)
+    }, 1500) // Shorter loading time
     return () => clearTimeout(timer)
   }, [])
 

@@ -43,7 +43,9 @@ def verificar_modulo_ejecucion():
         from src.apis.binance_client import (
             binance_trade_client,  # Import the trade client instance
         )
-        from src.apis.binance_client import BinanceClient
+        from src.apis.binance_client import (
+            BinanceClient,
+        )
         from src.apis.supabase_client import SupabaseClient
         from src.utils.config import get_config_value  # Import get_config_value
         from src.utils.logger import get_logger

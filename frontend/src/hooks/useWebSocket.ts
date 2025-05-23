@@ -39,44 +39,158 @@ export function useWebSocket({
     addTrade,
     addSignal,
     addNotification,
+    updatePortfolio,
   } = useTradingStore()
 
   const handleMessage = useCallback((event: MessageEvent) => {
     try {
       const message: WebSocketMessage = JSON.parse(event.data)
       
+      // Log para debugging
+      console.log('WebSocket message received:', message.type, message)
+      
       switch (message.type) {
+        case 'connection_ack': {
+          console.log('✅ Connected to enhanced trading server')
+          addNotification({
+            type: 'success',
+            title: 'Connected',
+            message: 'Connected to enhanced trading server with real Binance data',
+          })
+          break
+        }
+        
         case 'market_data': {
           const { data } = message as MarketDataMessage
-          updateMarketData(data)
+          updateMarketData({
+            symbol: data.symbol,
+            price: data.price,
+            volume24h: data.volume24h,
+            changePercent24h: data.changePercent24h,
+            high24h: data.high24h || data.price,
+            low24h: data.low24h || data.price,
+            change24h: (data.changePercent24h / 100) * data.price,
+            timestamp: data.timestamp
+          })
           break
         }
         
         case 'trading_signal': {
           const { data } = message as TradingSignalMessage
-          addSignal(data)
+          addSignal({
+            id: data.id,
+            symbol: data.symbol,
+            action: data.action as 'BUY' | 'SELL',
+            price: data.price,
+            quantity: 0.001, // Default quantity
+            confidence: data.confidence,
+            strategy: data.strategy,
+            riskLevel: 'MEDIUM' as const,
+            timestamp: data.timestamp
+          })
+          
           addNotification({
             type: 'info',
             title: 'New Trading Signal',
-            message: `${data.action} ${data.symbol} at ${data.price} (${data.strategy})`,
+            message: `${data.action} ${data.symbol} at $${data.price.toFixed(2)} (${data.confidence}% confidence)`,
           })
           break
         }
         
         case 'position_update': {
           const { data } = message as PositionUpdateMessage
-          updatePosition(data.id, data)
+          updatePosition(data.id, {
+            id: data.id,
+            symbol: data.symbol,
+            side: data.side as 'LONG' | 'SHORT',
+            entryPrice: data.entryPrice,
+            currentPrice: data.currentPrice,
+            quantity: data.quantity,
+            unrealizedPnL: data.unrealizedPnL,
+            unrealizedPnLPercent: data.unrealizedPnLPercent,
+            realizedPnL: 0,
+            timestamp: data.timestamp
+          })
           break
         }
         
         case 'trade_executed': {
           const { data } = message as TradeExecutedMessage
-          addTrade(data)
+          addTrade({
+            id: data.id,
+            symbol: data.symbol,
+            side: data.side as 'BUY' | 'SELL',
+            price: data.price,
+            quantity: data.quantity,
+            fee: data.price * data.quantity * 0.001, // 0.1% fee
+            pnl: data.pnl,
+            pnlPercent: (data.pnl / (data.price * data.quantity)) * 100,
+            timestamp: data.timestamp,
+            strategy: data.strategy
+          })
+          
           addNotification({
             type: data.pnl >= 0 ? 'success' : 'error',
             title: 'Trade Executed',
-            message: `${data.side} ${data.quantity} ${data.symbol} at ${data.price}`,
+            message: `${data.side} ${data.quantity} ${data.symbol} at $${data.price} (P&L: ${data.pnl >= 0 ? '+' : ''}$${data.pnl.toFixed(2)})`,
           })
+          break
+        }
+        
+        case 'portfolio_update': {
+          const portfolioData = message.data as any
+          updatePortfolio({
+            totalValue: portfolioData.totalValue,
+            totalPnL: portfolioData.totalPnL,
+            totalPnLPercent: portfolioData.totalPnLPercent,
+            availableBalance: portfolioData.availableBalance,
+            dailyPnL: portfolioData.dailyPnL,
+            positions: portfolioData.positions || []
+          })
+          break
+        }
+        
+        case 'trading_status': {
+          const statusData = message.data as any
+          const isActive = statusData.status === 'ACTIVE'
+          addNotification({
+            type: isActive ? 'success' : 'warning',
+            title: 'Trading Status',
+            message: statusData.message,
+          })
+          break
+        }
+        
+        case 'orderbook_update': {
+          const orderbookData = message.data as any
+          updateOrderBook({
+            symbol: orderbookData.symbol,
+            bids: orderbookData.bids.map((bid: number[]) => ({
+              price: bid[0],
+              quantity: bid[1],
+              total: bid[0] * bid[1]
+            })),
+            asks: orderbookData.asks.map((ask: number[]) => ({
+              price: ask[0],
+              quantity: ask[1],
+              total: ask[0] * ask[1]
+            })),
+            timestamp: orderbookData.timestamp
+          })
+          break
+        }
+        
+        case 'kline_data': {
+          // Handle candlestick data for charts
+          const klineData = message.data as any
+          console.log('📊 Kline data received:', klineData.symbol, klineData.close)
+          break
+        }
+        
+        case 'system_metrics': {
+          // Handle system metrics
+          const metricsData = message.data as any
+          console.log('📈 System metrics:', metricsData)
           break
         }
         
@@ -101,7 +215,7 @@ export function useWebSocket({
         message: 'Failed to parse server message',
       })
     }
-  }, [updateMarketData, updateOrderBook, addPosition, updatePosition, addTrade, addSignal, addNotification])
+  }, [updateMarketData, updateOrderBook, addPosition, updatePosition, addTrade, addSignal, addNotification, updatePortfolio])
 
   const connect = useCallback(() => {
     if (wsRef.current?.readyState === WebSocket.OPEN) {
@@ -112,7 +226,7 @@ export function useWebSocket({
       wsRef.current = new WebSocket(url)
 
       wsRef.current.onopen = () => {
-        console.log('WebSocket connected')
+        console.log('🔗 WebSocket connected to enhanced server')
         setConnected(true)
         reconnectAttemptsRef.current = 0
         onConnect?.()
@@ -120,20 +234,20 @@ export function useWebSocket({
         // Subscribe to trading data
         wsRef.current?.send(JSON.stringify({
           type: 'subscribe',
-          channels: ['market_data', 'trading_signals', 'positions', 'trades']
+          channels: ['market_data', 'trading_signals', 'positions', 'trades', 'portfolio']
         }))
       }
 
       wsRef.current.onmessage = handleMessage
 
       wsRef.current.onclose = (event) => {
-        console.log('WebSocket disconnected:', event.code, event.reason)
+        console.log('🔌 WebSocket disconnected:', event.code, event.reason)
         setConnected(false)
         onDisconnect?.()
 
         if (!isManualCloseRef.current && reconnectAttemptsRef.current < maxReconnectAttempts) {
           reconnectTimeoutRef.current = setTimeout(() => {
-            console.log(`Reconnecting... (attempt ${reconnectAttemptsRef.current + 1}/${maxReconnectAttempts})`)
+            console.log(`🔄 Reconnecting... (attempt ${reconnectAttemptsRef.current + 1}/${maxReconnectAttempts})`)
             reconnectAttemptsRef.current++
             connect()
           }, reconnectInterval)
@@ -141,7 +255,7 @@ export function useWebSocket({
       }
 
       wsRef.current.onerror = (error) => {
-        console.error('WebSocket error:', error)
+        console.error('❌ WebSocket error:', error)
         onError?.(error)
         addNotification({
           type: 'error',
@@ -175,7 +289,7 @@ export function useWebSocket({
     if (wsRef.current?.readyState === WebSocket.OPEN) {
       wsRef.current.send(JSON.stringify(message))
     } else {
-      console.warn('WebSocket is not connected')
+      console.warn('⚠️ WebSocket is not connected')
       addNotification({
         type: 'warning',
         title: 'Connection Issue',
@@ -211,6 +325,13 @@ export function useWebSocket({
     })
   }, [sendMessage])
 
+  const controlTrading = useCallback((action: 'start' | 'pause' | 'stop') => {
+    sendMessage({
+      type: 'trading_control',
+      action,
+    })
+  }, [sendMessage])
+
   const updateTradingConfig = useCallback((config: object) => {
     sendMessage({
       type: 'update_config',
@@ -242,6 +363,7 @@ export function useWebSocket({
     subscribeToSymbol,
     unsubscribeFromSymbol,
     executeOrder,
+    controlTrading,
     updateTradingConfig,
     isConnected: wsRef.current?.readyState === WebSocket.OPEN,
   }
@@ -265,7 +387,7 @@ export function useOrderExecution() {
       addNotification({
         type: 'info',
         title: 'Order Placed',
-        message: `BUY ${quantity} ${symbol}${price ? ` at ${price}` : ' (Market)'}`,
+        message: `BUY ${quantity} ${symbol}${price ? ` at $${price}` : ' (Market)'}`,
       })
     },
     [executeOrder, addNotification]
@@ -284,7 +406,7 @@ export function useOrderExecution() {
       addNotification({
         type: 'info',
         title: 'Order Placed',
-        message: `SELL ${quantity} ${symbol}${price ? ` at ${price}` : ' (Market)'}`,
+        message: `SELL ${quantity} ${symbol}${price ? ` at $${price}` : ' (Market)'}`,
       })
     },
     [executeOrder, addNotification]
@@ -294,6 +416,46 @@ export function useOrderExecution() {
     placeBuyOrder,
     placeSellOrder,
     executeOrder,
+  }
+}
+
+// Hook for trading controls
+export function useTradingControls() {
+  const { controlTrading } = useWebSocket()
+  const { addNotification } = useTradingStore()
+
+  const startTrading = useCallback(() => {
+    controlTrading('start')
+    addNotification({
+      type: 'success',
+      title: 'Trading Started',
+      message: 'AI-powered trading system is now active',
+    })
+  }, [controlTrading, addNotification])
+
+  const pauseTrading = useCallback(() => {
+    controlTrading('pause')
+    addNotification({
+      type: 'warning',
+      title: 'Trading Paused',
+      message: 'Trading system has been paused',
+    })
+  }, [controlTrading, addNotification])
+
+  const stopTrading = useCallback(() => {
+    controlTrading('stop')
+    addNotification({
+      type: 'info',
+      title: 'Trading Stopped',
+      message: 'Trading system has been stopped',
+    })
+  }, [controlTrading, addNotification])
+
+  return {
+    startTrading,
+    pauseTrading,
+    stopTrading,
+    controlTrading,
   }
 }
 

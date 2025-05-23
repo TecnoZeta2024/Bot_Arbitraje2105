@@ -10,7 +10,13 @@ from typing import Any, Dict, List, Optional
 
 import requests
 import uvicorn
-from fastapi import BackgroundTasks, FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import (
+    BackgroundTasks,
+    FastAPI,
+    HTTPException,
+    WebSocket,
+    WebSocketDisconnect,
+)
 from pydantic import BaseModel, Field
 
 from src.apis.gemini_client import gemini_client  # Import Gemini client
@@ -456,5 +462,5 @@ async def websocket_endpoint(websocket: WebSocket):
 if __name__ == "__main__":
     # Permitir ejecución directa para pruebas
     # Necesitarás importar asyncio si no está ya importado globalmente para el time.sleep asíncrono
-    import asyncio # Asegurar que asyncio esté disponible en este scope si es necesario
+    import asyncio  # Asegurar que asyncio esté disponible en este scope si es necesario
     start_server()
