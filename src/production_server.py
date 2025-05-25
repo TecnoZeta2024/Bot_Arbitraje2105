@@ -454,10 +454,15 @@ app = FastAPI(
     version="3.0.0"
 )
 
-# CORS Middleware
+# CORS Middleware - Agregamos localhost:8501 para Streamlit
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://localhost:3003"],
+    allow_origins=[
+        "http://localhost:5173", 
+        "http://localhost:3000", 
+        "http://localhost:3003", 
+        "http://localhost:8501"  # Agregado para Streamlit
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -805,7 +810,7 @@ async def system_monitoring():
 def start_production_server():
     """Inicia el servidor de producción"""
     host = "127.0.0.1"
-    port = 8501 # Cambiado a 8501
+    port = 8001  # CORREGIDO: Puerto 8001 para backend API
     
     print("\n" + "="*80)
     print("[LAUNCH] BOT ARBITRAJE PRODUCTION SERVER v3.0")

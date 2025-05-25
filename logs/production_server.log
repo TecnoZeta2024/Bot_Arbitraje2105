@@ -79,3 +79,57 @@
 2025-05-23 16:13:38 - ProductionServer - INFO - Shutting down production server...
 2025-05-23 16:13:46 - BinanceWebSocket - INFO - Binance WebSocket connection closed
 2025-05-23 16:13:46 - ProductionServer - INFO - Server shutdown complete
+2025-05-23 21:42:25 - HealthChecker - INFO - Registered health check for system (interval: 60s)
+2025-05-23 21:42:25 - SystemMonitor - INFO - SystemMonitor initialized
+2025-05-23 21:42:25 - AdvancedRiskManager - INFO - AdvancedRiskManager initialized
+2025-05-23 21:42:25 - ProductionServer - INFO - ================================================================================
+2025-05-23 21:42:25 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 21:42:25 - ProductionServer - INFO - ================================================================================
+2025-05-23 21:42:25 - ProductionServer - INFO - [OK] WebSocket logging handler initialized
+2025-05-23 21:42:25 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/30)
+2025-05-23 21:42:30 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 21:42:31 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 21:42:31 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 21:42:31 - BinanceWebSocket - INFO - Started Binance data feed for 2 symbols
+2025-05-23 21:42:31 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 21:42:31 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 21:42:31 - ProductionServer - INFO - ================================================================================
+2025-05-23 21:42:31 - SystemMonitor - INFO - Starting system monitoring
+2025-05-23 21:49:10 - HealthChecker - INFO - Registered health check for system (interval: 60s)
+2025-05-23 21:49:10 - SystemMonitor - INFO - SystemMonitor initialized
+2025-05-23 21:49:10 - AdvancedRiskManager - INFO - AdvancedRiskManager initialized
+2025-05-23 21:49:10 - ProductionServer - INFO - ================================================================================
+2025-05-23 21:49:10 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 21:49:10 - ProductionServer - INFO - ================================================================================
+2025-05-23 21:49:10 - ProductionServer - INFO - [OK] WebSocket logging handler initialized
+2025-05-23 21:49:10 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/30)
+2025-05-23 21:49:12 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 21:49:13 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 21:49:13 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 21:49:13 - BinanceWebSocket - INFO - Started Binance data feed for 2 symbols
+2025-05-23 21:49:13 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 21:49:13 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 21:49:13 - ProductionServer - INFO - ================================================================================
+2025-05-23 21:49:13 - SystemMonitor - INFO - Starting system monitoring
+2025-05-23 21:49:14 - ProductionServer - INFO - Shutting down production server...
+2025-05-23 21:49:20 - BinanceWebSocket - INFO - Binance WebSocket connection closed
+2025-05-23 21:49:20 - ProductionServer - INFO - Server shutdown complete
+2025-05-23 22:52:24 - HealthChecker - INFO - Registered health check for system (interval: 60s)
+2025-05-23 22:52:24 - SystemMonitor - INFO - SystemMonitor initialized
+2025-05-23 22:52:24 - AdvancedRiskManager - INFO - AdvancedRiskManager initialized
+2025-05-23 22:52:24 - ProductionServer - INFO - ================================================================================
+2025-05-23 22:52:24 - ProductionServer - INFO - [LAUNCH] PRODUCTION SERVER STARTING
+2025-05-23 22:52:24 - ProductionServer - INFO - ================================================================================
+2025-05-23 22:52:24 - ProductionServer - INFO - [OK] WebSocket logging handler initialized
+2025-05-23 22:52:24 - BinanceWebSocket - INFO - Attempting to connect to Binance WebSocket (Attempt 1/30)
+2025-05-23 22:52:26 - BinanceWebSocket - INFO - Connected to Binance WebSocket
+2025-05-23 22:52:27 - BinanceWebSocket - INFO - Subscribed to 1 streams
+2025-05-23 22:52:27 - BinanceWebSocket - INFO - Subscribed to 2 streams
+2025-05-23 22:52:27 - BinanceWebSocket - INFO - Started Binance data feed for 2 symbols
+2025-05-23 22:52:27 - ProductionServer - INFO - [OK] Binance data feed initialized
+2025-05-23 22:52:27 - ProductionServer - INFO - [OK] All systems initialized
+2025-05-23 22:52:27 - ProductionServer - INFO - ================================================================================
+2025-05-23 22:52:27 - SystemMonitor - INFO - Starting system monitoring
+2025-05-23 22:52:28 - ProductionServer - INFO - Shutting down production server...
+2025-05-23 22:52:38 - BinanceWebSocket - INFO - Binance WebSocket connection closed
+2025-05-23 22:52:38 - ProductionServer - INFO - Server shutdown complete
