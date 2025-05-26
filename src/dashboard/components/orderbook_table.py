@@ -1,5 +1,6 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
+
 
 def orderbook_table(title, data, is_bids=True):
     st.subheader(title)

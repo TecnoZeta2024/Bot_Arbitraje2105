@@ -1,6 +1,8 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
+
 from src.dashboard.components.orderbook_table import orderbook_table
+
 
 def show_aggregated_orderbooks_page():
     st.title("Agregador de Orderbooks y Detección de Arbitraje")
