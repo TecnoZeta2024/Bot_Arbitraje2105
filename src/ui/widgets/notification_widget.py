@@ -1,9 +1,24 @@
 import sys
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QApplication, QPushButton, QHBoxLayout
+
 from PyQt5 import QtCore
-from PyQt5.QtCore import Qt, QTimer, QRect, QUrl, QCoreApplication # Añadir QCoreApplication para primaryScreen
-from PyQt5.QtGui import QColor, QPalette, QIcon
+from PyQt5.QtCore import (  # Añadir QCoreApplication para primaryScreen
+    QCoreApplication,
+    QRect,
+    Qt,
+    QTimer,
+    QUrl,
+)
+from PyQt5.QtGui import QColor, QIcon, QPalette
 from PyQt5.QtMultimedia import QSoundEffect
+from PyQt5.QtWidgets import (
+    QApplication,
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
+)
+
 
 class NotificationWidget(QWidget):
     def __init__(self, message, level='info', parent=None, timeout=3000, persistent=False, enable_sound=True):

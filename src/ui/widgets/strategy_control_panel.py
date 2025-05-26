@@ -1,15 +1,29 @@
+import random  # Para simular datos
 import sys
-import random # Para simular datos
-import sys
-import random # Para simular datos
-import numpy as np # Para simular datos de rendimiento
-from PyQt5.QtWidgets import (
-    QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QCheckBox, QScrollArea,
-    QListWidget, QListWidgetItem, QDialog, QFormLayout, QLineEdit, QPushButton,
-    QDialogButtonBox, QStackedWidget, QTextEdit # Importar QTextEdit
+
+import numpy as np  # Para simular datos de rendimiento
+from PyQt5.QtCore import QDateTime, Qt, QTimer  # Importar QDateTime para timestamps
+from PyQt5.QtWidgets import (  # Importar QTextEdit
+    QApplication,
+    QCheckBox,
+    QDialog,
+    QDialogButtonBox,
+    QFormLayout,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QListWidget,
+    QListWidgetItem,
+    QPushButton,
+    QScrollArea,
+    QStackedWidget,
+    QTextEdit,
+    QVBoxLayout,
+    QWidget,
 )
-from PyQt5.QtCore import Qt, QTimer, QDateTime # Importar QDateTime para timestamps
-from .chart_widget import ChartWidget # Importar ChartWidget
+
+from .chart_widget import ChartWidget  # Importar ChartWidget
+
 
 class StrategyControlPanel(QWidget):
     def __init__(self, parent=None):

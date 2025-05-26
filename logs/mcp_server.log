@@ -1,0 +1,95 @@
+2025-05-25 21:40:25,213 - mcp_server - INFO - Sistema de logging configurado.
+2025-05-25 21:40:25,213 - mcp_server.main - INFO - Iniciando la aplicación FastAPI.
+2025-05-25 21:40:29,325 - uvicorn.error - ERROR - Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje2105\venv\Lib\site-packages\redis\asyncio\connection.py", line 290, in connect
+    await self.retry.call_with_retry(
+        lambda: self._connect(), lambda error: self.disconnect()
+    )
+  File "C:\Users\zamor\Bot_Arbitraje2105\venv\Lib\site-packages\redis\asyncio\retry.py", line 59, in call_with_retry
+    return await do()
+           ^^^^^^^^^^
+  File "C:\Users\zamor\Bot_Arbitraje2105\venv\Lib\site-packages\redis\asyncio\connection.py", line 723, in _connect
+    reader, writer = await asyncio.open_connection(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **self._connection_arguments()
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\asyncio\streams.py", line 48, in open_connection
+    transport, _ = await loop.create_connection(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        lambda: protocol, host, port, **kwds)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\asyncio\base_events.py", line 1171, in create_connection
+    raise exceptions[0]
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\asyncio\base_events.py", line 1141, in create_connection
+    sock = await self._connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+        exceptions, addrinfo, laddr_infos)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\asyncio\base_events.py", line 1044, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\asyncio\proactor_events.py", line 726, in sock_connect
+    return await self._proactor.connect(sock, address)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\asyncio\windows_events.py", line 804, in _poll
+    value = callback(transferred, key, ov)
+  File "C:\Users\zamor\AppData\Local\Programs\Python\Python313\Lib\asyncio\windows_events.py", line 600, in finish_connect
+    ov.getresult()
+    ~~~~~~~~~~~~^^
+ConnectionRefusedError: [WinError 1225] El equipo remoto rechazó la conexión de red
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\zamor\Bot_Arbitraje2105\venv\Lib\site-packages\starlette\routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\zamor\Bot_Arbitraje2105\venv\Lib\site-packages\starlette\routing.py", line 569, in __aenter__
+    await self._router.startup()
+  File "C:\Users\zamor\Bot_Arbitraje2105\venv\Lib\site-packages\starlette\routing.py", line 670, in startup
+    await handler()
+  File "C:\Users\zamor\Bot_Arbitraje2105\src\mcp_server\main.py", line 49, in startup
+    await FastAPILimiter.init(r)
+  File "C:\Users\zamor\Bot_Arbitraje2105\venv\Lib\site-packages\fastapi_limiter\__init__.py", line 85, in init
+    cls.lua_sha = await redis.script_load(cls.lua_script)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zamor\Bot_Arbitraje2105\venv\Lib\site-packages\redis\asyncio\client.py", line 641, in execute_command
+    conn = self.connection or await pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\zamor\Bot_Arbitraje2105\venv\Lib\site-packages\redis\asyncio\connection.py", line 1100, in get_connection
+    await self.ensure_connection(connection)
+  File "C:\Users\zamor\Bot_Arbitraje2105\venv\Lib\site-packages\redis\asyncio\connection.py", line 1133, in ensure_connection
+    await connection.connect()
+  File "C:\Users\zamor\Bot_Arbitraje2105\venv\Lib\site-packages\redis\asyncio\connection.py", line 298, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 22 connecting to localhost:6379. El equipo remoto rechazó la conexión de red.
+
+2025-05-25 21:40:29,326 - uvicorn.error - ERROR - Application startup failed. Exiting.
+2025-05-25 21:45:31,941 - mcp_server - INFO - Sistema de logging configurado.
+2025-05-25 21:45:31,941 - mcp_server.main - INFO - Iniciando la aplicación FastAPI.
+2025-05-25 21:45:31,953 - mcp_server.main - INFO - FastAPILimiter inicializado.
+2025-05-25 21:45:31,954 - uvicorn.error - INFO - Application startup complete.
+2025-05-25 21:45:31,954 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-05-25 21:46:34,170 - mcp_server - INFO - Sistema de logging configurado.
+2025-05-25 21:46:34,170 - mcp_server.main - INFO - Iniciando la aplicación FastAPI.
+2025-05-25 21:46:34,179 - mcp_server.main - INFO - FastAPILimiter inicializado.
+2025-05-25 21:46:34,180 - uvicorn.error - INFO - Application startup complete.
+2025-05-25 21:46:34,180 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-05-25 21:47:55,761 - uvicorn.error - INFO - Shutting down
+2025-05-25 21:47:55,873 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-05-25 21:47:55,873 - uvicorn.error - INFO - Application shutdown complete.
+2025-05-25 21:47:55,873 - uvicorn.error - INFO - Finished server process [16912]
+2025-05-25 21:48:29,729 - mcp_server - INFO - Sistema de logging configurado.
+2025-05-25 21:48:29,729 - mcp_server.main - INFO - Iniciando la aplicación FastAPI.
+2025-05-25 21:48:29,737 - mcp_server.main - INFO - FastAPILimiter inicializado.
+2025-05-25 21:48:29,737 - uvicorn.error - INFO - Application startup complete.
+2025-05-25 21:48:29,737 - uvicorn.error - INFO - Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-05-25 21:48:59,718 - mcp_server.main - INFO - Solicitud HTTP GET /metrics procesada en 0.0009 segundos con estado 200
+2025-05-25 21:48:59,718 - uvicorn.access - INFO - 127.0.0.1:65419 - "GET /metrics HTTP/1.1" 200
+2025-05-25 21:48:59,751 - mcp_server.main - ERROR - Error HTTP 404 en GET /favicon.ico
+2025-05-25 21:48:59,751 - uvicorn.access - INFO - 127.0.0.1:65419 - "GET /favicon.ico HTTP/1.1" 404
+2025-05-25 22:04:25,294 - uvicorn.error - INFO - Shutting down
+2025-05-25 22:04:25,400 - uvicorn.error - INFO - Waiting for application shutdown.
+2025-05-25 22:04:25,400 - uvicorn.error - INFO - Application shutdown complete.
+2025-05-25 22:04:25,400 - uvicorn.error - INFO - Finished server process [29156]

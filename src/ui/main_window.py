@@ -1,13 +1,40 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLabel, QAction, QMenu, QMenuBar, QToolBar, QDockWidget, QTextEdit, QHBoxLayout, QLineEdit, QComboBox
+
 from PyQt5 import QtCore
-from PyQt5.QtGui import QIcon # Descomentado para usar íconos
-import resources.resources_rc as resources_rc # Importar el archivo de recursos compilado de forma absoluta
-from .widgets.chart_widget import ChartWidget # Importar ChartWidget
-from .widgets.opportunities_table import OpportunitiesTableView # Importar OpportunitiesTableView
-from .widgets.strategy_control_panel import StrategyControlPanel # Importar StrategyControlPanel
-from .widgets.notification_widget import NotificationWidget # Importar NotificationWidget
-from .widgets.notification_center import NotificationCenter # Importar NotificationCenter
+from PyQt5.QtGui import QIcon  # Descomentado para usar íconos
+from PyQt5.QtWidgets import (
+    QAction,
+    QApplication,
+    QComboBox,
+    QDockWidget,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QMainWindow,
+    QMenu,
+    QMenuBar,
+    QTextEdit,
+    QToolBar,
+    QVBoxLayout,
+    QWidget,
+)
+
+import resources.resources_rc as resources_rc  # Importar el archivo de recursos compilado de forma absoluta
+
+from .widgets.chart_widget import ChartWidget  # Importar ChartWidget
+from .widgets.notification_center import (
+    NotificationCenter,  # Importar NotificationCenter
+)
+from .widgets.notification_widget import (
+    NotificationWidget,  # Importar NotificationWidget
+)
+from .widgets.opportunities_table import (
+    OpportunitiesTableView,  # Importar OpportunitiesTableView
+)
+from .widgets.strategy_control_panel import (
+    StrategyControlPanel,  # Importar StrategyControlPanel
+)
+
 
 class MainWindow(QMainWindow):
     def __init__(self):

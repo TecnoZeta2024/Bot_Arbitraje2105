@@ -1,6 +1,15 @@
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QListWidget, QLabel, QWidget, QHBoxLayout, QPushButton
 from PyQt5 import QtCore
 from PyQt5.QtCore import QDateTime
+from PyQt5.QtWidgets import (
+    QDialog,
+    QHBoxLayout,
+    QLabel,
+    QListWidget,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
+)
+
 
 class NotificationCenter(QDialog):
     def __init__(self, parent=None):
@@ -49,8 +58,9 @@ class NotificationCenter(QDialog):
             self.notification_list_widget.addItem(notification)
 
 if __name__ == '__main__':
-    from PyQt5.QtWidgets import QApplication
     import sys
+
+    from PyQt5.QtWidgets import QApplication
 
     app = QApplication(sys.argv)
     center = NotificationCenter()

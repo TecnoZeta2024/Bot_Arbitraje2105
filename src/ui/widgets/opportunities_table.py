@@ -1,13 +1,29 @@
-from PyQt5.QtWidgets import (
-    QTableView, QHeaderView, QPushButton, QWidget, QHBoxLayout, QApplication,
-    QStyledItemDelegate, QStyle, QStyleOptionViewItem, QStyleOptionButton,
-    QVBoxLayout, QLabel
-)
 from PyQt5.QtCore import (
-    QAbstractTableModel, QVariant, QModelIndex, QSortFilterProxyModel,
-    Qt, pyqtSignal, QRect, QSize
+    QAbstractTableModel,
+    QModelIndex,
+    QRect,
+    QSize,
+    QSortFilterProxyModel,
+    Qt,
+    QVariant,
+    pyqtSignal,
 )
-from PyQt5.QtGui import QPainter, QMouseEvent, QColor
+from PyQt5.QtGui import QColor, QMouseEvent, QPainter
+from PyQt5.QtWidgets import (
+    QApplication,
+    QHBoxLayout,
+    QHeaderView,
+    QLabel,
+    QPushButton,
+    QStyle,
+    QStyledItemDelegate,
+    QStyleOptionButton,
+    QStyleOptionViewItem,
+    QTableView,
+    QVBoxLayout,
+    QWidget,
+)
+
 
 class OpportunitiesTableModel(QAbstractTableModel):
     def __init__(self, data, parent=None):
