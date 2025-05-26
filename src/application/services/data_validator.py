@@ -1,7 +1,9 @@
-from typing import Any, Dict, List, Union
-from decimal import Decimal
 from datetime import datetime
+from decimal import Decimal
+from typing import Any, Dict, List, Union
+
 from pydantic import ValidationError
+
 from src.domain.data_models import MarketDataUnified, OpportunityUnified
 from src.utils.logger import get_logger
 

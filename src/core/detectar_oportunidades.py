@@ -5,17 +5,20 @@ import time
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
+import pandas as pd  # Importar pandas
 import requests
 
-import pandas as pd # Importar pandas
-from src.data.exchange_adapters import BinanceAdapter, MobulaAdapter, IExchangeAdapter
-from src.data.data_normalizer import DataNormalizer # Importar DataNormalizer
-from src.domain.data_models import MarketDataUnified # Importar el esquema unificado
-from src.dashboard.supabase_client import get_supabase_client, insertar_oportunidad  # Importar funciones
+from src.core.anomaly_detector import AnomalyDetector  # Importar AnomalyDetector
 from src.core.telegram.telegram_handler import (
     telegram_handler,  # Import the TelegramHandler instance
 )
-from src.core.anomaly_detector import AnomalyDetector # Importar AnomalyDetector
+from src.dashboard.supabase_client import (  # Importar funciones
+    get_supabase_client,
+    insertar_oportunidad,
+)
+from src.data.data_normalizer import DataNormalizer  # Importar DataNormalizer
+from src.data.exchange_adapters import BinanceAdapter, IExchangeAdapter, MobulaAdapter
+from src.domain.data_models import MarketDataUnified  # Importar el esquema unificado
 from src.utils.calculator import calcular_rentabilidad_triangular
 from src.utils.config import settings
 from src.utils.logger import get_logger

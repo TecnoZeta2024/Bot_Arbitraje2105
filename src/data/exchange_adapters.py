@@ -1,12 +1,13 @@
 from dataclasses import dataclass
-from typing import Any, Dict, Optional, Protocol, List
 from decimal import Decimal
+from typing import Any, Dict, List, Optional, Protocol
 
-from src.infrastructure.external_apis.binance_client import BinanceClient
-from src.infrastructure.external_apis.mobula_client import MobulaAPIClient
 from src.data.binance_transformer import BinanceTransformer
 from src.data.mobula_transformer import MobulaTransformer
 from src.domain.data_models import MarketDataUnified
+from src.infrastructure.external_apis.binance_client import BinanceClient
+from src.infrastructure.external_apis.mobula_client import MobulaAPIClient
+
 
 @dataclass
 class Ticker:

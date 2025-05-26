@@ -1,6 +1,6 @@
 from datetime import datetime
 from decimal import Decimal, getcontext
-from typing import Dict, Any, Optional, List
+from typing import Any, Dict, List, Optional
 
 from src.domain.data_models import MarketDataUnified, OpportunityUnified
 

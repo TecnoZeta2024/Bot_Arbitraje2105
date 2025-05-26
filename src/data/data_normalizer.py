@@ -1,9 +1,14 @@
 import logging
-from decimal import ROUND_HALF_UP, Decimal, getcontext
 from datetime import datetime
-from typing import Optional, Any, Dict, List, Union
-from src.domain.data_models import MarketDataUnified, OpportunityUnified, OpportunityStep
+from decimal import ROUND_HALF_UP, Decimal, getcontext
+from typing import Any, Dict, List, Optional, Union
+
 from src.application.services.data_validator import DataValidator
+from src.domain.data_models import (
+    MarketDataUnified,
+    OpportunityStep,
+    OpportunityUnified,
+)
 
 # Configurar la precisión decimal global
 getcontext().prec = 28 # Precisión estándar para operaciones financieras

@@ -12,13 +12,19 @@ Algoritmos seleccionados para la implementación inicial:
 Este módulo procesará datos normalizados y marcará las anomalías detectadas.
 """
 
+from typing import Optional
+
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest
-from typing import Optional
 
+from src.infrastructure.messaging.notification_service import (
+    MessagePriority,
+    MessageType,
+    NotificationService,
+)
 from src.utils.logger import get_logger
-from src.infrastructure.messaging.notification_service import NotificationService, MessageType, MessagePriority
+
 
 class AnomalyDetector:
     def __init__(self, z_score_threshold: float = 3.0, contamination: float = 0.01):
