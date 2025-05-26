@@ -1,6 +1,7 @@
 import logging
-from typing import List, Dict, Optional
+from typing import Dict, List, Optional
 from urllib.parse import urljoin
+
 import httpx
 from fastapi import HTTPException
 

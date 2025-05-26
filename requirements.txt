@@ -52,6 +52,9 @@ psutil>=5.9.0,<6.0.0
 # ========================================
 # DATABASE
 # ========================================
+# Supabase Client
+supabase>=2.4.0,<3.0.0
+
 # PostgreSQL (Production)
 asyncpg>=0.29.0,<1.0.0
 sqlalchemy>=2.0.0,<3.0.0

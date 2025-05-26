@@ -1,5 +1,9 @@
 import logging
 from decimal import ROUND_HALF_UP, Decimal, getcontext
+from datetime import datetime
+from typing import Optional, Any, Dict, List, Union
+from src.domain.data_models import MarketDataUnified, OpportunityUnified, OpportunityStep
+from src.application.services.data_validator import DataValidator
 
 # Configurar la precisión decimal global
 getcontext().prec = 28 # Precisión estándar para operaciones financieras
@@ -7,8 +11,9 @@ getcontext().prec = 28 # Precisión estándar para operaciones financieras
 class DataNormalizer:
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
+        self.data_validator = DataValidator() # Instanciar el servicio de validación
 
-    def normalize_ticker(self, raw_ticker_data: dict, source: str) -> dict:
+    def normalize_ticker(self, raw_ticker_data: Dict[str, Any], source: str) -> Optional[MarketDataUnified]:
         """
         Normaliza los datos de un ticker de una fuente específica a un esquema unificado.
 
@@ -17,98 +22,165 @@ class DataNormalizer:
             source (str): Nombre de la fuente (ej. 'binance', 'mobula').
 
         Returns:
-            dict: Datos del ticker normalizados.
+            Optional[MarketDataUnified]: Datos del ticker normalizados y validados, o None si falla.
         """
-        normalized_data = {
-            "symbol": None,
-            "bid_price": None,
-            "ask_price": None,
-            "last_price": None,
-            "volume_24h": None,
-            "timestamp": None,
-            "source": source
-        }
+        try:
+            if source == 'binance':
+                symbol = raw_ticker_data.get('s', '')
+                timestamp_ms = raw_ticker_data.get('E')
+                price = self._to_decimal(raw_ticker_data.get('c'))
+                volume = self._to_decimal(raw_ticker_data.get('v'))
+                close_price = self._to_decimal(raw_ticker_data.get('c'))
 
-        if source == 'binance':
-            normalized_data["symbol"] = raw_ticker_data.get('s')
-            normalized_data["bid_price"] = self._to_decimal(raw_ticker_data.get('b'))
-            normalized_data["ask_price"] = self._to_decimal(raw_ticker_data.get('a'))
-            normalized_data["last_price"] = self._to_decimal(raw_ticker_data.get('c'))
-            normalized_data["volume_24h"] = self._to_decimal(raw_ticker_data.get('v'))
-            normalized_data["timestamp"] = raw_ticker_data.get('E') # Event time in milliseconds
-        elif source == 'mobula':
-            normalized_data["symbol"] = raw_ticker_data.get('symbol')
-            normalized_data["bid_price"] = self._to_decimal(raw_ticker_data.get('bidPrice'))
-            normalized_data["ask_price"] = self._to_decimal(raw_ticker_data.get('askPrice'))
-            normalized_data["last_price"] = self._to_decimal(raw_ticker_data.get('lastPrice'))
-            normalized_data["volume_24h"] = self._to_decimal(raw_ticker_data.get('volume24h'))
-            normalized_data["timestamp"] = raw_ticker_data.get('timestamp') # Unix timestamp in seconds or milliseconds
-        else:
-            self.logger.warning(f"Fuente de datos desconocida: {source}")
-            return {}
+                if not all([symbol, price, volume, close_price]): # timestamp_ms puede ser None si se usa datetime.now()
+                    self.logger.error(f"Datos obligatorios faltantes o inválidos para Binance MarketDataUnified: {raw_ticker_data}")
+                    return None
 
-        # Validar y limpiar datos nulos o inválidos
-        for key, value in normalized_data.items():
-            if value is None and key not in ["bid_price", "ask_price", "last_price", "volume_24h"]:
-                self.logger.warning(f"Dato faltante para {key} en {source} ticker: {raw_ticker_data}")
-            elif isinstance(value, Decimal) and value < 0:
-                self.logger.warning(f"Valor negativo para {key} en {source} ticker: {raw_ticker_data}")
-                normalized_data[key] = None # O manejar de otra forma, ej. abs(value)
+                timestamp_dt = datetime.fromtimestamp(timestamp_ms / 1000) if timestamp_ms is not None else datetime.now()
 
-        return normalized_data
+                market_data = MarketDataUnified(
+                    symbol=symbol,
+                    timestamp=timestamp_dt,
+                    price=price,
+                    volume=volume,
+                    quote_volume=self._to_decimal(raw_ticker_data.get('q')),
+                    high_price=self._to_decimal(raw_ticker_data.get('h')),
+                    low_price=self._to_decimal(raw_ticker_data.get('l')),
+                    open_price=self._to_decimal(raw_ticker_data.get('o')),
+                    close_price=close_price,
+                    bid_price=self._to_decimal(raw_ticker_data.get('b')),
+                    bid_qty=self._to_decimal(raw_ticker_data.get('B')),
+                    ask_price=self._to_decimal(raw_ticker_data.get('a')),
+                    ask_qty=self._to_decimal(raw_ticker_data.get('A')),
+                    source=source,
+                    price_change_24h=self._to_decimal(raw_ticker_data.get('p')),
+                    price_change_percentage_24h=self._to_decimal(raw_ticker_data.get('P')),
+                    market_cap=self._to_decimal(raw_ticker_data.get('mkCap', '0')), # Asumiendo un campo para market_cap si existe
+                    rank=raw_ticker_data.get('rank', None), # Asumiendo un campo para rank si existe
+                    number_of_trades=raw_ticker_data.get('n')
+                )
+            
+            elif source == 'mobula':
+                symbol = raw_ticker_data.get('symbol', '')
+                timestamp_raw = raw_ticker_data.get('timestamp')
+                price = self._to_decimal(raw_ticker_data.get('lastPrice'))
+                volume = self._to_decimal(raw_ticker_data.get('volume24h'))
+                close_price = self._to_decimal(raw_ticker_data.get('lastPrice'))
 
-    def _to_decimal(self, value):
-        """Convierte un valor a Decimal, manejando None o errores de conversión."""
-        if value is None:
+                if not all([symbol, price, volume, close_price]): # timestamp_raw puede ser None si se usa datetime.now()
+                    self.logger.error(f"Datos obligatorios faltantes o inválidos para Mobula MarketDataUnified: {raw_ticker_data}")
+                    return None
+
+                timestamp_dt = None
+                if timestamp_raw is not None:
+                    if len(str(timestamp_raw)) == 13:
+                        timestamp_dt = datetime.fromtimestamp(timestamp_raw / 1000)
+                    else:
+                        timestamp_dt = datetime.fromtimestamp(timestamp_raw)
+                else:
+                    timestamp_dt = datetime.now()
+
+                market_data = MarketDataUnified(
+                    symbol=symbol,
+                    timestamp=timestamp_dt,
+                    price=price,
+                    volume=volume,
+                    quote_volume=self._to_decimal(raw_ticker_data.get('quoteVolume24h')),
+                    high_price=self._to_decimal(raw_ticker_data.get('highPrice')),
+                    low_price=self._to_decimal(raw_ticker_data.get('lowPrice')),
+                    open_price=self._to_decimal(raw_ticker_data.get('openPrice')),
+                    close_price=close_price,
+                    bid_price=self._to_decimal(raw_ticker_data.get('bidPrice')),
+                    bid_qty=self._to_decimal(raw_ticker_data.get('bidQty')),
+                    ask_price=self._to_decimal(raw_ticker_data.get('askPrice')),
+                    ask_qty=self._to_decimal(raw_ticker_data.get('askQty')),
+                    source=source,
+                    price_change_24h=self._to_decimal(raw_ticker_data.get('priceChange24h', '0')), # Asumiendo un campo para price_change_24h
+                    price_change_percentage_24h=self._to_decimal(raw_ticker_data.get('priceChangePercent24h', '0')), # Asumiendo un campo para price_change_percentage_24h
+                    market_cap=self._to_decimal(raw_ticker_data.get('marketCap')),
+                    rank=raw_ticker_data.get('rank'),
+                    number_of_trades=raw_ticker_data.get('numberOfTrades', None) # Asumiendo un campo para number_of_trades
+                )
+            else:
+                self.logger.warning(f"Fuente de datos desconocida: {source}")
+                return None
+
+            validated_data = self.data_validator.validate_market_data(market_data)
+            return validated_data
+        except Exception as e:
+            self.logger.error(f"Error al normalizar o validar datos de mercado de {source}: {e}, Datos: {raw_ticker_data}")
             return None
+
+    def normalize_opportunity(self, raw_opportunity_data: Dict[str, Any]) -> Optional[OpportunityUnified]:
+        """
+        Normaliza los datos de una oportunidad de arbitraje a un esquema unificado.
+        """
+        try:
+            opportunity_id = raw_opportunity_data.get('opportunity_id', '')
+            cycle = raw_opportunity_data.get('cycle', '')
+            profit_percentage_gross = self._to_decimal(raw_opportunity_data.get('profit_percentage_gross'))
+            profit_percentage_net = self._to_decimal(raw_opportunity_data.get('profit_percentage_net'))
+            capital_inicial = self._to_decimal(raw_opportunity_data.get('capital_inicial'))
+            capital_sugerido = self._to_decimal(raw_opportunity_data.get('capital_sugerido'))
+            timestamp_detected_raw = raw_opportunity_data.get('timestamp_detected')
+            
+            if not all([opportunity_id, cycle, profit_percentage_gross, profit_percentage_net,
+                        capital_inicial, capital_sugerido, timestamp_detected_raw is not None]):
+                self.logger.error(f"Datos de oportunidad incompletos o inválidos: {raw_opportunity_data}")
+                return None
+
+            timestamp_detected = datetime.fromisoformat(str(timestamp_detected_raw))
+
+            steps_data = raw_opportunity_data.get('steps', [])
+            parsed_steps = []
+            for step in steps_data:
+                try:
+                    # Asegurar que los valores numéricos en los pasos también sean Decimal
+                    step['price'] = self._to_decimal(step.get('price'))
+                    step['amount'] = self._to_decimal(step.get('amount'))
+                    step['fee'] = self._to_decimal(step.get('fee'))
+                    parsed_steps.append(OpportunityStep(**step))
+                except Exception as step_e:
+                    self.logger.error(f"Error al parsear paso de oportunidad: {step_e}, Paso: {step}")
+                    return None # Fallar si un paso es inválido
+
+            opportunity_data = OpportunityUnified(
+                opportunity_id=opportunity_id,
+                cycle=cycle,
+                profit_percentage_gross=profit_percentage_gross,
+                profit_percentage_net=profit_percentage_net,
+                steps=parsed_steps,
+                capital_inicial=capital_inicial,
+                capital_sugerido=capital_sugerido,
+                timestamp_detected=timestamp_detected
+            )
+            validated_opportunity = self.data_validator.validate_opportunity_data(opportunity_data)
+            return validated_opportunity
+        except Exception as e:
+            self.logger.error(f"Error al normalizar o validar datos de oportunidad: {e}, Datos: {raw_opportunity_data}")
+            return None
+
+    def _to_decimal(self, value: Any) -> Decimal:
+        """
+        Convierte un valor a Decimal, manejando None o errores de conversión.
+        Siempre retorna un Decimal, usando Decimal('0') como valor por defecto.
+        """
+        if value is None or str(value).strip() == '':
+            return Decimal('0')
         try:
             return Decimal(str(value))
         except Exception as e:
-            self.logger.error(f"Error al convertir a Decimal: {value}, Error: {e}")
-            return None
+            self.logger.error(f"Error al convertir a Decimal: {value}, Error: {e}. Retornando Decimal('0').")
+            return Decimal('0')
 
-    def validate_data(self, unified_data: dict) -> bool:
-        """
-        Valida la integridad de los datos unificados.
+    # La función validate_data ya no es necesaria si usamos DataValidator
+    # def validate_data(self, unified_data: dict) -> bool:
+    #     """
+    #     Valida la integridad de los datos unificados.
+    #     """
+    #     pass # Esta función será reemplazada por el uso de DataValidator
 
-        Args:
-            unified_data (dict): Datos normalizados a validar.
-
-        Returns:
-            bool: True si los datos son válidos, False en caso contrario.
-        """
-        if not unified_data:
-            self.logger.error("Datos vacíos para validación.")
-            return False
-
-        required_fields = ["symbol", "timestamp", "source"]
-        for field in required_fields:
-            if unified_data.get(field) is None:
-                self.logger.error(f"Campo requerido '{field}' faltante en datos unificados: {unified_data}")
-                return False
-
-        # Validar que los precios y volúmenes sean números positivos si existen
-        numeric_fields = ["bid_price", "ask_price", "last_price", "volume_24h"]
-        for field in numeric_fields:
-            value = unified_data.get(field)
-            if value is not None:
-                if not isinstance(value, Decimal):
-                    self.logger.error(f"Campo '{field}' no es Decimal: {value} en {unified_data}")
-                    return False
-                if value < 0:
-                    self.logger.error(f"Campo '{field}' es negativo: {value} en {unified_data}")
-                    return False
-        
-        # Ejemplo de validación de consistencia: bid_price <= ask_price
-        bid = unified_data.get("bid_price")
-        ask = unified_data.get("ask_price")
-        if bid is not None and ask is not None and bid > ask:
-            self.logger.error(f"Bid price ({bid}) es mayor que Ask price ({ask}) en {unified_data}")
-            return False
-
-        return True
-
-    def detect_anomalies(self, data_stream: list, threshold_multiplier: float = 3.0) -> list:
+    def detect_anomalies(self, data_stream: List[Any], threshold_multiplier: float = 3.0) -> List[Any]:
         """
         Detecta anomalías en un flujo de datos (ej. precios, volúmenes).
         Este es un ejemplo simple basado en la desviación estándar.
@@ -123,39 +195,35 @@ class DataNormalizer:
         if not data_stream or len(data_stream) < 2:
             return []
 
-        # Convertir a Decimal para cálculos precisos y filtrar None
         decimal_stream = [val for val in (self._to_decimal(x) for x in data_stream) if val is not None]
-        if not decimal_stream or len(decimal_stream) < 2: # Asegurar al menos 2 puntos para std_dev
+        if not decimal_stream or len(decimal_stream) < 2:
             return []
 
-        # Calcular la media
         mean = sum(decimal_stream) / Decimal(len(decimal_stream))
         
-        # Calcular la varianza y la desviación estándar
-        # Asegurarse de que la varianza no sea negativa debido a errores de punto flotante
         variance = sum([(x - mean) ** 2 for x in decimal_stream]) / Decimal(len(decimal_stream))
         if variance < 0:
-            variance = Decimal(0) # Evitar sqrt de números negativos
+            variance = Decimal(0)
         
         std_dev = variance.sqrt()
 
         anomalies = []
-        for i, value in enumerate(data_stream): # Iterar sobre el stream original para mantener el índice
+        for i, value in enumerate(data_stream):
             dec_value = self._to_decimal(value)
             if dec_value is None:
-                continue # Saltar valores no numéricos
+                continue
 
             threshold_decimal = self._to_decimal(threshold_multiplier)
             if threshold_decimal is None:
                 self.logger.error(f"Error: threshold_multiplier ({threshold_multiplier}) no pudo ser convertido a Decimal.")
-                continue # Saltar esta iteración si el umbral es inválido
+                continue
 
             if abs(dec_value - mean) > threshold_decimal * std_dev:
                 anomalies.append((i, dec_value))
                 self.logger.warning(f"Anomalía detectada en el índice {i}: {dec_value} (fuera de {threshold_multiplier} * std_dev)")
         return anomalies
 
-    def handle_decimal_precision(self, value, precision: int = 8):
+    def handle_decimal_precision(self, value: Any, precision: int = 8) -> Optional[Decimal]:
         """
         Asegura la precisión decimal de un valor.
 
@@ -169,17 +237,13 @@ class DataNormalizer:
         if value is None:
             return None
         try:
-            # Convertir a Decimal si no lo es
             dec_value = self._to_decimal(value)
             if dec_value is None:
                 return None
             
-            # Crear un contexto local para la precisión si es diferente de la global
             local_context = getcontext().copy()
-            local_context.prec = precision + 4 # Un poco más de precisión para el redondeo
+            local_context.prec = precision + 4
             
-            # Redondear al número de decimales especificado
-            # Usar ROUND_HALF_UP para el redondeo estándar
             quantize_pattern = Decimal('1e-' + str(precision))
             return dec_value.quantize(quantize_pattern, rounding=ROUND_HALF_UP, context=local_context)
         except Exception as e:

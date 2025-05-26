@@ -7,12 +7,15 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import requests
 
-from src.apis.binance_client import BinanceClient, binance_data_client
-from src.apis.mobula_client import MobulaClient  # Import MobulaClient
-from src.apis.supabase_client import SupabaseClient  # Import SupabaseClient
+import pandas as pd # Importar pandas
+from src.data.exchange_adapters import BinanceAdapter, MobulaAdapter, IExchangeAdapter
+from src.data.data_normalizer import DataNormalizer # Importar DataNormalizer
+from src.domain.data_models import MarketDataUnified # Importar el esquema unificado
+from src.dashboard.supabase_client import get_supabase_client, insertar_oportunidad  # Importar funciones
 from src.core.telegram.telegram_handler import (
     telegram_handler,  # Import the TelegramHandler instance
 )
+from src.core.anomaly_detector import AnomalyDetector # Importar AnomalyDetector
 from src.utils.calculator import calcular_rentabilidad_triangular
 from src.utils.config import settings
 from src.utils.logger import get_logger
@@ -183,12 +186,12 @@ def load_specific_cache_file(filepath: str) -> Tuple[Optional[List[str]], Option
         logger.error(f"Error al cargar datos de caché específico: {str(e)}")
         return None, None
 
-def verificar_modulo_deteccion(binance_client: BinanceClient) -> Dict[str, Any]:
+def verificar_modulo_deteccion(binance_adapter: BinanceAdapter) -> Dict[str, Any]:
     """
     Verifica que el módulo de detección de oportunidades esté correctamente configurado.
 
     Args:
-        binance_client (BinanceClient): Instancia del cliente de Binance.
+        binance_adapter (BinanceAdapter): Instancia del adaptador de Binance.
     
     Returns:
         dict: Resultado de la verificación
@@ -200,7 +203,8 @@ def verificar_modulo_deteccion(binance_client: BinanceClient) -> Dict[str, Any]:
     """
     try:
         # Verificar la conexión con Binance
-        binance_markets = binance_client.get_markets()
+        # Usar el cliente interno del adaptador para obtener los mercados
+        binance_markets = binance_adapter.binance_client.get_markets()
         
         if not binance_markets or len(binance_markets) == 0:
             return {
@@ -236,7 +240,9 @@ def verificar_modulo_deteccion(binance_client: BinanceClient) -> Dict[str, Any]:
              }
 
         # Verificar que se pueden obtener tickers
-        tickers = binance_client.get_tickers()
+        # El adaptador no tiene un método get_tickers() que devuelva todos.
+        # Usaremos el cliente interno para esta verificación.
+        tickers = binance_adapter.binance_client.get_tickers()
         
         if not tickers or len(tickers) == 0:
             return {
@@ -270,9 +276,9 @@ def verificar_modulo_deteccion(binance_client: BinanceClient) -> Dict[str, Any]:
             }
         }
 
-def fetch_market_data(
-    binance_client: BinanceClient, 
-    mobula_client: MobulaClient, 
+async def fetch_market_data(
+    binance_adapter: BinanceAdapter, 
+    mobula_adapter: MobulaAdapter, 
     token_search_limit: int = 400,
     use_cache: bool = False,
     cache_dir: str = "./cache"
@@ -282,14 +288,14 @@ def fetch_market_data(
     Implementa limitación de symbols/tickers/parámetros por llamada API y soporte de caché.
 
     Args:
-        binance_client (BinanceClient): Instancia del cliente de Binance.
-        mobula_client (MobulaClient): Instancia del cliente de Mobula.
+        binance_adapter (BinanceAdapter): Instancia del adaptador de Binance.
+        mobula_adapter (MobulaAdapter): Instancia del adaptador de Mobula.
         token_search_limit (int): Límite de tokens a buscar en Mobula.
         use_cache (bool): Si True, intenta cargar datos desde caché primero.
         cache_dir (str): Directorio para los archivos de caché.
 
     Returns:
-        tuple: (list of symbols, dict of tickers) or (None, None) if fetching fails.
+        tuple: (list of symbols, dict of tickers) o (None, None) si la obtención falla.
     """
     # Si se solicita usar caché, intentar cargar desde ahí primero
     if use_cache:
@@ -301,60 +307,90 @@ def fetch_market_data(
         logger.info("No se encontraron datos en caché o son inválidos. Obteniendo datos nuevos.")
     logger.info("=== INICIANDO FETCH DE DATOS DE MERCADO ===")
     logger.info("Fetching market data (symbols and tickers), prioritizing Mobula...")
+    data_normalizer = DataNormalizer() # Instanciar el normalizador/validador
+
+    logger.info("=== INICIANDO FETCH DE DATOS DE MERCADO ===")
+    logger.info("Fetching market data (symbols and tickers), prioritizing Mobula...")
+    
     symbols = []
     tickers = {}
-    mobula_failed = False
-
-    # 1. Attempt to get symbols from Mobula (with limit consideration)
+    
+    # 1. Attempt to get data from Mobula and normalize/validate it
     try:
-        # Mobula's /all endpoint might not respect limit, but we pass it.
-        # If it returns more than the limit, we'll process only the first 'token_search_limit'.
-        mobula_tokens = mobula_client.obtener_tokens_top(limit=token_search_limit)
-        if mobula_tokens:
-            # Extract symbols from Mobula response. Assuming 'symbol' key exists.
-            symbols = [token.get("symbol") for token in mobula_tokens if token.get("symbol")][:token_search_limit]
-            logger.info(f"Obtenidos {len(symbols)} símbolos desde Mobula.")
+        binance_symbols_raw = binance_adapter.binance_client.obtener_simbolos_trading()
+        if not binance_symbols_raw:
+            logger.error("No se pudieron obtener símbolos de Binance. No se puede proceder.")
+            return None, None
+        
+        symbols_to_fetch_mobula = binance_symbols_raw[:min(token_search_limit, len(binance_symbols_raw))]
+        
+        mobula_unified_data: List[MarketDataUnified] = []
+        for symbol in symbols_to_fetch_mobula:
+            try:
+                raw_mobula_ticker = await mobula_adapter.get_raw_ticker(symbol)
+                if raw_mobula_ticker:
+                    market_data_unified = data_normalizer.normalize_ticker(raw_mobula_ticker, 'mobula')
+                    if market_data_unified:
+                        mobula_unified_data.append(market_data_unified)
+            except Exception as e:
+                logger.debug(f"No se pudo obtener o normalizar/validar ticker de Mobula para {symbol}: {e}")
+        
+        if mobula_unified_data:
+            for data in mobula_unified_data:
+                symbols.append(data.symbol)
+                tickers[data.symbol] = float(data.price)
+            logger.info(f"Obtenidos {len(symbols)} símbolos y {len(tickers)} tickers desde Mobula (normalizados y validados).")
         else:
-            logger.warning("No se pudieron obtener símbolos desde Mobula. Fallback a Binance.")
-            mobula_failed = True
+            logger.warning("No se pudieron obtener datos de mercado válidos desde Mobula. Fallback a Binance.")
+            
     except Exception as e:
-        logger.error(f"Error fetching symbols from Mobula: {str(e)}. Fallback a Binance.", exc_info=e)
-        mobula_failed = True
+        logger.error(f"Error fetching or normalizing/validating data from Mobula: {str(e)}. Fallback a Binance.", exc_info=e)
 
-    # 2. Get tickers from Binance (with limit consideration)
-    try:
-        # Binance's obtener_precios_todos fetches all tickers.
-        binance_tickers = binance_client.obtener_precios_todos()
-        if binance_tickers:
-            # Filtrar tickers para mantener solo aquellos con precios válidos
-            tickers = {symbol: price for symbol, price in binance_tickers.items() 
-                      if price is not None and price > 0}
-            
-            logger.info(f"Obtenidos {len(tickers)} tickers válidos desde Binance (de {len(binance_tickers)} totales).")
-            
-            # Si Mobula falló o no hay símbolos, usamos los símbolos de Binance
-            if mobula_failed or not symbols:
-                binance_symbols = binance_client.obtener_simbolos_trading()
-                if binance_symbols:
-                    # Asegurarnos de que solo usamos símbolos para los que tenemos tickers válidos
-                    symbols = [symbol for symbol in binance_symbols if symbol in tickers]
-                    logger.info(f"Usando {len(symbols)} símbolos válidos desde Binance.")
+    # 2. Get tickers from Binance and normalize/validate them (if Mobula failed or as primary source)
+    if not symbols or not tickers:
+        try:
+            binance_raw_tickers = binance_adapter.binance_client.obtener_precios_todos()
+            if binance_raw_tickers:
+                binance_unified_data: List[MarketDataUnified] = []
+                for symbol, price in binance_raw_tickers.items():
+                    # Crear un diccionario de datos brutos simulado para Binance para pasar al normalizador
+                    # Asegurar que todos los campos obligatorios y opcionales estén presentes, incluso con valores por defecto
+                    raw_binance_data = {
+                        's': symbol,
+                        'c': price, # Precio de cierre
+                        'v': '0', # Volumen (no disponible en obtener_precios_todos, usar '0' como string para Decimal)
+                        'q': '0', # Quote Volume
+                        'h': '0', 'l': '0', 'o': '0', # High, Low, Open
+                        'b': price, 'a': price, # Bid, Ask (usar precio como proxy)
+                        'B': '0', 'A': '0', # Bid/Ask Qty
+                        'E': int(datetime.now().timestamp() * 1000), # Timestamp en ms
+                        'p': '0', 'P': '0', 'n': 0 # Price change, percentage, number of trades
+                    }
+                    # Normalizar y validar usando DataNormalizer
+                    market_data_unified = data_normalizer.normalize_ticker(raw_binance_data, 'binance')
+                    if market_data_unified:
+                        binance_unified_data.append(market_data_unified)
+                
+                if binance_unified_data:
+                    symbols = [data.symbol for data in binance_unified_data]
+                    tickers = {data.symbol: float(data.price) for data in binance_unified_data}
+                    logger.info(f"Obtenidos {len(symbols)} símbolos y {len(tickers)} tickers desde Binance (normalizados y validados).")
                 else:
-                    logger.error("No se pudieron obtener símbolos desde Binance.")
+                    logger.error("No se pudieron normalizar/validar datos válidos desde Binance.")
                     return None, None
-        else:
-            logger.error("No se pudieron obtener los tickers desde Binance.")
+            else:
+                logger.error("No se pudieron obtener los tickers desde Binance.")
+                return None, None
+
+        except Exception as e:
+            logger.error(f"Error fetching or normalizing/validating tickers from Binance: {str(e)}", exc_info=e)
             return None, None
 
-    except Exception as e:
-        logger.error(f"Error fetching tickers from Binance: {str(e)}", exc_info=e)
-        return None, None
-
     if not symbols or not tickers:
-        logger.error("Failed to fetch both symbols and tickers.")
+        logger.error("Failed to fetch, normalize, and validate both symbols and tickers from any source.")
         return None, None
 
-    logger.info(f"Market data fetch complete. Symbols: {len(symbols)}, Tickers: {len(tickers)}.")
+    logger.info(f"Market data fetch and transformation complete. Symbols: {len(symbols)}, Tickers: {len(tickers)}.")
     # Añadir logging para debug: mostrar algunos ejemplos de símbolos y tickers
     if symbols and len(symbols) > 0:
         logger.info(f"Sample symbols: {symbols[:5]}")
@@ -373,7 +409,7 @@ def fetch_market_data(
     logger.info(f"=== FETCH DE DATOS DE MERCADO FINALIZADO. Símbolos: {len(symbols) if symbols else 0}, Tickers: {len(tickers) if tickers else 0} ===")
     return symbols, tickers
 
-def find_opportunities(symbols: List[str], tickers: Dict[str, float], umbral_rentabilidad: float, capital_inicial: float, fees_percentage: List[float] = None) -> List[Dict[str, Any]]:
+def find_opportunities(symbols: List[str], tickers: Dict[str, float], umbral_rentabilidad: float, capital_inicial: float, fees_percentage: List[float] = [0.1, 0.1, 0.1]) -> List[Dict[str, Any]]:
     """
     Encuentra oportunidades de arbitraje triangular dadas los símbolos, tickers y parámetros. (Lógica para Encontrar Oportunidad)
 
@@ -391,8 +427,9 @@ def find_opportunities(symbols: List[str], tickers: Dict[str, float], umbral_ren
     logger.info(f"Parámetros de búsqueda: Umbral={umbral_rentabilidad}%, Capital={capital_inicial}")
     logger.info("Finding triangular opportunities...")
 
-    if fees_percentage is None:
-        fees_percentage = [0.1, 0.1, 0.1] # Default fee: 0.1% per trade
+    # fees_percentage ya tiene un valor por defecto en la firma de la función.
+    # if fees_percentage is None:
+    #     fees_percentage = [0.1, 0.1, 0.1] # Default fee: 0.1% per trade
 
     oportunidades_encontradas_list = []
     umbral_rentabilidad_decimal = umbral_rentabilidad / 100.0 # Convert to decimal
@@ -941,9 +978,9 @@ def find_opportunities(symbols: List[str], tickers: Dict[str, float], umbral_ren
     return filtered_opportunities  # Devolver solo oportunidades positivas
 
 
-def ejecutar_deteccion(
-    binance_client: BinanceClient, 
-    mobula_client: MobulaClient, 
+async def ejecutar_deteccion(
+    binance_adapter: BinanceAdapter, 
+    mobula_adapter: MobulaAdapter, 
     webhook_url: Optional[str] = None,
     use_cache: bool = False,
     cache_filepath: Optional[str] = None,
@@ -954,8 +991,8 @@ def ejecutar_deteccion(
     Esta función orquesta el proceso completo de detección y envío.
     
     Args:
-        binance_client: Cliente de Binance
-        mobula_client: Cliente de Mobula
+        binance_adapter: Adaptador de Binance
+        mobula_adapter: Adaptador de Mobula
         webhook_url: URL del webhook para enviar oportunidades (opcional)
         use_cache: Si True, intenta usar datos del caché
         cache_filepath: Si se especifica, usa un archivo de caché específico
@@ -970,13 +1007,13 @@ def ejecutar_deteccion(
     logger.info(f"Parámetros de configuración:")
     
     try:
-        # Verificar que los clientes son válidos
-        if not binance_client:
-            logger.error("Error: Cliente Binance no proporcionado o inválido")
-            return
+        # Verificar que los adaptadores son válidos
+        if not binance_adapter:
+            logger.error("Error: Adaptador Binance no proporcionado o inválido")
+            return [] # Devolver lista vacía en caso de error
             
-        if not mobula_client:
-            logger.warning("Advertencia: Cliente Mobula no proporcionado. Solo se usarán datos de Binance.")
+        if not mobula_adapter:
+            logger.warning("Advertencia: Adaptador Mobula no proporcionado. Solo se usarán datos de Binance.")
             
         # Obtener y validar parámetros de configuración
         try:
@@ -1002,6 +1039,13 @@ def ejecutar_deteccion(
             umbral_rentabilidad = 1.0
             capital_inicial = 100.0
 
+        # Instanciar el detector de anomalías
+        anomaly_detector = AnomalyDetector(
+            z_score_threshold=settings.anomaly_z_score_threshold,
+            contamination=settings.anomaly_isolation_forest_contamination
+        )
+        logger.info(f"Detector de anomalías inicializado con Z-score threshold: {settings.anomaly_z_score_threshold}, Isolation Forest contamination: {settings.anomaly_isolation_forest_contamination}")
+
         # Obtener datos de mercado
         logger.info("Obteniendo datos de mercado...")
         
@@ -1009,9 +1053,9 @@ def ejecutar_deteccion(
             logger.info(f"Usando archivo de caché específico: {cache_filepath}")
             symbols, tickers = load_specific_cache_file(cache_filepath)
         else:
-            symbols, tickers = fetch_market_data(
-                binance_client, 
-                mobula_client,
+            symbols, tickers = await fetch_market_data(
+                binance_adapter, 
+                mobula_adapter,
                 use_cache=use_cache,
                 cache_dir=cache_dir
             )
@@ -1021,6 +1065,29 @@ def ejecutar_deteccion(
             return []
             
         logger.info(f"Datos de mercado obtenidos exitosamente: {len(symbols)} símbolos, {len(tickers)} tickers")
+        
+        # Convertir tickers a DataFrame para detección de anomalías
+        # Asegurarse de que el DataFrame tenga un índice y una columna numérica para el precio
+        tickers_df = pd.DataFrame.from_dict(tickers, orient='index', columns=['price'])
+        tickers_df.index.name = 'symbol'
+        
+        logger.info("Realizando detección de anomalías en los datos de mercado...")
+        anomalies_results = await anomaly_detector.detect_anomalies(tickers_df, columns_for_z_score=['price'])
+        
+        # Unir los resultados de anomalías con los tickers originales para fácil acceso
+        # Esto crea un DataFrame con 'price' y las columnas 'is_anomaly_z_score_price', 'is_anomaly_isolation_forest', 'is_overall_anomaly'
+        market_data_with_anomalies = tickers_df.join(anomalies_results)
+        
+        # Opcional: Filtrar o registrar anomalías antes de buscar oportunidades
+        anomalous_symbols = market_data_with_anomalies[market_data_with_anomalies['is_overall_anomaly']].index.tolist()
+        if anomalous_symbols:
+            logger.warning(f"Anomalías detectadas en los siguientes símbolos: {anomalous_symbols}")
+            # Aquí se podría implementar una lógica para descartar símbolos anómalos
+            # o para enviar una alerta específica sobre ellos.
+            # Por ahora, solo se loguea.
+        else:
+            logger.info("No se detectaron anomalías en los datos de mercado.")
+
         logger.info("Buscando oportunidades de arbitraje triangular...")
         
         # Buscar oportunidades
@@ -1042,57 +1109,54 @@ def ejecutar_deteccion(
             # Integrate with TelegramHandler to send notification and request confirmation
             logger.info(f"Sending {len(opportunities)} opportunities for Telegram notification and confirmation and logging to Supabase...")
             
+            # Obtener la instancia del cliente Supabase
+            supabase_client_instance = get_supabase_client()
+
             for opportunity_data in opportunities:
                 try:
+                    # Adjuntar información de anomalías a la oportunidad si el símbolo es anómalo
+                    # Extraer los símbolos involucrados en la oportunidad
+                    involved_symbols = []
+                    cycle_parts = opportunity_data['cycle'].split(' -> ')
+                    if len(cycle_parts) >= 3: # Asegurarse de que hay al menos 3 partes para extraer símbolos
+                        involved_symbols.append(cycle_parts[0]) # Coin A
+                        involved_symbols.append(cycle_parts[1]) # Coin B
+                        involved_symbols.append(cycle_parts[2]) # Coin C
+                        
+                    opportunity_anomalies = {}
+                    for symbol in involved_symbols:
+                        if symbol in market_data_with_anomalies.index:
+                            symbol_anomalies = market_data_with_anomalies.loc[symbol]
+                            if symbol_anomalies['is_overall_anomaly']:
+                                opportunity_anomalies[symbol] = {
+                                    'is_anomaly_z_score_price': bool(symbol_anomalies.get('is_anomaly_z_score_price', False)),
+                                    'is_anomaly_isolation_forest': bool(symbol_anomalies.get('is_anomaly_isolation_forest', False)),
+                                    'price_at_detection': float(symbol_anomalies['price']) # Convertir Decimal a float para JSON
+                                }
+                    
+                    if opportunity_anomalies:
+                        opportunity_data['anomalies_detected'] = opportunity_anomalies
+                        logger.warning(f"Oportunidad {opportunity_data.get('opportunity_id', 'N/A')} involucra símbolos anómalos: {opportunity_anomalies}")
+                    else:
+                        opportunity_data['anomalies_detected'] = {} # Asegurar que el campo existe
+
                     # Log initial opportunity to Supabase
-                    supabase_client.insertar_oportunidad(opportunity_data)
+                    insertar_oportunidad(opportunity_data) # Usar la función directamente
                     logger.info(f"Logged initial opportunity {opportunity_data.get('opportunity_id', 'N/A')} to Supabase.")
 
                     # Call the new method in TelegramHandler
                     # This method will handle sending the message and registering the pending operation
-                    telegram_handler.notify_and_request_confirmation(opportunity_data)
+                    await telegram_handler.notify_opportunity_for_confirmation(opportunity_data)
                     logger.info(f"Sent opportunity {opportunity_data.get('opportunity_id', 'N/A')} for Telegram processing.")
                 except Exception as e:
-                    logger.error(f"Error processing opportunity {opportunity_data.get('opportunity_id', 'N/A')} for logging or Telegram: {e}")
+                    logger.error(f"Error processing opportunity {opportunity_data.get('opportunity_id', 'N/A')} for logging or Telegram: {e}", exc_info=e)
                     
-            # The webhook sending logic is now handled by the TelegramHandler after confirmation
-            # Remove the direct webhook sending loop from here.
-            # if webhook_url:
-            #     logger.info(f"Enviando {len(opportunities)} oportunidades al webhook...")
-            #     successful_sent = 0
-                
-            #     for i, opportunity_data in enumerate(opportunities):
-            #         try:
-            #             # Formatear datos para Supabase si es necesario
-            #             datos = {
-            #                 "ruta": opportunity_data.get("cycle", ""),
-            #                 "pares_comercio": json.dumps(opportunity_data.get("steps", [])),
-            #                 "rentabilidad_teorica": opportunity_data.get("profit_percentage_net", 0),
-            #                 "capital_sugerido": capital_inicial,  # Nombre de columna corregido
-            #                 "fecha_deteccion": time.strftime("%Y-%m-%d %H:%M:%S")
-            #             }
-                        
-            #             # Enviar al webhook
-            #             response = requests.post(webhook_url, json=opportunity_data, timeout=10)
-            #             response.raise_for_status()
-            #             successful_sent += 1
-                        
-            #             # Limitar el logging para evitar saturación
-            #             if i < 3 or i % 10 == 0:
-            #                 logger.info(f"Webhook response {i+1}/{len(opportunities)}: Status {response.status_code}")
-                            
-            #         except requests.exceptions.RequestException as e:
-            #             logger.error(f"Error enviando oportunidad {i+1}/{len(opportunities)} a webhook: {e}")
-                
-            #     logger.info(f"Envío a webhook completado: {successful_sent}/{len(opportunities)} exitosos")
-            # else:
-            #     logger.info("No se enviaron oportunidades porque no se proporcionó URL de webhook.")
         else:
             logger.info(f"No se encontraron oportunidades que superen el umbral de {umbral_rentabilidad}% en {finding_time:.2f} segundos.")
             logger.info("Sugerencias: Considere reducir el umbral de rentabilidad o ampliar el rango de tokens analizados.")
 
     except Exception as e:
-        logger.error(f"Error general durante la detección de oportunidades: {str(e)}", exc_info=True)
+        logger.error(f"Error general durante la detección de oportunidades: {str(e)}", exc_info=e)
         return []
         
     finally:
@@ -1104,13 +1168,13 @@ def ejecutar_deteccion(
         return opportunities
 
 
-def run_detection_and_send_to_webhook(binance_client: BinanceClient, mobula_client: MobulaClient, umbral_rentabilidad: float, capital_inicial: float, webhook_url: Optional[str] = None) -> List[Dict[str, Any]]:
+async def run_detection_and_send_to_webhook(binance_adapter: BinanceAdapter, mobula_adapter: MobulaAdapter, umbral_rentabilidad: float, capital_inicial: float, webhook_url: Optional[str] = None) -> List[Dict[str, Any]]:
     """
     Ejecuta el proceso de detección con los parámetros especificados y envía los resultados a un webhook.
 
     Args:
-        binance_client (BinanceClient): Instancia del cliente de Binance.
-        mobula_client (MobulaClient): Instancia del cliente de Mobula.
+        binance_adapter (BinanceAdapter): Instancia del adaptador de Binance.
+        mobula_adapter (MobulaAdapter): Instancia del adaptador de Mobula.
         umbral_rentabilidad (float): Umbral mínimo de rentabilidad (en porcentaje).
         capital_inicial (float): Capital inicial sugerido para la operación.
         webhook_url (Optional[str]): URL del webhook al que enviar las oportunidades.
@@ -1134,7 +1198,7 @@ def run_detection_and_send_to_webhook(binance_client: BinanceClient, mobula_clie
             
         # Obtener datos de mercado
         logger.info("Obteniendo datos de mercado...")
-        symbols, tickers = fetch_market_data(binance_client, mobula_client)
+        symbols, tickers = await fetch_market_data(binance_adapter, mobula_adapter)
         
         if not symbols or not tickers:
             logger.error("No se pudieron obtener datos de mercado para la detección y envío al webhook.")
@@ -1168,7 +1232,7 @@ def run_detection_and_send_to_webhook(binance_client: BinanceClient, mobula_clie
                             logger.info(f"Enviada oportunidad {opportunity_data.get('cycle')} (ID: {opportunity_data.get('opportunity_id', 'N/A')})")
                     except requests.exceptions.RequestException as e:
                         failed_count += 1
-                        logger.error(f"Error al enviar oportunidad: {str(e)}")
+                        logger.error(f"Error al enviar oportunidad: {str(e)}", exc_info=e)
                         
                 logger.info(f"Envío completado: {sent_count} exitosos, {failed_count} fallidos")
             else:
@@ -1177,7 +1241,7 @@ def run_detection_and_send_to_webhook(binance_client: BinanceClient, mobula_clie
             logger.info(f"No se encontraron oportunidades que superen el umbral de {umbral_rentabilidad}%.")
             
     except Exception as e:
-        logger.error(f"Error durante el proceso de detección y envío: {str(e)}", exc_info=True)
+        logger.error(f"Error durante el proceso de detección y envío: {str(e)}", exc_info=e)
         return []
         
     finally:
@@ -1190,22 +1254,24 @@ def run_detection_and_send_to_webhook(binance_client: BinanceClient, mobula_clie
 
 # Código para ejecutar la verificación o detección directamente
 if __name__ == "__main__":
+    import asyncio
     logger.info("Iniciando script de detección de oportunidades...")
-    # Instantiate clients here and pass them to the orchestrator function
-    binance_client_instance = BinanceClient()
-    mobula_client_instance = MobulaClient()
+    # Instantiate adapters here and pass them to the orchestrator function
+    binance_adapter_instance = BinanceAdapter(trading=False) # For data fetching
+    mobula_adapter_instance = MobulaAdapter()
+    
     # Use the new function for command line execution if webhook is configured
     if settings.n8n_webhook_oportunidad:
-        run_detection_and_send_to_webhook(
-            binance_client_instance,
-            mobula_client_instance,
+        asyncio.run(run_detection_and_send_to_webhook(
+            binance_adapter_instance,
+            mobula_adapter_instance,
             settings.umbral_rentabilidad,
             settings.capital_inicial,
             settings.n8n_webhook_oportunidad
-        )
+        ))
     else:
         # Or just run detection without sending if no webhook
-        ejecutar_deteccion(binance_client_instance, mobula_client_instance)
+        asyncio.run(ejecutar_deteccion(binance_adapter_instance, mobula_adapter_instance))
     logger.info("Script de detección de oportunidades finalizado.")
 
 def send_opportunities_to_webhook(opportunities: List[Dict[str, Any]], webhook_url: str) -> bool:

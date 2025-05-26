@@ -11,8 +11,8 @@ from urllib.parse import urlencode
 
 import requests
 
-from ..utils.config import get_config_value, settings
-from ..utils.logger import get_logger
+from src.utils.config import get_config_value, settings
+from src.utils.logger import get_logger
 
 # Obtener logger específico
 logger = get_logger("binance_client")
@@ -23,17 +23,19 @@ class BinanceClient:
     Proporciona métodos para obtener datos y ejecutar operaciones en Binance.
     """
     
-    def __init__(self, trading: bool = False):
+    def __init__(self, trading: bool = False, api_key: Optional[str] = None, api_secret: Optional[str] = None):
         """
         Inicializa el cliente con la configuración global.
         
         Args:
             trading: Si es True, inicializa con configuración para trading.
                     Si es False, inicializa solo para datos.
+            api_key (Optional[str]): Clave API de Binance. Si se proporciona, tiene prioridad sobre settings.
+            api_secret (Optional[str]): Secreto API de Binance. Si se proporciona, tiene prioridad sobre settings.
         """
         if trading:
-            self.api_key = settings.binance_api_key
-            self.api_secret = settings.binance_api_secret
+            self.api_key = api_key if api_key is not None else settings.binance_api_key
+            self.api_secret = api_secret if api_secret is not None else settings.binance_api_secret
             self.testnet = settings.binance_testnet
             self.base_url = "https://testnet.binance.vision/api/v3/" if self.testnet else "https://api.binance.com/api/v3/"
         else:

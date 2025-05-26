@@ -45,6 +45,10 @@ class Settings:
         self.umbral_rentabilidad = float(os.getenv("UMBRAL_RENTABILIDAD", 0.5))
         self.intervalo_deteccion = int(os.getenv("INTERVALO_DETECCION", 300))
         self.max_tokens_considerados = int(os.getenv("MAX_TOKENS_CONSIDERADOS", 50))
+        
+        # Configuración de detección de anomalías
+        self.anomaly_z_score_threshold = float(os.getenv("ANOMALY_Z_SCORE_THRESHOLD", 3.0))
+        self.anomaly_isolation_forest_contamination = float(os.getenv("ANOMALY_ISOLATION_FOREST_CONTAMINATION", 0.01))
 
 # Instancia global para acceso a la configuración
 settings = Settings()
@@ -129,11 +133,14 @@ def save_config_to_supabase(config: Dict[str, Any]) -> bool:
 
         # Eliminar configuración actual
         delete_response = supabase.table("configuracion_sistema").delete().neq("clave", "non_existent_key").execute()
-        if hasattr(delete_response, 'error') and delete_response.error:
-             logger.error(f"Error al eliminar configuración existente en Supabase: {delete_response.error}")
-             # Continuar intentando insertar, podría ser un error menor
+        # Supabase client might return a response object without a direct 'error' attribute on success
+        # Check for 'data' attribute to confirm success or inspect the response structure for errors
+        if not hasattr(delete_response, 'data') or not delete_response.data:
+            # If 'data' is empty or not present, it might indicate an issue or no records to delete
+            # Log the full response for debugging if it's not as expected
+            logger.warning(f"Posible error o no se encontraron registros para eliminar en Supabase: {delete_response}")
         else:
-             logger.info("Configuración existente eliminada de Supabase.")
+            logger.info("Configuración existente eliminada de Supabase.")
 
 
         # Preparar datos para insertar
@@ -202,7 +209,9 @@ def load_config(config_path: Optional[str] = None) -> Dict[str, Any]:
         "MAX_TOKENS_CONSIDERADOS": int(os.getenv("MAX_TOKENS_CONSIDERADOS", 50)),
         "BINANCE_TESTNET": os.getenv("BINANCE_TESTNET", "False").lower() == "true", # Añadir BINANCE_TESTNET
         "N8N_WEBHOOK_OPORTUNIDAD": os.getenv("N8N_WEBHOOK_OPORTUNIDAD", "https://d261-177-222-98-63.ngrok-free.app/webhook-test/arbitraje-oportunidad"), # Añadir webhook URLs
-        "N8N_WEBHOOK_RESULTADO": os.getenv("N8N_WEBHOOK_RESULTADO", "http://localhost:5678/webhook/e5b3189c-352e-4506-8306-22a40360c7e2/arbitraje-resultado")
+        "N8N_WEBHOOK_RESULTADO": os.getenv("N8N_WEBHOOK_RESULTADO", "http://localhost:5678/webhook/e5b3189c-352e-4506-8306-22a40360c7e2/arbitraje-resultado"),
+        "ANOMALY_Z_SCORE_THRESHOLD": float(os.getenv("ANOMALY_Z_SCORE_THRESHOLD", 3.0)),
+        "ANOMALY_ISOLATION_FOREST_CONTAMINATION": float(os.getenv("ANOMALY_ISOLATION_FOREST_CONTAMINATION", 0.01))
     }
     # Integrar env_config, manejando categorías si es necesario.
     # Por simplicidad, asumimos que las variables de entorno son de nivel superior o mapean a categorías específicas.

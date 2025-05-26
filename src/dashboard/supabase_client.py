@@ -1,5 +1,8 @@
+import json # Añadido
 import logging
 import os
+import random # Añadido
+from datetime import datetime # Añadido
 from typing import Any, Dict, List, Optional
 
 import streamlit as st
@@ -16,7 +19,7 @@ from src.utils.mock_data import (
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger("dashboard.supabase")
 
-def get_supabase_client() -> Client:
+def get_supabase_client() -> Optional[Client]:
     """
     Obtiene un cliente de Supabase configurado
     
@@ -141,13 +144,21 @@ def get_performance_metrics(use_mock=False) -> Dict[str, Any]:
         # Calcular tiempos de ejecución
         tiempos = []
         for op in operations:
-            if op.get('estado') == "COMPLETADO" and op.get('fecha_inicio_ejecucion') and op.get('fecha_completado'):
-                try:
-                    inicio = datetime.datetime.fromisoformat(op.get('fecha_inicio_ejecucion'))
-                    fin = datetime.datetime.fromisoformat(op.get('fecha_completado'))
-                    tiempos.append((fin - inicio).total_seconds())
-                except:
-                    pass
+            if op.get('estado') == "COMPLETADO":
+                fecha_inicio = op.get('fecha_inicio_ejecucion')
+                fecha_completado = op.get('fecha_completado')
+                
+                if fecha_inicio and fecha_completado:
+                    try:
+                        inicio = datetime.fromisoformat(fecha_inicio)
+                        fin = datetime.fromisoformat(fecha_completado)
+                        tiempos.append((fin - inicio).total_seconds())
+                    except ValueError as e:
+                        logger.warning(f"Error al parsear fecha de operación {op.get('id')}: {e}. Inicio: {fecha_inicio}, Fin: {fecha_completado}")
+                    except TypeError as e:
+                        logger.warning(f"Error de tipo al parsear fecha de operación {op.get('id')}: {e}. Inicio: {fecha_inicio}, Fin: {fecha_completado}")
+                else:
+                    logger.debug(f"Fechas de inicio o completado faltantes para la operación {op.get('id')}. No se calculará el tiempo de ejecución.")
         
         tiempo_promedio = sum(tiempos) / len(tiempos) if tiempos else 0
         
@@ -188,7 +199,7 @@ def get_realtime_opportunities(use_mock=False) -> List[Dict[str, Any]]:
     """
     if use_mock or os.getenv("DASHBOARD_MODE", "").lower() == "dev":
         logger.info("Usando datos simulados para oportunidades en tiempo real")
-        return generate_mock_realtime_opportunities()
+        return generate_mock_realtime_opportunities(count=5)
     
     try:
         supabase = get_supabase_client()
@@ -349,4 +360,47 @@ def update_system_config(config: Dict[str, Any], use_mock=False) -> bool:
         return hasattr(response, 'data')
     except Exception as e:
         logger.error(f"Error al actualizar configuración: {str(e)}")
+        return False
+
+def insertar_oportunidad(opportunity_data: Dict[str, Any]) -> bool:
+    """
+    Inserta una oportunidad detectada en la tabla 'oportunidades_detectadas' de Supabase.
+
+    Args:
+        opportunity_data (Dict[str, Any]): Diccionario con los datos de la oportunidad.
+
+    Returns:
+        bool: True si la inserción fue exitosa, False en caso contrario.
+    """
+    try:
+        supabase = get_supabase_client()
+        if not supabase:
+            logger.error("No se pudo obtener cliente Supabase para insertar oportunidad.")
+            return False
+
+        # Mapear los datos de la oportunidad al esquema de la tabla
+        # Asegúrate de que los nombres de las columnas coincidan con tu tabla en Supabase
+        data_to_insert = {
+            "opportunity_id": opportunity_data.get("opportunity_id"),
+            "cycle": opportunity_data.get("cycle"),
+            "profit_percentage_gross": opportunity_data.get("profit_percentage_gross"),
+            "profit_percentage_net": opportunity_data.get("profit_percentage_net"),
+            "steps": json.dumps(opportunity_data.get("steps")), # Convertir lista de pasos a JSON string
+            "capital_inicial": opportunity_data.get("capital_inicial"),
+            "capital_sugerido": opportunity_data.get("capital_sugerido"),
+            "timestamp": opportunity_data.get("timestamp", datetime.now().isoformat()), # Usar timestamp de la oportunidad o actual
+            "source": opportunity_data.get("source", "Deteccion"), # Fuente de la oportunidad
+            "details": json.dumps(opportunity_data.get("details", {})) # Detalles adicionales como JSON string
+        }
+
+        response = supabase.table("oportunidades_detectadas").insert(data_to_insert).execute()
+
+        if hasattr(response, 'data') and response.data:
+            logger.info(f"Oportunidad {opportunity_data.get('opportunity_id')} insertada en Supabase.")
+            return True
+        else:
+            logger.error(f"Fallo al insertar oportunidad {opportunity_data.get('opportunity_id')} en Supabase: {response.data}")
+            return False
+    except Exception as e:
+        logger.error(f"Error al insertar oportunidad en Supabase: {str(e)}", exc_info=e)
         return False

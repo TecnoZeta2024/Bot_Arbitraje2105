@@ -1,6 +1,12 @@
 from dataclasses import dataclass
-from typing import Any, Dict, Optional, Protocol
+from typing import Any, Dict, Optional, Protocol, List
+from decimal import Decimal
 
+from src.infrastructure.external_apis.binance_client import BinanceClient
+from src.infrastructure.external_apis.mobula_client import MobulaAPIClient
+from src.data.binance_transformer import BinanceTransformer
+from src.data.mobula_transformer import MobulaTransformer
+from src.domain.data_models import MarketDataUnified
 
 @dataclass
 class Ticker:
@@ -31,9 +37,9 @@ class IExchangeAdapter(Protocol):
     """
     Interfaz unificada para interactuar con diferentes exchanges de criptomonedas.
     """
-    async def get_ticker(self, symbol: str) -> Ticker:
+    async def get_ticker(self, symbol: str) -> MarketDataUnified:
         """
-        Obtiene la información del ticker para un símbolo dado.
+        Obtiene la información del ticker para un símbolo dado, ya transformada.
         """
         ...
 
@@ -51,54 +57,80 @@ class IExchangeAdapter(Protocol):
 
 class BinanceAdapter(IExchangeAdapter):
     """
-    Adaptador para interactuar con la API de Binance.
+    Adaptador para interactuar con la API de Binance, integrando transformadores.
     """
-    def __init__(self, api_key: str, secret_key: str):
-        self.api_key = api_key
-        self.secret_key = secret_key
-        # Aquí se inicializaría el cliente de Binance real
-        print("BinanceAdapter inicializado.")
+    def __init__(self, trading: bool = False):
+        self.binance_client = BinanceClient(trading=trading)
+        self.transformer = BinanceTransformer()
+        print(f"BinanceAdapter inicializado (trading: {trading}).")
 
-    async def get_ticker(self, symbol: str) -> Ticker:
-        # Implementación real para obtener el ticker de Binance
-        print(f"Obteniendo ticker para {symbol} desde Binance.")
-        return Ticker(symbol=symbol, bid=0.0, ask=0.0, last=0.0, timestamp=0)
+    async def get_ticker(self, symbol: str) -> MarketDataUnified:
+        """
+        Obtiene la información del ticker para un símbolo dado de Binance
+        y la transforma a MarketDataUnified.
+        """
+        ticker_data = self.binance_client.get_ticker(symbol)
+        if ticker_data:
+            return self.transformer.transform_ticker_24hr(ticker_data)
+        raise ValueError(f"No se pudieron obtener datos del ticker para {symbol} desde Binance.")
 
     async def place_order(self, order: Order) -> OrderResult:
         # Implementación real para colocar una orden en Binance
-        print(f"Colocando orden en Binance: {order}")
-        return OrderResult(order_id="binance_order_123", symbol=order.symbol,
-                           status="FILLED", amount=order.amount, price=order.price or 0.0,
-                           timestamp=0)
+        # Asumiendo que el cliente de Binance tiene un método para esto
+        result = self.binance_client.crear_orden_mercado(order.symbol, order.side, order.amount)
+        if result:
+            order_id = str(result.get("orderId", ""))
+            symbol = result.get("symbol", "")
+            status = result.get("status", "UNKNOWN")
+            amount = float(result.get("executedQty", 0.0))
+            price = float(result.get("price", order.price or 0.0))
+            timestamp = int(result.get("transactTime", 0))
+            return OrderResult(order_id=order_id, symbol=symbol,
+                               status=status, amount=amount, price=price,
+                               timestamp=timestamp)
+        raise ValueError("No se pudo crear la orden de mercado en Binance.")
 
     async def get_balance(self, asset: str) -> float:
         # Implementación real para obtener el balance de Binance
-        print(f"Obteniendo balance de {asset} desde Binance.")
-        return 0.0
+        balance = self.binance_client.obtener_saldo(asset)
+        return balance if balance is not None else 0.0
 
-class CoinbaseAdapter(IExchangeAdapter):
+class MobulaAdapter(IExchangeAdapter):
     """
-    Adaptador para interactuar con la API de Coinbase.
+    Adaptador para interactuar con la API de Mobula, integrando transformadores.
     """
-    def __init__(self, api_key: str, secret_key: str):
-        self.api_key = api_key
-        self.secret_key = secret_key
-        # Aquí se inicializaría el cliente de Coinbase real
-        print("CoinbaseAdapter inicializado.")
+    def __init__(self):
+        self.mobula_client = MobulaAPIClient()
+        self.transformer = MobulaTransformer()
+        print("MobulaAdapter inicializado.")
 
-    async def get_ticker(self, symbol: str) -> Ticker:
-        # Implementación real para obtener el ticker de Coinbase
-        print(f"Obteniendo ticker para {symbol} desde Coinbase.")
-        return Ticker(symbol=symbol, bid=0.0, ask=0.0, last=0.0, timestamp=0)
+    async def get_raw_ticker(self, symbol: str) -> Optional[Dict[str, Any]]:
+        """
+        Obtiene la información del ticker para un símbolo dado de Mobula en formato bruto.
+        """
+        market_data_raw = await self.mobula_client.get_market_data(assets=[symbol])
+        if market_data_raw and symbol.upper() in market_data_raw:
+            return market_data_raw[symbol.upper()]
+        return None
+
+    async def get_ticker(self, symbol: str) -> MarketDataUnified:
+        """
+        Obtiene la información de mercado para un símbolo dado de Mobula
+        y la transforma a MarketDataUnified.
+        """
+        raw_data = await self.get_raw_ticker(symbol)
+        if raw_data:
+            return self.transformer.transform_market_data(raw_data)
+        raise ValueError(f"No se pudieron obtener datos del ticker para {symbol} desde Mobula.")
 
     async def place_order(self, order: Order) -> OrderResult:
-        # Implementación real para colocar una orden en Coinbase
-        print(f"Colocando orden en Coinbase: {order}")
-        return OrderResult(order_id="coinbase_order_456", symbol=order.symbol,
-                           status="FILLED", amount=order.amount, price=order.price or 0.0,
-                           timestamp=0)
+        # Mobula no es un exchange de trading, por lo que este método no aplica.
+        # Podríamos levantar una excepción o devolver un resultado de error.
+        raise NotImplementedError("Mobula API no soporta la colocación de órdenes.")
 
     async def get_balance(self, asset: str) -> float:
-        # Implementación real para obtener el balance de Coinbase
-        print(f"Obteniendo balance de {asset} desde Coinbase.")
-        return 0.0
+        # Mobula no es un exchange de trading, por lo que este método no aplica.
+        raise NotImplementedError("Mobula API no soporta la obtención de balances.")
+
+# No instanciar adaptadores globales aquí, deben ser instanciados donde se necesiten
+# para permitir la inyección de dependencias y configuración flexible.

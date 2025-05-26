@@ -1,16 +1,18 @@
-import threading
-import time
+import importlib.util
 import json
-from collections import deque
-import httpx
 import logging
 import os
-import importlib.util
 import sys
-from typing import Optional, Dict, Any, List
-from src.mcp_server.database import get_db_connection, init_db
-from src.mcp_server.schemas import MCPRegistration, MCPInfo
+import threading
+import time
+from collections import deque
+from typing import Any, Dict, List, Optional
+
+import httpx
+
 from src.mcp_server.adapters.base_adapter import BaseMCPAdapter
+from src.mcp_server.database import get_db_connection, init_db
+from src.mcp_server.schemas import MCPInfo, MCPRegistration
 
 logger = logging.getLogger(__name__)
 

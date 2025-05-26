@@ -7,48 +7,39 @@ import hashlib
 from urllib.parse import urlencode
 import requests # Import requests to mock exceptions
 
-from src.apis.binance_client import BinanceClient
+from src.infrastructure.external_apis.binance_client import BinanceClient
+from src.utils.config import settings # Import settings directly for mocking
 
 # Mock de las dependencias externas
-@patch('src.apis.binance_client.get_binance_data_config')
-@patch('src.apis.binance_client.get_binance_trade_config')
-@patch('src.apis.binance_client.requests')
-@patch('src.apis.binance_client.time') # Mock time for timestamp in signed requests
+# Los mocks se inyectan como argumentos a los métodos de prueba
+@patch('src.infrastructure.external_apis.binance_client.requests')
+@patch('src.infrastructure.external_apis.binance_client.time') # Mock time for timestamp in signed requests
+@patch('src.infrastructure.external_apis.binance_client.get_logger') # Mock logger to prevent output during tests
 class TestBinanceClient(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        """Configuración que se ejecuta una vez para toda la clase de tests."""
+        # No es necesario parchear settings aquí, ya que los tests pasan api_key y api_secret directamente al constructor de BinanceClient.
+        pass
+
+    @classmethod
+    def tearDownClass(cls):
+        """Limpieza que se ejecuta una vez después de todos los tests de la clase."""
+        pass
+
     def setUp(self):
-        """Configuración común para los tests."""
-        # Reset mocks before each test
-        self.mock_get_binance_data_config.reset_mock()
-        self.mock_get_binance_trade_config.reset_mock()
-        self.mock_requests.reset_mock()
-        self.mock_time.reset_mock()
+        """Configuración común para cada test."""
+        # Los mocks inyectados por los decoradores de clase se pasan como argumentos a los métodos de prueba.
+        # No es necesario resetearlos aquí si se manejan a nivel de método o si su estado no interfiere.
+        # Para este caso, los mocks de requests, time y logger se pasan directamente a los métodos.
+        pass
 
-        # Configure default mock settings
-        self.mock_get_binance_data_config.return_value = {
-            "base_url": "https://api.binance.com/api/v3/",
-            "timeout": 10
-        }
-        self.mock_get_binance_trade_config.return_value = {
-            "base_url": "https://api.binance.com/api/v3/",
-            "api_key": "test_api_key",
-            "api_secret": "test_api_secret",
-            "testnet": True,
-            "timeout": 10
-        }
-        # Mock time.time to return a fixed value for timestamp generation
-        self.mock_time.time.return_value = 1678886400 # Example timestamp
-
-    @patch('src.apis.binance_client.get_logger') # Mock logger to prevent output during tests
-    def test_init_data_client(self, mock_get_logger, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_init_data_client(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para la inicialización del cliente de datos.
         """
         client = BinanceClient(trading=False)
-
-        # Verify data config was used
-        mock_get_binance_data_config.assert_called_once()
-        mock_get_binance_trade_config.assert_not_called()
 
         # Verify attributes
         self.assertEqual(client.base_url, "https://api.binance.com/api/v3/")
@@ -58,26 +49,22 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(client.timeout, 10)
         self.assertFalse(client.trading_enabled)
 
-    @patch('src.apis.binance_client.get_logger') # Mock logger to prevent output during tests
-    def test_init_trade_client(self, mock_get_logger, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_init_trade_client(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para la inicialización del cliente de trading.
         """
-        client = BinanceClient(trading=True)
-
-        # Verify trade config was used
-        mock_get_binance_trade_config.assert_called_once()
-        mock_get_binance_data_config.assert_not_called()
+        # Pass mock API keys directly to the constructor
+        client = BinanceClient(trading=True, api_key='test_api_key', api_secret='test_api_secret')
 
         # Verify attributes
-        self.assertEqual(client.base_url, "https://api.binance.com/api/v3/")
+        self.assertEqual(client.base_url, "https://testnet.binance.vision/api/v3/") # Should be testnet URL
         self.assertEqual(client.api_key, "test_api_key")
         self.assertEqual(client.api_secret, "test_api_secret")
         self.assertTrue(client.testnet)
         self.assertEqual(client.timeout, 10)
         self.assertTrue(client.trading_enabled)
 
-    def test_get_headers_data_client(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_get_headers_data_client(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para _get_headers en cliente de datos.
         """
@@ -89,11 +76,12 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(headers["Content-Type"], "application/json")
         self.assertNotIn("X-MBX-APIKEY", headers)
 
-    def test_get_headers_trade_client(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_get_headers_trade_client(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para _get_headers en cliente de trading.
         """
-        client = BinanceClient(trading=True)
+        # Pass mock API keys directly to the constructor
+        client = BinanceClient(trading=True, api_key='test_api_key', api_secret='test_api_secret')
         headers = client._get_headers()
 
         # Verify headers contain API key
@@ -102,12 +90,13 @@ class TestBinanceClient(unittest.TestCase):
         self.assertIn("X-MBX-APIKEY", headers)
         self.assertEqual(headers["X-MBX-APIKEY"], "test_api_key")
 
-    def test_get_signature(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_get_signature(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para _get_signature.
         Verifica que genera la firma HMAC SHA256 correcta.
         """
-        client = BinanceClient(trading=True)
+        # Pass mock API keys directly to the constructor
+        client = BinanceClient(trading=True, api_key='test_api_key', api_secret='test_api_secret')
         params = {"symbol": "BTCUSDT", "limit": 100}
 
         # Expected signature calculation
@@ -122,7 +111,7 @@ class TestBinanceClient(unittest.TestCase):
 
         self.assertEqual(signature, expected_signature)
 
-    def test_make_api_request_get_success(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_make_api_request_get_success(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para _make_api_request (GET exitoso).
         """
@@ -145,11 +134,12 @@ class TestBinanceClient(unittest.TestCase):
         )
         self.assertEqual(result, {"status": "success"})
 
-    def test_make_api_request_post_success(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_make_api_request_post_success(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para _make_api_request (POST exitoso).
         """
-        client = BinanceClient(trading=True) # Use trading client for signed request example
+        # Use trading client for signed request example, pass mock API keys
+        client = BinanceClient(trading=True, api_key='test_api_key', api_secret='test_api_secret')
         endpoint = "test_endpoint"
         params = {"param1": "value1"}
         mock_response = MagicMock()
@@ -162,17 +152,17 @@ class TestBinanceClient(unittest.TestCase):
              result = client._make_api_request(endpoint, method="POST", params=params, signed=True)
 
              # Verify requests.post was called with correct parameters
-             expected_params = {"param1": "value1", "timestamp": int(self.mock_time.time.return_value * 1000), "signature": "mock_signature"}
+             expected_params = {"param1": "value1", "timestamp": int(mock_time.time.return_value * 1000), "signature": "mock_signature"}
              mock_requests.post.assert_called_once_with(
-                 "https://api.binance.com/api/v3/test_endpoint",
+                 "https://testnet.binance.vision/api/v3/test_endpoint", # Should be testnet URL
                  headers={"Content-Type": "application/json", "X-MBX-APIKEY": "test_api_key"},
                  params=expected_params,
                  timeout=10
              )
-             mock_get_signature.assert_called_once_with({"param1": "value1", "timestamp": int(self.mock_time.time.return_value * 1000)})
+             mock_get_signature.assert_called_once_with({"param1": "value1", "timestamp": int(mock_time.time.return_value * 1000)})
              self.assertEqual(result, {"status": "success"})
 
-    def test_make_api_request_error_status(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_make_api_request_error_status(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para _make_api_request (respuesta con error).
         """
@@ -189,7 +179,7 @@ class TestBinanceClient(unittest.TestCase):
         mock_requests.get.assert_called_once()
         self.assertIsNone(result)
 
-    def test_make_api_request_exception(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_make_api_request_exception(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para _make_api_request (excepción durante la solicitud).
         """
@@ -203,11 +193,12 @@ class TestBinanceClient(unittest.TestCase):
         mock_requests.get.assert_called_once()
         self.assertIsNone(result)
 
-    def test_make_api_request_signed_without_keys(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_make_api_request_signed_without_keys(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para _make_api_request (solicitud firmada sin API keys).
         """
-        client = BinanceClient(trading=False) # Data client has no keys
+        # Ensure client is initialized without keys for this test
+        client = BinanceClient(trading=True, api_key=None, api_secret=None)
         endpoint = "test_endpoint"
 
         result = client._make_api_request(endpoint, signed=True)
@@ -217,7 +208,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertIsNone(result)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_info_exchange(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_info_exchange(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_info_exchange.
         Verifica que llama a _make_api_request con el endpoint correcto.
@@ -227,12 +218,12 @@ class TestBinanceClient(unittest.TestCase):
 
         info = client.obtener_info_exchange()
 
-        # Verify _make_api_request was called with the correct endpoint
+        # Verify _make_api_request was called with the correct endpoint and params
         mock_make_api_request.assert_called_once_with("exchangeInfo", method="GET", params=None, signed=False)
         self.assertEqual(info, {"symbols": []})
 
     @patch.object(BinanceClient, 'obtener_info_exchange')
-    def test_obtener_simbolos_trading(self, mock_obtener_info_exchange, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_simbolos_trading(self, mock_obtener_info_exchange, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_simbolos_trading.
         Verifica que obtiene y filtra los símbolos de trading.
@@ -263,7 +254,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertNotIn("NONTRADING", simbolos)
 
     @patch.object(BinanceClient, 'obtener_info_exchange')
-    def test_obtener_simbolos_trading_no_info(self, mock_obtener_info_exchange, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_simbolos_trading_no_info(self, mock_obtener_info_exchange, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_simbolos_trading cuando obtener_info_exchange retorna None.
         Verifica que retorna una lista vacía.
@@ -280,7 +271,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(simbolos, [])
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_precio_ticker_success(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_precio_ticker_success(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_precio_ticker (exitoso).
         Verifica que obtiene el precio de un símbolo.
@@ -295,7 +286,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(price, 60000.5)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_precio_ticker_failure(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_precio_ticker_failure(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_precio_ticker (fallo).
         Verifica que retorna None si la solicitud falla.
@@ -310,7 +301,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertIsNone(price)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_precio_ticker_missing_price(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_precio_ticker_missing_price(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_precio_ticker (precio faltante).
         Verifica que retorna None si la respuesta no contiene el precio.
@@ -325,7 +316,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertIsNone(price)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_precios_todos_success(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_precios_todos_success(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_precios_todos (exitoso).
         Verifica que obtiene los precios de todos los símbolos.
@@ -349,7 +340,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(prices["XRPETH"], 0.0001)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_precios_todos_failure(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_precios_todos_failure(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_precios_todos (fallo).
         Verifica que retorna un diccionario vacío si la solicitud falla.
@@ -364,7 +355,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(prices, {})
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_precios_todos_invalid_response(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_precios_todos_invalid_response(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_precios_todos (respuesta inválida).
         Verifica que retorna un diccionario vacío si la respuesta no es una lista.
@@ -379,7 +370,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(prices, {})
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_profundidad_mercado(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_profundidad_mercado(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_profundidad_mercado.
         Verifica que llama a _make_api_request con los parámetros correctos.
@@ -401,7 +392,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(depth, {"bids": [], "asks": []})
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_klines_success(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_klines_success(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_klines (exitoso).
         Verifica que obtiene datos históricos de velas.
@@ -410,7 +401,7 @@ class TestBinanceClient(unittest.TestCase):
         simbolo = "BTCUSDT"
         intervalo = "1h"
         limit = 50
-        mock_make_api_request.return_value = [[...]] # Simulate klines data
+        mock_make_api_request.return_value = [[1,2,3,4,5,6,7,8,9,10,11,12]] # Simulate klines data
 
         klines = client.obtener_klines(simbolo, intervalo, limit)
 
@@ -421,10 +412,10 @@ class TestBinanceClient(unittest.TestCase):
             params={"symbol": simbolo, "interval": intervalo, "limit": limit},
             signed=False
         )
-        self.assertEqual(klines, [[...]])
+        self.assertEqual(klines, [[1,2,3,4,5,6,7,8,9,10,11,12]])
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_klines_failure(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_klines_failure(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_klines (fallo).
         Verifica que retorna una lista vacía si la solicitud falla.
@@ -447,7 +438,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(klines, [])
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_volumen_24h_success(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_volumen_24h_success(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_volumen_24h (exitoso).
         Verifica que obtiene el volumen de 24h de un símbolo.
@@ -463,7 +454,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(volume, 123456.789)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_volumen_24h_failure(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_volumen_24h_failure(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_volumen_24h (fallo).
         Verifica que retorna None si la solicitud falla.
@@ -479,7 +470,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertIsNone(volume)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_volumen_24h_missing_volume(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_volumen_24h_missing_volume(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_volumen_24h (volumen faltante).
         Verifica que retorna None si la respuesta no contiene el volumen.
@@ -495,7 +486,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertIsNone(volume)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_verificar_credenciales_success(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_verificar_credenciales_success(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para verificar_credenciales (exitoso).
         Verifica que las credenciales son válidas.
@@ -510,7 +501,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertTrue(is_valid)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_verificar_credenciales_failure(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_verificar_credenciales_failure(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para verificar_credenciales (fallo).
         Verifica que retorna False si la solicitud falla.
@@ -525,7 +516,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertFalse(is_valid)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_verificar_credenciales_missing_balances(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_verificar_credenciales_missing_balances(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para verificar_credenciales (balances faltantes).
         Verifica que retorna False si la respuesta no contiene 'balances'.
@@ -539,7 +530,7 @@ class TestBinanceClient(unittest.TestCase):
         mock_make_api_request.assert_called_once_with("account", method="GET", params=None, signed=True)
         self.assertFalse(is_valid)
 
-    def test_verificar_credenciales_data_client(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_verificar_credenciales_data_client(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para verificar_credenciales en cliente de datos.
         Verifica que retorna False si no es un cliente de trading.
@@ -553,7 +544,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertFalse(is_valid)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_saldo_success(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_saldo_success(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_saldo (exitoso).
         Verifica que obtiene el saldo disponible de un activo.
@@ -573,7 +564,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(balance, 1000.0)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_saldo_asset_not_found(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_saldo_asset_not_found(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_saldo (activo no encontrado).
         Verifica que retorna 0.0 si el activo no está en la lista de balances.
@@ -593,7 +584,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(balance, 0.0)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_saldo_failure(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_saldo_failure(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_saldo (fallo).
         Verifica que retorna 0.0 si la solicitud falla.
@@ -607,7 +598,7 @@ class TestBinanceClient(unittest.TestCase):
         mock_make_api_request.assert_called_once_with("account", method="GET", params=None, signed=True)
         self.assertEqual(balance, 0.0)
 
-    def test_obtener_saldo_data_client(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_saldo_data_client(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_saldo en cliente de datos.
         Verifica que retorna 0.0 si no es un cliente de trading.
@@ -621,7 +612,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(balance, 0.0)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_crear_orden_mercado_success(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_crear_orden_mercado_success(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para crear_orden_mercado (exitoso).
         Verifica que crea una orden de mercado correctamente.
@@ -644,7 +635,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(order, {"orderId": 12345})
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_crear_orden_mercado_failure(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_crear_orden_mercado_failure(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para crear_orden_mercado (fallo).
         Verifica que retorna None si la solicitud falla.
@@ -666,7 +657,7 @@ class TestBinanceClient(unittest.TestCase):
         )
         self.assertIsNone(order)
 
-    def test_crear_orden_mercado_data_client(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_crear_orden_mercado_data_client(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para crear_orden_mercado en cliente de datos.
         Verifica que retorna None si no es un cliente de trading.
@@ -683,7 +674,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertIsNone(order)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_estado_orden_success(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_estado_orden_success(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_estado_orden (exitoso).
         Verifica que obtiene el estado de una orden.
@@ -705,7 +696,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(status, {"status": "FILLED"})
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_obtener_estado_orden_failure(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_estado_orden_failure(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_estado_orden (fallo).
         Verifica que retorna None si la solicitud falla.
@@ -726,7 +717,7 @@ class TestBinanceClient(unittest.TestCase):
         )
         self.assertIsNone(status)
 
-    def test_obtener_estado_orden_data_client(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_estado_orden_data_client(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_estado_orden en cliente de datos.
         Verifica que retorna None si no es un cliente de trading.
@@ -742,7 +733,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertIsNone(status)
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_cancelar_orden_success(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_cancelar_orden_success(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para cancelar_orden (exitoso).
         Verifica que cancela una orden abierta.
@@ -764,7 +755,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(cancellation_result, {"orderId": 12345, "status": "CANCELED"})
 
     @patch.object(BinanceClient, '_make_api_request')
-    def test_cancelar_orden_failure(self, mock_make_api_request, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_cancelar_orden_failure(self, mock_make_api_request, mock_get_logger, mock_time, mock_requests):
         """
         Test para cancelar_orden (fallo).
         Verifica que retorna None si la solicitud falla.
@@ -785,7 +776,7 @@ class TestBinanceClient(unittest.TestCase):
         )
         self.assertIsNone(cancellation_result)
 
-    def test_cancelar_orden_data_client(self, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_cancelar_orden_data_client(self, mock_get_logger, mock_time, mock_requests):
         """
         Test para cancelar_orden en cliente de datos.
         Verifica que retorna None si no es un cliente de trading.
@@ -801,7 +792,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertIsNone(cancellation_result)
 
     @patch.object(BinanceClient, 'obtener_info_exchange')
-    def test_obtener_reglas_simbolo_success(self, mock_obtener_info_exchange, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_reglas_simbolo_success(self, mock_obtener_info_exchange, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_reglas_simbolo (exitoso).
         Verifica que obtiene las reglas de trading para un símbolo.
@@ -824,7 +815,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(rules, {"symbol": "BTCUSDT", "filters": [{"filterType": "LOT_SIZE", "stepSize": "0.000001"}]})
 
     @patch.object(BinanceClient, 'obtener_info_exchange')
-    def test_obtener_reglas_simbolo_not_found(self, mock_obtener_info_exchange, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_reglas_simbolo_not_found(self, mock_obtener_info_exchange, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_reglas_simbolo (símbolo no encontrado).
         Verifica que retorna None si el símbolo no está en la información del exchange.
@@ -846,7 +837,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertIsNone(rules)
 
     @patch.object(BinanceClient, 'obtener_info_exchange')
-    def test_obtener_reglas_simbolo_failure(self, mock_obtener_info_exchange, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_obtener_reglas_simbolo_failure(self, mock_obtener_info_exchange, mock_get_logger, mock_time, mock_requests):
         """
         Test para obtener_reglas_simbolo (fallo).
         Verifica que retorna None si obtener_info_exchange falla.
@@ -862,7 +853,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertIsNone(rules)
 
     @patch.object(BinanceClient, 'obtener_reglas_simbolo')
-    def test_redondear_cantidad_success(self, mock_obtener_reglas_simbolo, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_redondear_cantidad_success(self, mock_obtener_reglas_simbolo, mock_get_logger, mock_time, mock_requests):
         """
         Test para redondear_cantidad (exitoso).
         Verifica que redondea la cantidad según las reglas del símbolo.
@@ -888,7 +879,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertAlmostEqual(rounded_quantity, 0.001567 - (0.001567 % 0.000001)) # Should round down to nearest step size
 
     @patch.object(BinanceClient, 'obtener_reglas_simbolo')
-    def test_redondear_cantidad_below_min_qty(self, mock_obtener_reglas_simbolo, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_redondear_cantidad_below_min_qty(self, mock_obtener_reglas_simbolo, mock_get_logger, mock_time, mock_requests):
         """
         Test para redondear_cantidad cuando la cantidad es menor al minQty.
         Verifica que retorna 0.0.
@@ -913,7 +904,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(rounded_quantity, 0.0)
 
     @patch.object(BinanceClient, 'obtener_reglas_simbolo')
-    def test_redondear_cantidad_no_rules(self, mock_obtener_reglas_simbolo, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_redondear_cantidad_no_rules(self, mock_obtener_reglas_simbolo, mock_get_logger, mock_time, mock_requests):
         """
         Test para redondear_cantidad cuando no se obtienen reglas.
         Verifica que retorna la cantidad original.
@@ -931,7 +922,7 @@ class TestBinanceClient(unittest.TestCase):
         self.assertEqual(rounded_quantity, cantidad) # Should return original quantity
 
     @patch.object(BinanceClient, 'obtener_reglas_simbolo')
-    def test_redondear_cantidad_no_lot_size_filter(self, mock_obtener_reglas_simbolo, mock_time, mock_requests, mock_get_binance_trade_config, mock_get_binance_data_config):
+    def test_redondear_cantidad_no_lot_size_filter(self, mock_obtener_reglas_simbolo, mock_get_logger, mock_time, mock_requests):
         """
         Test para redondear_cantidad cuando no hay filtro LOT_SIZE.
         Verifica que retorna la cantidad original.
@@ -954,8 +945,6 @@ class TestBinanceClient(unittest.TestCase):
         # Verify obtener_reglas_simbolo was called
         mock_obtener_reglas_simbolo.assert_called_once_with(simbolo)
         self.assertEqual(rounded_quantity, cantidad) # Should return original quantity
-
-    # Aquí se añadirán más tests para las otras funciones
 
 if __name__ == '__main__':
     unittest.main()

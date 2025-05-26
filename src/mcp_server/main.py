@@ -1,31 +1,41 @@
-import logging
 import json
-import uuid
+import logging
+import os
 import time
+import uuid
 from datetime import timedelta
+from typing import Any, Dict, Optional
 
-from fastapi import FastAPI, WebSocket, Depends, HTTPException, status, Request
+import redis.asyncio as redis
+from fastapi import Depends, FastAPI, HTTPException, Request, WebSocket, status
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi_limiter import FastAPILimiter
 from fastapi_limiter.depends import RateLimiter
-import redis.asyncio as redis
-import os
 from prometheus_client import Counter, Gauge, generate_latest
-from starlette.responses import PlainTextResponse, JSONResponse
-from starlette.middleware.gzip import GZipMiddleware # Importar GZipMiddleware
-from pydantic import ValidationError, TypeAdapter, BaseModel
-from typing import Optional, Dict, Any
+from pydantic import BaseModel, TypeAdapter, ValidationError
+from starlette.middleware.gzip import GZipMiddleware  # Importar GZipMiddleware
+from starlette.responses import JSONResponse, PlainTextResponse
 
 from src.mcp_server.auth import authenticate_user, create_access_token, get_current_user
+from src.mcp_server.dispatcher import MCPDispatcher  # Importar MCPDispatcher
 from src.mcp_server.logging_config import setup_logging
+from src.mcp_server.registry import MCPRegistry  # Importar MCPRegistry
 from src.mcp_server.schemas import (
-    MCPMessage, RequestMessage, ResponseMessage, ErrorMessage, AcknowledgmentMessage,
-    MessageType, ErrorDetails, PROTOCOL_VERSION,
-    RequestPayload, ResponsePayload, AcknowledgmentPayload,
-    MCPRegistration # Importar el nuevo esquema MCPRegistration
+    MCPRegistration,  # Importar el nuevo esquema MCPRegistration
 )
-from src.mcp_server.registry import MCPRegistry # Importar MCPRegistry
-from src.mcp_server.dispatcher import MCPDispatcher # Importar MCPDispatcher
+from src.mcp_server.schemas import (
+    PROTOCOL_VERSION,
+    AcknowledgmentMessage,
+    AcknowledgmentPayload,
+    ErrorDetails,
+    ErrorMessage,
+    MCPMessage,
+    MessageType,
+    RequestMessage,
+    RequestPayload,
+    ResponseMessage,
+    ResponsePayload,
+)
 
 # Configurar el logger para este módulo
 logger = logging.getLogger("mcp_server.main")

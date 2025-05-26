@@ -1,6 +1,7 @@
-from pydantic import BaseModel, Field
-from typing import Any, Dict, Optional, List
 from enum import Enum
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, Field
 
 # Definición de la versión del protocolo
 PROTOCOL_VERSION = "1.0.0"

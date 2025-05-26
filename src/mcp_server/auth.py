@@ -1,7 +1,8 @@
+from datetime import datetime, timedelta
+
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
-from datetime import datetime, timedelta
 
 # Configuración para JWT (estas deberían ser variables de entorno en un entorno de producción)
 SECRET_KEY = "your-secret-key" # ¡Cambia esto por una clave segura y guárdala en un .env!
