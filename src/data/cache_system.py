@@ -6,6 +6,7 @@ from typing import Any, Dict, Optional, Tuple
 
 import redis.asyncio as redis
 
+
 class CacheSystem:
     def __init__(self, redis_client: redis.Redis, l1_capacity: int = 1000, default_ttl: int = 300):
         self.l1_cache: OrderedDict[str, Tuple[Any, float]] = OrderedDict()

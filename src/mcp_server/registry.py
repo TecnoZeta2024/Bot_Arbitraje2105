@@ -1,7 +1,8 @@
+import json
 import threading
 import time
-import json
 from collections import deque
+
 
 class MCPRegistry:
     def __init__(self):

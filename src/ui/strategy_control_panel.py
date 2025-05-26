@@ -1,5 +1,14 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QScrollArea, QGroupBox
 from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import (
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
+    QScrollArea,
+    QVBoxLayout,
+    QWidget,
+)
+
 
 class StrategyControlPanel(QWidget):
     def __init__(self, parent=None):
@@ -93,8 +102,9 @@ class StrategyControlPanel(QWidget):
             # Update chart if a ChartWidget is integrated
 
 if __name__ == '__main__':
-    from PyQt5.QtWidgets import QApplication
     import sys
+
+    from PyQt5.QtWidgets import QApplication
 
     app = QApplication(sys.argv)
     panel = StrategyControlPanel()

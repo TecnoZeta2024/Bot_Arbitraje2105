@@ -1,5 +1,6 @@
-from typing import Protocol, Dict, Any, Optional
 from dataclasses import dataclass
+from typing import Any, Dict, Optional, Protocol
+
 
 @dataclass
 class Ticker:

@@ -1,6 +1,7 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QApplication
-from PyQt5.QtCore import Qt, QTimer, pyqtSignal, QObject, QCoreApplication
-from PyQt5.QtGui import QColor, QPalette, QFontMetrics
+from PyQt5.QtCore import QCoreApplication, QObject, Qt, QTimer, pyqtSignal
+from PyQt5.QtGui import QColor, QFontMetrics, QPalette
+from PyQt5.QtWidgets import QApplication, QLabel, QVBoxLayout, QWidget
+
 
 class NotificationManager(QObject):
     notification_signal = pyqtSignal(str, str, str) # type, message, details

@@ -2,561 +2,535 @@
 
 ## Visión General de la Gestión de Estado
 
-Scalper's Brain implementa un sistema de gestión de estado distribuido y reactivo, evolucionando significativamente del Bot_Arbitraje2105. El nuevo sistema maneja estado local (UI), estado compartido (entre componentes), estado distribuido (MCPs) y estado persistente (base de datos), todo coordinado mediante patrones reactivos y event-driven.
+Scalper's Brain implementa un sistema de gestión de estado híbrido que combina Event Sourcing para datos críticos, CQRS para optimización de lecturas, y state machines para flujos complejos. El sistema garantiza consistencia eventual mientras mantiene performance de tiempo real para trading de alta frecuencia.
 
 ## Arquitectura de Estado Multi-Capa
 
 ```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                          CAPA DE PRESENTACIÓN                            │
-│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐            │
-│  │  UI State      │  │  View Models   │  │  UI Cache      │            │
-│  │  (PyQt5)       │  │  (Reactive)    │  │  (Temporal)    │            │
-│  └────────┬───────┘  └────────┬───────┘  └────────┬───────┘            │
-│           └───────────────────┴───────────────────┘                     │
-└───────────────────────────────┬─────────────────────────────────────────┘
-                                │
-                                ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                       ESTADO DE APLICACIÓN                               │
-│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐            │
-│  │  App State     │  │  Session State │  │  Strategy State│            │
-│  │  Store         │  │  Manager       │  │  Machines      │            │
-│  └────────┬───────┘  └────────┬───────┘  └────────┬───────┘            │
-│           └───────────────────┴───────────────────┘                     │
-└───────────────────────────────┬─────────────────────────────────────────┘
-                                │
-                                ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         ESTADO DISTRIBUIDO                               │
-│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐            │
-│  │  MCP State     │  │  Exchange State│  │  Market State  │            │
-│  │  Registry      │  │  Aggregator    │  │  Snapshot      │            │
-│  └────────┬───────┘  └────────┬───────┘  └────────┬───────┘            │
-│           └───────────────────┴───────────────────┘                     │
-└───────────────────────────────┬─────────────────────────────────────────┘
-                                │
-                                ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│                       ESTADO PERSISTENTE                                 │
-│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐            │
-│  │  Event Store   │  │  State Store   │  │  Time Series   │            │
-│  │  (Immutable)   │  │  (Mutable)     │  │  Database      │            │
-│  └────────────────┘  └────────────────┘  └────────────────┘            │
-└─────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│                    UI STATE (PyQt5)                             │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │
+│  │ Local State  │  │ Redux-like   │  │   Reactive   │         │
+│  │  (Widgets)   │  │    Store     │  │  Bindings    │         │
+│  └──────────────┘  └──────────────┘  └──────────────┘         │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                 APPLICATION STATE                                │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │
+│  │   Command    │  │    Query     │  │    Event     │         │
+│  │   Handlers   │  │   Handlers   │  │   Handlers   │         │
+│  └──────────────┘  └──────────────┘  └──────────────┘         │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                   DOMAIN STATE                                   │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │
+│  │  Aggregates  │  │    State     │  │   Event      │         │
+│  │              │  │   Machines   │  │   Store      │         │
+│  └──────────────┘  └──────────────┘  └──────────────┘         │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│              INFRASTRUCTURE STATE                                │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐         │
+│  │ Write Models │  │ Read Models  │  │  Snapshots   │         │
+│  │   (Events)   │  │(Projections) │  │              │         │
+│  └──────────────┘  └──────────────┘  └──────────────┘         │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ## Patrones de Gestión de Estado
 
-### 1. Redux-like State Management para UI
-
-```python
-from dataclasses import dataclass
-from typing import Any, Dict, List, Callable
-from enum import Enum
-
-class ActionType(Enum):
-    # Market Actions
-    UPDATE_TICKER = "UPDATE_TICKER"
-    UPDATE_ORDERBOOK = "UPDATE_ORDERBOOK"
-    
-    # Trading Actions
-    PLACE_ORDER = "PLACE_ORDER"
-    ORDER_FILLED = "ORDER_FILLED"
-    ORDER_CANCELLED = "ORDER_CANCELLED"
-    
-    # Strategy Actions
-    STRATEGY_ENABLED = "STRATEGY_ENABLED"
-    STRATEGY_DISABLED = "STRATEGY_DISABLED"
-    STRATEGY_SIGNAL = "STRATEGY_SIGNAL"
-
-@dataclass
-class Action:
-    type: ActionType
-    payload: Dict[str, Any]
-    timestamp: datetime = field(default_factory=datetime.utcnow)
-
-class StateStore:
-    def __init__(self):
-        self._state = {}
-        self._subscribers: List[Callable] = []
-        self._middleware: List[Callable] = []
-        self._history: List[Action] = []
-        
-    def dispatch(self, action: Action):
-        # Middleware pipeline
-        for middleware in self._middleware:
-            action = middleware(action, self._state)
-            
-        # Update state
-        old_state = copy.deepcopy(self._state)
-        self._state = self._reducer(self._state, action)
-        
-        # History tracking
-        self._history.append(action)
-        
-        # Notify subscribers
-        for subscriber in self._subscribers:
-            subscriber(self._state, old_state, action)
-    
-    def subscribe(self, callback: Callable):
-        self._subscribers.append(callback)
-        return lambda: self._subscribers.remove(callback)
-    
-    def get_state(self) -> Dict[str, Any]:
-        return copy.deepcopy(self._state)
-```
-
-### 2. View Models Reactivos (MVVM Pattern)
-
-```python
-from PyQt5.QtCore import QObject, pyqtSignal
-import rx
-from rx import operators as ops
-
-class MarketDataViewModel(QObject):
-    # Signals para UI binding
-    ticker_updated = pyqtSignal(dict)
-    orderbook_updated = pyqtSignal(dict)
-    trade_executed = pyqtSignal(dict)
-    
-    def __init__(self, market_service: MarketDataService):
-        super().__init__()
-        self.market_service = market_service
-        self._subscriptions = []
-        
-        # Reactive streams
-        self.ticker_stream = rx.subject.BehaviorSubject({})
-        self.orderbook_stream = rx.subject.BehaviorSubject({})
-        
-        self._setup_streams()
-    
-    def _setup_streams(self):
-        # Ticker updates con throttling
-        ticker_sub = self.market_service.ticker_updates.pipe(
-            ops.throttle_first(0.1),  # Max 10 updates per second
-            ops.distinct_until_changed()
-        ).subscribe(
-            on_next=lambda data: self.ticker_updated.emit(data),
-            on_error=lambda e: self.handle_error(e)
-        )
-        self._subscriptions.append(ticker_sub)
-        
-        # Orderbook con debouncing
-        orderbook_sub = self.market_service.orderbook_updates.pipe(
-            ops.debounce(0.05),  # Wait 50ms after last update
-            ops.map(lambda ob: self._aggregate_orderbook(ob))
-        ).subscribe(
-            on_next=lambda data: self.orderbook_updated.emit(data),
-            on_error=lambda e: self.handle_error(e)
-        )
-        self._subscriptions.append(orderbook_sub)
-```
-
-### 3. State Machines para Estrategias
-
-```python
-from enum import Enum
-from transitions import Machine
-
-class StrategyState(Enum):
-    IDLE = "idle"
-    SCANNING = "scanning"
-    SIGNAL_DETECTED = "signal_detected"
-    EXECUTING = "executing"
-    COOLDOWN = "cooldown"
-    ERROR = "error"
-
-class ScalpingStrategyStateMachine:
-    def __init__(self):
-        self.state = StrategyState.IDLE
-        
-        # State machine configuration
-        self.machine = Machine(
-            model=self,
-            states=StrategyState,
-            initial=StrategyState.IDLE,
-            transitions=[
-                # From IDLE
-                {'trigger': 'start', 'source': StrategyState.IDLE, 'dest': StrategyState.SCANNING},
-                
-                # From SCANNING
-                {'trigger': 'signal_found', 'source': StrategyState.SCANNING, 'dest': StrategyState.SIGNAL_DETECTED},
-                {'trigger': 'stop', 'source': StrategyState.SCANNING, 'dest': StrategyState.IDLE},
-                
-                # From SIGNAL_DETECTED
-                {'trigger': 'execute', 'source': StrategyState.SIGNAL_DETECTED, 'dest': StrategyState.EXECUTING},
-                {'trigger': 'reject', 'source': StrategyState.SIGNAL_DETECTED, 'dest': StrategyState.SCANNING},
-                
-                # From EXECUTING
-                {'trigger': 'complete', 'source': StrategyState.EXECUTING, 'dest': StrategyState.COOLDOWN},
-                {'trigger': 'fail', 'source': StrategyState.EXECUTING, 'dest': StrategyState.ERROR},
-                
-                # From COOLDOWN
-                {'trigger': 'resume', 'source': StrategyState.COOLDOWN, 'dest': StrategyState.SCANNING},
-                
-                # From ERROR
-                {'trigger': 'recover', 'source': StrategyState.ERROR, 'dest': StrategyState.IDLE},
-            ],
-            before_state_change=self._before_state_change,
-            after_state_change=self._after_state_change
-        )
-        
-    def _before_state_change(self):
-        logger.info(f"Strategy transitioning from {self.state}")
-        
-    def _after_state_change(self):
-        logger.info(f"Strategy transitioned to {self.state}")
-        # Emit state change event
-        EventBus.emit(StrategyStateChanged(
-            strategy_id=self.id,
-            old_state=self.state,
-            new_state=self.state
-        ))
-```
-
-### 4. Event Store con Event Sourcing
+### 1. Event Sourcing para Datos Críticos
 
 ```python
 @dataclass
-class DomainEvent:
+class Event:
+    """Base class for all domain events"""
+    event_id: str = field(default_factory=lambda: str(uuid.uuid4()))
     aggregate_id: str
     event_type: str
-    event_data: Dict[str, Any]
-    event_id: str = field(default_factory=lambda: str(uuid.uuid4()))
-    timestamp: datetime = field(default_factory=datetime.utcnow)
-    version: int = 1
+    event_version: int = 1
+    occurred_at: datetime = field(default_factory=datetime.utcnow)
+    metadata: Dict[str, Any] = field(default_factory=dict)
 
-class EventStore:
-    def __init__(self, db_client: DatabaseClient):
-        self.db_client = db_client
-        self._projections: Dict[str, Projection] = {}
-        
-    async def append_event(self, event: DomainEvent):
-        """Append event to store and update projections"""
-        # Persist event
-        await self.db_client.execute(
-            """
-            INSERT INTO events (event_id, aggregate_id, event_type, event_data, timestamp, version)
-            VALUES ($1, $2, $3, $4, $5, $6)
-            """,
-            event.event_id, event.aggregate_id, event.event_type,
-            json.dumps(event.event_data), event.timestamp, event.version
-        )
-        
-        # Update projections
-        for projection in self._projections.values():
-            await projection.handle(event)
-            
-        # Publish to event bus
-        await EventBus.publish(event)
+class TradingSessionEventStore:
+    """Event store for trading session aggregate"""
     
-    async def get_events(self, aggregate_id: str, from_version: int = 0) -> List[DomainEvent]:
-        """Get events for aggregate from specific version"""
-        rows = await self.db_client.fetch(
-            """
-            SELECT * FROM events 
-            WHERE aggregate_id = $1 AND version > $2
-            ORDER BY version ASC
-            """,
-            aggregate_id, from_version
-        )
-        
-        return [self._row_to_event(row) for row in rows]
-    
-    async def replay_events(self, aggregate_id: str) -> Any:
-        """Replay events to rebuild aggregate state"""
-        events = await self.get_events(aggregate_id)
-        aggregate = self._create_aggregate(aggregate_id)
-        
-        for event in events:
-            aggregate.apply_event(event)
+    async def save_events(self, 
+                         aggregate_id: str, 
+                         events: List[Event], 
+                         expected_version: int) -> None:
+        """Save events with optimistic concurrency control"""
+        async with self.db.transaction() as tx:
+            # Check current version
+            current_version = await tx.fetchval(
+                "SELECT MAX(version) FROM events WHERE aggregate_id = $1",
+                aggregate_id
+            )
             
-        return aggregate
+            if current_version != expected_version:
+                raise ConcurrencyError(
+                    f"Expected version {expected_version}, got {current_version}"
+                )
+            
+            # Save events
+            for event in events:
+                await tx.execute("""
+                    INSERT INTO events 
+                    (event_id, aggregate_id, event_type, event_data, 
+                     version, occurred_at, metadata)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7)
+                """, event.event_id, aggregate_id, event.event_type,
+                    json.dumps(asdict(event)), current_version + 1,
+                    event.occurred_at, json.dumps(event.metadata))
+                
+                current_version += 1
+                
+            # Publish to event bus
+            for event in events:
+                await self.event_bus.publish(event)
 ```
 
-### 5. Caché Distribuido con Coherencia
+### 2. State Machines para Flujos Complejos
 
 ```python
-class DistributedCache:
-    def __init__(self, redis_client: Redis, local_cache_size: int = 1000):
+class OrderStateMachine:
+    """State machine for order lifecycle"""
+    
+    states = {
+        'CREATED': ['PENDING_SUBMIT'],
+        'PENDING_SUBMIT': ['SUBMITTED', 'REJECTED'],
+        'SUBMITTED': ['PARTIALLY_FILLED', 'FILLED', 'CANCELLED'],
+        'PARTIALLY_FILLED': ['FILLED', 'CANCELLED'],
+        'FILLED': ['SETTLED'],
+        'CANCELLED': [],
+        'REJECTED': [],
+        'SETTLED': []
+    }
+    
+    def __init__(self, order_id: str):
+        self.order_id = order_id
+        self.current_state = 'CREATED'
+        self.state_history = [('CREATED', datetime.utcnow())]
+        
+    def can_transition_to(self, new_state: str) -> bool:
+        """Check if transition is valid"""
+        return new_state in self.states.get(self.current_state, [])
+    
+    def transition_to(self, new_state: str, metadata: Dict = None) -> None:
+        """Execute state transition"""
+        if not self.can_transition_to(new_state):
+            raise InvalidStateTransition(
+                f"Cannot transition from {self.current_state} to {new_state}"
+            )
+        
+        old_state = self.current_state
+        self.current_state = new_state
+        self.state_history.append((new_state, datetime.utcnow(), metadata))
+        
+        # Emit state change event
+        event = OrderStateChanged(
+            order_id=self.order_id,
+            from_state=old_state,
+            to_state=new_state,
+            metadata=metadata
+        )
+        
+        return event
+```
+
+### 3. CQRS con Proyecciones Optimizadas
+
+```python
+class PortfolioProjection:
+    """Read model optimized for portfolio queries"""
+    
+    def __init__(self, redis_client: Redis, db_client: AsyncPGPool):
         self.redis = redis_client
-        self.local_cache = LRUCache(maxsize=local_cache_size)
-        self.subscriptions = {}
+        self.db = db_client
         
-    async def get(self, key: str) -> Optional[Any]:
-        # Check L1 cache
-        value = self.local_cache.get(key)
-        if value is not None:
-            return value
-            
-        # Check L2 cache (Redis)
-        value = await self.redis.get(key)
-        if value is not None:
-            # Update L1
-            self.local_cache[key] = value
-            return json.loads(value)
-            
-        return None
-    
-    async def set(self, key: str, value: Any, ttl: int = 3600):
-        # Update both caches
-        self.local_cache[key] = value
-        await self.redis.setex(key, ttl, json.dumps(value))
+    async def handle_position_opened(self, event: PositionOpened) -> None:
+        """Update projection when position is opened"""
+        # Update in-memory cache
+        portfolio_key = f"portfolio:{event.user_id}"
+        position_data = {
+            'symbol': event.symbol,
+            'quantity': str(event.quantity),
+            'entry_price': str(event.entry_price),
+            'opened_at': event.occurred_at.isoformat()
+        }
         
-        # Publish update event
-        await self.redis.publish(f"cache:update:{key}", json.dumps({
-            'key': key,
-            'action': 'set',
-            'timestamp': time.time()
-        }))
-    
-    async def invalidate(self, key: str):
-        # Remove from both caches
-        self.local_cache.pop(key, None)
-        await self.redis.delete(key)
-        
-        # Publish invalidation event
-        await self.redis.publish(f"cache:update:{key}", json.dumps({
-            'key': key,
-            'action': 'invalidate',
-            'timestamp': time.time()
-        }))
-```
-
-### 6. Estado de MCPs con Registry Pattern
-
-```python
-class MCPStateRegistry:
-    def __init__(self):
-        self._mcps: Dict[str, MCPState] = {}
-        self._health_checks: Dict[str, datetime] = {}
-        self._metrics: Dict[str, MCPMetrics] = {}
-        
-    async def register_mcp(self, mcp_id: str, mcp_config: MCPConfig):
-        """Register new MCP and initialize its state"""
-        state = MCPState(
-            id=mcp_id,
-            config=mcp_config,
-            status=MCPStatus.INITIALIZING,
-            capabilities=await self._discover_capabilities(mcp_config)
+        await self.redis.hset(
+            portfolio_key,
+            event.position_id,
+            json.dumps(position_data)
         )
         
-        self._mcps[mcp_id] = state
-        self._health_checks[mcp_id] = datetime.utcnow()
-        self._metrics[mcp_id] = MCPMetrics()
+        # Update materialized view
+        await self.db.execute("""
+            INSERT INTO portfolio_positions 
+            (user_id, position_id, symbol, quantity, entry_price, opened_at)
+            VALUES ($1, $2, $3, $4, $5, $6)
+            ON CONFLICT (position_id) DO UPDATE
+            SET quantity = $4, updated_at = NOW()
+        """, event.user_id, event.position_id, event.symbol,
+            event.quantity, event.entry_price, event.occurred_at)
         
-        # Start health monitoring
-        asyncio.create_task(self._monitor_health(mcp_id))
+    async def get_portfolio_summary(self, user_id: str) -> PortfolioSummary:
+        """Get optimized portfolio summary"""
+        # Try cache first
+        cached = await self.redis.get(f"portfolio_summary:{user_id}")
+        if cached:
+            return PortfolioSummary.from_json(cached)
         
-    async def get_mcp_state(self, mcp_id: str) -> Optional[MCPState]:
-        return self._mcps.get(mcp_id)
+        # Query materialized view
+        result = await self.db.fetchrow("""
+            SELECT 
+                COUNT(*) as position_count,
+                SUM(current_value) as total_value,
+                SUM(unrealized_pnl) as total_unrealized_pnl,
+                SUM(realized_pnl) as total_realized_pnl,
+                MAX(updated_at) as last_update
+            FROM portfolio_summary
+            WHERE user_id = $1
+        """, user_id)
+        
+        summary = PortfolioSummary(
+            position_count=result['position_count'],
+            total_value=result['total_value'],
+            total_unrealized_pnl=result['total_unrealized_pnl'],
+            total_realized_pnl=result['total_realized_pnl'],
+            last_update=result['last_update']
+        )
+        
+        # Cache for 60 seconds
+        await self.redis.setex(
+            f"portfolio_summary:{user_id}",
+            60,
+            summary.to_json()
+        )
+        
+        return summary
+```
+
+### 4. UI State Management con Redux-like Store
+
+```python
+class TradingStore:
+    """Centralized state store for PyQt5 UI"""
     
-    async def update_mcp_status(self, mcp_id: str, status: MCPStatus):
-        if mcp_id in self._mcps:
-            old_status = self._mcps[mcp_id].status
-            self._mcps[mcp_id].status = status
+    def __init__(self):
+        self._state = {
+            'market_data': {},
+            'portfolio': {},
+            'active_orders': [],
+            'signals': [],
+            'ui_settings': {},
+            'connection_status': {}
+        }
+        self._subscribers = []
+        self._middleware = []
+        self._reducer = self._create_reducer()
+        
+    def _create_reducer(self):
+        """Create root reducer"""
+        return combine_reducers({
+            'market_data': market_data_reducer,
+            'portfolio': portfolio_reducer,
+            'active_orders': orders_reducer,
+            'signals': signals_reducer,
+            'ui_settings': settings_reducer,
+            'connection_status': connection_reducer
+        })
+    
+    def dispatch(self, action: Action) -> None:
+        """Dispatch action through middleware chain"""
+        # Apply middleware
+        for middleware in self._middleware:
+            action = middleware(self._state, action)
+            if action is None:
+                return
+        
+        # Update state
+        old_state = self._state
+        self._state = self._reducer(self._state, action)
+        
+        # Notify subscribers if state changed
+        if self._state != old_state:
+            for subscriber in self._subscribers:
+                subscriber(self._state, action)
+    
+    def subscribe(self, callback: Callable) -> Callable:
+        """Subscribe to state changes"""
+        self._subscribers.append(callback)
+        
+        # Return unsubscribe function
+        def unsubscribe():
+            self._subscribers.remove(callback)
+        
+        return unsubscribe
+    
+    def get_state(self) -> Dict:
+        """Get current state"""
+        return deepcopy(self._state)
+    
+    def select(self, selector: Callable) -> Any:
+        """Select derived state"""
+        return selector(self._state)
+```
+
+### 5. Reactive Bindings para UI
+
+```python
+class ReactiveProperty(QObject):
+    """Reactive property with Qt signal emission"""
+    
+    valueChanged = pyqtSignal(object)
+    
+    def __init__(self, initial_value=None):
+        super().__init__()
+        self._value = initial_value
+        self._computed_properties = []
+    
+    @property
+    def value(self):
+        return self._value
+    
+    @value.setter
+    def value(self, new_value):
+        if self._value != new_value:
+            old_value = self._value
+            self._value = new_value
+            self.valueChanged.emit(new_value)
             
-            # Emit status change event
-            await EventBus.emit(MCPStatusChanged(
-                mcp_id=mcp_id,
-                old_status=old_status,
-                new_status=status
+            # Update computed properties
+            for computed in self._computed_properties:
+                computed.invalidate()
+    
+    def bind_to_widget(self, widget, property_name):
+        """Bind to Qt widget property"""
+        # Set initial value
+        setattr(widget, property_name, self._value)
+        
+        # Connect to changes
+        self.valueChanged.connect(
+            lambda v: setattr(widget, property_name, v)
+        )
+    
+    def computed(self, func):
+        """Create computed property"""
+        computed_prop = ComputedProperty(func, [self])
+        self._computed_properties.append(computed_prop)
+        return computed_prop
+```
+
+## Sincronización de Estado Multi-Fuente
+
+### 1. Reconciliación de Estado
+
+```python
+class StateReconciler:
+    """Reconcile state from multiple sources"""
+    
+    async def reconcile_orderbook(self, symbol: str) -> OrderBook:
+        """Reconcile orderbook from multiple exchanges"""
+        orderbooks = await asyncio.gather(
+            self.binance_client.get_orderbook(symbol),
+            self.coinbase_client.get_orderbook(symbol),
+            self.polygon_client.get_orderbook(symbol),
+            return_exceptions=True
+        )
+        
+        # Filter out errors
+        valid_orderbooks = [
+            ob for ob in orderbooks 
+            if not isinstance(ob, Exception)
+        ]
+        
+        if not valid_orderbooks:
+            raise NoDataAvailable(f"No orderbook data for {symbol}")
+        
+        # Merge orderbooks
+        merged = self._merge_orderbooks(valid_orderbooks)
+        
+        # Validate consistency
+        if not self._validate_orderbook_consistency(merged):
+            # Log inconsistency and use best effort
+            logger.warning(f"Orderbook inconsistency detected for {symbol}")
+        
+        return merged
+```
+
+### 2. Optimistic Updates
+
+```python
+class OptimisticUpdateManager:
+    """Manage optimistic updates with rollback capability"""
+    
+    def __init__(self, store: TradingStore):
+        self.store = store
+        self.pending_updates = {}
+        
+    async def execute_with_optimistic_update(self,
+                                            action: Action,
+                                            remote_call: Callable) -> Any:
+        """Execute with optimistic update and rollback on failure"""
+        update_id = str(uuid.uuid4())
+        
+        # Save current state
+        snapshot = self.store.get_state()
+        
+        # Apply optimistic update
+        self.store.dispatch(action)
+        self.pending_updates[update_id] = {
+            'snapshot': snapshot,
+            'action': action
+        }
+        
+        try:
+            # Execute remote call
+            result = await remote_call()
+            
+            # Confirm update
+            self.store.dispatch(Action(
+                type='CONFIRM_OPTIMISTIC_UPDATE',
+                payload={'update_id': update_id, 'result': result}
             ))
+            
+            del self.pending_updates[update_id]
+            return result
+            
+        except Exception as e:
+            # Rollback
+            self.store.dispatch(Action(
+                type='ROLLBACK_OPTIMISTIC_UPDATE',
+                payload={'update_id': update_id, 'error': str(e)}
+            ))
+            
+            # Restore snapshot
+            self.store._state = snapshot
+            del self.pending_updates[update_id]
+            
+            raise
 ```
 
-### 7. Sincronización de Estado Multi-Exchange
+## Persistencia y Recuperación de Estado
+
+### 1. Snapshot Strategy
 
 ```python
-class ExchangeStateAggregator:
-    def __init__(self):
-        self._exchange_states: Dict[str, ExchangeState] = {}
-        self._aggregated_state = AggregatedMarketState()
-        self._lock = asyncio.Lock()
-        
-    async def update_exchange_state(self, exchange_id: str, state_update: StateUpdate):
-        """Update individual exchange state and recalculate aggregated state"""
-        async with self._lock:
-            # Update individual exchange
-            if exchange_id not in self._exchange_states:
-                self._exchange_states[exchange_id] = ExchangeState(exchange_id)
-                
-            self._exchange_states[exchange_id].apply_update(state_update)
-            
-            # Recalculate aggregated state
-            await self._recalculate_aggregated_state()
-            
-    async def _recalculate_aggregated_state(self):
-        """Recalculate best prices across all exchanges"""
-        all_bids = []
-        all_asks = []
-        
-        for exchange_state in self._exchange_states.values():
-            if exchange_state.is_healthy:
-                all_bids.extend(exchange_state.orderbook.bids)
-                all_asks.extend(exchange_state.orderbook.asks)
-        
-        # Sort and aggregate
-        self._aggregated_state.best_bid = max(all_bids, key=lambda x: x.price) if all_bids else None
-        self._aggregated_state.best_ask = min(all_asks, key=lambda x: x.price) if all_asks else None
-        
-        # Calculate spread and arbitrage opportunities
-        if self._aggregated_state.best_bid and self._aggregated_state.best_ask:
-            self._aggregated_state.spread = self._aggregated_state.best_ask.price - self._aggregated_state.best_bid.price
-            self._check_arbitrage_opportunities()
-```
-
-## Flujo de Estado Reactivo
-
-```
-User Action → UI State → Command → Domain Event → State Update → Projection → UI Update
-     ↑                                                                              ↓
-     └──────────────────────── Reactive Feedback Loop ─────────────────────────────┘
-```
-
-## Estrategias de Persistencia
-
-### 1. Write-Through para Estado Crítico
-```python
-async def update_position(self, position: Position):
-    # Update in-memory state
-    self._positions[position.id] = position
+class SnapshotManager:
+    """Manage aggregate snapshots for performance"""
     
-    # Write through to database
-    await self._repository.save_position(position)
+    async def should_snapshot(self, aggregate: AggregateRoot) -> bool:
+        """Determine if snapshot is needed"""
+        # Snapshot every 100 events or 1 hour
+        events_since_snapshot = aggregate.version - aggregate.snapshot_version
+        time_since_snapshot = datetime.utcnow() - aggregate.snapshot_timestamp
+        
+        return (events_since_snapshot >= 100 or 
+                time_since_snapshot >= timedelta(hours=1))
     
-    # Update cache
-    await self._cache.set(f"position:{position.id}", position)
-    
-    # Emit event
-    await self._event_bus.emit(PositionUpdated(position))
-```
-
-### 2. Write-Behind para Estado de Alto Volumen
-```python
-class WriteBackBuffer:
-    def __init__(self, flush_interval: float = 1.0):
-        self._buffer: Dict[str, Any] = {}
-        self._flush_task = None
+    async def create_snapshot(self, aggregate: AggregateRoot) -> None:
+        """Create and store snapshot"""
+        snapshot_data = {
+            'aggregate_id': aggregate.id,
+            'aggregate_type': type(aggregate).__name__,
+            'version': aggregate.version,
+            'state': aggregate.to_dict(),
+            'created_at': datetime.utcnow()
+        }
         
-    async def write(self, key: str, value: Any):
-        self._buffer[key] = value
-        
-        if not self._flush_task:
-            self._flush_task = asyncio.create_task(self._flush_loop())
-            
-    async def _flush_loop(self):
-        while self._buffer:
-            await asyncio.sleep(self._flush_interval)
-            await self._flush()
-            
-    async def _flush(self):
-        if not self._buffer:
-            return
-            
-        # Batch write to database
-        items = list(self._buffer.items())
-        self._buffer.clear()
-        
-        await self._repository.batch_save(items)
-```
-
-## Manejo de Conflictos y Consistencia
-
-### 1. Optimistic Locking
-```python
-class OptimisticLockingMixin:
-    def __init__(self):
-        self._version = 0
-        
-    def increment_version(self):
-        self._version += 1
-        
-    async def save_with_version_check(self, repository):
-        current_version = await repository.get_version(self.id)
-        
-        if current_version != self._version:
-            raise ConcurrencyError(f"Version mismatch: expected {self._version}, got {current_version}")
-            
-        self.increment_version()
-        await repository.save(self)
-```
-
-### 2. Conflict Resolution con CRDTs
-```python
-class CRDTCounter:
-    """Conflict-free Replicated Data Type for distributed counting"""
-    def __init__(self, node_id: str):
-        self.node_id = node_id
-        self.counts: Dict[str, int] = {node_id: 0}
-        
-    def increment(self):
-        self.counts[self.node_id] += 1
-        
-    def merge(self, other: 'CRDTCounter'):
-        for node_id, count in other.counts.items():
-            self.counts[node_id] = max(self.counts.get(node_id, 0), count)
-            
-    def value(self) -> int:
-        return sum(self.counts.values())
-```
-
-## Monitoreo y Debugging de Estado
-
-### 1. State Inspector
-```python
-class StateInspector:
-    def __init__(self, state_store: StateStore):
-        self.state_store = state_store
-        self._snapshots: List[StateSnapshot] = []
-        
-    def take_snapshot(self, label: str = ""):
-        snapshot = StateSnapshot(
-            timestamp=datetime.utcnow(),
-            label=label,
-            state=copy.deepcopy(self.state_store.get_state()),
-            stack_trace=traceback.format_stack()
+        # Compress state
+        compressed = zlib.compress(
+            json.dumps(snapshot_data).encode('utf-8')
         )
-        self._snapshots.append(snapshot)
         
-    def compare_snapshots(self, idx1: int, idx2: int) -> Dict[str, Any]:
-        """Compare two state snapshots and return differences"""
-        snapshot1 = self._snapshots[idx1]
-        snapshot2 = self._snapshots[idx2]
-        
-        return DeepDiff(snapshot1.state, snapshot2.state)
+        await self.db.execute("""
+            INSERT INTO snapshots 
+            (aggregate_id, version, data, created_at)
+            VALUES ($1, $2, $3, $4)
+        """, aggregate.id, aggregate.version, compressed, datetime.utcnow())
 ```
 
-### 2. Time-Travel Debugging
+### 2. State Recovery
+
 ```python
-class TimeTravelDebugger:
-    def __init__(self, event_store: EventStore):
-        self.event_store = event_store
+class StateRecoveryService:
+    """Service for recovering system state after crash"""
+    
+    async def recover_system_state(self) -> SystemState:
+        """Recover complete system state"""
+        logger.info("Starting state recovery...")
         
-    async def replay_to_timestamp(self, aggregate_id: str, target_time: datetime):
-        """Replay events up to specific timestamp"""
-        events = await self.event_store.get_events(aggregate_id)
-        aggregate = self._create_aggregate(aggregate_id)
+        # 1. Load latest system snapshot
+        system_snapshot = await self.snapshot_store.get_latest_system_snapshot()
         
+        # 2. Replay events since snapshot
+        events = await self.event_store.get_events_since(
+            system_snapshot.timestamp if system_snapshot else datetime.min
+        )
+        
+        # 3. Rebuild state
+        state = SystemState()
+        if system_snapshot:
+            state = SystemState.from_snapshot(system_snapshot)
+        
+        # 4. Apply events
         for event in events:
-            if event.timestamp <= target_time:
-                aggregate.apply_event(event)
-            else:
-                break
-                
-        return aggregate
+            await self.event_processor.process(event, state)
+        
+        # 5. Validate state consistency
+        validation_result = await self.state_validator.validate(state)
+        if not validation_result.is_valid:
+            logger.error(f"State validation failed: {validation_result.errors}")
+            # Attempt repair
+            state = await self.state_repairer.repair(state, validation_result)
+        
+        logger.info("State recovery completed")
+        return state
 ```
 
-## Mejoras Respecto al Bot_Arbitraje2105
+## Monitoreo y Métricas de Estado
 
-1. **Estado Reactivo**: Implementación completa de programación reactiva
-2. **Multi-Fuente**: Gestión coherente de estado desde múltiples fuentes
-3. **Event Sourcing**: Historial completo y reproducible
-4. **State Machines**: Gestión formal de estados de estrategias
-5. **Debugging Avanzado**: Time-travel y state inspection
-6. **Caché Distribuido**: Coherencia entre múltiples nodos
-7. **Conflict Resolution**: Manejo robusto de concurrencia
+### 1. State Health Metrics
+
+```python
+class StateHealthMonitor:
+    """Monitor health of state management system"""
+    
+    def __init__(self):
+        self.metrics = {
+            'event_processing_lag': Gauge('event_processing_lag_seconds'),
+            'snapshot_age': Gauge('snapshot_age_seconds'),
+            'state_size': Gauge('state_size_bytes'),
+            'reconciliation_conflicts': Counter('reconciliation_conflicts_total'),
+            'optimistic_rollbacks': Counter('optimistic_rollbacks_total')
+        }
+    
+    async def check_health(self) -> HealthStatus:
+        """Comprehensive health check"""
+        checks = {
+            'event_store': await self._check_event_store(),
+            'projections': await self._check_projections(),
+            'cache_consistency': await self._check_cache_consistency(),
+            'state_machines': await self._check_state_machines()
+        }
+        
+        overall_health = all(check.is_healthy for check in checks.values())
+        
+        return HealthStatus(
+            is_healthy=overall_health,
+            checks=checks,
+            timestamp=datetime.utcnow()
+        )
+```
 
 ---
 
-*Este sistema de gestión de estado proporciona la base sólida necesaria para una plataforma de trading compleja, manteniendo la coherencia y trazabilidad mientras permite la escala y el rendimiento requeridos.*
+*Este sistema de gestión de estado representa una evolución significativa, introduciendo patrones avanzados como Event Sourcing y CQRS mientras mantiene la simplicidad para casos de uso básicos. La arquitectura permite comenzar simple y escalar según las necesidades.*

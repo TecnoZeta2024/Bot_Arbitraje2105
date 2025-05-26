@@ -1,5 +1,16 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QLineEdit, QPushButton, QHBoxLayout, QHeaderView, QLabel, QComboBox
-from PyQt5.QtCore import Qt, QAbstractTableModel, QVariant
+from PyQt5.QtCore import QAbstractTableModel, Qt, QVariant
+from PyQt5.QtWidgets import (
+    QComboBox,
+    QHBoxLayout,
+    QHeaderView,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QTableView,
+    QVBoxLayout,
+    QWidget,
+)
+
 
 class OpportunitiesTableModel(QAbstractTableModel):
     def __init__(self, data=None):
@@ -124,8 +135,9 @@ class OpportunitiesPanel(QWidget):
         pass
 
 if __name__ == '__main__':
-    from PyQt5.QtWidgets import QApplication, QMainWindow
     import sys
+
+    from PyQt5.QtWidgets import QApplication, QMainWindow
 
     app = QApplication(sys.argv)
     main_win = QMainWindow()

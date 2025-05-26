@@ -1,13 +1,15 @@
 import logging
-from fastapi import FastAPI, WebSocket, Depends, HTTPException, status, Request
-from fastapi.security import OAuth2PasswordBearer
+from datetime import datetime, timedelta
+from typing import Dict, Optional  # Importar Optional
+
+from fastapi import Depends, FastAPI, HTTPException, Request, WebSocket, status
 from fastapi.responses import HTMLResponse
+from fastapi.security import OAuth2PasswordBearer
 from fastapi.templating import Jinja2Templates
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse
-from datetime import datetime, timedelta
-from typing import Dict, Optional # Importar Optional
-from src.mcp_server.registry import MCPRegistry # Importar el registro de MCPs
+
+from src.mcp_server.registry import MCPRegistry  # Importar el registro de MCPs
 
 # Configuración de logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')

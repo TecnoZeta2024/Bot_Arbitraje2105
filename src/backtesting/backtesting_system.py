@@ -1,5 +1,6 @@
 from typing import Any, Dict, List
 
+
 class HistoricalDataProvider:
     def __init__(self, data_source: str):
         self.data_source = data_source

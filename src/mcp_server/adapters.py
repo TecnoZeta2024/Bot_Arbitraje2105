@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class IMCPAdapter(ABC):
     @abstractmethod
     async def call(self, tool_name: str, args: dict):

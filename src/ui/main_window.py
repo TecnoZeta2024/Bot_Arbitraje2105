@@ -1,203 +1,195 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QDockWidget, QAction, QMenuBar, QToolBar
-from PyQt5.QtCore import Qt, QSize, QCoreApplication
-from PyQt5.QtGui import QIcon, QPalette, QColor
-from src.ui.chart_widget import ChartWidget # Importar ChartWidget
-from src.ui.opportunities_panel import OpportunitiesPanel # Importar OpportunitiesPanel
-from src.ui.strategy_control_panel import StrategyControlPanel # Importar StrategyControlPanel
-from src.ui.notification_manager import NotificationManager # Importar NotificationManager
-from src.ui.notification_center_panel import NotificationCenterPanel # Importar NotificationCenterPanel
-import pandas as pd # Necesario para los datos de mplfinance
-import numpy as np # Necesario para generar datos de prueba
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QLabel, QAction, QMenu, QMenuBar, QToolBar, QDockWidget, QTextEdit, QHBoxLayout, QLineEdit, QComboBox
+from PyQt5 import QtCore
+from PyQt5.QtGui import QIcon # Descomentado para usar íconos
+import resources.resources_rc as resources_rc # Importar el archivo de recursos compilado de forma absoluta
+from .widgets.chart_widget import ChartWidget # Importar ChartWidget
+from .widgets.opportunities_table import OpportunitiesTableView # Importar OpportunitiesTableView
+from .widgets.strategy_control_panel import StrategyControlPanel # Importar StrategyControlPanel
+from .widgets.notification_widget import NotificationWidget # Importar NotificationWidget
+from .widgets.notification_center import NotificationCenter # Importar NotificationCenter
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Scalper's Brain")
+        self.setWindowTitle("Aplicación de Trading de Criptomonedas")
         self.setGeometry(100, 100, 1200, 800)
-        
-        # Instanciar el gestor de notificaciones
-        self.notification_manager = NotificationManager(self)
-        
-        # Instanciar el centro de notificaciones
-        self.notification_center_panel = NotificationCenterPanel(self)
-        
-        # Conectar la señal del gestor de notificaciones al centro de notificaciones
-        self.notification_manager.notification_signal.connect(self.notification_center_panel.add_notification)
 
-        self._setup_ui()
+        self.notification_widget = NotificationWidget("", parent=self) # Instanciar el widget de notificación
+        self.notification_center = NotificationCenter(self) # Instanciar el centro de notificaciones
+        self._create_actions()
+        self._create_menu_bar()
+        self._create_tool_bar()
+        self._create_dock_widgets()
 
-    def _setup_ui(self):
-        # Configurar tema oscuro
-        self.set_dark_theme()
+    def _create_actions(self):
+        # Acciones de Archivo
+        self.new_action = QAction(QIcon(":/icons/icon_home.png"), "&Nuevo", self) # Usando QIcon desde recursos
+        self.new_action.setShortcut("Ctrl+N")
+        self.new_action.setStatusTip("Crear un nuevo archivo")
+        self.new_action.triggered.connect(self.new_file)
 
-        # Widget central
-        self.central_widget = QWidget()
-        self.setCentralWidget(self.central_widget)
-        self.central_layout = QVBoxLayout(self.central_widget)
-        self.central_layout.setContentsMargins(0, 0, 0, 0)
+        self.open_action = QAction("&Abrir...", self)
+        self.open_action.setShortcut("Ctrl+O")
+        self.open_action.setStatusTip("Abrir un archivo existente")
+        self.open_action.triggered.connect(self.open_file)
 
-        # Configurar menús
-        self._setup_menus()
+        self.save_action = QAction("&Guardar", self)
+        self.save_action.setShortcut("Ctrl+S")
+        self.save_action.setStatusTip("Guardar el archivo actual")
+        self.save_action.triggered.connect(self.save_file)
 
-        # Configurar toolbar
-        self._setup_toolbar()
+        self.exit_action = QAction("&Salir", self)
+        self.exit_action.setShortcut("Ctrl+Q")
+        self.exit_action.setStatusTip("Salir de la aplicación")
+        self.exit_action.triggered.connect(self._exit_app)
 
-        # Configurar sistema de docking (ejemplo de paneles)
-        self._setup_dock_widgets()
+        # Acciones de Editar
+        self.cut_action = QAction("Cor&tar", self)
+        self.cut_action.setShortcut("Ctrl+X")
+        self.cut_action.setStatusTip("Cortar el texto seleccionado")
 
-    def set_dark_theme(self):
-        palette = QPalette()
-        palette.setColor(QPalette.Window, QColor(53, 53, 53))
-        palette.setColor(QPalette.WindowText, QColor(255, 255, 255))
-        palette.setColor(QPalette.Base, QColor(25, 25, 25))
-        palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
-        palette.setColor(QPalette.ToolTipBase, QColor(255, 255, 255))
-        palette.setColor(QPalette.ToolTipText, QColor(255, 255, 255))
-        palette.setColor(QPalette.Text, QColor(255, 255, 255))
-        palette.setColor(QPalette.Button, QColor(53, 53, 53))
-        palette.setColor(QPalette.ButtonText, QColor(255, 255, 255))
-        palette.setColor(QPalette.BrightText, QColor(255, 0, 0))
-        palette.setColor(QPalette.Link, QColor(42, 130, 218))
-        palette.setColor(QPalette.Highlight, QColor(42, 130, 218))
-        palette.setColor(QPalette.HighlightedText, QColor(0, 0, 0))
-        self.setPalette(palette)
+        self.copy_action = QAction("&Copiar", self)
+        self.copy_action.setShortcut("Ctrl+C")
+        self.copy_action.setStatusTip("Copiar el texto seleccionado")
 
-    def _setup_menus(self):
-        menubar = self.menuBar()
+        self.paste_action = QAction("&Pegar", self)
+        self.paste_action.setShortcut("Ctrl+V")
+        self.paste_action.setStatusTip("Pegar el texto desde el portapapeles")
 
-        self.file_menu = menubar.addMenu('&Archivo')
-        new_action = QAction('&Nuevo', self)
-        self.file_menu.addAction(new_action)
+        # Acciones de Ver
+        self.zoom_in_action = QAction("Acercar", self)
+        self.zoom_in_action.setShortcut("Ctrl++")
+        self.zoom_in_action.setStatusTip("Acercar la vista")
+
+        self.zoom_out_action = QAction("Alejar", self)
+        self.zoom_out_action.setShortcut("Ctrl+-")
+        self.zoom_out_action.setStatusTip("Alejar la vista")
+
+        # Acciones de Ayuda
+        self.about_action = QAction("&Acerca de...", self)
+        self.about_action.setStatusTip("Mostrar información acerca de la aplicación")
+        self.about_action.triggered.connect(self.about_dialog)
+
+        # Acción para abrir el centro de notificaciones
+        self.show_notification_center_action = QAction("Centro de &Notificaciones", self)
+        self.show_notification_center_action.setStatusTip("Mostrar el historial de notificaciones")
+        self.show_notification_center_action.triggered.connect(self.notification_center.show_center)
+
+    def _create_menu_bar(self):
+        self.menu_bar = QMenuBar(self)
+        self.setMenuBar(self.menu_bar)
+
+        # Menú Archivo
+        self.file_menu: QMenu = self.menu_bar.addMenu("&Archivo")
+        self.file_menu.addAction(self.new_action)
+        self.file_menu.addAction(self.open_action)
+        self.file_menu.addAction(self.save_action)
         self.file_menu.addSeparator()
-        exit_action = QAction('&Salir', self)
-        exit_action.triggered.connect(QCoreApplication.instance().quit)
-        self.file_menu.addAction(exit_action)
+        self.file_menu.addAction(self.exit_action)
 
-        self.view_menu = menubar.addMenu('&Vista')
-        # Aquí se añadirán acciones para mostrar/ocultar paneles
-        show_notifications_action = QAction('Mostrar Centro de Notificaciones', self)
-        show_notifications_action.triggered.connect(self._toggle_notification_center)
-        self.view_menu.addAction(show_notifications_action)
+        # Menú Editar
+        self.edit_menu: QMenu = self.menu_bar.addMenu("&Editar")
+        self.edit_menu.addAction(self.cut_action)
+        self.edit_menu.addAction(self.copy_action)
+        self.edit_menu.addAction(self.paste_action)
+
+        # Menú Ver
+        self.view_menu: QMenu = self.menu_bar.addMenu("&Ver")
+        self.view_menu.addAction(self.zoom_in_action)
+        self.view_menu.addAction(self.zoom_out_action)
+        self.view_menu.addSeparator()
+        self.view_menu.addAction(self.show_notification_center_action) # Añadir acción al menú Ver
+
+        # Menú Ayuda
+        self.help_menu: QMenu = self.menu_bar.addMenu("&Ayuda")
+        self.help_menu.addAction(self.about_action)
+
+    def _create_tool_bar(self):
+        self.tool_bar: QToolBar = self.addToolBar("Barra de Herramientas Principal")
+        self.tool_bar.addAction(self.new_action)
+        self.tool_bar.addAction(self.open_action)
+        self.tool_bar.addAction(self.save_action)
+        self.tool_bar.addSeparator()
+        self.tool_bar.addAction(self.cut_action)
+        self.tool_bar.addAction(self.copy_action)
+        self.tool_bar.addAction(self.paste_action)
+
+    def _create_dock_widgets(self):
+        # Panel de Gráficos
+        self.chart_dock = QDockWidget("Gráficos", self)
+        self.chart_widget = ChartWidget(self) # Instanciar ChartWidget
+        self.chart_dock.setWidget(self.chart_widget) # Establecer ChartWidget como contenido
+        self.addDockWidget(QtCore.Qt.DockWidgetArea.LeftDockWidgetArea, self.chart_dock)
+
+        # Panel de Oportunidades (Tabla)
+        self.opportunities_dock = QDockWidget("Oportunidades", self)
         
-        self.tools_menu = menubar.addMenu('&Herramientas')
-        # Acciones para herramientas de trading, backtesting, etc.
-        test_notification_action = QAction('Enviar Notificación de Prueba', self)
-        test_notification_action.triggered.connect(self._send_test_notification)
-        self.tools_menu.addAction(test_notification_action)
+        # Contenedor principal para la tabla y los controles de filtro/ordenamiento
+        opportunities_container = QWidget()
+        opportunities_layout = QVBoxLayout(opportunities_container)
 
-        self.help_menu = menubar.addMenu('&Ayuda')
-        about_action = QAction('&Acerca de', self)
-        self.help_menu.addAction(about_action)
+        self.opportunities_table = OpportunitiesTableView(self) # Instanciar OpportunitiesTableView
+        opportunities_layout.addWidget(self.opportunities_table) # Añadir tabla al layout
 
-    def _setup_toolbar(self):
-        self.toolbar = self.addToolBar('Principal')
-        self.toolbar.setIconSize(QSize(24, 24))
+        # Controles de filtrado
+        filter_layout = QHBoxLayout()
+        self.filter_label = QLabel("Filtrar por:")
+        self.filter_input = QLineEdit()
+        self.filter_input.setPlaceholderText("Escriba para filtrar...")
+        self.filter_input.textChanged.connect(self.opportunities_table.set_filter_text)
 
-        open_action = QAction(QIcon.fromTheme('document-open'), 'Abrir', self)
-        self.toolbar.addAction(open_action)
+        self.filter_column_combo = QComboBox()
+        self.filter_column_combo.addItems(self.opportunities_table._model._headers) # Usar los encabezados del modelo
+        self.filter_column_combo.currentIndexChanged.connect(self.opportunities_table.set_filter_column)
 
-        save_action = QAction(QIcon.fromTheme('document-save'), 'Guardar', self)
-        self.toolbar.addAction(save_action)
-
-        self.toolbar.addSeparator()
-
-        play_action = QAction(QIcon.fromTheme('media-playback-start'), 'Iniciar Estrategia', self)
-        self.toolbar.addAction(play_action)
-
-        stop_action = QAction(QIcon.fromTheme('media-playback-stop'), 'Detener Estrategia', self)
-        self.toolbar.addAction(stop_action)
-
-    def _setup_dock_widgets(self):
-        # Ejemplo de un panel acoplable
-        self.opportunities_panel = OpportunitiesPanel()
-        dock1 = QDockWidget("Panel de Oportunidades", self)
-        dock1.setAllowedAreas(Qt.DockWidgetArea.LeftDockWidgetArea | Qt.DockWidgetArea.RightDockWidgetArea)
-        dock1.setWidget(self.opportunities_panel)
-        self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, dock1)
-
-        dock2 = QDockWidget("Panel de Gráficos", self)
-        dock2.setAllowedAreas(Qt.DockWidgetArea.AllDockWidgetAreas)
-        self.chart_widget = ChartWidget() # Instanciar ChartWidget
-        dock2.setWidget(self.chart_widget)
-        self.addDockWidget(Qt.DockWidgetArea.RightDockWidgetArea, dock2)
-
-        self.strategy_control_panel = StrategyControlPanel()
-        dock3 = QDockWidget("Panel de Control de Estrategias", self)
-        dock3.setAllowedAreas(Qt.DockWidgetArea.LeftDockWidgetArea | Qt.DockWidgetArea.RightDockWidgetArea)
-        dock3.setWidget(self.strategy_control_panel)
-        self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, dock3)
-
-        # Panel de Centro de Notificaciones
-        dock_notifications = QDockWidget("Centro de Notificaciones", self)
-        dock_notifications.setAllowedAreas(Qt.DockWidgetArea.RightDockWidgetArea | Qt.DockWidgetArea.LeftDockWidgetArea)
-        dock_notifications.setWidget(self.notification_center_panel)
-        self.addDockWidget(Qt.DockWidgetArea.RightDockWidgetArea, dock_notifications)
-
-        # Ejemplo de datos para el panel de oportunidades
-        example_opportunities_data = [
-            [1, "BTC/USDT", "Binance", "Triangular", "0.5", "1000", "95%", "Ejecutar"],
-            [2, "ETH/USDT", "Coinbase", "Cross-Exchange", "1.2", "500", "88%", "Analizar"],
-            [3, "ADA/BTC", "Kraken", "Triangular", "0.3", "2000", "70%", "Ejecutar"],
-            [4, "XRP/USDT", "Binance", "Cross-Exchange", "0.8", "750", "92%", "Analizar"],
-            [5, "LTC/EUR", "Bitstamp", "Triangular", "0.6", "1200", "80%", "Ejecutar"],
-            [6, "BCH/USD", "Gemini", "Cross-Exchange", "1.0", "600", "90%", "Analizar"],
-            [7, "DOT/USDT", "KuCoin", "Triangular", "0.4", "1500", "78%", "Ejecutar"],
-            [8, "SOL/USDT", "FTX", "Cross-Exchange", "1.5", "300", "98%", "Analizar"],
-        ]
-        self.opportunities_panel.update_opportunities(example_opportunities_data)
-
-        # Generar datos de prueba y actualizar el gráfico
-        self._load_and_display_sample_chart_data()
-
-        # Puedes añadir más paneles y configurarlos según sea necesario
-
-    def _load_and_display_sample_chart_data(self):
-        # Generar datos de velas de ejemplo
-        np.random.seed(42)
-        dates = pd.date_range('2023-01-01', periods=100, freq='D')
-        open_prices = np.random.uniform(100, 110, 100)
-        high_prices = open_prices + np.random.uniform(1, 5, 100)
-        low_prices = open_prices - np.random.uniform(1, 5, 100)
-        close_prices = np.random.uniform(low_prices, high_prices, 100)
-        volume = np.random.uniform(1000, 5000, 100)
-
-        data = pd.DataFrame({
-            'Open': open_prices,
-            'High': high_prices,
-            'Low': low_prices,
-            'Close': close_prices,
-            'Volume': volume
-        }, index=dates)
-
-        # Generar indicadores de ejemplo (SMA 10 y SMA 20)
-        sma_10 = data['Close'].rolling(window=10).mean()
-        sma_20 = data['Close'].rolling(window=20).mean()
+        filter_layout.addWidget(self.filter_label)
+        filter_layout.addWidget(self.filter_input)
+        filter_layout.addWidget(self.filter_column_combo)
         
-        indicators = [
-            {'data': sma_10, 'color': 'blue', 'linestyle': '-', 'panel': 0},
-            {'data': sma_20, 'color': 'red', 'linestyle': '-', 'panel': 0}
-        ]
+        opportunities_layout.addLayout(filter_layout) # Añadir layout de filtro al layout principal
 
-        # Generar señales de trading de ejemplo (compra/venta aleatorias)
-        signals = []
-        for i in range(len(data)):
-            if np.random.rand() < 0.05: # 5% de probabilidad de señal
-                if np.random.rand() < 0.5: # 50% de probabilidad de compra
-                    signals.append({'data': [data['Low'].iloc[i] * 0.98 if i == j else np.nan for j in range(len(data))], 'marker': '^', 'color': 'green', 'markersize': 100, 'panel': 0})
-                else: # 50% de probabilidad de venta
-                    signals.append({'data': [data['High'].iloc[i] * 1.02 if i == j else np.nan for j in range(len(data))], 'marker': 'v', 'color': 'red', 'markersize': 100, 'panel': 0})
+        self.opportunities_dock.setWidget(opportunities_container) # Establecer el contenedor como contenido del dock
+        self.addDockWidget(QtCore.Qt.DockWidgetArea.RightDockWidgetArea, self.opportunities_dock)
 
-        self.chart_widget.update_chart(data, indicators, signals)
+        # Panel de Estrategias
+        self.strategies_dock = QDockWidget("Estrategias", self)
+        self.strategies_content = StrategyControlPanel(self) # Instanciar el panel de control de estrategias
+        self.strategies_dock.setWidget(self.strategies_content)
+        self.addDockWidget(QtCore.Qt.DockWidgetArea.BottomDockWidgetArea, self.strategies_dock)
 
-    def _send_test_notification(self):
-        self.notification_manager.show_notification("info", "Notificación de Prueba", "Esta es una notificación de información de prueba.")
-        self.notification_manager.show_notification("warning", "Advertencia de Prueba", "Algo importante que debes saber.")
-        self.notification_manager.show_notification("error", "Error de Prueba", "Ha ocurrido un error crítico.")
-        self.notification_manager.show_notification("success", "Éxito de Prueba", "La operación se completó con éxito.")
+        # Configurar áreas de docking permitidas
+        self.chart_dock.setAllowedAreas(QtCore.Qt.DockWidgetArea.AllDockWidgetAreas)
+        self.opportunities_dock.setAllowedAreas(QtCore.Qt.DockWidgetArea.AllDockWidgetAreas)
+        self.strategies_dock.setAllowedAreas(QtCore.Qt.DockWidgetArea.AllDockWidgetAreas)
 
-    def _toggle_notification_center(self):
-        if self.notification_center_panel.isVisible():
-            self.notification_center_panel.hide()
-        else:
-            self.notification_center_panel.show()
+    def show_notification(self, message, level='info', timeout=3000, persistent=False):
+        # Mostrar notificación flotante
+        self.notification_widget.label.setText(message)
+        self.notification_widget.timeout = timeout
+        self.notification_widget.persistent = persistent # Establecer la persistencia
+        self.notification_widget.set_level_style(level) # Establecer el estilo de la notificación
+        self.notification_widget.show_notification()
+
+        # Añadir notificación al centro de notificaciones
+        self.notification_center.add_notification(message, level)
+
+    # Métodos de ejemplo para las acciones
+    def new_file(self):
+        print("Acción: Nuevo archivo")
+        self.show_notification("¡Nuevo archivo creado!", timeout=2000)
+
+    def open_file(self):
+        print("Acción: Abrir archivo")
+        self.show_notification("Abriendo archivo...", timeout=2000)
+
+    def save_file(self):
+        print("Acción: Guardar archivo")
+        self.show_notification("Archivo guardado exitosamente.", timeout=2000)
+
+    def about_dialog(self):
+        # self.label.setText("Acción: Acerca de la aplicación")
+        print("Acción: Acerca de la aplicación")
+
+    def _exit_app(self):
+        self.close()

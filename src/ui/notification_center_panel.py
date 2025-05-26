@@ -1,5 +1,13 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QScrollArea, QFrame, QApplication
-from PyQt5.QtCore import Qt, QDateTime
+from PyQt5.QtCore import QDateTime, Qt
+from PyQt5.QtWidgets import (
+    QApplication,
+    QFrame,
+    QLabel,
+    QScrollArea,
+    QVBoxLayout,
+    QWidget,
+)
+
 
 class NotificationCenterPanel(QWidget):
     def __init__(self, parent=None):

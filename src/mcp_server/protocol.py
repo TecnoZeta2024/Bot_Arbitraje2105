@@ -1,7 +1,9 @@
-from pydantic import BaseModel
-from typing import Any, Dict, Optional
 import json
 import zlib
+from typing import Any, Dict, Optional
+
+from pydantic import BaseModel
+
 
 class MCPRequest(BaseModel):
     mcp_id: str

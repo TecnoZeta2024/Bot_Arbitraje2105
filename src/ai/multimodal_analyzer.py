@@ -1,10 +1,11 @@
 import asyncio
 import re
-from typing import Dict, Any, Optional, Protocol
+from typing import Any, Dict, Optional, Protocol
 
 from src.ai.llm_factory import LLMFactory
 from src.ai.llm_providers import ILLMProvider, LLMAbstraction
 from src.mcp_server.adapters import IMCPAdapter
+
 
 class MultimodalAnalyzer:
     def __init__(self, llm_factory: LLMFactory, mcp_orchestrator: IMCPAdapter):

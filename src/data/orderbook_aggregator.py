@@ -1,6 +1,7 @@
 import heapq
 from collections import defaultdict
 
+
 class OrderbookAggregator:
     def __init__(self):
         self.exchange_orderbooks = {}  # {exchange_id: {"bids": {price: quantity}, "asks": {price: quantity}}}

@@ -1,5 +1,5 @@
 import logging
-from decimal import Decimal, getcontext, ROUND_HALF_UP
+from decimal import ROUND_HALF_UP, Decimal, getcontext
 
 # Configurar la precisión decimal global
 getcontext().prec = 28 # Precisión estándar para operaciones financieras

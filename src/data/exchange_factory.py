@@ -1,5 +1,14 @@
 from typing import Optional
-from src.data.exchange_adapters import IExchangeAdapter, BinanceAdapter, CoinbaseAdapter, Order, OrderResult, Ticker
+
+from src.data.exchange_adapters import (
+    BinanceAdapter,
+    CoinbaseAdapter,
+    IExchangeAdapter,
+    Order,
+    OrderResult,
+    Ticker,
+)
+
 
 class ExchangeFactory:
     """

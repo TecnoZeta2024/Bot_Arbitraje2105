@@ -2,363 +2,470 @@
 
 ## Arquitectura General
 
-Scalper's Brain implementa una **Arquitectura Limpia (Clean Architecture)** evolucionada, combinada con **Arquitectura Hexagonal (Ports and Adapters)** y **Arquitectura Basada en Eventos (Event-Driven Architecture)**. Adicionalmente, incorpora el patrón **MCP (Model Context Protocol)** para modularidad extrema, manteniendo los principios de **Domain-Driven Design (DDD)**.
+Scalper's Brain evoluciona la arquitectura limpia original hacia una **Arquitectura Orientada a Eventos con Microservicios Opcionales**, manteniendo los principios de Domain-Driven Design (DDD) y agregando capacidades de procesamiento distribuido. La arquitectura permite comenzar como monolito modular y escalar a microservicios según necesidad.
 
-## Evolución Arquitectónica
-
-La arquitectura evoluciona del Bot_Arbitraje2105 añadiendo:
-- **Capa de Presentación Rica**: UI PyQt5 con patrón MVP (Model-View-Presenter)
-- **Orquestación de MCPs**: Nueva capa para gestión de Model Context Protocols
-- **Multi-Provider Pattern**: Abstracción para múltiples exchanges y LLMs
-- **Event Sourcing Parcial**: Para auditoría y reproducibilidad
-- **CQRS Completo**: Separación total de lecturas y escrituras
-
-## Diagrama de Capas Expandido
+## Diagrama de Arquitectura Evolutiva
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
 │                        CAPA DE PRESENTACIÓN                              │
-│                                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌─────────────┐ │
-│  │   PyQt5 UI   │  │  Streamlit   │  │   REST API   │  │  WebSocket  │ │
-│  │   (Main)     │  │  Dashboard   │  │   Server     │  │   Server    │ │
-│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘  └──────┬──────┘ │
-│         │                  │                  │                 │        │
-│         └──────────────────┴──────────────────┴─────────────────┘        │
-│                                   │                                       │
-│                            ┌──────▼────────┐                             │
-│                            │   Presenter   │                             │
-│                            │    Layer      │                             │
-│                            └──────┬────────┘                             │
-└────────────────────────────────────┼─────────────────────────────────────┘
-                                     │
-                                     ▼
+│                                                                           │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐   │
+│  │   PyQt5     │  │   Web API   │  │  WebSocket  │  │   Mobile    │   │
+│  │   Desktop   │  │  (FastAPI)  │  │   Server    │  │   (Future)  │   │
+│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘   │
+└─────────┼────────────────┼────────────────┼────────────────┼───────────┘
+          │                │                │                │
+          ▼                ▼                ▼                ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                      CAPA DE APLICACIÓN                                  │
-│                                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌─────────────┐ │
-│  │  Casos de    │  │  Servicios   │  │   Command    │  │   Query     │ │
-│  │     Uso      │  │ Aplicación   │  │   Handlers   │  │  Handlers   │ │
-│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘  └──────┬──────┘ │
-│         │                  │                  │                 │        │
-│         └──────────────────┴──────────────────┴─────────────────┘        │
-│                                   │                                       │
-│                            ┌──────▼────────┐                             │
-│                            │ Event Bus &   │                             │
-│                            │ Message Queue │                             │
-│                            └──────┬────────┘                             │
-└────────────────────────────────────┼─────────────────────────────────────┘
-                                     │
-                                     ▼
+│                    CAPA DE APLICACIÓN (Use Cases)                        │
+│                                                                           │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐   │
+│  │  Trading    │  │  Analysis   │  │   Risk      │  │  Portfolio  │   │
+│  │  Commands   │  │  Queries    │  │  Commands   │  │   Queries   │   │
+│  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘   │
+└─────────┼────────────────┼────────────────┼────────────────┼───────────┘
+          │                │                │                │
+          ▼                ▼                ▼                ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                        CAPA DE DOMINIO                                   │
-│                                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌─────────────┐ │
-│  │  Entidades   │  │  Agregados   │  │   Servicios  │  │    Value    │ │
-│  │              │  │              │  │   Dominio    │  │   Objects   │ │
-│  └──────────────┘  └──────────────┘  └──────────────┘  └─────────────┘ │
-│                                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌─────────────┐ │
-│  │    Eventos   │  │ Repositorios │  │   Políticas  │  │   Fábricas  │ │
-│  │   Dominio    │  │ (Interfaces) │  │   Negocio    │  │             │ │
-│  └──────────────┘  └──────────────┘  └──────────────┘  └─────────────┘ │
+│                         EVENT BUS / MEDIATOR                             │
+│  ┌────────────────────────────────────────────────────────────────┐    │
+│  │  Domain Events | Integration Events | Command Bus | Query Bus   │    │
+│  └────────────────────────────────────────────────────────────────┘    │
 └─────────────────────────────────────────────────────────────────────────┘
-                                     │
-                                     ▼
+          │                │                │                │
+          ▼                ▼                ▼                ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                    CAPA DE ORQUESTACIÓN MCP                             │
-│                                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌─────────────┐ │
-│  │  MCP Router  │  │MCP Discovery │  │MCP Lifecycle │  │ MCP Health  │ │
-│  │              │  │   Service    │  │   Manager    │  │   Monitor   │ │
-│  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘  └──────┬──────┘ │
-│         │                  │                  │                 │        │
-│         └──────────────────┴──────────────────┴─────────────────┘        │
-│                                   │                                       │
-│  ┌────────────────────────────────┼─────────────────────────────────┐   │
-│  │                         MCP Adapters                              │   │
-│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐   │   │
-│  │  │Indicator│ │Sentiment│ │  News   │ │CoinMCap │ │FreqTrade│   │   │
-│  │  │   MCP   │ │   MCP   │ │   MCP   │ │   MCP   │ │   MCP   │   │   │
-│  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘ └─────────┘   │   │
-│  └───────────────────────────────────────────────────────────────────┘   │
+│                      CAPA DE DOMINIO (Core)                              │
+│                                                                           │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐   │
+│  │  Trading    │  │   Market    │  │    Risk     │  │     AI      │   │
+│  │  Aggregate  │  │  Aggregate  │  │  Aggregate  │  │  Aggregate  │   │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘   │
+│                                                                           │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐   │
+│  │   Domain    │  │   Domain    │  │   Value     │  │  Domain     │   │
+│  │  Services   │  │   Events    │  │   Objects   │  │   Rules     │   │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘   │
 └─────────────────────────────────────────────────────────────────────────┘
-                                     │
-                                     ▼
+          │                │                │                │
+          ▼                ▼                ▼                ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                   CAPA DE INFRAESTRUCTURA                               │
-│                                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌─────────────┐ │
-│  │  Repository  │  │   Exchange   │  │      LLM     │  │    Cache    │ │
-│  │    Impls     │  │   Adapters   │  │   Providers  │  │   Layers    │ │
-│  └──────────────┘  └──────────────┘  └──────────────┘  └─────────────┘ │
-│                                                                          │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌─────────────┐ │
-│  │  WebSocket   │  │   Database   │  │   Message    │  │  External   │ │
-│  │  Managers    │  │  Connectors  │  │    Queue     │  │    APIs     │ │
-│  └──────────────┘  └──────────────┘  └──────────────┘  └─────────────┘ │
+│                    CAPA DE INFRAESTRUCTURA                               │
+│                                                                           │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐   │
+│  │  Exchange   │  │     MCP     │  │     AI      │  │  Database   │   │
+│  │  Adapters   │  │ Orchestrator│  │  Providers  │  │  Adapters   │   │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘   │
+│                                                                           │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐   │
+│  │   Message   │  │    Cache    │  │  Monitoring │  │   File      │   │
+│  │    Queue    │  │   System    │  │   System    │  │   System    │   │
+│  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘   │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
-## Patrones de Diseño Implementados
+## Principios Arquitectónicos Fundamentales
 
-### 1. Model-View-Presenter (MVP) - NUEVO
-Para la capa de presentación PyQt5:
-- **Model**: Datos del dominio expuestos via ViewModels
-- **View**: Widgets PyQt5 sin lógica de negocio
-- **Presenter**: Coordinación entre View y Model
+### 1. Event-Driven Architecture (EDA)
 
-### 2. Adapter Pattern Extendido
-Múltiples niveles de adaptadores:
-- **Exchange Adapters**: Binance, Coinbase, EOD, Polygon
-- **LLM Adapters**: Gemini, OpenAI, Claude
-- **MCP Adapters**: Cada MCP con su adaptador específico
+El sistema se basa en eventos para comunicación desacoplada:
 
-### 3. Strategy Pattern Mejorado
 ```python
-class TradingStrategy(ABC):
-    @abstractmethod
-    async def analyze(self, market_data: MarketData) -> Signal:
-        pass
-    
-    @abstractmethod
-    async def execute(self, signal: Signal) -> ExecutionResult:
-        pass
-
-class ScalpingStrategy(TradingStrategy):
-    def __init__(self, mcp_orchestrator: MCPOrchestrator):
-        self.mcp_orchestrator = mcp_orchestrator
-        
-    async def analyze(self, market_data: MarketData) -> Signal:
-        # Usar MCPs para análisis
-        indicators = await self.mcp_orchestrator.call_mcp(
-            "crypto-indicators", 
-            market_data
-        )
-        sentiment = await self.mcp_orchestrator.call_mcp(
-            "crypto-sentiment",
-            market_data.symbol
-        )
-        return self._generate_signal(indicators, sentiment)
-```
-
-### 4. Chain of Responsibility para Validación
-```python
-class ValidationChain:
-    def __init__(self):
-        self.validators = [
-            BalanceValidator(),
-            RiskLimitValidator(),
-            MarketConditionValidator(),
-            ComplianceValidator()
-        ]
-    
-    async def validate(self, order: Order) -> ValidationResult:
-        for validator in self.validators:
-            result = await validator.validate(order)
-            if not result.is_valid:
-                return result
-        return ValidationResult(is_valid=True)
-```
-
-### 5. Event Sourcing Parcial
-Para operaciones críticas:
-```python
+# Domain Event
 @dataclass
-class TradingEvent:
-    event_id: str
-    event_type: str
-    aggregate_id: str
+class TradingSignalDetected(DomainEvent):
+    signal_id: str
+    symbol: str
+    strategy: str
+    action: TradingAction
+    confidence: float
     timestamp: datetime
-    data: Dict[str, Any]
+    metadata: Dict[str, Any]
+
+# Event Handler
+class TradingSignalHandler(IEventHandler[TradingSignalDetected]):
+    def __init__(self, 
+                 trading_service: ITradingService,
+                 risk_manager: IRiskManager,
+                 notification_service: INotificationService):
+        self.trading_service = trading_service
+        self.risk_manager = risk_manager
+        self.notification_service = notification_service
     
-class EventStore:
-    async def append(self, event: TradingEvent):
-        # Persistir evento inmutable
-        pass
-    
-    async def get_events(self, aggregate_id: str) -> List[TradingEvent]:
-        # Recuperar historial de eventos
-        pass
+    async def handle(self, event: TradingSignalDetected) -> None:
+        # Validate with risk manager
+        if await self.risk_manager.approve_signal(event):
+            # Execute trade
+            result = await self.trading_service.execute_signal(event)
+            
+            # Notify user
+            await self.notification_service.notify_trade_execution(result)
 ```
 
-### 6. CQRS (Command Query Responsibility Segregation)
-Separación completa de lecturas y escrituras:
+### 2. CQRS (Command Query Responsibility Segregation)
+
+Separación clara entre comandos y consultas:
+
 ```python
-# Commands
-class CreateOrderCommand:
-    def __init__(self, order_data: OrderData):
-        self.order_data = order_data
+# Command
+@dataclass
+class ExecuteTradeCommand(Command):
+    symbol: str
+    side: TradeSide
+    quantity: Decimal
+    order_type: OrderType
+    user_id: str
 
-class CreateOrderHandler:
-    async def handle(self, command: CreateOrderCommand):
-        # Lógica de escritura
-        pass
+# Command Handler
+class ExecuteTradeCommandHandler(ICommandHandler[ExecuteTradeCommand]):
+    async def handle(self, command: ExecuteTradeCommand) -> TradeResult:
+        # Business logic for trade execution
+        ...
 
-# Queries
-class GetPortfolioQuery:
-    def __init__(self, user_id: str):
+# Query
+@dataclass
+class GetPortfolioPerformanceQuery(Query):
+    user_id: str
+    start_date: datetime
+    end_date: datetime
+
+# Query Handler
+class GetPortfolioPerformanceQueryHandler(IQueryHandler[GetPortfolioPerformanceQuery]):
+    async def handle(self, query: GetPortfolioPerformanceQuery) -> PortfolioPerformance:
+        # Optimized read model for performance data
+        ...
+```
+
+### 3. Agregados Mejorados
+
+Agregados con mejor encapsulación y event sourcing opcional:
+
+```python
+class TradingSession(AggregateRoot):
+    """Agregado que representa una sesión de trading"""
+    
+    def __init__(self, session_id: str, user_id: str):
+        super().__init__()
+        self.session_id = session_id
         self.user_id = user_id
-
-class GetPortfolioHandler:
-    async def handle(self, query: GetPortfolioQuery):
-        # Lógica optimizada de lectura
-        pass
-```
-
-### 7. Saga Pattern para Transacciones Distribuidas
-```python
-class ArbitrageSaga:
-    def __init__(self):
-        self.steps = [
-            BuyStep(),
-            TransferStep(),
-            SellStep()
-        ]
-        self.compensations = []
+        self.status = SessionStatus.INACTIVE
+        self.active_strategies: List[Strategy] = []
+        self.performance_metrics = PerformanceMetrics()
+        
+    def start_session(self, strategies: List[Strategy]) -> None:
+        """Inicia una sesión de trading"""
+        if self.status != SessionStatus.INACTIVE:
+            raise DomainError("Cannot start an active session")
+        
+        self.status = SessionStatus.ACTIVE
+        self.active_strategies = strategies
+        self.started_at = datetime.utcnow()
+        
+        # Emit domain event
+        self.add_domain_event(
+            TradingSessionStarted(
+                session_id=self.session_id,
+                user_id=self.user_id,
+                strategies=[s.name for s in strategies],
+                started_at=self.started_at
+            )
+        )
     
-    async def execute(self):
-        for step in self.steps:
-            try:
-                result = await step.execute()
-                self.compensations.append(step.compensate)
-            except Exception as e:
-                await self._compensate()
-                raise
+    def execute_trade(self, trade: Trade) -> None:
+        """Ejecuta un trade dentro de la sesión"""
+        if self.status != SessionStatus.ACTIVE:
+            raise DomainError("Cannot execute trade in inactive session")
+        
+        # Validate trade against session rules
+        self._validate_trade(trade)
+        
+        # Update metrics
+        self.performance_metrics.add_trade(trade)
+        
+        # Emit event
+        self.add_domain_event(
+            TradeExecuted(
+                session_id=self.session_id,
+                trade_id=trade.id,
+                symbol=trade.symbol,
+                pnl=trade.calculate_pnl()
+            )
+        )
 ```
 
-### 8. Circuit Breaker para Servicios Externos
+### 4. Bounded Contexts Definidos
+
+El sistema se divide en contextos delimitados claros:
+
+```yaml
+bounded_contexts:
+  trading:
+    aggregates: [TradingSession, Order, Position]
+    services: [ExecutionService, OrderManagementService]
+    events: [OrderPlaced, OrderFilled, PositionOpened, PositionClosed]
+    
+  market_data:
+    aggregates: [MarketDataFeed, PriceHistory]
+    services: [DataNormalizationService, AggregationService]
+    events: [PriceUpdated, VolumeSpike, MarketOpened]
+    
+  risk_management:
+    aggregates: [RiskProfile, RiskLimit]
+    services: [RiskCalculationService, ComplianceService]
+    events: [RiskLimitBreached, DrawdownAlert]
+    
+  analytics:
+    aggregates: [AnalysisReport, AIModel]
+    services: [TechnicalAnalysisService, SentimentAnalysisService]
+    events: [SignalGenerated, AnalysisCompleted]
+    
+  portfolio:
+    aggregates: [Portfolio, Asset]
+    services: [ValuationService, AllocationService]
+    events: [PortfolioRebalanced, AssetAllocated]
+```
+
+### 5. Patrón Repository Mejorado
+
+Repositorios con soporte para proyecciones y event sourcing:
+
+```python
+class TradingSessionRepository(IRepository[TradingSession]):
+    """Repository con capacidades avanzadas"""
+    
+    def __init__(self, 
+                 event_store: IEventStore,
+                 snapshot_store: ISnapshotStore,
+                 cache: ICache):
+        self.event_store = event_store
+        self.snapshot_store = snapshot_store
+        self.cache = cache
+    
+    async def get_by_id(self, session_id: str) -> Optional[TradingSession]:
+        # Try cache first
+        cached = await self.cache.get(f"session:{session_id}")
+        if cached:
+            return cached
+        
+        # Try snapshot
+        snapshot = await self.snapshot_store.get_latest(session_id)
+        
+        # Rebuild from events
+        events = await self.event_store.get_events(
+            aggregate_id=session_id,
+            from_version=snapshot.version if snapshot else 0
+        )
+        
+        session = self._rebuild_from_events(snapshot, events)
+        
+        # Cache for future requests
+        await self.cache.set(f"session:{session_id}", session, ttl=300)
+        
+        return session
+    
+    async def save(self, session: TradingSession) -> None:
+        # Save events
+        if session.uncommitted_events:
+            await self.event_store.save_events(
+                aggregate_id=session.session_id,
+                events=session.uncommitted_events,
+                expected_version=session.version
+            )
+        
+        # Update snapshot if needed
+        if session.version % 10 == 0:  # Every 10 events
+            await self.snapshot_store.save(session)
+        
+        # Update cache
+        await self.cache.set(f"session:{session.session_id}", session)
+        
+        # Clear uncommitted events
+        session.mark_events_as_committed()
+```
+
+### 6. Saga Pattern para Transacciones Distribuidas
+
+Gestión de procesos de negocio complejos:
+
+```python
+class ArbitrageTradingSaga(ISaga):
+    """Saga para ejecutar arbitraje triangular"""
+    
+    def __init__(self, 
+                 command_bus: ICommandBus,
+                 query_bus: IQueryBus):
+        self.command_bus = command_bus
+        self.query_bus = query_bus
+        self.state = SagaState()
+    
+    async def handle(self, event: ArbitrageOpportunityDetected) -> None:
+        try:
+            # Step 1: Check available balance
+            balance = await self.query_bus.query(
+                GetAvailableBalanceQuery(event.base_currency)
+            )
+            
+            if balance < event.required_amount:
+                await self._compensate("Insufficient balance")
+                return
+            
+            # Step 2: Place first order
+            order1_result = await self.command_bus.send(
+                PlaceOrderCommand(
+                    symbol=event.pair1,
+                    side=event.side1,
+                    quantity=event.quantity1
+                )
+            )
+            self.state.add_step("order1", order1_result)
+            
+            # Step 3: Place second order
+            order2_result = await self.command_bus.send(
+                PlaceOrderCommand(
+                    symbol=event.pair2,
+                    side=event.side2,
+                    quantity=event.quantity2
+                )
+            )
+            self.state.add_step("order2", order2_result)
+            
+            # Step 4: Place third order
+            order3_result = await self.command_bus.send(
+                PlaceOrderCommand(
+                    symbol=event.pair3,
+                    side=event.side3,
+                    quantity=event.quantity3
+                )
+            )
+            self.state.add_step("order3", order3_result)
+            
+            # Success - emit completion event
+            await self._complete_saga(event)
+            
+        except Exception as e:
+            # Compensate all completed steps
+            await self._compensate(str(e))
+```
+
+## Patrones de Diseño Adicionales
+
+### 1. Circuit Breaker Pattern
+
+Protección contra fallos en servicios externos:
+
 ```python
 class CircuitBreaker:
-    def __init__(self, failure_threshold: int = 5, timeout: int = 60):
+    def __init__(self, 
+                 failure_threshold: int = 5,
+                 recovery_timeout: int = 60,
+                 expected_exception: Type[Exception] = Exception):
         self.failure_threshold = failure_threshold
-        self.timeout = timeout
-        self.failures = 0
+        self.recovery_timeout = recovery_timeout
+        self.expected_exception = expected_exception
+        self.failure_count = 0
         self.last_failure_time = None
         self.state = CircuitState.CLOSED
-    
-    async def call(self, func, *args, **kwargs):
-        if self.state == CircuitState.OPEN:
-            if self._should_attempt_reset():
-                self.state = CircuitState.HALF_OPEN
-            else:
-                raise CircuitOpenError()
-        
-        try:
-            result = await func(*args, **kwargs)
-            self._on_success()
-            return result
-        except Exception as e:
-            self._on_failure()
-            raise
 ```
 
-## Principios SOLID Reforzados
+### 2. Bulkhead Pattern
 
-### 1. SRP - Responsabilidad Única
-- Cada MCP tiene una responsabilidad específica
-- Presenters separados por vista
-- Handlers específicos por comando/query
+Aislamiento de recursos para prevenir fallos en cascada:
 
-### 2. OCP - Abierto/Cerrado
-- Nuevos MCPs sin modificar el orquestador
-- Nuevas estrategias sin tocar el motor
-- Nuevos exchanges via adaptadores
-
-### 3. LSP - Sustitución de Liskov
-- Todos los exchanges implementan IExchangeAdapter
-- Todos los LLMs implementan ILLMProvider
-- Todos los MCPs implementan IMCPAdapter
-
-### 4. ISP - Segregación de Interfaces
 ```python
-# Interfaces específicas y enfocadas
-class IMarketDataProvider(Protocol):
-    async def get_ticker(self, symbol: str) -> Ticker: ...
-
-class IOrderExecutor(Protocol):
-    async def place_order(self, order: Order) -> OrderResult: ...
-
-class IHistoricalDataProvider(Protocol):
-    async def get_candles(self, symbol: str, interval: str) -> List[Candle]: ...
-```
-
-### 5. DIP - Inversión de Dependencias
-- Dominio no conoce infraestructura
-- Aplicación depende de abstracciones
-- Infraestructura implementa contratos del dominio
-
-## Patrones Adicionales para Escalabilidad
-
-### 1. Bulkhead Pattern
-Aislamiento de recursos para prevenir fallas en cascada:
-```python
-class ResourcePool:
-    def __init__(self, name: str, size: int):
-        self.name = name
-        self.semaphore = asyncio.Semaphore(size)
+class BulkheadExecutor:
+    def __init__(self, max_concurrent: int = 10):
+        self.semaphore = asyncio.Semaphore(max_concurrent)
     
-    async def acquire(self):
+    async def execute(self, func: Callable, *args, **kwargs):
         async with self.semaphore:
-            yield
+            return await func(*args, **kwargs)
 ```
 
-### 2. Retry Pattern con Backoff Exponencial
+### 3. Strategy Pattern Mejorado
+
+Estrategias de trading como plugins:
+
 ```python
-class RetryPolicy:
-    def __init__(self, max_attempts: int = 3, base_delay: float = 1.0):
-        self.max_attempts = max_attempts
-        self.base_delay = base_delay
+class StrategyPlugin(ABC):
+    """Base para todas las estrategias de trading"""
     
-    async def execute(self, func, *args, **kwargs):
-        for attempt in range(self.max_attempts):
-            try:
-                return await func(*args, **kwargs)
-            except Exception as e:
-                if attempt == self.max_attempts - 1:
-                    raise
-                delay = self.base_delay * (2 ** attempt)
-                await asyncio.sleep(delay)
+    @abstractmethod
+    def get_metadata(self) -> StrategyMetadata:
+        pass
+    
+    @abstractmethod
+    async def analyze(self, market_data: MarketData) -> List[Signal]:
+        pass
+    
+    @abstractmethod
+    def get_required_indicators(self) -> List[str]:
+        pass
+    
+    @abstractmethod
+    def get_required_mcps(self) -> List[str]:
+        pass
 ```
 
-### 3. Rate Limiter Pattern
-```python
-class RateLimiter:
-    def __init__(self, rate: int, per: float):
-        self.rate = rate
-        self.per = per
-        self.tokens = rate
-        self.updated_at = time.time()
-    
-    async def acquire(self):
-        while self.tokens <= 0:
-            now = time.time()
-            elapsed = now - self.updated_at
-            self.tokens = min(self.rate, self.tokens + elapsed * (self.rate / self.per))
-            self.updated_at = now
-            if self.tokens <= 0:
-                await asyncio.sleep(0.1)
-        
-        self.tokens -= 1
+## Modelo de Deployment
+
+### 1. Monolito Modular (Inicio)
+```yaml
+deployment:
+  type: monolithic
+  modules:
+    - ui-module
+    - trading-module
+    - market-data-module
+    - risk-module
+    - analytics-module
 ```
 
-## Evolución y Mejoras Clave
+### 2. Microservicios (Escalado)
+```yaml
+deployment:
+  type: microservices
+  services:
+    - name: trading-service
+      replicas: 3
+      resources:
+        cpu: 2
+        memory: 4Gi
+    
+    - name: market-data-service
+      replicas: 5
+      resources:
+        cpu: 4
+        memory: 8Gi
+```
 
-### Respecto al Bot_Arbitraje2105:
-1. **Presentación Rica**: De API-only a UI completa
-2. **Multi-Exchange**: De Binance-only a agregación
-3. **Multi-Estrategia**: De arbitraje-only a completo
-4. **Modularidad MCP**: Capacidades pluggables
-5. **IA Avanzada**: De Gemini-only a multi-provider
-6. **Observabilidad**: Métricas y trazabilidad completas
+## Principios SOLID Aplicados - Mejorados
 
-### Preparación para el Futuro:
-1. **Cloud-Ready**: Diseño distribuible
-2. **Multi-Tenant**: Bases para SaaS
-3. **Plugin System**: Extensibilidad total
-4. **API First**: Todo expuesto como API
-5. **Event Streaming**: Preparado para Kafka/Pulsar
+### 1. Single Responsibility Principle (SRP)
+- Cada agregado maneja su propio estado
+- Servicios con responsabilidad única
+- Handlers separados por tipo de operación
+
+### 2. Open/Closed Principle (OCP)
+- Estrategias como plugins
+- MCPs como extensiones
+- Proveedores de IA intercambiables
+
+### 3. Liskov Substitution Principle (LSP)
+- Todas las implementaciones respetan contratos
+- Adapters transparentes para exchanges
+- Providers de IA con interfaz común
+
+### 4. Interface Segregation Principle (ISP)
+- Interfaces específicas por contexto
+- Separación read/write models
+- APIs granulares
+
+### 5. Dependency Inversion Principle (DIP)
+- Dominio no depende de infraestructura
+- Inyección de dependencias mejorada
+- Abstracciones para todo servicio externo
 
 ---
 
-*Esta arquitectura representa una evolución natural que mantiene las fortalezas del diseño original mientras añade las capacidades necesarias para una plataforma de trading completa y profesional.*
+*Esta arquitectura representa una evolución significativa que mantiene los principios sólidos del sistema original mientras agrega capacidades empresariales como event sourcing, CQRS, y la posibilidad de escalar a microservicios cuando sea necesario.*

@@ -1,6 +1,7 @@
 import asyncio
 from decimal import Decimal
 
+
 class ScalpingStrategy:
     def __init__(self, exchange_adapter, orderbook_aggregator):
         self.exchange = exchange_adapter
