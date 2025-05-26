@@ -5,8 +5,15 @@ Widget de notificaciones para Scalper's Brain
 import logging
 from typing import Optional
 
-from PyQt5.QtCore import Qt, QTimer, QPropertyAnimation, QRect, QEasingCurve
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QSizePolicy
+from PyQt5.QtCore import QEasingCurve, QPropertyAnimation, QRect, Qt, QTimer
+from PyQt5.QtWidgets import (
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
+    QSizePolicy,
+    QVBoxLayout,
+    QWidget,
+)
 
 logger = logging.getLogger(__name__)
 

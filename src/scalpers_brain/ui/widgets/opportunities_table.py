@@ -3,12 +3,26 @@ Tabla de oportunidades de trading para Scalper's Brain
 """
 
 import logging
-from typing import List, Dict, Optional, Any
 from datetime import datetime
+from typing import Any, Dict, List, Optional
 
-from PyQt5.QtCore import Qt, QAbstractTableModel, QModelIndex, QVariant, QSortFilterProxyModel, pyqtSignal
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QHeaderView, QMenu, QAction
+from PyQt5.QtCore import (
+    QAbstractTableModel,
+    QModelIndex,
+    QSortFilterProxyModel,
+    Qt,
+    QVariant,
+    pyqtSignal,
+)
 from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import (
+    QAction,
+    QHeaderView,
+    QMenu,
+    QTableView,
+    QVBoxLayout,
+    QWidget,
+)
 
 logger = logging.getLogger(__name__)
 

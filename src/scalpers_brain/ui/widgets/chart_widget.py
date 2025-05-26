@@ -4,15 +4,22 @@ Implementa visualización avanzada de gráficos con mplfinance
 """
 
 import logging
-import numpy as np
-import pandas as pd
-import mplfinance as mpf
 from datetime import datetime, timedelta
 
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QComboBox, QPushButton, QLabel
-from PyQt5.QtCore import Qt, pyqtSignal
+import mplfinance as mpf
+import numpy as np
+import pandas as pd
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
+from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtWidgets import (
+    QComboBox,
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
+)
 
 logger = logging.getLogger(__name__)
 

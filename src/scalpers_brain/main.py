@@ -5,10 +5,10 @@ Plataforma avanzada de trading personal con arquitectura modular y análisis pot
 """
 
 import asyncio
-import os
-import sys
-import platform
 import logging
+import os
+import platform
+import sys
 from pathlib import Path
 
 # Configurar logging
@@ -28,8 +28,11 @@ os.makedirs('logs', exist_ok=True)
 
 async def initialize_backend(app_context):
     """Inicializa los servicios backend de manera asíncrona"""
-    from scalpers_brain.infrastructure.container.di_container import DIContainer, ServiceLocator
     from scalpers_brain.core.backend_service import UIBackendService
+    from scalpers_brain.infrastructure.container.di_container import (
+        DIContainer,
+        ServiceLocator,
+    )
     
     logger.info("Inicializando servicios backend...")
     
@@ -52,7 +55,7 @@ async def register_services(container):
     """Registra todos los servicios en el contenedor DI"""
     from scalpers_brain.core.backend_service import UIBackendService
     from scalpers_brain.infrastructure.market_data.binance_adapter import BinanceAdapter
-    
+
     # Registrar adaptadores de exchange
     container.register_singleton(BinanceAdapter)
     
@@ -65,8 +68,9 @@ async def register_services(container):
 
 def run():
     """Función principal que inicia la aplicación"""
-    from PyQt5.QtWidgets import QApplication
     from PyQt5.QtGui import QIcon
+    from PyQt5.QtWidgets import QApplication
+
     from scalpers_brain.ui.main_window import MainWindow
     
     logger.info(f"Iniciando Scalper's Brain en {platform.system()} {platform.release()}")

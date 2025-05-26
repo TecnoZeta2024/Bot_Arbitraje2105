@@ -3,15 +3,15 @@ Contenedor de inyección de dependencias para Scalper's Brain
 """
 
 from .di_container import (
-    DIContainer, 
+    DIContainer,
     DIScope,
-    ServiceLocator,
     ServiceLifetime,
+    ServiceLocator,
+    auto_register,
+    dependency,
+    scoped,
     singleton,
     transient,
-    scoped,
-    dependency,
-    auto_register
 )
 
 __all__ = [

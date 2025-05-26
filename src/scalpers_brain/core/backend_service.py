@@ -6,9 +6,9 @@ Actúa como puente entre la interfaz de usuario y los servicios de dominio
 import asyncio
 import logging
 import time
-from typing import Dict, List, Any, Optional, Callable
+from typing import Any, Callable, Dict, List, Optional
 
-from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot, QTimer
+from PyQt5.QtCore import QObject, QTimer, pyqtSignal, pyqtSlot
 
 logger = logging.getLogger(__name__)
 

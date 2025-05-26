@@ -5,7 +5,7 @@ Implementa la interfaz de usuario con paneles acoplables y diseño modular
 
 import logging
 import sys
-from typing import Dict, Any, Optional
+from typing import Any, Dict, Optional
 
 from PyQt5 import QtCore
 from PyQt5.QtGui import QIcon
