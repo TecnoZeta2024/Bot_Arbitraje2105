@@ -52,7 +52,7 @@ def get_arbitrage_operations(limit=100, order_by="fecha_inicio_ejecucion", ascen
     # Modo desarrollo o si falla conexión - usar datos simulados
     if use_mock or os.getenv("DASHBOARD_MODE", "").lower() == "dev":
         logger.info("Usando datos simulados para operaciones")
-        return generate_mock_operations(limit)
+        return generate_mock_operations(limit) # type: ignore
     
     # Modo producción - conectar a Supabase
     try:
@@ -222,7 +222,7 @@ def get_realtime_opportunities(use_mock=False) -> List[Dict[str, Any]]:
                     "id": opp.get("id", f"OPP-{random.randint(100, 999)}"),
                     "ruta": opp.get("ruta", ""),
                     "rentabilidad_teorica": opp.get("rentabilidad_teorica", 0),
-                    "capital_sugerido": opp.get("capital_inicial", 100),
+                    "capital_sugerido": opp.get("capital_sugerido", 100),
                     "timestamp": opp.get("fecha_deteccion", ""),
                 }
                 
@@ -257,10 +257,10 @@ def get_realtime_opportunities(use_mock=False) -> List[Dict[str, Any]]:
             return opportunities
         else:
             logger.warning("No se encontraron oportunidades en tiempo real, usando simuladas")
-            return generate_mock_realtime_opportunities()
+            return generate_mock_realtime_opportunities() # type: ignore
     except Exception as e:
         logger.error(f"Error al obtener oportunidades en tiempo real: {str(e)}")
-        return generate_mock_realtime_opportunities()
+        return generate_mock_realtime_opportunities() # type: ignore
 
 def get_system_config(use_mock=False) -> Dict[str, Any]:
     """

@@ -5,6 +5,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
+from src.dashboard.pages.aggregated_orderbooks import show_aggregated_orderbooks_page
 
 from datetime import datetime
 import asyncio
@@ -256,7 +257,7 @@ with st.sidebar:
 process_websocket_messages()
 
 # Definir las pestañas principales
-tab_titles = ["Inicio", "Estrategias", "Riesgos", "Alertas", "Métricas", "Configuración"]
+tab_titles = ["Inicio", "Estrategias", "Riesgos", "Alertas", "Métricas", "Orderbooks Agregados", "Configuración"]
 tabs = st.tabs(tab_titles)
 
 # --- Pestaña: Inicio ---
@@ -662,8 +663,12 @@ with tabs[4]:
     
     st.caption("Las métricas de rendimiento se basan en las operaciones completadas registradas en la base de datos.")
 
-# --- Pestaña: Configuración ---
+# --- Pestaña: Orderbooks Agregados ---
 with tabs[5]:
+    show_aggregated_orderbooks_page()
+
+# --- Pestaña: Configuración ---
+with tabs[6]:
     st.header("Configuración del Sistema")
     st.markdown("### Variables de Entorno, API Keys y Modo de Operación")
     

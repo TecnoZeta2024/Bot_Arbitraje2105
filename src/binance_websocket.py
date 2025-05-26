@@ -167,8 +167,9 @@ class BinanceWebSocketClient:
 
 # Cliente integrado para el API Server
 class BinanceDataFeeder:
-    def __init__(self, api_manager):
+    def __init__(self, api_manager, orderbook_aggregator=None):
         self.api_manager = api_manager  # ConnectionManager del API server
+        self.orderbook_aggregator = orderbook_aggregator # Agregador de orderbooks
         self.binance_client = BinanceWebSocketClient(self.handle_binance_data)
         self.symbols = [
             "BTCUSDT", "ETHUSDT"  # Empezar con solo 2 símbolos
@@ -186,12 +187,13 @@ class BinanceDataFeeder:
         # Suscribirse a todos los símbolos
         for symbol in self.symbols:
             await self.binance_client.subscribe_ticker(symbol)
+            await self.binance_client.subscribe_orderbook(symbol, levels=20) # Suscribirse a orderbook
             await asyncio.sleep(0.1)  # Pequeño delay entre suscripciones
         
         logger.info(f"Started Binance data feed for {len(self.symbols)} symbols")
     
     async def handle_binance_data(self, data: Dict):
-        """Procesa datos de Binance y los envía al frontend"""
+        """Procesa datos de Binance y los envía al frontend o al agregador"""
         try:
             if not self._running:
                 return
@@ -244,12 +246,17 @@ class BinanceDataFeeder:
                         "type": "orderbook_update",
                         "data": {
                             "symbol": data['s'],
-                            "bids": [[float(bid[0]), float(bid[1])] for bid in data['b'][:10]],
-                            "asks": [[float(ask[0]), float(ask[1])] for ask in data['a'][:10]],
+                            "bids": [[float(bid[0]), float(bid[1])] for bid in data['b']], # Eliminar [:10] para obtener todos los niveles
+                            "asks": [[float(ask[0]), float(ask[1])] for ask in data['a']], # Eliminar [:10] para obtener todos los niveles
                             "timestamp": int(data['E'])
                         }
                     }
                     
+                    # Enviar al agregador de orderbooks si está disponible
+                    if self.orderbook_aggregator:
+                        await self.orderbook_aggregator.process_binance_orderbook_update(orderbook_data)
+                    
+                    # También se puede seguir haciendo broadcast al frontend si es necesario
                     await self.api_manager.broadcast(orderbook_data)
                     
         except Exception as e:
